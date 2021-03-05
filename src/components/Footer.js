@@ -4,6 +4,7 @@ const Footer = () => {
   // states
   const [date, setDate] = React.useState(2021);
 
+  // useEffect
   React.useEffect(() => {
     setDate(new Date().getFullYear());
   }, []);
