@@ -1,8 +1,13 @@
 import React from 'react';
 import { FaEnvelope, FaThumbsUp } from 'react-icons/fa';
 import heroImage from '../images/hero/hero-image.svg';
+import { AppContext } from '../context';
 
 const Hero = () => {
+  // function from context
+  const { smoothScroll } = React.useContext(AppContext);
+
+  // jsx
   return (
     <header id="home">
       <div className="banner">
@@ -24,7 +29,11 @@ const Hero = () => {
               >
                 get in touch <FaEnvelope />
               </a>
-              <a href="#footer" className="btn hero-btn scroll-link">
+              <a
+                href="#follow"
+                className="btn hero-btn"
+                onClick={(e) => smoothScroll(e)}
+              >
                 follow me <FaThumbsUp />
               </a>
             </div>

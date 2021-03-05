@@ -134,7 +134,7 @@ p {
 }
 @media screen and (min-width: 768px) {
   h1 {
-    font-size: 4rem;
+    font-size: 3.75rem;
   }
   h2 {
     font-size: 2.5rem;
@@ -312,8 +312,8 @@ nav {
 @media screen and (min-width: 792px) {
   nav {
     background: linear-gradient(
-        rgba(200, 200, 200, 0.1),
-        rgba(200, 200, 200, 0.1)
+        rgba(180, 180, 180, 0.1),
+        rgba(180, 180, 180, 0.1)
       ),
       url(./images/hero/hero-bcg-light.png) center repeat fixed;
   }
@@ -518,7 +518,7 @@ header {
 
 @media screen and (min-width: 768px) {
   #my-name {
-    width: 520px;
+    width: 500px;
   }
 }
 @media screen and (max-width: 395px) {
@@ -549,10 +549,10 @@ header {
   }
 }
 
-@media screen and (min-width: 976px) {
+@media screen and (min-width: 992px) {
   .banner-container {
     grid-template-columns: 1fr auto;
-    gap: 7rem;
+    gap: 5rem;
     align-items: center;
   }
   .hero-img {
