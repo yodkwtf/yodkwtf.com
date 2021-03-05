@@ -1,12 +1,12 @@
 import React from 'react';
-import { skills } from '../data/utils';
+import { skills } from '../data/data';
 
 export const Skills = () => {
   return (
     <section className="section skills" id="skills">
       <div className="section-title">
         <h2>
-          <span>tools</span> i work with
+          <span>languages & tools</span> i work with
         </h2>
         <div className="underline"></div>
       </div>

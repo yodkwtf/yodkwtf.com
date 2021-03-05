@@ -9,13 +9,13 @@ const Hero = () => {
         <div className="banner-container section-center">
           {/* hero-info */}
           <article className="hero-info">
-            <h1>
-              hey, i'm <span id="my-name">durgesh!</span>
+            <h1 id="my-name">
+              hey,<span> i'm durgesh</span>
             </h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptates deleniti, error unde aperiam perferendis blanditiis sed
-              aut culpa eligendi rerum. Ducimus quo soluta vitae autem?
+              I'm a front-end developer based in Delhi, India. I create
+              responsive websites and web apps to help people improve their
+              internet surfing experiences.
             </p>
             <div className="hero-btn-container">
               <a

@@ -3,15 +3,15 @@ import { socialIcons } from '../data/utils';
 
 const SocialIcons = () => {
   return (
-    <div className="social-icons">
-      {socialIcons.map(({ id, url, icon }) => {
+    <>
+      {socialIcons.map(({ id, url, icon, title }) => {
         return (
-          <a href={url} key={id} className="social-icon">
-            {icon}
+          <a href={url} key={id} className="social-icon" target="_blank">
+            {icon}&nbsp;<span>{title}</span>
           </a>
         );
       })}
-    </div>
+    </>
   );
 };
 

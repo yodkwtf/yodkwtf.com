@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from '../images/logo.png';
+import NavLinks from './NavLinks';
+import { Link } from 'react-router-dom';
 import { FaChevronCircleDown } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -8,30 +9,16 @@ const Navbar = () => {
       <div className="nav-center">
         {/* nav-header */}
         <div className="nav-header">
-          <a href="#home" className="scroll-link">
-            <img src={logo} alt="Logo" className="nav-logo" />
-          </a>
+          <Link to="/">
+            <h5 className="logo">&#60;YODKWTF&#62;</h5>
+          </Link>
           <button className="nav-btn">
             <FaChevronCircleDown />
           </button>
         </div>
         {/* nav-links */}
         <ul className="nav-links">
-          <li>
-            <a href="#about" className="scroll-link">
-              about
-            </a>
-          </li>
-          <li>
-            <a href="#projects" className="scroll-link">
-              projects
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="scroll-link">
-              contact
-            </a>
-          </li>
+          <NavLinks />
         </ul>
       </div>
     </nav>

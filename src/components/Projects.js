@@ -1,5 +1,67 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaGithub, FaLightbulb, FaShareSquare } from 'react-icons/fa';
+import { projects } from '../data/data';
 
 export const Projects = () => {
-  return <div></div>;
+  return (
+    <section className="section projects" id="projects">
+      {/* title */}
+      <div className="section-title">
+        <h2>
+          recent <span>projects</span>
+        </h2>
+        <div className="underline"></div>
+      </div>
+
+      {/* projects-center */}
+      <div className="section-center projects-center">
+        {projects.map((project) => (
+          <SingleProject key={project.id} {...project} />
+        ))}
+      </div>
+
+      {/* all projects btn */}
+      <div className="btn-container">
+        <Link to="/Projects" className="btn">
+          more projects <FaLightbulb />{' '}
+        </Link>
+      </div>
+    </section>
+  );
+};
+
+const SingleProject = ({ image, title, info, tools, url, repo_url }) => {
+  // jsx
+  return (
+    <article className="project">
+      {/* image */}
+      <div className="project-img">
+        <img src={image} alt={title} className="project-image" />
+      </div>
+      <div>
+        {/* info */}
+        <div className="project-info">
+          <h4 className="project-title">{title}</h4>
+          <p className="project-text">{info}</p>
+          <div className="project-tools">
+            {tools.map((tool, index) => (
+              <span key={index}>{tool}</span>
+            ))}
+          </div>
+        </div>
+        {/* footer */}
+        <div className="project-footer">
+          <a href={url} target="_blank">
+            <strong>
+              <FaShareSquare className="fa" /> <span>live demo</span>
+            </strong>
+          </a>
+          <a href={repo_url} target="_blank">
+            <FaGithub className="fa" /> <span>source code</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  );
 };
