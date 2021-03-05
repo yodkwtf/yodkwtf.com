@@ -282,7 +282,6 @@ nav {
   letter-spacing: 2px;
   text-shadow: var(--light-shadow);
   font-family: 'Acme', sans-serif;
-  /* align-self: baseline; */
   justify-self: center;
   transition: var(--transition);
 }
@@ -312,12 +311,11 @@ nav {
 
 @media screen and (min-width: 792px) {
   nav {
-    background: transparent;
     background: linear-gradient(
-      rgba(250, 250, 250, 0.2),
-      rgba(250, 250, 250, 0.6),
-      rgba(250, 250, 250, 0.2)
-    );
+        rgba(200, 200, 200, 0.1),
+        rgba(200, 200, 200, 0.1)
+      ),
+      url(./images/hero/hero-bcg-light.png) center repeat fixed;
   }
   .nav-center {
     display: flex;

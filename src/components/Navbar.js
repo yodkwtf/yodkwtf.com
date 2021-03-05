@@ -8,9 +8,23 @@ const Navbar = () => {
   // function from context
   const { openSidebar } = React.useContext(AppContext);
 
+  // state
+  const [scrolled, setScrolled] = React.useState(false);
+
+  // scroll event
+  window.addEventListener('scroll', () => {
+    const scrollHeight = window.pageYOffset;
+
+    if (scrollHeight > 74) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  });
+
   // jsx
   return (
-    <nav id="nav">
+    <nav className={`${scrolled ? 'nav-fixed' : ''}`}>
       <div className="nav-center">
         {/* nav-header */}
         <div className="nav-header">
