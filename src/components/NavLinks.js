@@ -6,8 +6,8 @@ const NavLinks = () => {
     <>
       {navLinks.map(({ id, url, text }) => {
         return (
-          <li>
-            <a href={url} key={id} className="link scroll-link">
+          <li key={id}>
+            <a href={url} className="link scroll-link">
               {text}
             </a>
           </li>

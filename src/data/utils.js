@@ -7,25 +7,25 @@ import { FaInstagram, FaTwitter, FaLinkedin, FaGithub } from 'react-icons/fa';
 export const socialIcons = [
   {
     id: 1,
-    icon: <FaInstagram class="fa instagram" />,
+    icon: <FaInstagram className="fa instagram" />,
     url: 'https://www.instagram.com/yodkwtf',
     title: 'instagram',
   },
   {
     id: 2,
-    icon: <FaTwitter class="fa twitter" />,
+    icon: <FaTwitter className="fa twitter" />,
     url: 'https://twitter.com/yodkwtf',
     title: 'twitter',
   },
   {
     id: 3,
-    icon: <FaLinkedin class="fa linkedin" />,
+    icon: <FaLinkedin className="fa linkedin" />,
     url: 'https://www.linkedin.com/in/durgesh-chaudhary-4516491b0/',
     title: 'linkedin',
   },
   {
     id: 4,
-    icon: <FaGithub class="fa github" />,
+    icon: <FaGithub className="fa github" />,
     url: 'https://github.com/yodkwtf',
     title: 'github',
   },

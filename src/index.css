@@ -246,10 +246,11 @@ nav {
 }
 .nav-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 .nav-btn {
+  align-self: center;
   font-size: 2rem;
   color: var(--clr-primary);
   background: transparent;
@@ -259,6 +260,7 @@ nav {
   outline: none;
   transform: rotate(90deg);
   animation: bounce 2s linear infinite;
+  line-height: 0;
 }
 .nav-btn:hover {
   color: var(--clr-secondary);
@@ -280,7 +282,7 @@ nav {
   letter-spacing: 2px;
   text-shadow: var(--light-shadow);
   font-family: 'Acme', sans-serif;
-  align-self: center;
+  /* align-self: baseline; */
   justify-self: center;
   transition: var(--transition);
 }

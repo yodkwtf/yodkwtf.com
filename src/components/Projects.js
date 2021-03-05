@@ -52,12 +52,12 @@ const SingleProject = ({ image, title, info, tools, url, repo_url }) => {
         </div>
         {/* footer */}
         <div className="project-footer">
-          <a href={url} target="_blank">
+          <a href={url} target="_blank" rel="noreferrer">
             <strong>
               <FaShareSquare className="fa" /> <span>live demo</span>
             </strong>
           </a>
-          <a href={repo_url} target="_blank">
+          <a href={repo_url} target="_blank" rel="noreferrer">
             <FaGithub className="fa" /> <span>source code</span>
           </a>
         </div>

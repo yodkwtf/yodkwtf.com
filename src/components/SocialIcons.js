@@ -6,7 +6,13 @@ const SocialIcons = () => {
     <>
       {socialIcons.map(({ id, url, icon, title }) => {
         return (
-          <a href={url} key={id} className="social-icon" target="_blank">
+          <a
+            href={url}
+            key={id}
+            className="social-icon"
+            target="_blank"
+            rel="noreferrer"
+          >
             {icon}&nbsp;<span>{title}</span>
           </a>
         );
