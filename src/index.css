@@ -1116,6 +1116,42 @@ main {
   display: grid;
   grid-template-rows: 1fr auto;
 }
-
 .page {
+  background: var(--clr-body-bcg-2);
+}
+.nav-2 {
+  background: var(--clr-body-bcg);
+}
+
+.page-center {
+  min-height: calc(100vh - 74px - 67px);
+}
+@media screen and (max-width: 792px) {
+  .page .nav-center {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+  .page-center {
+    min-height: calc(100vh - 74px - 49px);
+  }
+  .page .toggle-theme {
+    display: block;
+  }
+}
+
+/* 
+======================
+ERROR PAGE
+======================
+*/
+
+.error-page {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  grid-template-rows: auto;
+}
+.error-page h1 {
+  text-transform: none;
 }

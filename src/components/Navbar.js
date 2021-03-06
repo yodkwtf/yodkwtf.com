@@ -7,21 +7,7 @@ import { AppContext } from '../context';
 
 export const Navbar = () => {
   // function from context
-  const { openSidebar } = React.useContext(AppContext);
-
-  // state
-  const [scrolled, setScrolled] = React.useState(false);
-
-  // scroll event
-  window.addEventListener('scroll', () => {
-    const scrollHeight = window.pageYOffset;
-
-    if (scrollHeight > 74) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
-  });
+  const { scrolled, openSidebar } = React.useContext(AppContext);
 
   // jsx
   return (

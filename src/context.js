@@ -15,14 +15,27 @@ const storedTheme = () => {
 const AppProvider = ({ children }) => {
   // setting states
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+  const [theme, setTheme] = React.useState(storedTheme());
 
-  // functions for sidebar
+  // SIDEBAR FUNCTIONS
   const openSidebar = () => {
     setIsSidebarOpen(true);
   };
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
+
+  // NAV FIXED ON SCROLL
+  window.addEventListener('scroll', () => {
+    const scrollHeight = window.pageYOffset;
+
+    if (scrollHeight > 74) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  });
 
   // SMOOTH SCROLL FUNCTION
   const smoothScroll = (e) => {
@@ -53,16 +66,7 @@ const AppProvider = ({ children }) => {
     closeSidebar();
   };
 
-  // state
-  const [theme, setTheme] = React.useState(storedTheme());
-
-  // useEffect
-  React.useEffect(() => {
-    document.documentElement.className = theme;
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  // switch theme function
+  // SWITCH THEME FUNCTION
   const switchTheme = () => {
     if (theme === 'light') {
       setTheme('dark');
@@ -70,6 +74,12 @@ const AppProvider = ({ children }) => {
       setTheme('light');
     }
   };
+
+  // useEffect
+  React.useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
     <AppContext.Provider
@@ -79,6 +89,7 @@ const AppProvider = ({ children }) => {
         isSidebarOpen,
         smoothScroll,
         theme,
+        scrolled,
         switchTheme,
       }}
     >

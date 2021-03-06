@@ -6,5 +6,16 @@ import { Projects } from './Projects';
 import { Skills } from './Skills';
 import { Contact } from './Contact';
 import { Footer } from './Footer';
+import { NavForPages } from './NavForPages';
 
-export { Navbar, Sidebar, Hero, About, Projects, Skills, Contact, Footer };
+export {
+  Navbar,
+  Sidebar,
+  Hero,
+  About,
+  Projects,
+  Skills,
+  Contact,
+  Footer,
+  NavForPages,
+};
