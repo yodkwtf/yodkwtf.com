@@ -367,15 +367,15 @@ nav {
     background: var(--nav-bcg);
   }
   .nav-center {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
   }
   .nav-btn {
     display: none;
   }
   .nav-links {
+    justify-self: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

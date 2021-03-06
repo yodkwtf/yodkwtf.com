@@ -1,24 +1,3 @@
-// importing recent projects images
-// import {
-//   furnitureWorld,
-//   portfolio,
-//   quizfeed,
-//   spotifyPage,
-//   toDoList,
-// } from '../images/projects';
-
-// importing skills images
-// import {
-//   html,
-//   css,
-//   javascript,
-//   bootstrap,
-//   react,
-//   jquery,
-//   github,
-//   netlify,
-// } from '../images/skills';
-
 // **************************
 // recent projects
 // **************************
