@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaChevronCircleDown } from 'react-icons/fa';
 import { AppContext } from '../context';
 
-const Navbar = () => {
+export const Navbar = () => {
   // function from context
   const { openSidebar } = React.useContext(AppContext);
 
@@ -43,5 +43,3 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;

@@ -2,14 +2,9 @@ import React from 'react';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import pages
-import Main from './pages/Main';
-import Error from './pages/Error';
-import ProjectsPage from './pages/ProjectsPage';
-import ContactPage from './pages/ContactPage';
+import { HomePage, ContactPage, ProjectsPage, ErrorPage } from './pages';
 // import components
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import Footer from './components/Footer';
+import { Navbar, Sidebar, Footer } from './components';
 
 const App = () => {
   return (
@@ -19,7 +14,7 @@ const App = () => {
         <Sidebar />
         <Switch>
           <Route exact path="/">
-            <Main />
+            <HomePage />
           </Route>
           <Route exact path="/Projects">
             <ProjectsPage />
@@ -28,7 +23,7 @@ const App = () => {
             <ContactPage />
           </Route>
           <Route path="*">
-            <Error />
+            <ErrorPage />
           </Route>
         </Switch>
         <Footer />

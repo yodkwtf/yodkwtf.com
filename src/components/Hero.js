@@ -3,7 +3,7 @@ import { FaEnvelope, FaThumbsUp } from 'react-icons/fa';
 import heroImage from '../images/hero/hero-image.svg';
 import { AppContext } from '../context';
 
-const Hero = () => {
+export const Hero = () => {
   // function from context
   const { smoothScroll } = React.useContext(AppContext);
 
@@ -48,5 +48,3 @@ const Hero = () => {
     </header>
   );
 };
-
-export default Hero;

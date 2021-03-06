@@ -5,7 +5,7 @@ import { AppContext } from '../context';
 import SocialIcons from './SocialIcons';
 import NavLinks from './NavLinks';
 
-const Sidebar = () => {
+export const Sidebar = () => {
   // function from context
   const { isSidebarOpen, closeSidebar } = React.useContext(AppContext);
 
@@ -38,5 +38,3 @@ const Sidebar = () => {
     </aside>
   );
 };
-
-export default Sidebar;

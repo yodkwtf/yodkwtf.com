@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = () => {
+export const Footer = () => {
   // states
   const [date, setDate] = React.useState(2021);
 
@@ -20,5 +20,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;
