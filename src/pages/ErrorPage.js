@@ -6,11 +6,13 @@ const ErrorPage = () => {
   return (
     <section className="page">
       <NavForPages />
-      <div className="section section-center page-center error-page">
-        <h1>OOPS! The page you're looking for doesn't exist :/</h1>
-        <Link to="/" className="btn">
-          back to home
-        </Link>
+      <div className="error-page page-center">
+        <div className="section-center ">
+          <h2>OOPS! The page you're looking for doesn't exist :/</h2>
+          <Link to="/" className="btn">
+            back to home
+          </Link>
+        </div>
       </div>
     </section>
   );
