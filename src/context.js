@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 
 const AppContext = React.createContext();
 
+// get store theme from LS
+const storedTheme = () => {
+  // default theme if no theme is stored
+  let theme = 'light';
+  if (localStorage.getItem('theme')) {
+    theme = localStorage.getItem('theme');
+  }
+  return theme;
+};
+
 const AppProvider = ({ children }) => {
   // setting states
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -43,6 +53,24 @@ const AppProvider = ({ children }) => {
     closeSidebar();
   };
 
+  // state
+  const [theme, setTheme] = React.useState(storedTheme());
+
+  // useEffect
+  React.useEffect(() => {
+    document.documentElement.className = theme;
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  // switch theme function
+  const switchTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -50,6 +78,8 @@ const AppProvider = ({ children }) => {
         closeSidebar,
         isSidebarOpen,
         smoothScroll,
+        theme,
+        switchTheme,
       }}
     >
       {children}

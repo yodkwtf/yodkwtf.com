@@ -86,13 +86,13 @@ export const skills = [
   },
   {
     id: 3,
-    image: bootstrap,
-    title: 'Bootstrap',
+    image: javascript,
+    title: 'Javascript',
   },
   {
     id: 4,
-    image: javascript,
-    title: 'Javascript',
+    image: bootstrap,
+    title: 'Bootstrap',
   },
   {
     id: 5,
@@ -112,6 +112,6 @@ export const skills = [
   {
     id: 8,
     image: netlify,
-    title: 'Netlify Functions',
+    title: 'Netlify',
   },
 ];

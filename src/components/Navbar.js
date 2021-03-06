@@ -1,5 +1,6 @@
 import React from 'react';
 import NavLinks from './NavLinks';
+import ToggleTheme from './ToggleTheme';
 import { Link } from 'react-router-dom';
 import { FaChevronCircleDown } from 'react-icons/fa';
 import { AppContext } from '../context';
@@ -39,6 +40,7 @@ export const Navbar = () => {
         <ul className="nav-links">
           <NavLinks />
         </ul>
+        <ToggleTheme />
       </div>
     </nav>
   );
