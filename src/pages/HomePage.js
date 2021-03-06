@@ -1,9 +1,19 @@
 import React from 'react';
-import { Hero, About, Projects, Skills, Contact } from '../components';
+import {
+  Navbar,
+  Sidebar,
+  Hero,
+  About,
+  Projects,
+  Skills,
+  Contact,
+} from '../components';
 
 const HomePage = () => {
   return (
-    <main>
+    <main className="page">
+      <Navbar />
+      <Sidebar />
       <Hero />
       <About />
       <Projects />

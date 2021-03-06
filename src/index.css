@@ -1097,9 +1097,12 @@ FOOTER
 }
 .footer-text {
   color: var(--clr-grey-10);
-  text-transform: capitalize;
   line-height: 1;
   margin-bottom: 0;
+}
+.footer-text a {
+  color: #1b9ce5;
+  text-decoration: underline;
 }
 
 /* 
@@ -1107,13 +1110,12 @@ FOOTER
 PAGES
 #####################
 */
+
 main {
+  min-height: 100vh;
   display: grid;
   grid-template-rows: 1fr auto;
-  min-height: 100vh;
 }
-.projects-page-center,
-.contact-page-center {
-  text-align: center;
-  margin: 0 auto;
+
+.page {
 }

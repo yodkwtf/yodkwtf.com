@@ -4,14 +4,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import pages
 import { HomePage, ContactPage, ProjectsPage, ErrorPage } from './pages';
 // import components
-import { Navbar, Sidebar, Footer } from './components';
+import { Footer } from './components';
 
 const App = () => {
   return (
     <main>
       <Router>
-        <Navbar />
-        <Sidebar />
         <Switch>
           <Route exact path="/">
             <HomePage />

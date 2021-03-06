@@ -4,6 +4,10 @@ import { FaGithub, FaLightbulb, FaShareSquare } from 'react-icons/fa';
 import { projects } from '../data/data';
 
 export const Projects = () => {
+  // get recent projects from projects
+  const { recent_projects } = projects;
+
+  // jsx
   return (
     <section className="section projects" id="projects">
       {/* title */}
@@ -16,7 +20,7 @@ export const Projects = () => {
 
       {/* projects-center */}
       <div className="section-center projects-center">
-        {projects.map((project) => (
+        {recent_projects.map((project) => (
           <SingleProject key={project.id} {...project} />
         ))}
       </div>
