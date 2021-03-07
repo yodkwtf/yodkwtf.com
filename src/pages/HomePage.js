@@ -11,7 +11,7 @@ import {
 
 const HomePage = () => {
   return (
-    <main className="page">
+    <main>
       <Navbar />
       <Sidebar />
       <Hero />

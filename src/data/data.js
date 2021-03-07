@@ -1,5 +1,96 @@
+import React from 'react';
+import {
+  SiHtml5,
+  SiCss3,
+  SiSass,
+  SiJavascript,
+  SiBootstrap,
+  SiJquery,
+  SiReact,
+  SiGithub,
+  SiNetlify,
+  SiVisualstudiocode,
+} from 'react-icons/si';
+
 // **************************
-// recent projects
+// skills
+// **************************
+export const skills = [
+  {
+    id: 1,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/html_dc2h5g.webp',
+    title: 'HTML',
+    icon: <SiHtml5 />,
+  },
+  {
+    id: 2,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/css_y1llea.webp',
+    title: 'CSS',
+    icon: <SiCss3 />,
+  },
+  {
+    id: 3,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/javascript_sv0rik.webp',
+    title: 'Javascript',
+    icon: <SiJavascript />,
+  },
+  {
+    id: 4,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615108807/skills_portfolio/sass_t0ctz1.webp',
+    title: 'Sass',
+    icon: <SiSass />,
+  },
+
+  {
+    id: 5,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/bootstrap_z8nct3.webp',
+    title: 'Bootstrap',
+    icon: <SiBootstrap />,
+  },
+  {
+    id: 6,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/jquery_n976ml.webp',
+    title: 'jQuery',
+    icon: <SiJquery />,
+  },
+  {
+    id: 7,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057426/skills_portfolio/react_ug3rsk.webp',
+    title: 'React JS',
+    icon: <SiReact />,
+  },
+  {
+    id: 8,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615109122/skills_portfolio/github_kehram.webp',
+    title: 'GitHub',
+    icon: <SiGithub />,
+  },
+  {
+    id: 9,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400,w_600/v1615057426/skills_portfolio/netlify_ptzx2w.webp',
+    title: 'Netlify',
+    icon: <SiNetlify />,
+  },
+  {
+    id: 10,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615108807/skills_portfolio/vscode_o0nxup.webp',
+    title: 'VSCode',
+    icon: <SiVisualstudiocode />,
+  },
+];
+
+// **************************
+//  projects
 // **************************
 export const projects = {
   // recent projects
@@ -100,57 +191,3 @@ export const projects = {
     },
   ],
 };
-
-// **************************
-// skills
-// **************************
-export const skills = [
-  {
-    id: 1,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/html_dc2h5g.webp',
-    title: 'HTML',
-  },
-  {
-    id: 2,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/css_y1llea.webp',
-    title: 'CSS',
-  },
-  {
-    id: 3,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/javascript_sv0rik.webp',
-    title: 'Javascript',
-  },
-  {
-    id: 4,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/bootstrap_z8nct3.webp',
-    title: 'Bootstrap',
-  },
-  {
-    id: 5,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/jquery_n976ml.webp',
-    title: 'jQuery',
-  },
-  {
-    id: 6,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057426/skills_portfolio/react_ug3rsk.webp',
-    title: 'React JS',
-  },
-  {
-    id: 7,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/github_lwi8vb.webp',
-    title: 'GitHub',
-  },
-  {
-    id: 8,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400,w_600/v1615057426/skills_portfolio/netlify_ptzx2w.webp',
-    title: 'Netlify',
-  },
-];

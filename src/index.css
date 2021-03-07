@@ -933,17 +933,17 @@ SKILLS
 
 .skills-center {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
-  gap: 2rem;
+  gap: 0rem 2rem;
 }
 .skill {
   position: relative;
 }
 .skill-image {
   object-fit: contain;
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   transition: var(--long-transition);
 }
 .skill-title {
@@ -965,18 +965,80 @@ SKILLS
   opacity: 1;
 }
 
-@media screen and (min-width: 756px) {
+@media screen and (min-width: 524px) {
   .skills-center {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 3rem;
+    gap: 2rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .skills-center {
+    gap: 3rem 2rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 @media screen and (min-width: 1170px) {
   .skills-center {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 }
+
+/* .skills-center {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  gap: 1rem;
+}
+.skill {
+  position: relative;
+}
+.skill h1 {
+  background: var(--clr-body-bcg-3);
+  padding: 1.25rem;
+  font-size: 2rem;
+  line-height: 0;
+  border-radius: 50%;
+  background: var(--clr-primary-gradient);
+  color: var(--clr-white);
+  margin-bottom: 0;
+}
+.skill-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--clr-body-bcg);
+  background: var(--clr-font);
+  padding: 0.5rem;
+  text-align: center;
+  transition: var(--long-transition);
+  opacity: 0.01;
+}
+.skill:hover .skill-image {
+  opacity: 0.7;
+}
+.skill:hover .skill-title {
+  opacity: 1;
+}
+@media screen and (min-width: 676px) {
+  .skills-center {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .skill h1 {
+    padding: 1.5rem;
+    font-size: 3.25rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .skills-center {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem 1rem;
+  }
+  .skill h1 {
+    padding: 1.5rem;
+    font-size: 3.25rem;
+  }
+} */
 
 /* 
 ======================

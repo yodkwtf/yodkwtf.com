@@ -13,10 +13,11 @@ export const Skills = () => {
 
       {/* skills-center */}
       <div className="skills-center section-center">
-        {skills.map(({ id, title, image }) => {
+        {skills.map(({ id, title, image, icon }) => {
           return (
             <article key={id} className="skill">
               <img src={image} alt={title} className="skill-image" />
+              {/* <h1>{icon}</h1> */}
               <h4 className="skill-title">{title}</h4>
             </article>
           );
