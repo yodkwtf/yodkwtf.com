@@ -93,6 +93,55 @@ export const skills = [
 //  projects
 // **************************
 export const projects = {
+  // all projects
+  all_projects: [
+    {
+      id: 1,
+      title: 'titans digital',
+      category: 'HTML & CSS',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615124006/projects/Screenshot_198_qpoicb.webp',
+      url: 'https://titansdigital.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/titans_digital-html-css',
+    },
+    {
+      id: 2,
+      title: 'furniture world',
+      category: 'React',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055954/projects/furniture_world_aftlwz.webp',
+      url: 'https://furnitureworld-react-dk.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/furniture_world-reactJS',
+    },
+    {
+      id: 3,
+      title: 'cloned spotify page',
+      category: 'HTML & CSS',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055956/projects/spotify_page_fz0ysv.webp',
+      url: 'https://spotifypage-dk.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/html-css-mini_projects',
+    },
+    {
+      id: 4,
+      title: 'to do list app',
+      category: 'Javascript',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055956/projects/to_do_list_mdab4s.webp',
+      url: 'https://todolist-dk.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/to_do_list-vanillaJS',
+    },
+    {
+      id: 5,
+      title: 'quizfeed',
+      category: 'React',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615123875/projects/Screenshot_197_wsyxq6.webp',
+      url: 'https://quizfeed-react-dk.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/quizfeed-reactJS',
+    },
+  ],
+
   // recent projects
   recent_projects: [
     {
@@ -142,50 +191,6 @@ export const projects = {
       title: 'quizfeed',
       info: `A quiz app built with reactJS that fetches questions from an API. There are multiple categories and difficulty levels for the user to choose his questions from. The app also has a dark mode.`,
       tools: ['ReactJS', 'CSS', 'JSX'],
-      url: 'https://quizfeed-react-dk.netlify.app/',
-      repo_url: 'https://github.com/yodkwtf/quizfeed-reactJS',
-    },
-  ],
-
-  // all projects
-  all_projects: [
-    {
-      id: 1,
-      image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615124006/projects/Screenshot_198_qpoicb.webp',
-      title: 'titans digital',
-      url: 'https://titansdigital.netlify.app/',
-      repo_url: 'https://github.com/yodkwtf/titans_digital-html-css',
-    },
-    {
-      id: 2,
-      image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055954/projects/furniture_world_aftlwz.webp',
-      title: 'furniture world',
-      url: 'https://furnitureworld-react-dk.netlify.app/',
-      repo_url: 'https://github.com/yodkwtf/furniture_world-reactJS',
-    },
-    {
-      id: 3,
-      image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055956/projects/spotify_page_fz0ysv.webp',
-      title: 'cloned spotify page',
-      url: 'https://spotifypage-dk.netlify.app/',
-      repo_url: 'https://github.com/yodkwtf/html-css-mini_projects',
-    },
-    {
-      id: 4,
-      image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055956/projects/to_do_list_mdab4s.webp',
-      title: 'to do list app',
-      url: 'https://todolist-dk.netlify.app/',
-      repo_url: 'https://github.com/yodkwtf/to_do_list-vanillaJS',
-    },
-    {
-      id: 5,
-      image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615123875/projects/Screenshot_197_wsyxq6.webp',
-      title: 'quizfeed',
       url: 'https://quizfeed-react-dk.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/quizfeed-reactJS',
     },

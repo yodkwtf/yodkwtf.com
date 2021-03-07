@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaPaperPlane } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import SocialIcons from './SocialIcons';
 
@@ -12,7 +13,7 @@ export const Contact = () => {
           <h2>get in touch</h2>
           <p>Have a project you'd like to discuss?</p>
           <Link to="/Contact" className="btn">
-            send details
+            send details <FaPaperPlane />
           </Link>
         </article>
 

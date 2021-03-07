@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaPaperPlane } from 'react-icons/fa';
 import { NavForPages } from '../components';
 
 const ContactPage = () => {
@@ -73,7 +74,7 @@ const ContactPage = () => {
             </div>
             <div className="btn-container">
               <button className="btn submit-btn" type="submit">
-                submit
+                submit <FaPaperPlane />
               </button>
             </div>
           </form>

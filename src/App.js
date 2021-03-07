@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import pages
 import { HomePage, ContactPage, ProjectsPage, ErrorPage } from './pages';
 // import components
-import { Footer } from './components';
+import { Footer, ScrollToTop } from './components';
 
 const App = () => {
   return (
     <main>
       <Router>
+        <ScrollToTop />
         <Switch>
           <Route exact path="/">
             <HomePage />
