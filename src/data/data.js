@@ -19,26 +19,27 @@ export const skills = [
   {
     id: 1,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/html_dc2h5g.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615110696/skills_portfolio/html_xh9koh.webp',
     title: 'HTML',
     icon: <SiHtml5 />,
   },
   {
     id: 2,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/css_y1llea.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615110696/skills_portfolio/css_adhs9m.webp',
     title: 'CSS',
     icon: <SiCss3 />,
   },
   {
     id: 3,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/javascript_sv0rik.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615110696/skills_portfolio/javascript_kh6tqn.webp',
     title: 'Javascript',
     icon: <SiJavascript />,
   },
   {
     id: 4,
+    // copyrighted
     image:
       'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615108807/skills_portfolio/sass_t0ctz1.webp',
     title: 'Sass',
@@ -47,6 +48,7 @@ export const skills = [
 
   {
     id: 5,
+    // copyrighted
     image:
       'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/bootstrap_z8nct3.webp',
     title: 'Bootstrap',
@@ -54,6 +56,7 @@ export const skills = [
   },
   {
     id: 6,
+    // copyrighted
     image:
       'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/jquery_n976ml.webp',
     title: 'jQuery',
@@ -61,6 +64,7 @@ export const skills = [
   },
   {
     id: 7,
+    // copyrighted
     image:
       'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057426/skills_portfolio/react_ug3rsk.webp',
     title: 'React JS',
@@ -82,6 +86,7 @@ export const skills = [
   },
   {
     id: 10,
+    // copyrighted
     image:
       'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615108807/skills_portfolio/vscode_o0nxup.webp',
     title: 'VSCode',
