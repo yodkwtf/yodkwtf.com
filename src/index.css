@@ -1269,6 +1269,6 @@ label {
 .submit-btn {
   outline: none;
   border-style: solid;
-  background: var(--clr-primary);
+  background: var(--clr-primary-gradient);
   border-color: var(--clr-primary);
 }
