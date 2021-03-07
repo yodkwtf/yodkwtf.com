@@ -115,12 +115,13 @@ export const projects = {
     },
     {
       id: 3,
-      title: 'cloned spotify page',
+      title: 'spotify page clone',
       category: 'HTML & CSS',
       image:
         'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055956/projects/spotify_page_fz0ysv.webp',
       url: 'https://spotifypage-dk.netlify.app/',
-      repo_url: 'https://github.com/yodkwtf/html-css-mini_projects',
+      repo_url:
+        'https://github.com/yodkwtf/html-css-mini_projects/tree/main/1)%20Spotify%20Page',
     },
     {
       id: 4,
@@ -139,6 +140,83 @@ export const projects = {
         'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615123875/projects/Screenshot_197_wsyxq6.webp',
       url: 'https://quizfeed-react-dk.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/quizfeed-reactJS',
+    },
+    {
+      id: 6,
+      title: 'coding FR',
+      category: 'HTML & CSS',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160160/projects/Screenshot_205_x7j678.webp',
+      url: 'https://codingfr.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/coding_fr-html-css',
+    },
+    {
+      id: 7,
+      title: 'get cocktails',
+      category: 'React',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160160/projects/Screenshot_203_xmtxgb.webp',
+      url: 'https://getcocktails-react-dk.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/get_cocktails-reactJS',
+    },
+    {
+      id: 8,
+      title: 'young at art',
+      category: 'jQuery',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160160/projects/Screenshot_204_k8dj42.webp',
+      url: 'https://youngatart.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/young_at_art-html-css',
+    },
+    {
+      id: 9,
+      title: 'color generator',
+      category: 'React',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160160/projects/Screenshot_201_t88bgn.webp',
+      url: 'https://colorgenerator-react-dk.netlify.app/',
+      repo_url:
+        'https://github.com/yodkwtf/reactJS-mini_projects/tree/main/2)%20Color%20Generator',
+    },
+    {
+      id: 10,
+      title: 'saints of shows',
+      category: 'jQuery',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160160/projects/Screenshot_206_pqwfmc.webp',
+      url: 'https://saintsofshows.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/saints_of_shows-html-css',
+    },
+
+    {
+      id: 11,
+      title: 'text generator',
+      category: 'React',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160159/projects/Screenshot_200_idzjtl.webp',
+      url: 'https://randomtextgenerator-react-dk.netlify.app/',
+      repo_url:
+        'https://github.com/yodkwtf/reactJS-mini_projects/tree/main/1)%20Random%20Text%20Generator',
+    },
+    {
+      id: 12,
+      title: 'redux website clone',
+      category: 'HTML & CSS',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160159/projects/Screenshot_199_nvi6xu.webp',
+      url: 'https://reduxwebsite-dk.netlify.app/',
+      repo_url:
+        'https://github.com/yodkwtf/html-css-mini_projects/tree/main/2)%20Redux%20Website',
+    },
+    {
+      id: 13,
+      title: 'markdown preview',
+      category: 'React',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160159/projects/Screenshot_202_feiz7x.webp',
+      url: 'https://markdownpreview-react-dk.netlify.app/',
+      repo_url:
+        'https://github.com/yodkwtf/reactJS-mini_projects/tree/main/3)%20Markdown%20Preview',
     },
   ],
 
