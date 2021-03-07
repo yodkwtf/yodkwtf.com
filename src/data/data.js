@@ -19,54 +19,50 @@ export const skills = [
   {
     id: 1,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615110696/skills_portfolio/html_xh9koh.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/html_e3zuxs.webp',
     title: 'HTML',
     icon: <SiHtml5 />,
   },
   {
     id: 2,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615110696/skills_portfolio/css_adhs9m.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112107/skills_portfolio/css_eukzsu.webp',
     title: 'CSS',
     icon: <SiCss3 />,
   },
   {
     id: 3,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615110696/skills_portfolio/javascript_kh6tqn.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/javascript_blwmub.webp',
     title: 'Javascript',
     icon: <SiJavascript />,
   },
   {
     id: 4,
-    // copyrighted
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615108807/skills_portfolio/sass_t0ctz1.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_300/v1615112108/skills_portfolio/sass_fhymhd.webp',
     title: 'Sass',
     icon: <SiSass />,
   },
 
   {
     id: 5,
-    // copyrighted
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/bootstrap_z8nct3.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112107/skills_portfolio/bootstrap_qvf7ze.webp',
     title: 'Bootstrap',
     icon: <SiBootstrap />,
   },
   {
     id: 6,
-    // copyrighted
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057425/skills_portfolio/jquery_n976ml.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_200/v1615112108/skills_portfolio/jquery_r6e4mm.webp',
     title: 'jQuery',
     icon: <SiJquery />,
   },
   {
     id: 7,
-    // copyrighted
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615057426/skills_portfolio/react_ug3rsk.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/react_pg9f18.webp',
     title: 'React JS',
     icon: <SiReact />,
   },
@@ -86,9 +82,8 @@ export const skills = [
   },
   {
     id: 10,
-    // copyrighted
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615108807/skills_portfolio/vscode_o0nxup.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/vscode_akfeuy.webp',
     title: 'VSCode',
     icon: <SiVisualstudiocode />,
   },
