@@ -26,7 +26,7 @@ export const skills = [
   {
     id: 2,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112107/skills_portfolio/css_eukzsu.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400,w_400/v1615112107/skills_portfolio/css_eukzsu.webp',
     title: 'CSS',
     icon: <SiCss3 />,
   },
