@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { NavForPages } from '../components';
 
 const ContactPage = () => {
@@ -29,38 +28,54 @@ const ContactPage = () => {
 
         {/* form */}
         <div className="section-center">
-          <form className="form">
+          <form
+            className="form"
+            action="https://formspree.io/f/xvoveppv"
+            method="POST"
+          >
             <div className="form-center">
-              {/* name and email */}
+              {/* name  */}
               <article>
                 <label htmlFor="name">name</label>
+                <br />
                 <input
                   type="text"
                   className="form-control"
                   name="Name"
                   placeholder="John Doe"
+                  required
                 />
-                <label htmlFor="email">name</label>
+              </article>
+              {/* email */}
+              <article>
+                <label htmlFor="email">e-mail</label>
+                <br />
                 <input
                   type="email"
                   className="form-control"
                   name="Email"
                   placeholder="johndoe123@mail.com"
+                  required
                 />
               </article>
               {/* text area */}
               <article>
-                <label htmlFor="message">message</label>
+                <label htmlFor="message">how can I help?</label>
+                <br />
                 <textarea
                   name="Message"
                   className="form-control"
                   placeholder="I want a portfolio website"
+                  rows="8"
+                  required
                 ></textarea>
               </article>
             </div>
-            <button className="btn" type="submit">
-              submit
-            </button>
+            <div className="btn-container">
+              <button className="btn submit-btn" type="submit">
+                submit
+              </button>
+            </div>
           </form>
         </div>
       </div>

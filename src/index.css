@@ -1128,7 +1128,7 @@ main {
 .page-title {
   margin: 0 auto;
   background: var(--clr-body-bcg-3);
-  padding: 4rem 0;
+  padding: 4rem 1rem;
 }
 .page-title p {
   text-transform: none;
@@ -1167,4 +1167,46 @@ ERROR PAGE
 .error-page h2 {
   text-transform: none;
   margin-bottom: 3rem;
+}
+
+/* 
+======================
+CONTACT PAGE
+======================
+*/
+
+.form-center {
+  max-width: 768px;
+  margin: 0 auto;
+}
+.form-center article {
+  margin: 4rem 0;
+}
+label {
+  text-transform: uppercase;
+}
+.form-control {
+  margin-top: 1rem;
+  padding: 1rem 0.75rem;
+  outline: none;
+  width: 100%;
+  max-width: 768px;
+  background: transparent;
+  border: 3px solid transparent;
+  border-bottom: 3px solid var(--clr-primary);
+  color: var(--clr-font-3);
+  font-size: 1.25rem;
+}
+.form-control:focus {
+  border-radius: 0.35rem;
+  border-color: var(--clr-primary);
+}
+.form .btn-container {
+  margin: 0 auto 3rem;
+}
+.submit-btn {
+  outline: none;
+  border-style: solid;
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
 }
