@@ -76,7 +76,7 @@ export const skills = [
   {
     id: 9,
     image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400,w_600/v1615057426/skills_portfolio/netlify_ptzx2w.webp',
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615109895/skills_portfolio/netlify_x2su8j.webp',
     title: 'Netlify',
     icon: <SiNetlify />,
   },
