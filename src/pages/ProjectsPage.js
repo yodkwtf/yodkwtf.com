@@ -2,6 +2,7 @@ import React from 'react';
 import { projects } from '../data/data';
 import { FaGithub, FaLink } from 'react-icons/fa';
 import { NavForPages } from '../components';
+import { AppContext } from '../context';
 
 // get all projects from data
 const { all_projects } = projects;
@@ -23,8 +24,17 @@ const ProjectsPage = () => {
   // states
   const [projects, setProjects] = React.useState(all_projects);
 
+  // get theme from context
+  const { theme } = React.useContext(AppContext);
+
   // FILTER PROJECTS FUNCTION
-  const filterProjects = (category) => {
+  const filterProjects = (category, e) => {
+    // remove active class
+    document.querySelectorAll('.category-btn').forEach((btn) => {
+      btn.style.background = `${theme === 'light' ? '#29648a' : '#bb2525'}`;
+    });
+    // add active class
+    e.target.style.background = `${theme === 'light' ? '#2e9cca' : '#ee3322'}`;
     // check if all btn is clicked
     if (category === 'all') {
       setProjects(all_projects);
@@ -77,8 +87,9 @@ const Categories = ({ categories, filterProjects }) => {
       {categories.map((category, i) => (
         <button
           className="category-btn btn"
+          data-category={category}
           key={i}
-          onClick={() => filterProjects(category)}
+          onClick={(e) => filterProjects(category, e)}
         >
           {category}
         </button>
