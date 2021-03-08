@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaLightbulb, FaShareSquare } from 'react-icons/fa';
+import { FaGithub, FaLightbulb, FaLink } from 'react-icons/fa';
 import { projects } from '../data/data';
 
 export const Projects = () => {
@@ -58,7 +58,7 @@ const SingleProject = ({ image, title, info, tools, url, repo_url }) => {
         <div className="project-footer">
           <a href={url} target="_blank" rel="noreferrer">
             <strong>
-              <FaShareSquare className="fa" /> <span>live demo</span>
+              <FaLink className="fa" /> <span>live demo</span>
             </strong>
           </a>
           <a href={repo_url} target="_blank" rel="noreferrer">

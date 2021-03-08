@@ -1,6 +1,6 @@
 import React from 'react';
 import { projects } from '../data/data';
-import { FaGithub, FaShareSquare } from 'react-icons/fa';
+import { FaGithub, FaLink } from 'react-icons/fa';
 import { NavForPages } from '../components';
 
 // get all projects from data
@@ -111,7 +111,7 @@ const SingleProject = ({ project: { title, image, url, repo_url } }) => {
         <div className="single-project-footer">
           <a href={url} target="_blank" rel="noreferrer">
             <strong>
-              <FaShareSquare className="fa" /> <span>live</span>
+              <FaLink className="fa" /> <span>live</span>
             </strong>
           </a>
           <a href={repo_url} target="_blank" rel="noreferrer">
