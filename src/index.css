@@ -6,69 +6,6 @@
 Variables
 ===============
 */
-.dark {
-  /* bcg */
-  --toggle-color: rgb(61, 124, 182);
-  --nav-bcg: linear-gradient(rgba(75, 75, 75, 0.1), rgba(75, 75, 75, 0.1)),
-    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
-  --hero-bcg: linear-gradient(
-      rgba(100, 100, 100, 0.1),
-      rgba(5, 5, 5, 0.7),
-      rgba(5, 5, 5, 0.1)
-    ),
-    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
-  --contact-bcg: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(./images/contact/contact-bcg.png) center repeat;
-
-  /* black colors */
-  --clr-body-bcg: #101114;
-  --clr-body-bcg-2: #191a1d;
-  --clr-body-bcg-3: #252525;
-  /* white colors  */
-  --clr-font: #fff;
-  --clr-font-2: #f5f6f7;
-  --clr-font-3: #f0f0f0;
-  /* primary colors */
-  /* --clr-primary: #1b9ce5;
-  --clr-secondary: #0074e1;
-  --clr-tertiary: #e3f0f8; */
-  --clr-primary: #bb2525;
-  --clr-secondary: #ee3322;
-  --clr-tertiary: #e14b5a;
-  /* shadows */
-  --light-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-  --dark-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
-}
-
-.light {
-  /* bcg */
-  --toggle-color: #000;
-  --nav-bcg: linear-gradient(rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.1)),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
-  --hero-bcg: linear-gradient(
-      rgba(160, 160, 160, 0.1),
-      rgba(250, 250, 250, 0.7),
-      rgba(250, 250, 250, 0.1)
-    ),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
-  --contact-bcg: url(./images/contact/contact-bcg.png) center repeat;
-
-  /* white colors */
-  --clr-body-bcg: #fff;
-  --clr-body-bcg-2: #f5f6f7;
-  --clr-body-bcg-3: #f0f0f0;
-  /* black colors  */
-  --clr-font: #101114;
-  --clr-font-2: #191a1d;
-  --clr-font-3: #252525;
-  /* primary colors */
-  --clr-primary: #29648a;
-  --clr-secondary: #2e9cca;
-  --clr-tertiary: #e3f0f8;
-  /* shadows */
-  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
 
 :root {
   /* bcg */
@@ -131,6 +68,69 @@ Variables
   /* width */
   --max-width: 1280px;
   --fixed-width: 560px;
+}
+.dark {
+  /* bcg */
+  --toggle-color: rgb(61, 124, 182);
+  --nav-bcg: linear-gradient(rgba(75, 75, 75, 0.1), rgba(75, 75, 75, 0.1)),
+    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
+  --hero-bcg: linear-gradient(
+      rgba(100, 100, 100, 0.1),
+      rgba(5, 5, 5, 0.7),
+      rgba(5, 5, 5, 0.1)
+    ),
+    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
+  --contact-bcg: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(./images/contact/contact-bcg.png) center repeat;
+
+  /* black colors */
+  --clr-body-bcg: #101114;
+  --clr-body-bcg-2: #191a1d;
+  --clr-body-bcg-3: #252525;
+  /* white colors  */
+  --clr-font: #fff;
+  --clr-font-2: #f5f6f7;
+  --clr-font-3: #f0f0f0;
+  /* primary colors */
+  /* --clr-primary: #1b9ce5;
+  --clr-secondary: #0074e1;
+  --clr-tertiary: #e3f0f8; */
+  --clr-primary: #bb2525;
+  --clr-secondary: #ee3322;
+  --clr-tertiary: #e14b5a;
+  /* shadows */
+  --light-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+  --dark-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+.light {
+  /* bcg */
+  --toggle-color: #000;
+  --nav-bcg: linear-gradient(rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.1)),
+    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --hero-bcg: linear-gradient(
+      rgba(160, 160, 160, 0.1),
+      rgba(250, 250, 250, 0.7),
+      rgba(250, 250, 250, 0.1)
+    ),
+    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --contact-bcg: url(./images/contact/contact-bcg.png) center repeat;
+
+  /* white colors */
+  --clr-body-bcg: #fff;
+  --clr-body-bcg-2: #f5f6f7;
+  --clr-body-bcg-3: #f0f0f0;
+  /* black colors  */
+  --clr-font: #101114;
+  --clr-font-2: #191a1d;
+  --clr-font-3: #252525;
+  /* primary colors */
+  --clr-primary: #29648a;
+  --clr-secondary: #2e9cca;
+  --clr-tertiary: #e3f0f8;
+  /* shadows */
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /*
