@@ -1337,6 +1337,12 @@ PROJECTS PAGE
 .category-btn:hover {
   opacity: 0.9;
 }
+.active {
+  background: var(--clr-secondary);
+}
+.unactive {
+  background: var(--clr-primary) !important;
+}
 .projects-container {
   display: grid;
   gap: 3rem;

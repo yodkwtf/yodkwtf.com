@@ -2,39 +2,35 @@ import React from 'react';
 import { projects } from '../data/data';
 import { FaGithub, FaLink } from 'react-icons/fa';
 import { NavForPages } from '../components';
-import { AppContext } from '../context';
 
 // get all projects from data
 const { all_projects } = projects;
 
 // COMPONENT
 const ProjectsPage = () => {
-  /**
-   // **** get all unique categories
-   * using map to get category of all items
-   * using SET to filter out only unique ones
-   * changing them into an array from object
-   * adding 'all' btn and using spread operator
-   */
+  // get all unique categories
   const categories = [
     'all',
     ...new Set(all_projects.map((project) => project.category)),
   ];
-
   // states
   const [projects, setProjects] = React.useState(all_projects);
 
-  // get theme from context
-  const { theme } = React.useContext(AppContext);
+  // UPDATE FILTER BTNS COLOR
+  const updateFilterBtns = (e) => {
+    // remove active class from all
+    document.querySelectorAll('.category-btn').forEach((btn) => {
+      btn.classList.add('unactive');
+    });
+    // remove unactive and then add active class to clicked btn
+    e.target.classList.remove('unactive');
+    e.target.classList.add('active');
+  };
 
   // FILTER PROJECTS FUNCTION
   const filterProjects = (category, e) => {
-    // remove active class
-    document.querySelectorAll('.category-btn').forEach((btn) => {
-      btn.style.background = `${theme === 'light' ? '#29648a' : '#bb2525'}`;
-    });
-    // add active class
-    e.target.style.background = `${theme === 'light' ? '#2e9cca' : '#ee3322'}`;
+    // update btns
+    updateFilterBtns(e);
     // check if all btn is clicked
     if (category === 'all') {
       setProjects(all_projects);
