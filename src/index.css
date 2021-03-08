@@ -71,6 +71,33 @@ Variables
 }
 
 :root {
+  /* bcg */
+  --toggle-color: #000;
+  --nav-bcg: linear-gradient(rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.1)),
+    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --hero-bcg: linear-gradient(
+      rgba(160, 160, 160, 0.1),
+      rgba(250, 250, 250, 0.7),
+      rgba(250, 250, 250, 0.1)
+    ),
+    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --contact-bcg: url(./images/contact/contact-bcg.png) center repeat;
+
+  /* white colors */
+  --clr-body-bcg: #fff;
+  --clr-body-bcg-2: #f5f6f7;
+  --clr-body-bcg-3: #f0f0f0;
+  /* black colors  */
+  --clr-font: #101114;
+  --clr-font-2: #191a1d;
+  --clr-font-3: #252525;
+  /* primary colors */
+  --clr-primary: #29648a;
+  --clr-secondary: #2e9cca;
+  --clr-tertiary: #e3f0f8;
+  /* shadows */
+  --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   /* other colors */
   --clr-white: #fff;
   --clr-black: #222;
