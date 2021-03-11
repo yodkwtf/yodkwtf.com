@@ -630,7 +630,7 @@ header {
 @media screen and (min-width: 992px) {
   .banner-container {
     grid-template-columns: 1fr auto;
-    gap: 5rem;
+    gap: 3rem;
     align-items: center;
   }
   .hero-img {
@@ -638,6 +638,9 @@ header {
   }
   .hero-info {
     text-align: left;
+  }
+  .hero-info p {
+    max-width: 45rem;
   }
   .hero-btn-container,
   #my-name {
