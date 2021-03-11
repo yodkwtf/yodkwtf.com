@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaEnvelope, FaThumbsUp } from 'react-icons/fa';
 import heroImageLight from '../images/hero/hero-image-light.svg';
-import heroImageDark from '../images/hero/hero-image-dark.svg';
+// import heroImageDark from '../images/hero/hero-image-dark.svg';
+import heroImageDark2 from '../images/hero/hero-image-dark2.svg';
 import { AppContext } from '../context';
 
 export const Hero = () => {
@@ -43,7 +44,7 @@ export const Hero = () => {
           {/* hero-image */}
           <article className="hero-img">
             <img
-              src={theme === 'light' ? heroImageLight : heroImageDark}
+              src={theme === 'light' ? heroImageLight : heroImageDark2}
               alt="Hero"
               className="hero-image"
             />

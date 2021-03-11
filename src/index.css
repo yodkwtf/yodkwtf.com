@@ -92,12 +92,12 @@ Variables
   --clr-font-2: #f5f6f7;
   --clr-font-3: #f0f0f0;
   /* primary colors */
-  /* --clr-primary: #1b9ce5;
+  --clr-primary: #1b9ce5;
   --clr-secondary: #0074e1;
-  --clr-tertiary: #e3f0f8; */
-  --clr-primary: #bb2525;
+  --clr-tertiary: #b0d9f3;
+  /* --clr-primary: #bb2525;
   --clr-secondary: #ee3322;
-  --clr-tertiary: #e14b5a;
+  --clr-tertiary: #e14b5a; */
   /* shadows */
   --light-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
   --dark-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
@@ -1109,8 +1109,8 @@ CONTACT
   color: #0073b1;
 }
 .github {
-  color: #333;
-  background: var(--clr-white);
+  color: var(--clr-font);
+  background: var(--clr-body-bcg);
   border-radius: 50%;
 }
 
@@ -1272,7 +1272,8 @@ CONTACT PAGE
   margin: 0 auto;
 }
 .form-center article {
-  margin: 4rem 0;
+  margin: 4rem auto;
+  max-width: 600px;
 }
 label {
   text-transform: uppercase;
@@ -1282,7 +1283,6 @@ label {
   padding: 1rem 0.75rem;
   outline: none;
   width: 100%;
-  max-width: 768px;
   background: transparent;
   border: 3px solid transparent;
   border-bottom: 3px solid var(--clr-primary);
@@ -1320,6 +1320,7 @@ PROJECTS PAGE
 }
 .category-btn:first-child {
   background: var(--clr-secondary);
+  opacity: 1;
 }
 .category-btn {
   width: 100%;
@@ -1330,18 +1331,20 @@ PROJECTS PAGE
   color: var(--clr-white);
   transition: all 0.2;
   border-radius: var(--radius);
-  opacity: 0.9;
+  opacity: 0.8;
   outline: none;
   background: var(--clr-primary);
 }
 .category-btn:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 .active {
   background: var(--clr-secondary);
+  opacity: 1;
 }
 .unactive {
   background: var(--clr-primary) !important;
+  opacity: 0.8 !important;
 }
 .projects-container {
   display: grid;
