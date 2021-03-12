@@ -1098,10 +1098,10 @@ CONTACT
 .social-icon {
   font-size: 2rem;
   transition: var(--transition);
+  line-height: 1;
 }
 .social-icon .fa {
   transition: var(--transition);
-  line-height: 1;
 }
 .twitter {
   color: #00a7e7;
