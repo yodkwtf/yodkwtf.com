@@ -18,7 +18,11 @@ Variables
       rgba(250, 250, 250, 0.1)
     ),
     url(./images/hero/hero-bcg-light.png) center repeat fixed;
-  --contact-bcg: url(./images/contact/contact-bcg.png) center repeat;
+  --contact-bcg: linear-gradient(
+      rgba(160, 160, 160, 0.3),
+      rgba(160, 160, 160, 0.3)
+    ),
+    url(./images/contact/contact-bcg.png) center repeat;
 
   /* white colors */
   --clr-body-bcg: #fff;
@@ -80,7 +84,7 @@ Variables
       rgba(5, 5, 5, 0.1)
     ),
     url(./images/hero/hero-bcg-dark.png) center repeat fixed;
-  --contact-bcg: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  --contact-bcg: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
     url(./images/contact/contact-bcg.png) center repeat;
 
   /* black colors */
@@ -114,7 +118,11 @@ Variables
       rgba(250, 250, 250, 0.1)
     ),
     url(./images/hero/hero-bcg-light.png) center repeat fixed;
-  --contact-bcg: url(./images/contact/contact-bcg.png) center repeat;
+  --contact-bcg: linear-gradient(
+      rgba(160, 160, 160, 0.3),
+      rgba(160, 160, 160, 0.3)
+    ),
+    url(./images/contact/contact-bcg.png) center repeat;
 
   /* white colors */
   --clr-body-bcg: #fff;
@@ -282,7 +290,7 @@ p {
 }
 .section-title span {
   font-weight: bolder;
-  text-shadow: 1px 1px 1px var(--clr-grey-5);
+  text-shadow: 2px 1px 2px var(--clr-primary);
 }
 
 /* 
@@ -613,9 +621,6 @@ header {
   1% {
     opacity: 1;
   }
-  99% {
-    /* border-right: 3px solid var(--clr-dark); */
-  }
   100% {
     opacity: 1;
   }
@@ -907,7 +912,7 @@ PROJECTS
     height: 100%;
     border-radius: 0.25rem;
     background: var(--clr-tertiary);
-    box-shadow: var(--light-shadow);
+    box-shadow: var(--dark-shadow);
   }
   .project-title {
     text-align: left;
@@ -985,6 +990,7 @@ SKILLS
 }
 .skill:hover .skill-image {
   opacity: 0.7;
+  box-shadow: var(--dark-shadow);
 }
 .skill:hover .skill-title {
   opacity: 1;
