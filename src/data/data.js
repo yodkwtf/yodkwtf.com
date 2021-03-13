@@ -15,6 +15,7 @@ import {
 // **************************
 // skills
 // **************************
+
 export const skills = [
   {
     id: 1,
@@ -92,6 +93,7 @@ export const skills = [
 // **************************
 //  projects
 // **************************
+
 export const projects = {
   // recent projects
   recent_projects: [
@@ -117,12 +119,12 @@ export const projects = {
     },
     {
       id: 3,
-      image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615055956/projects/spotify_page_fz0ysv.webp',
-      title: 'cloned spotify page',
-      info: `One of the spotify webpage cloned from scratch using just HTML and CSS. This is part of my mini HTML/CSS projects series where I create designs without using javascript (or keep it bare minimum).`,
+      title: 'redux website clone',
       tools: ['HTML', 'CSS'],
-      url: 'https://spotifypage-dk.netlify.app/',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160159/projects/Screenshot_199_nvi6xu.webp',
+      info: `The official redux website cloned from scratch using just HTML and CSS. This is part of my mini HTML/CSS projects series where I create designs without using javascript (or keep it bare minimum).`,
+      url: 'https://reduxwebsite-dk.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/html-css-mini_projects',
     },
     {
@@ -336,7 +338,7 @@ export const projects = {
     // PORTFOLIO V-1
     {
       id: 17,
-      title: 'portfolio design',
+      title: 'portfolio design #1',
       category: 'jQuery',
       image:
         'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615177624/projects/Screenshot_207_biiko7.webp',
@@ -353,6 +355,17 @@ export const projects = {
         'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615177624/projects/Screenshot_208_jev8f4.webp',
       url: 'https://pigdicegame-dk.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/pig_dice_game-vanillaJS',
+    },
+
+    // PORTFOLIO V-2
+    {
+      id: 19,
+      title: 'portfolio design #2',
+      category: 'HTML & CSS',
+      image:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615653521/projects/Screenshot_229_zr8otf.webp',
+      url: 'https://portfolio-v2-dk.netlify.app/',
+      repo_url: 'https://github.com/yodkwtf/portfolio-v2',
     },
   ],
 };
