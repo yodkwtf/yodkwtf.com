@@ -130,7 +130,7 @@ export const projects = {
     {
       id: 4,
       image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615179643/projects/Screenshot_215_mnm09e.webp',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615931676/projects/Screenshot_234_wmiiae.webp',
       title: 'to do list app',
       info: `A to-do list app built with javascript that handles entry, editing and deletion of tasks. The tasks are also stored locally in the browser so one can visit them later.`,
       tools: ['HTML', 'CSS', 'Javascript'],
@@ -191,7 +191,7 @@ export const projects = {
       title: 'to do list app',
       category: 'Javascript',
       image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615179643/projects/Screenshot_215_mnm09e.webp',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615931676/projects/Screenshot_234_wmiiae.webp',
       url: 'https://todolist-dk.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/to_do_list-vanillaJS',
     },
@@ -218,31 +218,20 @@ export const projects = {
       repo_url: 'https://github.com/yodkwtf/coding_fr-html-css',
     },
 
-    // GET COCKTAILS
-    {
-      id: 7,
-      title: 'get cocktails',
-      category: 'React',
-      image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615179644/projects/Screenshot_214_kbicbs.webp',
-      url: 'https://getcocktails-react-dk.netlify.app/',
-      repo_url: 'https://github.com/yodkwtf/get_cocktails-reactJS',
-    },
-
     // YOUNG AT ART
     {
-      id: 8,
+      id: 7,
       title: 'young at art',
       category: 'jQuery',
       image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160160/projects/Screenshot_204_k8dj42.webp',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615931568/projects/Screenshot_239_se1dau.webp',
       url: 'https://youngatart.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/young_at_art-html-css',
     },
 
     // MULTIPLICATION TABLE
     {
-      id: 9,
+      id: 8,
       title: 'multiplication table',
       category: 'Javascript',
       image:
@@ -254,7 +243,7 @@ export const projects = {
 
     // COLOR GENERATOR
     {
-      id: 10,
+      id: 9,
       title: 'color generator',
       category: 'React',
       image:
@@ -266,18 +255,18 @@ export const projects = {
 
     // SAINTS OF SHOWS
     {
-      id: 11,
+      id: 10,
       title: 'saints of shows',
       category: 'jQuery',
       image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615160160/projects/Screenshot_206_pqwfmc.webp',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615931678/projects/Screenshot_238_yr8lrn.webp',
       url: 'https://saintsofshows.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/saints_of_shows-html-css',
     },
 
     // TEXT GENERATOR
     {
-      id: 12,
+      id: 11,
       title: 'text generator',
       category: 'React',
       image:
@@ -289,7 +278,7 @@ export const projects = {
 
     // WEATHER APP
     {
-      id: 13,
+      id: 12,
       title: 'weather app',
       category: 'Javascript',
       image:
@@ -301,7 +290,7 @@ export const projects = {
 
     // REDUX WEBSITE
     {
-      id: 14,
+      id: 13,
       title: 'redux website clone',
       category: 'HTML & CSS',
       image:
@@ -313,7 +302,7 @@ export const projects = {
 
     // COUNTDOWN TIMER
     {
-      id: 15,
+      id: 14,
       title: 'countdown',
       category: 'Javascript',
       image:
@@ -325,7 +314,7 @@ export const projects = {
 
     // MARKDOWN PREVIEW
     {
-      id: 16,
+      id: 15,
       title: 'markdown preview',
       category: 'React',
       image:
@@ -337,7 +326,7 @@ export const projects = {
 
     // PORTFOLIO V-1
     {
-      id: 17,
+      id: 16,
       title: 'portfolio design #1',
       category: 'jQuery',
       image:
@@ -348,18 +337,18 @@ export const projects = {
 
     // PIG DICE GAME
     {
-      id: 18,
+      id: 17,
       title: 'pig dice game',
       category: 'Javascript',
       image:
-        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615177624/projects/Screenshot_208_jev8f4.webp',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615931676/projects/Screenshot_235_j3wjst.webp',
       url: 'https://pigdicegame-dk.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/pig_dice_game-vanillaJS',
     },
 
     // PORTFOLIO V-2
     {
-      id: 19,
+      id: 18,
       title: 'portfolio design #2',
       category: 'HTML & CSS',
       image:

@@ -28,7 +28,7 @@ export const Projects = () => {
       {/* all projects btn */}
       <div className="btn-container">
         <Link to="/Projects" className="btn">
-          more projects <FaLightbulb />{' '}
+          all projects <FaLightbulb />{' '}
         </Link>
       </div>
     </section>

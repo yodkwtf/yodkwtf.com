@@ -96,6 +96,9 @@ const Categories = ({ categories, filterProjects }) => {
 
 // Projects Component
 const Projects = ({ projects }) => {
+  // sort by name
+  projects = projects.sort((a, b) => a.title.localeCompare(b.title));
+
   // jsx
   return (
     <div className="projects-container">

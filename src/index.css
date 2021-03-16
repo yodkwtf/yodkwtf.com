@@ -234,7 +234,7 @@ p {
   text-transform: uppercase;
   background: var(--clr-primary-gradient);
   color: var(--clr-white);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.25rem;
   letter-spacing: var(--spacing);
   display: inline-block;
   font-weight: 700;
