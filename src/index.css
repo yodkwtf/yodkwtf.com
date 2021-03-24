@@ -43,7 +43,7 @@ Variables
   --clr-white: #fff;
   --clr-black: #222;
   --clr-primary-gradient: linear-gradient(
-    to bottom right,
+    to top right,
     var(--clr-secondary),
     var(--clr-primary)
   );
@@ -136,6 +136,9 @@ Variables
   --clr-primary: #29648a;
   --clr-secondary: #2e9cca;
   --clr-tertiary: #e3f0f8;
+  /* --clr-primary: #b22222;
+  --clr-secondary: #ff4040;
+  --clr-tertiary: #ff9999; */
   /* shadows */
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -570,23 +573,20 @@ header {
 }
 .hero-btn {
   align-self: center;
-  border: 2px solid transparent;
+  border: 2px solid var(--clr-primary);
   transition: all 0.5s ease-out;
 }
 .hero-btn:last-child {
   background: var(--clr-white);
   color: var(--clr-primary);
-  border-color: var(--clr-primary);
 }
 .hero-btn:hover {
   background: var(--clr-white);
   color: var(--clr-primary);
-  border-color: var(--clr-primary);
 }
 .hero-btn:last-child:hover {
   background: var(--clr-primary-gradient);
   color: var(--clr-white);
-  border-color: transparent;
 }
 
 #my-name {
@@ -1106,6 +1106,11 @@ CONTACT
   transition: var(--transition);
   line-height: 1;
 }
+@media screen and (max-width: 792px) {
+  .social-icon {
+    line-height: 0;
+  }
+}
 .social-icon .fa {
   transition: var(--transition);
 }
@@ -1157,6 +1162,9 @@ CONTACT
   }
   .social-icon {
     font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    line-height: 1.5;
   }
   .social-icon:hover .fa {
     color: var(--clr-font);

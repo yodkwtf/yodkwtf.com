@@ -102,7 +102,7 @@ export const projects = {
       image:
         'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615124006/projects/Screenshot_198_qpoicb.webp',
       title: 'titans digital',
-      info: `A website for an online web agency that builts web and mobile apps. This is a single page website that I built from scratch in the early stages of my coding journey.`,
+      info: `A website for an online web agency that builts web sites and web apps. This is a single page website that I built from scratch in the early stages of my coding journey.`,
       tools: ['HTML', 'CSS', 'Javascript'],
       url: 'https://titansdigital.netlify.app/',
       repo_url: 'https://github.com/yodkwtf/titans_digital-html-css',
