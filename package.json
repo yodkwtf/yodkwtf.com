@@ -1,5 +1,6 @@
 {
-  "name": "react-portfolio",
+  "name": "yodkwtf-portfolio",
+  "homepage": "https://yodkwtf.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
