@@ -1,13 +1,11 @@
 import React from 'react';
 import { FaEnvelope, FaThumbsUp } from 'react-icons/fa';
-import heroImageLight from '../images/hero/hero-image-light.svg';
-// import heroImageDark from '../images/hero/hero-image-dark.svg';
-import heroImageDark2 from '../images/hero/hero-image-dark2.svg';
+import heroImg from '../images/hero/hero-img.svg';
 import { AppContext } from '../context';
 
 export const Hero = () => {
   // function from context
-  const { smoothScroll, theme } = React.useContext(AppContext);
+  const { smoothScroll } = React.useContext(AppContext);
 
   // jsx
   return (
@@ -43,11 +41,7 @@ export const Hero = () => {
 
           {/* hero-image */}
           <article className="hero-img">
-            <img
-              src={theme === 'light' ? heroImageLight : heroImageDark2}
-              alt="Hero"
-              className="hero-image"
-            />
+            <img src={heroImg} alt="Hero" className="hero-image" />
           </article>
         </div>
       </div>
