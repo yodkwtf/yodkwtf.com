@@ -12,6 +12,7 @@ const SocialIcons = () => {
             className="social-icon"
             target="_blank"
             rel="noreferrer"
+            title={title}
           >
             {icon}&nbsp;<span>{title}</span>
           </a>

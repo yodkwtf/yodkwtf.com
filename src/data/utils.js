@@ -22,31 +22,32 @@ export const socialIcons = [
     id: 2,
     icon: <FaTwitter className="fa twitter" />,
     url: 'https://twitter.com/yodkwtf',
-    title: 'twitter',
+    title: 'Twitter',
   },
+
   {
     id: 3,
+    icon: <FaYoutube className="fa youtube" />,
+    url: 'https://youtube.com/yodkwtf',
+    title: 'YouTube',
+  },
+  {
+    id: 4,
     icon: <FaLinkedin className="fa linkedin" />,
     url: 'https://www.linkedin.com/in/durgesh-chaudhary',
     title: 'LinkedIn',
   },
   {
-    id: 4,
+    id: 5,
     icon: <FaGithub className="fa github" />,
     url: 'https://github.com/yodkwtf',
-    title: 'gitHub',
-  },
-  {
-    id: 5,
-    icon: <FaYoutube className="fa youtube" />,
-    url: 'https://youtube.com/yodkwtf',
-    title: 'youTube',
+    title: 'GitHub',
   },
   {
     id: 6,
     icon: <FaCodepen className="fa codepen" />,
     url: 'https://codepen.io/yodkwtf',
-    title: 'codepen',
+    title: 'Codepen',
   },
 ];
 
