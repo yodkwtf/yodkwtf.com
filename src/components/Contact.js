@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaPaperPlane } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import SocialIcons from './SocialIcons';
 
@@ -12,14 +11,14 @@ export const Contact = () => {
         <article className="contact-info">
           <h2>get in touch</h2>
           <p>Have a project you'd like to discuss?</p>
-          <Link to="/Contact" className="btn">
-            send details <FaPaperPlane />
+          <Link to="/contact" className="btn">
+            send details 🚀
           </Link>
         </article>
 
         {/* icons */}
         <article className="social-icons" id="follow">
-          <h4>Follow to stay updated</h4>
+          <h4>Connect With Me Now!</h4>
           <div className="social-icons-container">
             <SocialIcons />
           </div>

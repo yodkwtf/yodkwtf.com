@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaEnvelope, FaThumbsUp } from 'react-icons/fa';
 import heroImg from '../images/hero/hero-img.svg';
 import { AppContext } from '../context';
 
@@ -27,14 +26,14 @@ export const Hero = () => {
                 href="mailto:48durgesh.kumar@gmail.com"
                 className="btn hero-btn"
               >
-                get in touch <FaEnvelope />
+                get in touch 📞
               </a>
               <a
                 href="#follow"
                 className="btn hero-btn"
                 onClick={(e) => smoothScroll(e)}
               >
-                follow me <FaThumbsUp />
+                follow me 📱
               </a>
             </div>
           </article>

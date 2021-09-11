@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaLightbulb, FaLink } from 'react-icons/fa';
+import { FaGithub, FaLink } from 'react-icons/fa';
 import { projects } from '../data/data';
 
 export const Projects = () => {
@@ -13,7 +13,7 @@ export const Projects = () => {
       {/* title */}
       <div className="section-title">
         <h2>
-          recent <span>projects</span>
+          latest <span>works</span>
         </h2>
         <div className="underline"></div>
       </div>
@@ -27,8 +27,8 @@ export const Projects = () => {
 
       {/* all projects btn */}
       <div className="btn-container">
-        <Link to="/Projects" className="btn">
-          all projects <FaLightbulb />{' '}
+        <Link to="/projects" className="btn">
+          all projects 📚
         </Link>
       </div>
     </section>

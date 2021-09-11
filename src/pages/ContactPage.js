@@ -74,7 +74,7 @@ const ContactPage = () => {
             </div>
             <div className="btn-container">
               <button className="btn submit-btn" type="submit">
-                submit <FaPaperPlane />
+                send 🛴
               </button>
             </div>
           </form>

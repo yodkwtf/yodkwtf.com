@@ -10,7 +10,7 @@ const ErrorPage = () => {
         <div className="section-center ">
           <h2>OOPS! The page you're looking for doesn't exist :/</h2>
           <Link to="/" className="btn">
-            back to home
+            back to home 🏡
           </Link>
         </div>
       </div>
