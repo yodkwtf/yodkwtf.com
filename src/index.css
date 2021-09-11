@@ -362,28 +362,16 @@ nav {
     transform: scale(1);
   }
 }
-
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.logo img {
-  height: 3rem;
-  width: 3rem;
-}
-
-.logo h5 {
   color: var(--clr-primary);
   font-size: 1.75rem;
   letter-spacing: 2px;
   text-shadow: var(--light-shadow);
   font-family: 'Acme', sans-serif;
-  /* justify-self: center; */
+  justify-self: center;
   transition: var(--transition);
 }
-.logo h5:hover {
+.logo:hover {
   color: var(--clr-secondary);
 }
 .nav-links {

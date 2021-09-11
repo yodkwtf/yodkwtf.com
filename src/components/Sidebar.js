@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import { AppContext } from '../context';
 import SocialIcons from './SocialIcons';
 import NavLinks from './NavLinks';
 import ToggleTheme from './ToggleTheme';
-import Logo from './Logo';
 
 export const Sidebar = () => {
   // function from context
@@ -16,7 +16,9 @@ export const Sidebar = () => {
       {/* sidebar-header */}
       <div className="sidebar-header">
         <div className="sidebar-header-col">
-          <Logo />
+          <Link to="/">
+            <h5 className="logo">&#60;YODKWTF&#62;</h5>
+          </Link>
           <ToggleTheme />
         </div>
         <button className="close-btn" onClick={closeSidebar}>
