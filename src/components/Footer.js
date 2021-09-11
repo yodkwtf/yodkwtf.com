@@ -14,8 +14,13 @@ export const Footer = () => {
     <footer id="footer" className="footer">
       <div className="section-center">
         <p className="footer-text">
-          &copy; <span>{date}</span> Durgesh. All rights reserved. Built with{' '}
-          <a href="https://reactjs.org/" target="_blank" rel="noreferrer">
+          &copy; <span>{date}</span> Yodkwtf. All rights reserved. Built with{' '}
+          <a
+            href="https://reactjs.org/"
+            target="_blank"
+            rel="noreferrer"
+            title="Reactjs - Official Website"
+          >
             Reactjs
           </a>
           .
