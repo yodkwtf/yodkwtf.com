@@ -25,15 +25,17 @@ export const Hero = () => {
               <a
                 href="mailto:48durgesh.kumar@gmail.com"
                 className="btn hero-btn"
+                title="Email Me Now"
               >
                 get in touch 📞
               </a>
               <a
-                href="#follow"
+                href="#projects"
                 className="btn hero-btn"
                 onClick={(e) => smoothScroll(e)}
+                title="My Latest Works"
               >
-                follow me 📱
+                see my work 💻
               </a>
             </div>
           </article>

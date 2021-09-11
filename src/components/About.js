@@ -30,13 +30,17 @@ export const About = () => {
           <div className="about-img-small">
             <img
               src={aboutSmallImage}
-              alt="about"
+              alt="Durgesh"
               className="about-image-small"
             />
           </div>
           {/* big image */}
           <div className="about-img-big">
-            <img src={aboutBigImage} alt="about" className="about-image-big" />
+            <img
+              src={aboutBigImage}
+              alt="Durgesh"
+              className="about-image-big"
+            />
           </div>
         </article>
 
@@ -57,6 +61,7 @@ export const About = () => {
               href="https://youtube.com/c/yodkwtf"
               target="_blank"
               rel="noreferrer"
+              title="My YouTube Channel"
             >
               Yodkwtf Academy
             </a>{' '}

@@ -57,12 +57,15 @@ const ProjectsPage = () => {
           </h2>
           <div className="underline"></div>
           <p>
-            {' '}
             Since I've been creating websites for a while now, there are a lot
             of them. So I decided to put some of my favourite ones here.
             <br />
             However, if you are interested in seeing all my projects then just
-            follow me on <a href="https://github.com/yodkwtf">github</a>.
+            follow me on{' '}
+            <a href="https://github.com/yodkwtf" title="My GitHub Profile">
+              github
+            </a>
+            .
           </p>
         </div>
 
@@ -119,12 +122,17 @@ const SingleProject = ({ project: { title, image, url, repo_url } }) => {
       <div className="single-project-info">
         <h4 className="single-project-title">{title}</h4>
         <div className="single-project-footer">
-          <a href={url} target="_blank" rel="noreferrer">
+          <a href={url} target="_blank" rel="noreferrer" title="Live Site">
             <strong>
               <FaLink className="fa" /> <span>live</span>
             </strong>
           </a>
-          <a href={repo_url} target="_blank" rel="noreferrer">
+          <a
+            href={repo_url}
+            target="_blank"
+            rel="noreferrer"
+            title="GitHub Code"
+          >
             <FaGithub className="fa" /> <span>code</span>
           </a>
         </div>

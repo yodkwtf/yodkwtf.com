@@ -16,12 +16,11 @@ const ContactPage = () => {
           </h2>
           <div className="underline"></div>
           <p>
-            {' '}
             If you want to work with me please fill the form below and I'll get
             back to you within 24 hours.
             <br />
             Alternatively, you can also send me an email on{' '}
-            <a href="mailto:48durgesh.kumar@gmail.com">
+            <a href="mailto:48durgesh.kumar@gmail.com" title="Email Me">
               48durgesh.kumar@gmail.com
             </a>
           </p>

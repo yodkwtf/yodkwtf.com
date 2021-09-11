@@ -56,12 +56,17 @@ const SingleProject = ({ image, title, info, tools, url, repo_url }) => {
         </div>
         {/* footer */}
         <div className="project-footer">
-          <a href={url} target="_blank" rel="noreferrer">
+          <a href={url} target="_blank" rel="noreferrer" title="Live Site">
             <strong>
               <FaLink className="fa" /> <span>live demo</span>
             </strong>
           </a>
-          <a href={repo_url} target="_blank" rel="noreferrer">
+          <a
+            href={repo_url}
+            target="_blank"
+            rel="noreferrer"
+            title="GitHub Code"
+          >
             <FaGithub className="fa" /> <span>source code</span>
           </a>
         </div>

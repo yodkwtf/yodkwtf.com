@@ -251,11 +251,7 @@ p {
   border-radius: 2rem;
 }
 .btn:hover {
-  opacity: 0.9;
-}
-
-svg {
-  vertical-align: middle;
+  background: var(--clr-secondary);
 }
 
 /* section */
@@ -1067,6 +1063,7 @@ CONTACT
     display: block;
     text-transform: none;
     text-align: center;
+    margin-bottom: 2rem;
   }
   .social-icons-container {
     display: grid;
