@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Navbar,
-  Sidebar,
-  Hero,
-  About,
-  Projects,
-  Skills,
-  Contact,
-} from '../components';
+import { Navbar, Sidebar, Hero, About, Projects, Contact } from '../components';
 
 const HomePage = () => {
   return (

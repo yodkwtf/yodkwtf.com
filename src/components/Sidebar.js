@@ -32,7 +32,7 @@ export const Sidebar = () => {
 
       {/* sidebar-icons */}
       <div className="sidebar-icons">
-        <h4>Follow to stay updated</h4>
+        <h4>Connect With Me! 📱</h4>
         <div className="icons-container">
           <SocialIcons />
         </div>

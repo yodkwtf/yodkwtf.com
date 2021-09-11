@@ -254,6 +254,10 @@ p {
   opacity: 0.9;
 }
 
+.btn .fa {
+  vertical-align: middle;
+}
+
 /* section */
 
 .section {

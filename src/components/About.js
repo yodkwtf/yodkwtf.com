@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 import aboutSmallImage from '../images/about/about-image-small.jpg';
 import aboutBigImage from '../images/about/about-image.jpg';
 import { Skills } from './Skills';
