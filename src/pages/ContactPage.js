@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaPaperPlane } from 'react-icons/fa';
 import { NavForPages } from '../components';
 
 const ContactPage = () => {
