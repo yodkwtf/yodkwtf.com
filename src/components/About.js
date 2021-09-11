@@ -17,9 +17,9 @@ export const About = () => {
   // jsx
   return (
     <section id="about" className="section about">
-      <div className="section-title title-small">
+      <div className="section-title">
         <h2>
-          my <span>story</span>
+          <span>about</span> me
         </h2>
         <div className="underline"></div>
       </div>
@@ -42,35 +42,28 @@ export const About = () => {
         </article>
 
         <article className="about-info">
-          <div className="section-title title-big">
-            <h2>
-              my <span>story</span>
-            </h2>
-            <div className="underline"></div>
-          </div>
-
-          {/* about-info */}
-
-          <h4>front-end developer</h4>
+          <h4>Full-Stack developer 💻</h4>
           <p>
             {/* text */}
-            My name is Durgesh but most people know me by my nickname Deekayy.
-            I'm <span>{age}</span> years old and currently pursuing B.Tech in
-            Computer Science from The Northcap University, Gurgaon.
+            Hello Friend. <br />
+            I'm Durgesh, a <span>{age}</span> year old web developer, currently
+            trying to master full stack MERN development. I have a profound
+            knowledge of HTML & CSS, Javascript, React, Nodejs, and Gatsby.
             <br />
-            <br />I love coding as it gives me a challenge of learning something
-            new everyday. My speciality is building
+            <br />
+            I've built a lot of websites and web apps and currently, I'm working
+            as a freelance web developer where I deliver highly optimized
+            websites to my clients and help them scale their business digitally.
             {readMore ? (
               <>
-                &nbsp;responsive websites using HTML, CSS and Javascript. I'm
-                also very familiar with using frameworks and can work very well
-                with ReactJS.
+                I also run a youtube channel called Yodkwtf Academy where I
+                teach web development to beginners.
                 <br />
                 <br />
-                When I'm not coding, I love to binge watch web shows and
-                documentaries. I also enjoy sketching and painting. Although I'm
-                not very good at it but it does help a bit in creating awesome
-                designs for my websites.
+                When I'm not coding, I love to binge watch pop culture stuff. I
+                also love to play guitar and create sketches. Although I'm not
+                very good at it but the creative mind does help me a bit in
+                creating awesome designs for my websites.
               </>
             ) : (
               `...`

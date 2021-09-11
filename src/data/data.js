@@ -2,7 +2,7 @@ import React from 'react';
 import {
   SiHtml5,
   SiCss3,
-  // SiSass,
+  SiSass,
   SiJavascript,
   SiBootstrap,
   SiJquery,
@@ -38,13 +38,14 @@ export const skills = [
     title: 'Javascript',
     icon: <SiJavascript />,
   },
-  // {
-  //   id: 4,
-  //   image:
-  //     'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_300/v1615112108/skills_portfolio/sass_fhymhd.webp',
-  //   title: 'Sass',
-  //   icon: <SiSass />,
-  // },
+
+  {
+    id: 4,
+    image:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_300/v1615112108/skills_portfolio/sass_fhymhd.webp',
+    title: 'Sass',
+    icon: <SiSass />,
+  },
 
   {
     id: 5,

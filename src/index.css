@@ -702,15 +702,17 @@ ABOUT
 .about-img-big {
   display: none;
 }
-.title-big {
-  display: none;
+
+.about-info {
+  text-align: center;
 }
+
 .about-info h4 {
   text-align: center;
   background: var(--clr-font);
   color: var(--clr-body-bcg);
   margin-bottom: 0 auto 1.5rem;
-  padding: 0.3rem 1.25rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 2px;
   display: block;
 }
@@ -732,41 +734,29 @@ ABOUT
 
 @media screen and (min-width: 992px) {
   .about-center {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 30% 1fr;
     align-items: center;
-    padding: 5rem;
-    column-gap: 3rem;
+    padding-left: 3rem;
+    column-gap: 5rem;
   }
   .about-info {
-    padding: 1.5rem;
-    padding-left: 3rem;
+    padding: 1.5rem 0 1.5rem 3rem;
     border-left: 3px solid var(--clr-font);
+    text-align: left;
   }
   .about-img-small {
     display: none;
   }
-  .title-small {
-    display: none;
-  }
-  .title-big {
-    display: block;
-    text-align: left;
-    margin-bottom: 2rem;
-  }
-  .title-big .underline {
-    margin-left: 0;
-    margin-right: 0;
-  }
 
   .about-img-big {
     display: block;
-    max-width: 25rem;
+    max-width: 20rem;
     max-height: 32rem;
     margin: 0 auto;
     position: relative;
   }
   .about-image-big {
-    max-width: 24rem;
+    max-width: 20rem;
     max-height: 32rem;
     object-fit: cover;
     position: relative;
@@ -776,9 +766,9 @@ ABOUT
   .about-img-big::before {
     content: '';
     position: absolute;
-    top: -10%;
-    left: -7%;
-    width: 110%;
+    top: -7.5%;
+    left: -7.5%;
+    width: 115%;
     height: 100%;
     border-radius: 0.25rem;
     background: var(--clr-tertiary);
@@ -978,7 +968,7 @@ SKILLS
 ======================
 */
 
-.skills-center {
+/* .skills-center {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
@@ -1028,9 +1018,9 @@ SKILLS
   .skills-center {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
-}
+} */
 
-/* .skills-center {
+.skills-center {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
@@ -1086,7 +1076,7 @@ SKILLS
     padding: 1.5rem;
     font-size: 3.25rem;
   }
-} */
+}
 
 /* 
 ======================
