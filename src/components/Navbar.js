@@ -2,7 +2,7 @@ import React from 'react';
 import NavLinks from './NavLinks';
 import ToggleTheme from './ToggleTheme';
 import Logo from './Logo';
-import { FaChevronCircleDown } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { AppContext } from '../context';
 
 export const Navbar = () => {
@@ -17,7 +17,7 @@ export const Navbar = () => {
         <div className="nav-header">
           <Logo />
           <button className="nav-btn" onClick={openSidebar}>
-            <FaChevronCircleDown />
+            <FaBars />
           </button>
         </div>
         {/* nav-links */}

@@ -357,12 +357,15 @@ nav {
 @keyframes bounce {
   0% {
     transform: scale(1);
+    color: var(--clr-primary);
   }
   50% {
-    transform: scale(1.5);
+    transform: scale(1.25);
+    color: var(--clr-secondary);
   }
   100% {
     transform: scale(1);
+    color: var(--clr-primary);
   }
 }
 
@@ -590,11 +593,11 @@ header {
   transition: all 0.5s ease-out;
 }
 .hero-btn:last-child {
-  background: var(--clr-white);
+  background: transparent;
   color: var(--clr-primary);
 }
 .hero-btn:hover {
-  background: var(--clr-white);
+  background: transparent;
   color: var(--clr-primary);
 }
 .hero-btn:last-child:hover {
