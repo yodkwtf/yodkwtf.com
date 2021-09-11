@@ -696,6 +696,7 @@ ABOUT
 .about-image-small {
   border-radius: 50%;
   width: 100%;
+  object-fit: contain;
 }
 .about-img-big {
   display: none;
@@ -729,18 +730,16 @@ ABOUT
 
   .about-img-big {
     display: block;
-    max-width: 20rem;
-    max-height: 32rem;
+    /* max-width: 18rem; */
     margin: 0 auto;
     position: relative;
   }
   .about-image-big {
-    max-width: 20rem;
-    max-height: 32rem;
-    object-fit: cover;
+    /* max-height: 28rem; */
     position: relative;
     box-shadow: var(--light-shadow);
     border-radius: 0.25rem;
+    object-fit: contain;
   }
   .about-img-big::before {
     content: '';

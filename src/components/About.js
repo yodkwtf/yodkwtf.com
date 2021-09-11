@@ -1,6 +1,7 @@
 import React from 'react';
 import aboutSmallImage from '../images/about/about-image-small.jpg';
-import aboutBigImage from '../images/about/about-image.jpg';
+import aboutSmallImg from '../images/about/about-img-small.jpg';
+import aboutBigImg from '../images/about/about-img.jpg';
 import { Skills } from './Skills';
 
 export const About = () => {
@@ -29,18 +30,14 @@ export const About = () => {
           {/* small image */}
           <div className="about-img-small">
             <img
-              src={aboutSmallImage}
+              src={aboutSmallImg}
               alt="Durgesh"
               className="about-image-small"
             />
           </div>
           {/* big image */}
           <div className="about-img-big">
-            <img
-              src={aboutBigImage}
-              alt="Durgesh"
-              className="about-image-big"
-            />
+            <img src={aboutBigImg} alt="Durgesh" className="about-image-big" />
           </div>
         </article>
 
