@@ -2,15 +2,16 @@ import React from 'react';
 import {
   SiHtml5,
   SiCss3,
-  SiSass,
-  SiJavascript,
-  SiBootstrap,
-  SiJquery,
   SiReact,
-  SiGithub,
-  SiNetlify,
-  SiVisualstudiocode,
+  SiNodeDotJs,
+  SiGatsby,
+  SiMongodb,
+  SiStyledComponents,
+  SiGraphql,
+  SiFigma,
+  SiGit,
 } from 'react-icons/si';
+import { IoLogoJavascript, IoLogoGithub } from 'react-icons/io';
 
 // **************************
 // skills
@@ -19,75 +20,63 @@ import {
 export const skills = [
   {
     id: 1,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/html_e3zuxs.webp',
     title: 'HTML',
     icon: <SiHtml5 />,
   },
   {
     id: 2,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400,w_400/v1615112107/skills_portfolio/css_eukzsu.webp',
     title: 'CSS',
     icon: <SiCss3 />,
   },
   {
     id: 3,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/javascript_blwmub.webp',
     title: 'Javascript',
-    icon: <SiJavascript />,
+    icon: <IoLogoJavascript />,
   },
-
   {
     id: 4,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_300/v1615112108/skills_portfolio/sass_fhymhd.webp',
-    title: 'Sass',
-    icon: <SiSass />,
-  },
-
-  {
-    id: 5,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112107/skills_portfolio/bootstrap_qvf7ze.webp',
-    title: 'Bootstrap',
-    icon: <SiBootstrap />,
-  },
-  {
-    id: 6,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_200/v1615112108/skills_portfolio/jquery_r6e4mm.webp',
-    title: 'jQuery',
-    icon: <SiJquery />,
-  },
-  {
-    id: 7,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/react_pg9f18.webp',
-    title: 'React JS',
+    title: 'React',
     icon: <SiReact />,
   },
   {
+    id: 5,
+    title: 'Nodejs',
+    icon: <SiNodeDotJs />,
+  },
+  {
+    id: 6,
+    title: 'Gatsby',
+    icon: <SiGatsby />,
+  },
+  {
+    id: 7,
+    title: 'github',
+    icon: <IoLogoGithub />,
+  },
+  {
     id: 8,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615109122/skills_portfolio/github_kehram.webp',
-    title: 'GitHub',
-    icon: <SiGithub />,
+    title: 'Git',
+    icon: <SiGit />,
   },
   {
     id: 9,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615109895/skills_portfolio/netlify_x2su8j.webp',
-    title: 'Netlify',
-    icon: <SiNetlify />,
+    title: 'mongoDb',
+    icon: <SiMongodb />,
   },
   {
     id: 10,
-    image:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/c_scale,h_400/v1615112108/skills_portfolio/vscode_akfeuy.webp',
-    title: 'VSCode',
-    icon: <SiVisualstudiocode />,
+    title: 'styled-components',
+    icon: <SiStyledComponents />,
+  },
+  {
+    id: 11,
+    title: 'graphql',
+    icon: <SiGraphql />,
+  },
+  {
+    id: 12,
+    title: 'figma',
+    icon: <SiFigma />,
   },
 ];
 

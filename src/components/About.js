@@ -2,10 +2,10 @@ import React from 'react';
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 import aboutSmallImage from '../images/about/about-image-small.jpg';
 import aboutBigImage from '../images/about/about-image.jpg';
+import { Skills } from './Skills';
 
 export const About = () => {
   // state
-  const [readMore, setReadMore] = React.useState(false);
   const [age, setAge] = React.useState(20);
 
   React.useEffect(() => {
@@ -42,7 +42,6 @@ export const About = () => {
         </article>
 
         <article className="about-info">
-          <h4>Full-Stack developer 💻</h4>
           <p>
             {/* text */}
             Hello Friend. <br />
@@ -54,33 +53,24 @@ export const About = () => {
             I've built a lot of websites and web apps and currently, I'm working
             as a freelance web developer where I deliver highly optimized
             websites to my clients and help them scale their business digitally.
-            {readMore ? (
-              <>
-                I also run a youtube channel called Yodkwtf Academy where I
-                teach web development to beginners.
-                <br />
-                <br />
-                When I'm not coding, I love to binge watch pop culture stuff. I
-                also love to play guitar and create sketches. Although I'm not
-                very good at it but the creative mind does help me a bit in
-                creating awesome designs for my websites.
-              </>
-            ) : (
-              `...`
-            )}
-            {/* read more btn */}
-            <button id="toggle-text" onClick={() => setReadMore(!readMore)}>
-              {readMore ? (
-                <>
-                  &nbsp;show less <FaAngleUp />
-                </>
-              ) : (
-                <>
-                  read more <FaAngleDown />
-                </>
-              )}
-            </button>
+            I also run a youtube channel called{' '}
+            <a
+              href="https://youtube.com/c/yodkwtf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Yodkwtf Academy
+            </a>{' '}
+            where I teach web development to beginners.
+            <br />
+            <br />
+            When I'm not coding, I love to binge watch pop culture stuff. I also
+            love to play guitar and create sketches. Although I'm not very good
+            at it but the creative mind does help me a bit in
           </p>
+
+          {/* stack */}
+          <Skills />
         </article>
       </div>
     </section>
