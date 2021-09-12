@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { projects } from '../data/data';
 import { FaGithub, FaLink } from 'react-icons/fa';
 import { Contact, NavForPages } from '../components';
@@ -45,40 +46,53 @@ const ProjectsPage = () => {
 
   // jsx
   return (
-    <section className="page">
-      {/* navbar */}
-      <NavForPages />
+    <>
+      <Helmet>
+        <title>Durgesh | List of Projects</title>
+        <meta
+          name="description"
+          content="The list of a few of projects built by yodkwtf, aka, Durgesh. These are built with a variety of technology including html & css, javascript, reactjs, nodejs, bootstrap, gatsby, jQuery, etc. Take a look at the github profile for more info."
+        />
+      </Helmet>
 
-      <div className="page-center projects-page">
-        {/* title */}
-        <div className="section-title page-title">
-          <h2>
-            my <span>projects</span>
-          </h2>
-          <div className="underline"></div>
-          <p>
-            Since I've been creating websites for a while now, there are a lot
-            of them. So I decided to put some of my favourite ones here.
-            <br />
-            However, if you are interested in seeing all my projects then just
-            follow me on{' '}
-            <a href="https://github.com/yodkwtf" title="My GitHub Profile">
-              github
-            </a>
-            .
-          </p>
+      <section className="page">
+        {/* navbar */}
+        <NavForPages />
+
+        <div className="page-center projects-page">
+          {/* title */}
+          <div className="section-title page-title">
+            <h2>
+              my <span>projects</span>
+            </h2>
+            <div className="underline"></div>
+            <p>
+              Since I've been creating websites for a while now, there are a lot
+              of them. So I decided to put some of my favourite ones here.
+              <br />
+              However, if you are interested in seeing all my projects then just
+              follow me on{' '}
+              <a href="https://github.com/yodkwtf" title="My GitHub Profile">
+                github
+              </a>
+              .
+            </p>
+          </div>
+
+          {/* projects-center */}
+          <div className="section-center projects-page-center">
+            <Categories
+              categories={categories}
+              filterProjects={filterProjects}
+            />
+            <Projects projects={projects} />
+          </div>
         </div>
 
-        {/* projects-center */}
-        <div className="section-center projects-page-center">
-          <Categories categories={categories} filterProjects={filterProjects} />
-          <Projects projects={projects} />
-        </div>
-      </div>
-
-      {/* CONTACT SECTION */}
-      <Contact />
-    </section>
+        {/* CONTACT SECTION */}
+        <Contact />
+      </section>
+    </>
   );
 };
 

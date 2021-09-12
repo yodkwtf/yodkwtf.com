@@ -1,5 +1,5 @@
 {
-  "name": "yodkwtf-portfolio",
+  "name": "durgesh-yodkwtf",
   "homepage": "https://yodkwtf.com/",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.7.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-helmet-async": "^1.1.2",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
