@@ -1,11 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaLink } from 'react-icons/fa';
-import { projects } from '../data/data';
+import Airtable from 'airtable-node';
+import { Loading } from '.';
 
 export const Projects = () => {
-  // get recent projects from projects
-  const { recent_projects } = projects;
+  const [projects, setProjects] = useState();
+  const [loading, setLoading] = useState(true);
+
+  const airtable = new Airtable({ apiKey: process.env.REACT_APP_API_KEY })
+    .base(process.env.REACT_APP_BASE_ID)
+    .table('recent-works');
+
+  const fetchProjects = async () => {
+    const { records } = await airtable.list();
+    const projects = records.map((record) => {
+      const { id } = record;
+      const { title, desc, image, stack, url, github } = record.fields;
+      const imgUrl = image[0].url;
+
+      return {
+        id,
+        title,
+        desc,
+        imgUrl,
+        stack,
+        url,
+        github,
+      };
+    });
+
+    setProjects(projects);
+    setLoading(false);
+  };
+
+  // useEffect
+  useEffect(() => {
+    fetchProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // jsx
   return (
@@ -20,9 +53,15 @@ export const Projects = () => {
 
       {/* projects-center */}
       <div className="section-center projects-center">
-        {recent_projects.map((project) => (
-          <SingleProject key={project.id} {...project} />
-        ))}
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            {projects.map((project) => (
+              <SingleProject key={project.id} {...project} />
+            ))}
+          </>
+        )}
       </div>
 
       {/* all projects btn */}
@@ -35,22 +74,22 @@ export const Projects = () => {
   );
 };
 
-const SingleProject = ({ image, title, info, tools, url, repo_url }) => {
+const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
   // jsx
   return (
     <article className="project">
       {/* image */}
       <div className="project-img">
-        <img src={image} alt={title} className="project-image" />
+        <img src={imgUrl} alt={title} className="project-image" />
       </div>
       <div>
         {/* info */}
         <div className="project-info">
           <h4 className="project-title">{title}</h4>
-          <p className="project-text">{info}</p>
+          <p className="project-text">{desc}</p>
           <div className="project-tools">
-            {tools.map((tool, index) => (
-              <span key={index}>{tool}</span>
+            {stack.map((item, index) => (
+              <span key={index}>{item}</span>
             ))}
           </div>
         </div>
@@ -61,12 +100,7 @@ const SingleProject = ({ image, title, info, tools, url, repo_url }) => {
               <FaLink className="fa" /> <span>live demo</span>
             </strong>
           </a>
-          <a
-            href={repo_url}
-            target="_blank"
-            rel="noreferrer"
-            title="GitHub Code"
-          >
+          <a href={github} target="_blank" rel="noreferrer" title="GitHub Code">
             <FaGithub className="fa" /> <span>source code</span>
           </a>
         </div>

@@ -1260,17 +1260,17 @@ PROJECTS PAGE
   border-radius: var(--radius);
   opacity: 0.8;
   outline: none;
-  background: var(--clr-primary);
+  background: var(--clr-secondary);
 }
 .category-btn:hover {
   opacity: 1;
 }
 .active {
-  background: var(--clr-secondary);
+  background: var(--clr-primary);
   opacity: 1;
 }
 .unactive {
-  background: var(--clr-primary) !important;
+  background: var(--clr-secondary) !important;
   opacity: 0.8 !important;
 }
 .projects-container {
