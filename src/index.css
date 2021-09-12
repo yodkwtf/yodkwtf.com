@@ -1138,7 +1138,7 @@ main {
   background: var(--clr-body-bcg);
 }
 .page-center {
-  min-height: calc(100vh - 74px - 67px);
+  min-height: calc(100vh - 80px - 67px);
 }
 .page-title {
   margin: 0 auto;
@@ -1165,7 +1165,7 @@ main {
     align-items: center;
   }
   .page-center {
-    min-height: calc(100vh - 74px - 49px);
+    min-height: calc(100vh - 80px - 49px);
   }
   .nav-2 .toggle-theme {
     display: block;

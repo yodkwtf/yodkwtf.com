@@ -1,7 +1,7 @@
 import React from 'react';
 import { projects } from '../data/data';
 import { FaGithub, FaLink } from 'react-icons/fa';
-import { NavForPages } from '../components';
+import { Contact, NavForPages } from '../components';
 
 // get all projects from data
 const { all_projects } = projects;
@@ -75,6 +75,9 @@ const ProjectsPage = () => {
           <Projects projects={projects} />
         </div>
       </div>
+
+      {/* CONTACT SECTION */}
+      <Contact />
     </section>
   );
 };
