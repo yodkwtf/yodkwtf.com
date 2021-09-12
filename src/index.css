@@ -298,6 +298,21 @@ p {
   text-shadow: 1px 1px 1px var(--clr-tertiary);
 }
 
+.loader {
+  margin: 10rem auto;
+  width: 5rem;
+  height: 5rem;
+  border: 4px solid var(--clr-grey-9);
+  border-radius: 50%;
+  border-top-color: var(--clr-secondary);
+  animation: loader 1s linear infinite;
+}
+@keyframes loader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* 
 ======================
 NAVBAR
@@ -762,7 +777,6 @@ PROJECTS
 .projects {
   background: var(--clr-body-bcg-2);
 }
-/* ####### */
 
 .project:first-child {
   margin-top: 0;
