@@ -1041,7 +1041,7 @@ CONTACT
   font-size: 2rem;
   transition: var(--transition);
   line-height: 1;
-  justify-self: center;
+  justify-self: left;
 }
 @media screen and (max-width: 792px) {
   .social-icon {
@@ -1089,6 +1089,7 @@ CONTACT
     margin: 0 auto;
     max-width: var(--max-width);
     text-align: left;
+    gap: 2rem;
   }
   .social-icons {
     background: transparent;
@@ -1260,9 +1261,7 @@ label {
   margin: 0 auto 3rem;
 }
 .submit-btn {
-  outline: none;
   border-style: solid;
-  background: var(--clr-primary-gradient);
   border-color: var(--clr-primary);
 }
 
