@@ -1,5 +1,4 @@
 import React from 'react';
-import aboutSmallImage from '../images/about/about-image-small.jpg';
 import aboutSmallImg from '../images/about/about-img-small.jpg';
 import aboutBigImg from '../images/about/about-img.jpg';
 import { Skills } from './Skills';

@@ -10,7 +10,10 @@ export const Contact = () => {
         {/* info */}
         <article className="contact-info">
           <h2>get in touch</h2>
-          <p>Have a project you'd like to discuss?</p>
+          <p>
+            <strong>Have a project you'd like to discuss?</strong> Just leave me
+            a message below and I'll get back to you within 24 hours.
+          </p>
           <Link to="/contact" className="btn">
             send details 🚀
           </Link>

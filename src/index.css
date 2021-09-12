@@ -985,6 +985,7 @@ CONTACT
 }
 .contact-info h2 {
   text-shadow: 2px 2px 2px var(--clr-body-bcg);
+  margin-bottom: 1.5rem;
 }
 
 .social-icons {
