@@ -17,9 +17,10 @@ export const Hero = () => {
               hey,<span> i'm durgesh</span>
             </h1>
             <p>
-              I'm a front-end developer based in Delhi, India. I create
-              responsive websites and web apps to help people improve their
-              internet surfing experiences.
+              I'm a freelance web developer based in Delhi, India. I create
+              highly optimized responsive websites to help my clients scale
+              their business digitally and help people improve their internet
+              surfing experiences.
             </p>
             <div className="hero-btn-container">
               <a

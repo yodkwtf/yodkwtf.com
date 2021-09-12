@@ -33,9 +33,6 @@ Variables
   --clr-font-2: #191a1d;
   --clr-font-3: #252525;
   /* primary colors */
-  /* --clr-primary: #29648a;
-  --clr-secondary: #2e9cca;
-  --clr-tertiary: #e3f0f8; */
   --clr-primary: #008037;
   --clr-secondary: #00995e;
   --clr-tertiary: hsl(146, 52%, 76%);
@@ -98,13 +95,6 @@ Variables
   --clr-font: #fff;
   --clr-font-2: #f5f6f7;
   --clr-font-3: #f0f0f0;
-  /* primary colors */
-  /* --clr-primary: #1b9ce5;
-  --clr-secondary: #0074e1;
-  --clr-tertiary: #b0d9f3; */
-  --clr-primary: hsl(146, 100%, 25%);
-  --clr-secondary: hsl(157, 100%, 30%);
-  --clr-tertiary: hsl(146, 52%, 76%);
   /* shadows */
   --light-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
   --dark-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
@@ -135,13 +125,6 @@ Variables
   --clr-font: #101114;
   --clr-font-2: #191a1d;
   --clr-font-3: #252525;
-  /* primary colors */
-  /* --clr-primary: #29648a;
-  --clr-secondary: #2e9cca;
-  --clr-tertiary: #e3f0f8; */
-  --clr-primary: hsl(146, 100%, 25%);
-  --clr-secondary: hsl(157, 100%, 30%);
-  --clr-tertiary: hsl(146, 52%, 76%);
   /* shadows */
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -154,6 +137,22 @@ Global Styles
 */
 html {
   scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar {
+  width: 1em;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--clr-primary);
+  transition: var(--transition);
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-secondary);
+  transition: var(--transition);
+}
+html::-webkit-scrollbar-track {
+  background: #ccc;
 }
 
 *,
