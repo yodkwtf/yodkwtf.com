@@ -1,44 +1,66 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { projects } from '../data/data';
-import { FaGithub, FaLink } from 'react-icons/fa';
-import { Contact, NavForPages } from '../components';
-
-// get all projects from data
-const { all_projects } = projects;
+import { Contact, Loading, NavForPages, SingleProject } from '../components';
+import Airtable from 'airtable-node';
 
 // COMPONENT
 const ProjectsPage = () => {
-  // get all unique categories
-  const categories = [
-    'all',
-    ...new Set(all_projects.map((project) => project.category)),
-  ];
-  // states
-  const [projects, setProjects] = React.useState(all_projects);
+  const [allProjects, setAllProjects] = useState([]);
+  const [categories, setCategories] = useState();
+  const [projects, setProjects] = useState();
+  const [loading, setLoading] = useState(true);
+
+  const airtable = new Airtable({ apiKey: process.env.REACT_APP_API_KEY })
+    .base(process.env.REACT_APP_BASE_ID)
+    .table('projects');
+
+  const fetchProjects = async () => {
+    const { records } = await airtable.list();
+    const projects = records.map((record) => {
+      const { id } = record;
+      const { title, stack, image, url, github } = record.fields;
+      const imgUrl = image[0].url;
+
+      return {
+        id,
+        title,
+        imgUrl,
+        github,
+        url,
+        stack,
+      };
+    });
+
+    setAllProjects(projects);
+    setCategories([
+      'all',
+      ...new Set(projects.map((project) => project.stack)),
+    ]);
+    setProjects(projects);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   // UPDATE FILTER BTNS COLOR
   const updateFilterBtns = (e) => {
-    // remove active class from all
     document.querySelectorAll('.category-btn').forEach((btn) => {
       btn.classList.add('unactive');
     });
-    // remove unactive and then add active class to clicked btn
     e.target.classList.remove('unactive');
     e.target.classList.add('active');
   };
 
   // FILTER PROJECTS FUNCTION
-  const filterProjects = (category, e) => {
-    // update btns
+  const filterProjects = (stack, e) => {
     updateFilterBtns(e);
-    // check if all btn is clicked
-    if (category === 'all') {
-      setProjects(all_projects);
+    if (stack === 'all') {
+      setProjects(allProjects);
     } else {
-      // create new projects array of projects whose category matches clicked category
-      const newProjects = all_projects.filter(
-        (project) => project.category === category
+      const newProjects = allProjects.filter(
+        (project) => project.stack === stack
       );
       setProjects(newProjects);
     }
@@ -81,11 +103,17 @@ const ProjectsPage = () => {
 
           {/* projects-center */}
           <div className="section-center projects-page-center">
-            <Categories
-              categories={categories}
-              filterProjects={filterProjects}
-            />
-            <Projects projects={projects} />
+            {loading ? (
+              <Loading />
+            ) : (
+              <>
+                <Categories
+                  categories={categories}
+                  filterProjects={filterProjects}
+                />
+                <Projects projects={projects} />
+              </>
+            )}
           </div>
         </div>
 
@@ -123,38 +151,9 @@ const Projects = ({ projects }) => {
   return (
     <div className="projects-container">
       {projects.map((project) => (
-        <SingleProject project={project} key={project.id} />
+        <SingleProject {...project} key={project.id} />
       ))}
     </div>
-  );
-};
-
-// Single Project Component
-const SingleProject = ({ project: { title, image, url, repo_url } }) => {
-  return (
-    <article className="single-project">
-      <div className="single-project-img">
-        <img src={image} alt={title} className="single-project-image" />
-      </div>
-      <div className="single-project-info">
-        <h4 className="single-project-title">{title}</h4>
-        <div className="single-project-footer">
-          <a href={url} target="_blank" rel="noreferrer" title="Live Site">
-            <strong>
-              <FaLink className="fa" /> <span>live</span>
-            </strong>
-          </a>
-          <a
-            href={repo_url}
-            target="_blank"
-            rel="noreferrer"
-            title="GitHub Code"
-          >
-            <FaGithub className="fa" /> <span>code</span>
-          </a>
-        </div>
-      </div>
-    </article>
   );
 };
 
