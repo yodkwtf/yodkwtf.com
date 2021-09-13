@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLink } from 'react-icons/fa';
+import { FaGithub, FaShareSquare } from 'react-icons/fa';
 
 const SingleProject = ({ title, imgUrl, url, github }) => {
   return (
@@ -12,7 +12,7 @@ const SingleProject = ({ title, imgUrl, url, github }) => {
         <div className="single-project-footer">
           <a href={url} target="_blank" rel="noreferrer" title="Live Site">
             <strong>
-              <FaLink className="fa" /> <span>live</span>
+              <FaShareSquare className="fa" /> <span>live</span>
             </strong>
           </a>
           <a href={github} target="_blank" rel="noreferrer" title="GitHub Code">

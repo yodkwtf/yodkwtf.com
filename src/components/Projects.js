@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaLink } from 'react-icons/fa';
+import { FaGithub, FaShareSquare } from 'react-icons/fa';
 import Airtable from 'airtable-node';
 import { Loading } from '.';
 
@@ -97,7 +97,7 @@ const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
         <div className="project-footer">
           <a href={url} target="_blank" rel="noreferrer" title="Live Site">
             <strong>
-              <FaLink className="fa" /> <span>live demo</span>
+              <FaShareSquare className="fa" /> <span>live demo</span>
             </strong>
           </a>
           <a href={github} target="_blank" rel="noreferrer" title="GitHub Code">
