@@ -64,10 +64,10 @@ export const About = () => {
             &nbsp; where I post web dev tutorials.
             <br />
             <br />
-            When I'm not coding, I love to binge watch pop culture stuff. I also
-            love to play guitar 🎸 and create sketche. Although I'm not very
-            good at it but the creative mind does help me come up with designs
-            for my sites.
+            When I'm not coding, I love to binge-watch pop culture stuff. I also
+            love to play guitar 🎸 and create sketches. Even though I'm not very
+            good at it the creative mind does help me come up with designs for
+            my sites.
           </p>
 
           {/* stack */}
