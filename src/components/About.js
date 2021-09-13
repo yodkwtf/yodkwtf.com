@@ -25,7 +25,7 @@ export const About = () => {
 
       <div className="section-center about-center">
         {/* about-img  */}
-        <article className="about-img">
+        <article>
           {/* small image */}
           <div className="about-img-small">
             <img

@@ -1,17 +1,17 @@
-import React from 'react';
-import {
-  SiHtml5,
-  SiCss3,
-  SiReact,
-  SiNodeDotJs,
-  SiGatsby,
-  SiMongodb,
-  SiStyledComponents,
-  SiGraphql,
-  SiFigma,
-  SiGit,
-} from 'react-icons/si';
-import { IoLogoJavascript, IoLogoGithub } from 'react-icons/io';
+import html from '../images/skills/html.svg';
+import css from '../images/skills/css.svg';
+import javascript from '../images/skills/javascript.svg';
+import restApi from '../images/skills/rest-api.svg';
+import json from '../images/skills/json.svg';
+import react from '../images/skills/react.svg';
+import styledComponents from '../images/skills/styled-components.svg';
+import node from '../images/skills/node.svg';
+import mongodb from '../images/skills/mongo.svg';
+import gatsby from '../images/skills/gatsby.svg';
+import graphql from '../images/skills/graphql.svg';
+import github from '../images/skills/github.svg';
+import git from '../images/skills/git.svg';
+import figma from '../images/skills/figma.svg';
 
 // **************************
 // skills
@@ -21,62 +21,72 @@ export const skills = [
   {
     id: 1,
     title: 'HTML',
-    icon: <SiHtml5 />,
+    icon: html,
   },
   {
     id: 2,
     title: 'CSS',
-    icon: <SiCss3 />,
+    icon: css,
   },
   {
     id: 3,
     title: 'Javascript',
-    icon: <IoLogoJavascript />,
+    icon: javascript,
   },
   {
     id: 4,
-    title: 'React',
-    icon: <SiReact />,
+    title: 'Rest API',
+    icon: restApi,
   },
   {
     id: 5,
-    title: 'Nodejs',
-    icon: <SiNodeDotJs />,
+    title: 'JSON',
+    icon: json,
   },
   {
     id: 6,
-    title: 'Gatsby',
-    icon: <SiGatsby />,
+    title: 'React',
+    icon: react,
   },
   {
     id: 7,
-    title: 'github',
-    icon: <IoLogoGithub />,
+    title: 'styled-components',
+    icon: styledComponents,
   },
   {
     id: 8,
-    title: 'Git',
-    icon: <SiGit />,
+    title: 'Nodejs',
+    icon: node,
   },
   {
     id: 9,
-    title: 'mongoDb',
-    icon: <SiMongodb />,
+    title: 'MongoDB',
+    icon: mongodb,
   },
   {
     id: 10,
-    title: 'styled-components',
-    icon: <SiStyledComponents />,
+    title: 'Gatsby',
+    icon: gatsby,
   },
   {
     id: 11,
-    title: 'graphql',
-    icon: <SiGraphql />,
+    title: 'Graphql',
+    icon: graphql,
   },
   {
     id: 12,
-    title: 'figma',
-    icon: <SiFigma />,
+    title: 'Git',
+    icon: git,
+  },
+  {
+    id: 13,
+    title: 'GitHub',
+    icon: github,
+  },
+  {
+    id: 14,
+    title: 'Figma',
+    icon: figma,
   },
 ];
 

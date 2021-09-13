@@ -575,11 +575,11 @@ header {
 }
 .hero-img {
   display: none;
-  width: 22rem;
+  width: 26rem;
 }
 
 .hero-image {
-  width: 22rem;
+  width: 26rem;
 }
 
 .hero-info {
@@ -702,7 +702,7 @@ ABOUT
 
 .about-center {
   display: grid;
-  row-gap: 2rem;
+  gap: 2rem;
 }
 .about-img-small {
   margin: 0 auto;
@@ -737,12 +737,12 @@ ABOUT
     grid-template-columns: 30% 1fr;
     align-items: center;
     padding-left: 3rem;
-    column-gap: 5rem;
+    column-gap: 4rem;
   }
   .about-info {
     padding: 1.5rem 0 1.5rem 3rem;
-    border-left: 3px solid var(--clr-font);
-    text-align: left;
+    max-width: 42rem;
+    justify-self: center;
   }
   .about-img-small {
     display: none;
@@ -750,14 +750,12 @@ ABOUT
 
   .about-img-big {
     display: block;
-    margin: 0 auto;
     position: relative;
   }
   .about-image-big {
     position: relative;
     box-shadow: var(--light-shadow);
     border-radius: 0.25rem;
-    object-fit: contain;
     width: 20rem;
   }
   .about-img-big::before {
@@ -769,9 +767,6 @@ ABOUT
     height: 100%;
     border-radius: 0.25rem;
     background: var(--clr-tertiary);
-  }
-  .about-info p {
-    max-width: 45rem;
   }
 }
 
@@ -985,8 +980,27 @@ SKILLS
 ======================
 */
 
-.skills-title {
+.skills-title-container {
+  position: relative;
   margin: 2rem 0 1.5rem;
+}
+
+.skills-title {
+  display: inline-block;
+  background: var(--clr-body-bcg);
+  padding: 0 0.75rem;
+  margin-bottom: 0;
+}
+
+.skills-line {
+  height: 2px;
+  background: var(--clr-primary-gradient);
+  position: absolute;
+  width: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
 }
 
 .skills-center {
@@ -994,22 +1008,12 @@ SKILLS
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem 1rem;
 }
 
 .skill-icon {
-  font-size: 2.5rem;
-  color: var(--clr-secondary);
-  transition: var(--transition);
-}
-.skill-icon:hover {
-  color: var(--clr-primary);
-}
-
-@media screen and (min-width: 992px) {
-  .skills-center {
-    justify-content: unset;
-  }
+  width: auto;
+  height: 3rem;
 }
 
 /* 
