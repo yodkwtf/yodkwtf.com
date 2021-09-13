@@ -35,7 +35,7 @@ Variables
   /* primary colors */
   --clr-primary: #008037;
   --clr-secondary: #00995e;
-  --clr-tertiary: hsl(146, 52%, 76%);
+  --clr-tertiary: #a2e2be;
   /* shadows */
   --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -1174,7 +1174,7 @@ FOOTER
 }
 .footer-text {
   color: var(--clr-grey-10);
-  line-height: 1;
+  line-height: 1.25;
   margin-bottom: 0;
 }
 .footer-text a {

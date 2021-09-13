@@ -90,11 +90,11 @@ const ProjectsPage = () => {
             </h2>
             <div className="underline"></div>
             <p>
-              Since I've been creating websites for a while now, there are a lot
-              of them. So I decided to put some of my favourite ones here.
+              Since I've been creating projects for a while now, there are a lot
+              of them. I decided to put some of my favourite ones here.
               <br />
-              However, if you are interested in seeing all my projects then just
-              follow me on{' '}
+              If you are interested in seeing all my projects then please
+              consider following me on{' '}
               <a href="https://github.com/yodkwtf" title="My GitHub Profile">
                 github
               </a>
