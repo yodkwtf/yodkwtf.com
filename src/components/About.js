@@ -44,29 +44,30 @@ export const About = () => {
           <p>
             {/* text */}
             Hello Friend. <br />
-            I'm Durgesh, a <span>{age}</span> year old web developer, currently
-            trying to master full stack MERN development. I have a profound
-            knowledge of HTML & CSS, Javascript, React, Nodejs, and Gatsby.
+            I'm <strong>Durgesh</strong>, a <span>{age}</span> year old web
+            developer, currently trying to master full stack MERN development. I
+            have a profound knowledge of HTML & CSS, Javascript, React, Nodejs,
+            and Gatsby.
             <br />
             <br />
-            I've built a lot of websites and web apps and currently, I'm working
-            as a freelance web developer where I deliver highly optimized
-            websites to my clients and help them scale their business digitally.
-            I also run a youtube channel called{' '}
+            I'm working as a <strong>freelance web developer</strong> where I
+            deliver highly optimized websites to my clients and help them scale
+            their business digitally. I also run a&nbsp;&nbsp;
             <a
               href="https://youtube.com/c/yodkwtf"
               target="_blank"
               rel="noreferrer"
-              title="My YouTube Channel"
+              title="Yodkwtf Academy - My YouTube Channel"
             >
-              Yodkwtf Academy
-            </a>{' '}
-            where I teach web development to beginners.
+              YouTube channel
+            </a>
+            &nbsp; where I post web dev tutorials.
             <br />
             <br />
             When I'm not coding, I love to binge watch pop culture stuff. I also
-            love to play guitar and create sketches. Although I'm not very good
-            at it but the creative mind does help me a bit in
+            love to play guitar 🎸 and create sketche. Although I'm not very
+            good at it but the creative mind does help me come up with designs
+            for my sites.
           </p>
 
           {/* stack */}

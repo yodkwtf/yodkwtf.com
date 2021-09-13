@@ -729,7 +729,6 @@ ABOUT
 .about-info a {
   color: var(--clr-primary);
   text-decoration: underline;
-  font-style: italic;
 }
 
 @media screen and (min-width: 992px) {
@@ -1014,6 +1013,10 @@ SKILLS
 .skill-icon {
   width: auto;
   height: 3rem;
+  transition: var(--transition);
+}
+.skill-icon:hover {
+  transform: scale(1.05);
 }
 
 /* 
