@@ -19,7 +19,7 @@ export const Projects = () => {
 
   const fetchProjects = async () => {
     const { records } = await airtable.list();
-    const projects = records.map((record) => {
+    let projects = records.map((record) => {
       const { id } = record;
       const { title, desc, image, stack, url, github } = record.fields;
       const imgUrl = image[0].url;
@@ -34,7 +34,7 @@ export const Projects = () => {
         github,
       };
     });
-
+    projects = projects.sort((a, b) => a.title.localeCompare(b.title));
     setProjects(projects);
     setLoading(false);
   };
@@ -72,7 +72,7 @@ export const Projects = () => {
       {/* all projects btn */}
       <div className="btn-container">
         <Link to="/projects" className="btn">
-          all projects 📚
+          more projects 📚
         </Link>
       </div>
     </section>
