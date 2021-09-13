@@ -1048,7 +1048,7 @@ CONTACT
   font-size: 2rem;
   transition: var(--transition);
   line-height: 1;
-  justify-self: left;
+  justify-self: center;
 }
 @media screen and (max-width: 792px) {
   .social-icon {
