@@ -17,7 +17,7 @@ The design is a complete orginal created from scratch in Figma. I'm using airtab
 - [Airtable - Headless CMS](https://airtable.com/)
 - [Undraw - SVG Illustrations](https://undraw.co/illustrations)
 - [Formspree - Form Handling](https://formspree.io/)
-- [readme.so - Readme Creator](https://readme.so/editor)
+- [Icons& - SVG Icons](https://icons8.com/)
 
 #### Packages
 

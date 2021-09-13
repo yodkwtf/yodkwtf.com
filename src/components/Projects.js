@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaGithub, FaShareSquare } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaShareSquare,
+  FaAngleDown,
+  FaAngleUp,
+} from 'react-icons/fa';
 import Airtable from 'airtable-node';
 import { Loading } from '.';
 
@@ -75,6 +80,8 @@ export const Projects = () => {
 };
 
 const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
+  const [showDesc, setShowDesc] = useState(false);
+
   // jsx
   return (
     <article className="project">
@@ -86,13 +93,25 @@ const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
         {/* info */}
         <div className="project-info">
           <h4 className="project-title">{title}</h4>
-          <p className="project-text">{desc}</p>
+
+          <button
+            className="project-text-toggle"
+            onClick={() => setShowDesc(!showDesc)}
+          >
+            Description {showDesc ? <FaAngleUp /> : <FaAngleDown />}
+          </button>
+
+          <p className={`project-text ${showDesc ? 'show-project-text' : ''}`}>
+            {desc}
+          </p>
+
           <div className="project-tools">
             {stack.map((item, index) => (
               <span key={index}>{item}</span>
             ))}
           </div>
         </div>
+
         {/* footer */}
         <div className="project-footer">
           <a href={url} target="_blank" rel="noreferrer" title="Live Site">
