@@ -577,6 +577,11 @@ header {
   display: none;
   width: 22rem;
 }
+
+.hero-image {
+  width: 22rem;
+}
+
 .hero-info {
   text-align: center;
 }
@@ -711,6 +716,7 @@ ABOUT
   border-radius: 50%;
   width: 100%;
   object-fit: contain;
+  width: 15rem;
 }
 .about-img-big {
   display: none;
@@ -752,6 +758,7 @@ ABOUT
     box-shadow: var(--light-shadow);
     border-radius: 0.25rem;
     object-fit: contain;
+    width: 20rem;
   }
   .about-img-big::before {
     content: '';
