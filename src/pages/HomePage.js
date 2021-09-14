@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Durgesh | Yodkwtf </title>
+        <title>Yodkwtf | Durgesh Chaudhary</title>
         <meta
           name="description"
           content="I'm a freelance web developer based in Delhi, India. I create
