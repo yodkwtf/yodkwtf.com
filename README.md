@@ -1,4 +1,4 @@
-# Yodkwtf | My Portfolio Website
+# yodkwtf.com | My Portfolio Website
 
 My personal portfolio website built with reactjs using modern react hooks for the functionality and react router dom to configure different pages within the site. The website also has a dark mode.
 The design is a complete orginal created from scratch in Figma. I'm using airtable as a headless CMS for my projects.
@@ -11,13 +11,18 @@ The design is a complete orginal created from scratch in Figma. I'm using airtab
 
 ## Stack
 
+- Reactjs + Context API & React Hooks
+- CSS + Animations & Transitions
+- localStorage API
+- Airtable
+
 #### Resources
 
 - [Figma - Website Design](https://www.figma.com/)
 - [Airtable - Headless CMS](https://airtable.com/)
 - [Undraw - SVG Illustrations](https://undraw.co/illustrations)
 - [Formspree - Form Handling](https://formspree.io/)
-- [Icons& - SVG Icons](https://icons8.com/)
+- [Icons8 - SVG Icons](https://icons8.com/)
 
 #### Packages
 
