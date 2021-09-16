@@ -704,7 +704,8 @@ ABOUT
   display: grid;
   gap: 2rem;
 }
-.about-img-small {
+.about-img-small,
+.links-page-img {
   margin: 0 auto;
   max-width: 300px;
   border-radius: 50%;
@@ -712,7 +713,8 @@ ABOUT
   padding: 0.1rem;
   border: 3px solid var(--clr-primary);
 }
-.about-image-small {
+.about-image-small,
+.links-page-image {
   border-radius: 50%;
   width: 100%;
   object-fit: contain;
@@ -1412,4 +1414,69 @@ PROJECTS PAGE
 }
 .single-project-footer a:hover {
   color: var(--clr-primary);
+}
+
+/* 
+======================
+LINKS PAGE
+======================
+*/
+
+.links-page .section {
+  padding: 3rem 0 0;
+}
+
+.links-page-img {
+  width: 9rem;
+}
+
+.links-info {
+  text-align: center;
+}
+
+.links-info p {
+  margin-bottom: 0;
+}
+
+.links-info h4 {
+  margin: 1rem 0 0.25rem;
+  letter-spacing: 1px;
+}
+
+.links-info hr {
+  width: 80%;
+  margin: 0 auto;
+  height: 1px;
+  border: none;
+  background: var(--clr-font);
+}
+
+.links-page-center {
+  margin: 0 auto;
+  max-width: 556px;
+  text-align: center;
+}
+
+.links-page-center h4 {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.links-page-btn {
+  border-radius: 0.25rem;
+  display: block;
+  text-align: center;
+  outline: 2px solid var(--clr-secondary);
+  outline-offset: 2px;
+  margin: 1.5rem 0;
+}
+.links-page-btn:last-child {
+  margin-bottom: 0;
+}
+
+.links-page-btn .fa {
+  vertical-align: middle;
+  color: white;
+  margin-left: 0.25rem;
+  font-size: 1.25rem;
 }
