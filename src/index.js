@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { AppProvider } from './context';
+import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProvider>
-      <App />
-    </AppProvider>
+    <HelmetProvider>
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </HelmetProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

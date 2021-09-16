@@ -1,11 +1,10 @@
 import React from 'react';
-import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
-import aboutSmallImage from '../images/about/about-image-small.jpg';
-import aboutBigImage from '../images/about/about-image.jpg';
+import aboutSmallImg from '../images/about/about-img-small.jpg';
+import aboutBigImg from '../images/about/about-img.jpg';
+import { Skills } from './Skills';
 
 export const About = () => {
   // state
-  const [readMore, setReadMore] = React.useState(false);
   const [age, setAge] = React.useState(20);
 
   React.useEffect(() => {
@@ -17,77 +16,62 @@ export const About = () => {
   // jsx
   return (
     <section id="about" className="section about">
-      <div className="section-title title-small">
+      <div className="section-title">
         <h2>
-          my <span>story</span>
+          <span>about</span> me
         </h2>
         <div className="underline"></div>
       </div>
 
       <div className="section-center about-center">
         {/* about-img  */}
-        <article className="about-img">
+        <article>
           {/* small image */}
           <div className="about-img-small">
             <img
-              src={aboutSmallImage}
-              alt="about"
+              src={aboutSmallImg}
+              alt="Durgesh"
               className="about-image-small"
             />
           </div>
           {/* big image */}
           <div className="about-img-big">
-            <img src={aboutBigImage} alt="about" className="about-image-big" />
+            <img src={aboutBigImg} alt="Durgesh" className="about-image-big" />
           </div>
         </article>
 
         <article className="about-info">
-          <div className="section-title title-big">
-            <h2>
-              my <span>story</span>
-            </h2>
-            <div className="underline"></div>
-          </div>
-
-          {/* about-info */}
-
-          <h4>front-end developer</h4>
           <p>
             {/* text */}
-            My name is Durgesh but most people know me by my nickname Deekayy.
-            I'm <span>{age}</span> years old and currently pursuing B.Tech in
-            Computer Science from The Northcap University, Gurgaon.
+            Hello Friend. <br />
+            I'm <strong>Durgesh</strong>, a <span>{age}</span> year old
+            self-taught web developer, currently trying to master full stack
+            MERN development. I have a profound knowledge of HTML & CSS,
+            Javascript, React, Nodejs, and Gatsby.
             <br />
-            <br />I love coding as it gives me a challenge of learning something
-            new everyday. My speciality is building
-            {readMore ? (
-              <>
-                &nbsp;responsive websites using HTML, CSS and Javascript. I'm
-                also very familiar with using frameworks and can work very well
-                with ReactJS.
-                <br />
-                <br />
-                When I'm not coding, I love to binge watch web shows and
-                documentaries. I also enjoy sketching and painting. Although I'm
-                not very good at it but it does help a bit in creating awesome
-                designs for my websites.
-              </>
-            ) : (
-              `...`
-            )}
-            {/* read more btn */}
-            <button id="toggle-text" onClick={() => setReadMore(!readMore)}>
-              {readMore ? (
-                <>
-                  &nbsp;show less <FaAngleUp />
-                </>
-              ) : (
-                <>
-                  read more <FaAngleDown />
-                </>
-              )}
-            </button>
+            <br />
+            I'm working as a <strong>freelance web developer</strong> where I
+            deliver highly optimized websites to my clients and help them scale
+            their business digitally. I also run a&nbsp;&nbsp;
+            <a
+              href="https://youtube.com/c/yodkwtf"
+              target="_blank"
+              rel="noreferrer"
+              title="Yodkwtf Academy - My YouTube Channel"
+            >
+              YouTube channel
+            </a>
+            &nbsp; where I post web dev tutorials.
+            <br />
+            <br />
+            When I'm not coding, I love to binge-watch pop culture stuff. I also
+            love to play guitar 🎸 and create sketches. Even though I'm not very
+            good at it the creative mind does help me come up with designs for
+            my sites.
           </p>
+
+          {/* stack */}
+          <Skills />
         </article>
       </div>
     </section>

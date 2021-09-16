@@ -3,26 +3,22 @@ import { skills } from '../data/data';
 
 export const Skills = () => {
   return (
-    <section className="section skills" id="skills">
-      <div className="section-title">
-        <h2>
-          <span>languages & tools</span> i work with
-        </h2>
-        <div className="underline"></div>
+    <>
+      <div className="skills-title-container">
+        <h4 className="skills-title">MY STACK</h4>
+        <div className="skills-line"></div>
       </div>
 
       {/* skills-center */}
-      <div className="skills-center section-center">
-        {skills.map(({ id, title, image, icon }) => {
+      <div className="skills-center">
+        {skills.map(({ id, title, icon }) => {
           return (
-            <article key={id} className="skill">
-              <img src={image} alt={title} className="skill-image" />
-              {/* <h1>{icon}</h1> */}
-              <h4 className="skill-title">{title}</h4>
+            <article key={id} className="skill" title={title}>
+              <img src={icon} alt={title} className="skill-icon" />
             </article>
           );
         })}
       </div>
-    </section>
+    </>
   );
 };

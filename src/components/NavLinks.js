@@ -12,7 +12,12 @@ const NavLinks = () => {
       {navLinks.map(({ id, url, text }) => {
         return (
           <li key={id}>
-            <a href={url} className="link" onClick={(e) => smoothScroll(e)}>
+            <a
+              href={url}
+              className="link"
+              title={text}
+              onClick={(e) => smoothScroll(e)}
+            >
               {text}
             </a>
           </li>

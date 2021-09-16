@@ -1,13 +1,10 @@
 import React from 'react';
-import { FaEnvelope, FaThumbsUp } from 'react-icons/fa';
-import heroImageLight from '../images/hero/hero-image-light.svg';
-// import heroImageDark from '../images/hero/hero-image-dark.svg';
-import heroImageDark2 from '../images/hero/hero-image-dark2.svg';
+import heroImg from '../images/hero/hero-img.svg';
 import { AppContext } from '../context';
 
 export const Hero = () => {
   // function from context
-  const { smoothScroll, theme } = React.useContext(AppContext);
+  const { smoothScroll } = React.useContext(AppContext);
 
   // jsx
   return (
@@ -20,34 +17,33 @@ export const Hero = () => {
               hey,<span> i'm durgesh</span>
             </h1>
             <p>
-              I'm a front-end developer based in Delhi, India. I create
-              responsive websites and web apps to help people improve their
-              internet surfing experiences.
+              I'm a freelance web developer based in Delhi, India. I create
+              highly optimized responsive websites to help my clients scale
+              their business digitally and help people improve their internet
+              surfing experiences.
             </p>
             <div className="hero-btn-container">
               <a
                 href="mailto:48durgesh.kumar@gmail.com"
                 className="btn hero-btn"
+                title="Email Me Now"
               >
-                get in touch <FaEnvelope />
+                get in touch 📞
               </a>
               <a
-                href="#follow"
+                href="#projects"
                 className="btn hero-btn"
                 onClick={(e) => smoothScroll(e)}
+                title="My Latest Works"
               >
-                follow me <FaThumbsUp />
+                see my work 💻
               </a>
             </div>
           </article>
 
           {/* hero-image */}
           <article className="hero-img">
-            <img
-              src={theme === 'light' ? heroImageLight : heroImageDark2}
-              alt="Hero"
-              className="hero-image"
-            />
+            <img src={heroImg} alt="Hero" className="hero-image" />
           </article>
         </div>
       </div>

@@ -7,6 +7,8 @@ import { Projects } from './Projects';
 import { Skills } from './Skills';
 import { Contact } from './Contact';
 import { Footer } from './Footer';
+import Loading from './Loading';
+import SingleProject from './SingleProject';
 import ScrollToTop from './ScrollToTop';
 
 export {
@@ -20,4 +22,6 @@ export {
   Footer,
   NavForPages,
   ScrollToTop,
+  Loading,
+  SingleProject,
 };

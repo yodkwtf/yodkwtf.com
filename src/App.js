@@ -1,8 +1,7 @@
 import React from 'react';
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import pages
-import { HomePage, ContactPage, ProjectsPage, ErrorPage } from './pages';
+import { HomePage, ContactPage, ProjectsPage, ErrorPage, Links } from './pages';
 // import components
 import { Footer, ScrollToTop } from './components';
 
@@ -15,11 +14,14 @@ const App = () => {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route exact path="/Projects">
+          <Route exact path="/projects">
             <ProjectsPage />
           </Route>
-          <Route exact path="/Contact">
+          <Route exact path="/contact">
             <ContactPage />
+          </Route>
+          <Route exact path="/links">
+            <Links />
           </Route>
           <Route path="*">
             <ErrorPage />
