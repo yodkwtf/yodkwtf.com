@@ -124,10 +124,10 @@ export const links = [
 
   {
     id: 3,
-    title: 'Download My Resume',
+    title: 'See My Resume',
     text: 'Resume/CV',
     icon: <FaDownload className="fa" />,
-    url: 'https://youtube.com/c/yodkwtf',
+    url: 'https://rxresu.me/r/mwrvoe',
   },
 
   {
@@ -135,7 +135,7 @@ export const links = [
     title: `My Latest Client's Website`,
     text: 'Latest Work',
     icon: <FaAward className="fa" />,
-    url: 'wedorenovation.in',
+    url: 'https://wedorenovation.in',
   },
 
   {
