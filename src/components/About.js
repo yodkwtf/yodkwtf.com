@@ -44,10 +44,10 @@ export const About = () => {
           <p>
             {/* text */}
             Hello Friend. <br />
-            I'm <strong>Durgesh</strong>, a <span>{age}</span> year old web
-            developer, currently trying to master full stack MERN development. I
-            have a profound knowledge of HTML & CSS, Javascript, React, Nodejs,
-            and Gatsby.
+            I'm <strong>Durgesh</strong>, a <span>{age}</span> year old
+            self-taught web developer, currently trying to master full stack
+            MERN development. I have a profound knowledge of HTML & CSS,
+            Javascript, React, Nodejs, and Gatsby.
             <br />
             <br />
             I'm working as a <strong>freelance web developer</strong> where I
