@@ -14,7 +14,12 @@ export const Skills = () => {
         {skills.map(({ id, title, icon }) => {
           return (
             <article key={id} className="skill" title={title}>
-              <img src={icon} alt={title} className="skill-icon" />
+              <img
+                src={icon}
+                alt={title}
+                className="skill-icon"
+                loading="lazy"
+              />
             </article>
           );
         })}
