@@ -26,6 +26,7 @@ const Links = () => {
                 src={aboutSmallImg}
                 alt="Durgesh"
                 className="links-page-image"
+                loading="lazy"
               />
             </div>
             <h4>Durgesh</h4>

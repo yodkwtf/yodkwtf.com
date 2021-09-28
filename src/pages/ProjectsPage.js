@@ -71,7 +71,7 @@ const ProjectsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Durgesh | Projects</title>
+        <title>Durgesh | Personal Projects</title>
         <meta
           name="description"
           content="The list of a few of projects built by yodkwtf, aka, Durgesh. These are built with a variety of technology including html & css, javascript, reactjs, nodejs, bootstrap, gatsby, jQuery, etc. Take a look at the github profile for more info."

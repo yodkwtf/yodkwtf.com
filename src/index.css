@@ -144,7 +144,7 @@ html::-webkit-scrollbar {
 }
 
 html::-webkit-scrollbar-thumb {
-  background: var(--clr-primary);
+  background: var(--clr-secondary);
   transition: var(--transition);
 }
 html::-webkit-scrollbar-thumb:hover {
@@ -418,11 +418,24 @@ nav {
   transition: var(--transition);
   letter-spacing: 2px;
   padding: 0.1rem 0 0.5rem;
-  border-bottom: 2px solid transparent;
+  position: relative;
 }
+.nav-links .link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: var(--clr-secondary);
+  transition: var(--transition);
+}
+
 .nav-links .link:hover {
   color: var(--clr-secondary);
-  border-color: var(--clr-secondary);
+}
+.nav-links .link:hover::after {
+  width: 100%;
 }
 
 @media screen and (min-width: 792px) {
@@ -629,8 +642,7 @@ header {
   white-space: nowrap;
   opacity: 0;
   line-height: 1.5;
-  animation: type 4s steps(20, end) infinite alternate,
-    blink 0.5s step-end infinite alternate;
+  animation: type 4s steps(20, end) alternate, blink 1s step-end infinite;
   animation-fill-mode: forwards;
   border-right: 3px solid var(--clr-font);
   overflow: hidden;
@@ -1283,10 +1295,10 @@ label {
   border-bottom: 3px solid var(--clr-primary);
   color: var(--clr-font-3);
   font-size: 1.25rem;
+  border-radius: 0.35rem;
 }
 .form-control:focus {
-  border-radius: 0.35rem;
-  border-color: var(--clr-primary);
+  background: var(--clr-body-bcg);
 }
 .form .btn-container {
   margin: 0 auto 3rem;
@@ -1348,7 +1360,7 @@ PROJECTS PAGE
 @media screen and (min-width: 692px) {
   .projects-container {
     grid-template-columns: 1fr 1fr;
-    gap: 5rem 4rem;
+    gap: 4rem;
   }
 }
 @media screen and (min-width: 1080px) {
@@ -1372,15 +1384,26 @@ PROJECTS PAGE
   transform: scale(1.01);
   box-shadow: var(--dark-shadow);
 }
-.single-project-img {
-  position: relative;
-}
+
 .single-project-image {
   border-top-left-radius: var(--radius);
   border-top-right-radius: var(--radius);
   height: 15rem;
   object-fit: cover;
 }
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
 .single-project-info {
   background: var(--clr-body-bcg-3);
   padding: 1rem 1.2rem;
@@ -1441,14 +1464,6 @@ LINKS PAGE
 .links-info h4 {
   margin: 1rem 0 0.25rem;
   letter-spacing: 1px;
-}
-
-.links-info hr {
-  width: 80%;
-  margin: 0 auto;
-  height: 1px;
-  border: none;
-  background: var(--clr-font);
 }
 
 .links-page-center {

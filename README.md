@@ -28,6 +28,7 @@ The design is a complete orginal created from scratch in Figma. I'm using airtab
 
 - [React Router Dom](https://www.npmjs.com/package/react-router-dom)
 - [React Icons](https://www.npmjs.com/package/react-icons)
+- [Normalize.css](https://necolas.github.io/normalize.css/)
 - [React Helmet](https://www.npmjs.com/package/react-helmet-async)
 - [Airtable Node](https://www.npmjs.com/package/airtable-node)
 

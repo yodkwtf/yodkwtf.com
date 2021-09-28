@@ -5,10 +5,15 @@ const SingleProject = ({ title, imgUrl, url, github }) => {
   return (
     <article className="single-project">
       <div className="single-project-img">
-        <img src={imgUrl} alt={title} className="single-project-image" />
+        <img
+          src={imgUrl}
+          alt={title}
+          loading="lazy"
+          className="single-project-image skeleton"
+        />
       </div>
       <div className="single-project-info">
-        <h4 className="single-project-title">{title}</h4>
+        <h4 className="single-project-title">{title || 'Loading...'}</h4>
         <div className="single-project-footer">
           <a href={url} target="_blank" rel="noreferrer" title="Live Site">
             <strong>

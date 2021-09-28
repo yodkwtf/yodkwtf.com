@@ -6,11 +6,11 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Yodkwtf | Durgesh Chaudhary</title>
+        <title>Durgesh Chaudhary | Yodkwtf</title>
         <meta
           name="description"
-          content="I'm a freelance web developer based in Delhi, India. I create
-              highly optimized responsive websites to help my clients scale
+          content="Durgesh Chaudhary is a freelance web developer based in Delhi, India. He creates
+              highly optimized responsive websites to help his clients scale
               their business digitally and help people improve their internet
               surfing experiences."
         />

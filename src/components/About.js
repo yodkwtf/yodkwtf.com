@@ -32,11 +32,17 @@ export const About = () => {
               src={aboutSmallImg}
               alt="Durgesh"
               className="about-image-small"
+              loading="lazy"
             />
           </div>
           {/* big image */}
           <div className="about-img-big">
-            <img src={aboutBigImg} alt="Durgesh" className="about-image-big" />
+            <img
+              src={aboutBigImg}
+              alt="Durgesh"
+              className="about-image-big"
+              loading="lazy"
+            />
           </div>
         </article>
 

@@ -6,7 +6,7 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Durgesh | Contact Details</title>
+        <title>Durgesh | Contact Form</title>
         <meta
           name="description"
           content="Here are my contact details. Find me on any of the socials mentioned or just send me a message via the form below. Alternatively, you can also send me an email and I'll get back to within 24 hours."

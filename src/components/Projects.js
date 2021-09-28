@@ -87,7 +87,12 @@ const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
     <article className="project">
       {/* image */}
       <div className="project-img">
-        <img src={imgUrl} alt={title} className="project-image" />
+        <img
+          src={imgUrl}
+          alt={title}
+          className="project-image"
+          loading="lazy"
+        />
       </div>
       <div className="project-details">
         {/* info */}

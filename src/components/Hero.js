@@ -43,7 +43,12 @@ export const Hero = () => {
 
           {/* hero-image */}
           <article className="hero-img">
-            <img src={heroImg} alt="Hero" className="hero-image" />
+            <img
+              src={heroImg}
+              alt="Hero"
+              className="hero-image"
+              loading="lazy"
+            />
           </article>
         </div>
       </div>
