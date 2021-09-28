@@ -1392,18 +1392,6 @@ PROJECTS PAGE
   object-fit: cover;
 }
 
-.skeleton {
-  animation: skeleton-loading 1s linear infinite alternate;
-}
-@keyframes skeleton-loading {
-  0% {
-    background-color: hsl(200, 20%, 70%);
-  }
-  100% {
-    background-color: hsl(200, 20%, 95%);
-  }
-}
-
 .single-project-info {
   background: var(--clr-body-bcg-3);
   padding: 1rem 1.2rem;

@@ -9,7 +9,7 @@ const SingleProject = ({ title, imgUrl, url, github }) => {
           src={imgUrl}
           alt={title}
           loading="lazy"
-          className="single-project-image skeleton"
+          className="single-project-image"
         />
       </div>
       <div className="single-project-info">
