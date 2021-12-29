@@ -6,7 +6,7 @@ import {
   ContactPage,
   ProjectsPage,
   ErrorPage,
-  Resources,
+  Links,
 } from './pages';
 // import components
 import { Contact, Footer, ScrollToTop } from './components';
@@ -27,7 +27,7 @@ const App = () => {
             <ContactPage />
           </Route>
           <Route exact path="/links">
-            <Resources />
+            <Links />
           </Route>
           <Route path="*">
             <ErrorPage />

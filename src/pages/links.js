@@ -4,7 +4,7 @@ import { NavForPages } from '../components';
 import aboutSmallImg from '../images/about/about-img-small.jpg';
 import Airtable from 'airtable-node';
 
-const Resources = () => {
+const Links = () => {
   // state
   const [resources, setResources] = useState([]);
 
@@ -30,7 +30,6 @@ const Resources = () => {
         isLatest,
       };
     });
-
     setResources(resources);
   };
 
@@ -44,7 +43,7 @@ const Resources = () => {
   return (
     <>
       <Helmet>
-        <title>Durgesh Chaudhary // Links & Resources</title>
+        <title>Durgesh Chaudhary | Links & Resources</title>
         <meta
           name="description"
           content="All the various social and other necessary links to find me and my work online. It has my portfolio website, my youtube channel, my latest work, my social media links, and my resume."
@@ -77,7 +76,7 @@ const Resources = () => {
               .map(({ id, title, iconUrl, text, url, isLatest }) => (
                 <a
                   href={url}
-                  className={`btn links-page-btn  ${
+                  className={`btn links-page-btn ${
                     isLatest ? 'latest-link' : ''
                   }`}
                   title={title}
@@ -94,4 +93,4 @@ const Resources = () => {
   );
 };
 
-export default Resources;
+export default Links;
