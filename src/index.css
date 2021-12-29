@@ -220,10 +220,10 @@ p {
     font-size: 1.75rem;
   }
   h4 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   body {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   h1,
   h2,
@@ -1041,7 +1041,7 @@ SKILLS
 
 .skill-icon {
   width: auto;
-  height: 3rem;
+  height: 2.5rem;
   transition: var(--transition);
 }
 .skill-icon:hover {
@@ -1456,7 +1456,7 @@ LINKS PAGE
 
 .links-page-center {
   margin: 0 auto;
-  max-width: 556px;
+  max-width: 481px;
   text-align: center;
 }
 
@@ -1467,14 +1467,40 @@ LINKS PAGE
 
 .links-page-btn {
   border-radius: 0.25rem;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   text-align: center;
   outline: 2px solid var(--clr-secondary);
   outline-offset: 2px;
   margin: 1.5rem 0;
+  background: var(--clr-secondary);
 }
 .links-page-btn:last-child {
   margin-bottom: 0;
+}
+.links-page-btn.latest-link {
+  animation: scale-link 1.5s infinite ease-in-out;
+}
+@keyframes scale-link {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.025);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.links-page-btn:hover {
+  background: var(--clr-primary);
+}
+.links-page-btn img {
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
 }
 
 .links-page-btn .fa {
