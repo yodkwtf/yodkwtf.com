@@ -1,7 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import pages
-import { HomePage, ContactPage, ProjectsPage, ErrorPage, Links } from './pages';
+import {
+  HomePage,
+  ContactPage,
+  ProjectsPage,
+  ErrorPage,
+  Resources,
+} from './pages';
 // import components
 import { Contact, Footer, ScrollToTop } from './components';
 
@@ -21,7 +27,7 @@ const App = () => {
             <ContactPage />
           </Route>
           <Route exact path="/links">
-            <Links />
+            <Resources />
           </Route>
           <Route path="*">
             <ErrorPage />

@@ -4,7 +4,7 @@ import { NavForPages } from '../components';
 import aboutSmallImg from '../images/about/about-img-small.jpg';
 import Airtable from 'airtable-node';
 
-const Links = () => {
+const Resources = () => {
   // state
   const [resources, setResources] = useState([]);
 
@@ -94,4 +94,4 @@ const Links = () => {
   );
 };
 
-export default Links;
+export default Resources;

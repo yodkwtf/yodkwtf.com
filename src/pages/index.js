@@ -2,6 +2,6 @@ import HomePage from './HomePage';
 import ContactPage from './ContactPage';
 import ProjectsPage from './ProjectsPage';
 import ErrorPage from './ErrorPage';
-import Links from './Links';
+import Resources from './Resources';
 
-export { HomePage, ContactPage, ProjectsPage, ErrorPage, Links };
+export { HomePage, ContactPage, ProjectsPage, ErrorPage, Resources };
