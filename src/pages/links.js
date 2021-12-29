@@ -30,8 +30,6 @@ const Links = () => {
         isLatest,
       };
     });
-
-    console.log(records);
     setResources(resources);
   };
 
@@ -45,7 +43,7 @@ const Links = () => {
   return (
     <>
       <Helmet>
-        <title>Durgesh Chaudhary // Links & Resources</title>
+        <title>Durgesh Chaudhary | Links & Resources</title>
         <meta
           name="description"
           content="All the various social and other necessary links to find me and my work online. It has my portfolio website, my youtube channel, my latest work, my social media links, and my resume."
@@ -78,7 +76,7 @@ const Links = () => {
               .map(({ id, title, iconUrl, text, url, isLatest }) => (
                 <a
                   href={url}
-                  className={`btn links-page-btn  ${
+                  className={`btn links-page-btn ${
                     isLatest ? 'latest-link' : ''
                   }`}
                   title={title}
