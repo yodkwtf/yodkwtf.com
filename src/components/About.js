@@ -51,14 +51,16 @@ export const About = () => {
             {/* text */}
             Hello Friend. <br />
             I'm <strong>Durgesh</strong>, a <span>{age}</span> year old
-            self-taught web developer, currently trying to master full stack
-            MERN development. I have a profound knowledge of HTML & CSS,
-            Javascript, React, Nodejs, and Gatsby.
+            self-taught web developer. I mainly work with the MERN stack but I
+            have a profound knowledge of HTML & CSS, Javascript, Python, and
+            Gatsby too.
             <br />
             <br />
-            I'm working as a <strong>freelance web developer</strong> where I
-            deliver highly optimized websites to my clients and help them scale
-            their business digitally. I also run a&nbsp;&nbsp;
+            Currently I'm working as a <strong>
+              freelance web developer
+            </strong>{' '}
+            where I deliver highly optimized websites to my clients and help
+            them scale their businesses digitally. I also run a&nbsp;&nbsp;
             <a
               href="https://youtube.com/c/yodkwtf"
               target="_blank"
@@ -71,9 +73,8 @@ export const About = () => {
             <br />
             <br />
             When I'm not coding, I love to binge-watch pop culture stuff. I also
-            love to play guitar 🎸 and create sketches. Even though I'm not very
-            good at it the creative mind does help me come up with designs for
-            my sites.
+            love to play guitar and create sketches. Even though I'm not very
+            good, it does help me to get creative designs for my sites.
           </p>
 
           {/* stack */}

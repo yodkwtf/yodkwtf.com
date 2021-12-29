@@ -2,14 +2,12 @@
 import html from '../images/skills/html.svg';
 import css from '../images/skills/css.svg';
 import javascript from '../images/skills/javascript.svg';
-import restApi from '../images/skills/rest-api.svg';
-import json from '../images/skills/json.svg';
+import python from '../images/skills/python.svg';
 import reactjs from '../images/skills/react.svg';
 import styledComponents from '../images/skills/styled-components.svg';
 import node from '../images/skills/node.svg';
 import mongodb from '../images/skills/mongo.svg';
 import gatsby from '../images/skills/gatsby.svg';
-import graphql from '../images/skills/graphql.svg';
 import github from '../images/skills/github.svg';
 import git from '../images/skills/git.svg';
 import figma from '../images/skills/figma.svg';
@@ -36,56 +34,41 @@ export const skills = [
   },
   {
     id: 4,
-    title: 'Rest API',
-    icon: restApi,
-  },
-  {
-    id: 5,
-    title: 'JSON',
-    icon: json,
-  },
-  {
-    id: 6,
-    title: 'React',
+    title: 'ReactJs',
     icon: reactjs,
   },
   {
-    id: 7,
-    title: 'styled-components',
-    icon: styledComponents,
-  },
-  {
-    id: 8,
-    title: 'Nodejs',
-    icon: node,
-  },
-  {
-    id: 9,
-    title: 'MongoDB',
-    icon: mongodb,
-  },
-  {
-    id: 10,
+    id: 5,
     title: 'Gatsby',
     icon: gatsby,
   },
   {
-    id: 11,
-    title: 'Graphql',
-    icon: graphql,
+    id: 6,
+    title: 'styled-components',
+    icon: styledComponents,
   },
   {
-    id: 12,
-    title: 'Git',
+    id: 7,
+    title: 'Nodejs',
+    icon: node,
+  },
+  {
+    id: 8,
+    title: 'MongoDB',
+    icon: mongodb,
+  },
+  {
+    id: 9,
+    title: 'Git & GitHub',
     icon: git,
   },
   {
-    id: 13,
-    title: 'GitHub',
-    icon: github,
+    id: 10,
+    title: 'Python',
+    icon: python,
   },
   {
-    id: 14,
+    id: 11,
     title: 'Figma',
     icon: figma,
   },
