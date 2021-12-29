@@ -8,7 +8,6 @@ import styledComponents from '../images/skills/styled-components.svg';
 import node from '../images/skills/node.svg';
 import mongodb from '../images/skills/mongo.svg';
 import gatsby from '../images/skills/gatsby.svg';
-import github from '../images/skills/github.svg';
 import git from '../images/skills/git.svg';
 import figma from '../images/skills/figma.svg';
 

@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Durgesh Chaudhary // yokdwtf.com</title>
+        <title>Durgesh Chaudhary | Yodkwtf</title>
         <meta
           name="description"
           content="Durgesh Chaudhary is a freelance web developer based in Delhi, India. He creates

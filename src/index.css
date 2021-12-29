@@ -409,6 +409,7 @@ nav {
   width: 100%;
   max-width: 480px;
   padding: 0 1rem;
+  margin-right: 6rem;
 }
 .nav-links .link {
   text-transform: uppercase;
