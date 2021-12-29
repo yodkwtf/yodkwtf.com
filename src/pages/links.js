@@ -31,7 +31,6 @@ const Links = () => {
       };
     });
 
-    console.log(records);
     setResources(resources);
   };
 
