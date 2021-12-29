@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import pages
 import { HomePage, ContactPage, ProjectsPage, ErrorPage, Links } from './pages';
 // import components
-import { Footer, ScrollToTop } from './components';
+import { Contact, Footer, ScrollToTop } from './components';
 
 const App = () => {
   return (
@@ -27,6 +27,7 @@ const App = () => {
             <ErrorPage />
           </Route>
         </Switch>
+        <Contact />
         <Footer />
       </Router>
     </main>

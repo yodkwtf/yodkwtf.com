@@ -1,12 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Navbar, Sidebar, Hero, About, Projects, Contact } from '../components';
+import { Navbar, Sidebar, Hero, About, Projects } from '../components';
 
 const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Durgesh Chaudhary | Yodkwtf</title>
+        <title>Durgesh Chaudhary // yokdwtf.com</title>
         <meta
           name="description"
           content="Durgesh Chaudhary is a freelance web developer based in Delhi, India. He creates
@@ -21,7 +21,6 @@ const HomePage = () => {
         <Hero />
         <About />
         <Projects />
-        <Contact />
       </main>
     </>
   );

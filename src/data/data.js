@@ -1,14 +1,3 @@
-// icons
-import {
-  FaGlobe,
-  FaYoutube,
-  FaDownload,
-  FaAward,
-  FaGithub,
-  FaLinkedin,
-  FaCodepen,
-} from 'react-icons/fa';
-
 // skills
 import html from '../images/skills/html.svg';
 import css from '../images/skills/css.svg';
@@ -99,66 +88,5 @@ export const skills = [
     id: 14,
     title: 'Figma',
     icon: figma,
-  },
-];
-
-// ###########
-// links
-// ###########
-export const links = [
-  {
-    id: 1,
-    title: 'yodkwtf.com | My Portfolio Website',
-    text: 'Website',
-    icon: <FaGlobe className="fa" />,
-    url: '/',
-  },
-
-  {
-    id: 2,
-    title: 'Yodkwtf Academy | My YouTube Channel',
-    text: 'YouTube',
-    icon: <FaYoutube className="fa" />,
-    url: 'https://youtube.com/c/yodkwtf',
-  },
-
-  {
-    id: 3,
-    title: 'See My Resume',
-    text: 'Resume/CV',
-    icon: <FaDownload className="fa" />,
-    url: 'https://rxresu.me/r/mwrvoe',
-  },
-
-  {
-    id: 4,
-    title: `My Latest Client's Website`,
-    text: 'Latest Work',
-    icon: <FaAward className="fa" />,
-    url: 'https://wedorenovation.in',
-  },
-
-  {
-    id: 5,
-    title: 'My Github Profile',
-    text: 'GitHub',
-    icon: <FaGithub className="fa" />,
-    url: 'https://github.com/yodkwtf',
-  },
-
-  {
-    id: 6,
-    title: 'My LinkedIN Profile',
-    text: 'LinkedIn',
-    icon: <FaLinkedin className="fa" />,
-    url: 'https://www.linkedin.com/in/durgesh-chaudhary',
-  },
-
-  {
-    id: 7,
-    title: 'My Codepen Profile',
-    text: 'Codepen',
-    icon: <FaCodepen className="fa" />,
-    url: 'https://codepen.io/yodkwtf',
   },
 ];
