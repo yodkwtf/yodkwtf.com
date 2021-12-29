@@ -7,7 +7,7 @@ const ErrorPage = () => {
   return (
     <>
       <Helmet>
-        <title>404 // Page Not Found</title>
+        <title>404 | Page Not Found</title>
         <meta
           name="description"
           content="The page you are looking for does not exist..."
