@@ -14,7 +14,7 @@ export const Footer = () => {
     <footer id="footer" className="footer">
       <div className="section-center">
         <p className="footer-text">
-          &copy; <span>{date}</span> Yodkwtf. All rights reserved. Built with{' '}
+          Copyright &copy;<span>{date}</span>. All rights reserved. Built with{' '}
           <a
             href="https://reactjs.org/"
             target="_blank"

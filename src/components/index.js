@@ -1,3 +1,4 @@
+import { NavAlert } from './NavAlert';
 import { Navbar } from './Navbar';
 import { NavForPages } from './NavForPages';
 import { Sidebar } from './Sidebar';
@@ -12,6 +13,7 @@ import SingleProject from './SingleProject';
 import ScrollToTop from './ScrollToTop';
 
 export {
+  NavAlert,
   Navbar,
   Sidebar,
   Hero,
