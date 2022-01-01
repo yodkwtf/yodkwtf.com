@@ -1,5 +1,6 @@
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Roboto&family=Source+Sans+Pro:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 /*
 ===============
@@ -61,7 +62,7 @@ Variables
   --clr-grey-10: #eef3f7;
   /* font families */
   --ff-primary: 'Roboto', sans-serif;
-  --ff-secondary: 'Source Sans Pro', sans-serif;
+  --ff-secondary: 'Ubuntu', sans-serif;
   /* transitions */
   --transition: all 0.3s linear;
   --long-transition: all 1s ease;
@@ -315,6 +316,24 @@ p {
 
 /* 
 ======================
+NAV ALERT
+======================
+*/
+
+.nav-alert {
+  background: var(--clr-primary-gradient);
+  text-align: center;
+  color: var(--clr-white);
+  padding: 0.75rem 0.5rem;
+}
+
+.nav-alert a {
+  text-decoration: underline;
+  color: white;
+}
+
+/* 
+======================
 NAVBAR
 ======================
 */
@@ -409,7 +428,7 @@ nav {
   width: 100%;
   max-width: 480px;
   padding: 0 1rem;
-  margin-right: 6rem;
+  margin-right: 4.5rem;
 }
 .nav-links .link {
   text-transform: uppercase;
@@ -582,7 +601,7 @@ header {
   min-height: calc(100vh - 75px);
   display: grid;
   place-items: center;
-  padding-bottom: 4rem;
+  padding-bottom: 7rem;
 }
 .banner-container {
   display: grid;
@@ -639,7 +658,7 @@ header {
 
 #my-name {
   margin: 0 auto;
-  width: 380px;
+  width: 400px;
   white-space: nowrap;
   opacity: 0;
   line-height: 1.5;
@@ -651,13 +670,13 @@ header {
 
 @media screen and (min-width: 768px) {
   #my-name {
-    width: 500px;
+    width: 520px;
   }
 }
 @media screen and (max-width: 395px) {
   #my-name {
-    font-size: 2.1rem;
-    width: 300px;
+    font-size: 2rem;
+    width: 320px;
   }
 }
 /* text animation */
@@ -1170,10 +1189,6 @@ CONTACT
   .social-icon:hover {
     transform: scale(1.01);
   }
-  .footer-text {
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-  }
 }
 
 /* 
@@ -1188,14 +1203,36 @@ FOOTER
   padding: 0 1rem;
 }
 .footer-text {
+  font-size: 1rem;
+  margin: 0.75rem;
+}
+@media screen and (min-width: 792px) {
+  .footer-text {
+    padding: 0.5rem 1rem;
+    font-size: 1.15rem;
+  }
+}
+
+.footer p {
   color: var(--clr-grey-10);
   line-height: 1.25;
-  margin-bottom: 0;
+  margin: 0.5rem 0;
 }
-.footer-text a {
-  color: #1b9ce5;
-  text-decoration: underline;
+
+.footer a {
   transition: var(--transition);
+  color: var(--clr-secondary);
+}
+.footer-img-block,
+.footer-text-2 {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
+.footer-img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .footer-text a:hover {
   color: var(--clr-grey-10);
@@ -1285,6 +1322,9 @@ CONTACT PAGE
 }
 label {
   text-transform: uppercase;
+}
+textarea {
+  resize: none;
 }
 .form-control {
   margin-top: 1rem;
@@ -1487,12 +1527,20 @@ LINKS PAGE
 @keyframes scale-link {
   0% {
     transform: scale(1);
+    outline-color: var(--clr-primary);
+  }
+  33% {
+    outline-color: rgb(194, 14, 14);
   }
   50% {
-    transform: scale(1.025);
+    transform: scale(1.05);
+  }
+  67% {
+    outline-color: rgba(137, 43, 226, 0.753);
   }
   100% {
     transform: scale(1);
+    outline-color: var(--clr-primary);
   }
 }
 .links-page-btn:hover {
