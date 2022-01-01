@@ -601,7 +601,7 @@ header {
   min-height: calc(100vh - 75px);
   display: grid;
   place-items: center;
-  padding-bottom: 4rem;
+  padding-bottom: 7rem;
 }
 .banner-container {
   display: grid;
