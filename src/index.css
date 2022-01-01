@@ -1286,6 +1286,9 @@ CONTACT PAGE
 label {
   text-transform: uppercase;
 }
+textarea {
+  resize: none;
+}
 .form-control {
   margin-top: 1rem;
   padding: 1rem 0.75rem;
@@ -1487,12 +1490,21 @@ LINKS PAGE
 @keyframes scale-link {
   0% {
     transform: scale(1);
+    outline-color: var(--clr-primary);
+  }
+  25% {
+    outline-color: var(--clr-font);
   }
   50% {
-    transform: scale(1.025);
+    transform: scale(1.05);
+    outline-color: var(--clr-primary);
+  }
+  75% {
+    outline-color: var(--clr-font);
   }
   100% {
     transform: scale(1);
+    outline-color: var(--clr-primary);
   }
 }
 .links-page-btn:hover {

@@ -74,7 +74,7 @@ const ContactPage = () => {
                   <textarea
                     name="Message"
                     className="form-control"
-                    placeholder="I want a portfolio website"
+                    placeholder="We run a small startup and we want a website for the same..."
                     rows="8"
                     required
                   ></textarea>
@@ -82,7 +82,7 @@ const ContactPage = () => {
               </div>
               <div className="btn-container">
                 <button className="btn submit-btn" type="submit">
-                  deliver 🛴
+                  submit 🛴
                 </button>
               </div>
             </form>

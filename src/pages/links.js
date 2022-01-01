@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { NavForPages } from '../components';
+import { Loading, NavForPages } from '../components';
 import aboutSmallImg from '../images/about/about-img-small.jpg';
 import Airtable from 'airtable-node';
 
 const Links = () => {
   // state
   const [resources, setResources] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const airtable = new Airtable({ apiKey: process.env.REACT_APP_API_KEY })
     .base(process.env.REACT_APP_BASE_ID)
@@ -30,7 +31,9 @@ const Links = () => {
         isLatest,
       };
     });
+
     setResources(resources);
+    setLoading(false);
   };
 
   // useEffect
@@ -71,21 +74,27 @@ const Links = () => {
           <article className="section-center links-page-center">
             <h4>Developer | YouTuber | Freelancer</h4>
 
-            {resources
-              .sort((a, b) => a.order - b.order)
-              .map(({ id, title, iconUrl, text, url, isLatest }) => (
-                <a
-                  href={url}
-                  className={`btn links-page-btn ${
-                    isLatest ? 'latest-link' : ''
-                  }`}
-                  title={title}
-                  key={id}
-                >
-                  {text}
-                  <img src={iconUrl} alt="icon" />
-                </a>
-              ))}
+            {loading ? (
+              <Loading />
+            ) : (
+              <>
+                {resources
+                  .sort((a, b) => a.order - b.order)
+                  .map(({ id, title, iconUrl, text, url, isLatest }) => (
+                    <a
+                      href={url}
+                      className={`btn links-page-btn ${
+                        isLatest ? 'latest-link' : ''
+                      }`}
+                      title={title}
+                      key={id}
+                    >
+                      {text}
+                      <img src={iconUrl} alt="icon" />
+                    </a>
+                  ))}
+              </>
+            )}
           </article>
         </section>
       </div>
