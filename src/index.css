@@ -1189,10 +1189,6 @@ CONTACT
   .social-icon:hover {
     transform: scale(1.01);
   }
-  .footer-text {
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-  }
 }
 
 /* 
@@ -1207,14 +1203,36 @@ FOOTER
   padding: 0 1rem;
 }
 .footer-text {
+  font-size: 1rem;
+  margin: 0.75rem;
+}
+@media screen and (min-width: 792px) {
+  .footer-text {
+    padding: 0.5rem 1rem;
+    font-size: 1.15rem;
+  }
+}
+
+.footer p {
   color: var(--clr-grey-10);
   line-height: 1.25;
-  margin-bottom: 0;
+  margin: 0.5rem 0;
 }
-.footer-text a {
-  color: #1b9ce5;
-  text-decoration: underline;
+
+.footer a {
   transition: var(--transition);
+  color: var(--clr-secondary);
+}
+.footer-img-block,
+.footer-text-2 {
+  display: flex;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
+.footer-img {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .footer-text a:hover {
   color: var(--clr-grey-10);
