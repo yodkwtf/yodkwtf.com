@@ -316,6 +316,32 @@ p {
 
 /* 
 ======================
+WIDGET
+======================
+*/
+
+.widget {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--clr-white);
+  border-radius: 50%;
+  padding: 0.5rem;
+  transition: transform 0.5s ease-in-out;
+  outline: 1px solid var(--clr-black);
+  outline-offset: -2px;
+}
+.widget:hover {
+  transform: rotate(760deg);
+}
+
+.widget-img {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+/* 
+======================
 NAV ALERT
 ======================
 */
@@ -673,12 +699,18 @@ header {
     width: 520px;
   }
 }
-@media screen and (max-width: 395px) {
+@media screen and (max-width: 548px) {
+  .hero-btn-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 1rem;
+  }
   #my-name {
     font-size: 2rem;
     width: 320px;
   }
 }
+
 /* text animation */
 @keyframes type {
   0% {
@@ -716,13 +748,6 @@ header {
   .hero-btn-container,
   #my-name {
     margin: 0;
-  }
-}
-@media screen and (max-width: 495px) {
-  .hero-btn-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 1rem;
   }
 }
 

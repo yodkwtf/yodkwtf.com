@@ -8,6 +8,7 @@ import { Projects } from './Projects';
 import { Skills } from './Skills';
 import { Contact } from './Contact';
 import { Footer } from './Footer';
+import { Widget } from './Widget';
 import Loading from './Loading';
 import SingleProject from './SingleProject';
 import ScrollToTop from './ScrollToTop';
@@ -22,6 +23,7 @@ export {
   Skills,
   Contact,
   Footer,
+  Widget,
   NavForPages,
   ScrollToTop,
   Loading,

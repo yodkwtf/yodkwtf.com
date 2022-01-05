@@ -1,6 +1,6 @@
 import React from 'react';
 import react from '../images/skills/react.svg';
-import airtable from '../images/skills/airtable.svg';
+import airtable from '../images/airtable.svg';
 
 export const Footer = () => {
   // states
