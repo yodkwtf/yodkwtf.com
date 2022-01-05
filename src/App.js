@@ -9,7 +9,7 @@ import {
   Links,
 } from './pages';
 // import components
-import { Contact, Footer, ScrollToTop } from './components';
+import { Contact, Footer, Widget, ScrollToTop } from './components';
 
 const App = () => {
   return (
@@ -35,6 +35,7 @@ const App = () => {
         </Switch>
         <Contact />
         <Footer />
+        <Widget />
       </Router>
     </main>
   );
