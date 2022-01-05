@@ -340,6 +340,17 @@ WIDGET
   height: 2.75rem;
 }
 
+@media (max-width: 481px) {
+  .widget {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+  .widget-img {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
 /* 
 ======================
 NAV ALERT
