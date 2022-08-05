@@ -1,6 +1,7 @@
 import React from 'react';
 import heroImg from '../images/hero/hero-img.svg';
 import { AppContext } from '../context';
+import { FaCode, FaEnvelope } from 'react-icons/fa';
 
 export const Hero = () => {
   // function from context
@@ -17,26 +18,26 @@ export const Hero = () => {
               hey,<span> i'm durgesh</span>
             </h1>
             <p>
-              I'm a freelance web developer based in Delhi, India. I create
-              highly optimized responsive websites to help my clients scale
-              their business digitally and help people improve their internet
-              surfing experiences.
+              Full-Stack Web Developer with 2+ years of experience. I
+              occasionally work as a freelance web developer, delivering highly
+              optimized websites to my clients and assisting them in digitally
+              scaling their businesses.
             </p>
             <div className="hero-btn-container">
-              <a
-                href="mailto:48durgesh.kumar@gmail.com"
-                className="btn hero-btn"
-                title="Email Me Now"
-              >
-                get in touch 📞
-              </a>
               <a
                 href="#projects"
                 className="btn hero-btn"
                 onClick={(e) => smoothScroll(e)}
                 title="My Latest Works"
               >
-                see my work 💻
+                projects <FaCode className="fa" />
+              </a>
+              <a
+                href="mailto:48durgesh.kumar@gmail.com"
+                className="btn hero-btn"
+                title="Email Me Now"
+              >
+                contact <FaEnvelope className="fa" />
               </a>
             </div>
           </article>

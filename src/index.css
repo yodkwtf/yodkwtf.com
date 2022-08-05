@@ -11,14 +11,14 @@ Variables
 :root {
   /* bcg */
   --toggle-color: #000;
-  --nav-bcg: linear-gradient(rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.1)),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --nav-bcg: linear-gradient(rgba(160, 160, 160, 0.1), rgba(160, 160, 160, 0.1)),
+    url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
       rgba(160, 160, 160, 0.1),
-      rgba(250, 250, 250, 0.7),
-      rgba(250, 250, 250, 0.1)
+      rgba(160, 160, 160, 0.1),
+      rgba(250, 250, 250, 0.5)
     ),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+    url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --contact-bcg: linear-gradient(
       rgba(160, 160, 160, 0.3),
       rgba(160, 160, 160, 0.3)
@@ -77,14 +77,14 @@ Variables
 .dark {
   /* bcg */
   --toggle-color: rgb(61, 124, 182);
-  --nav-bcg: linear-gradient(rgba(75, 75, 75, 0.1), rgba(75, 75, 75, 0.1)),
-    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
+  --nav-bcg: linear-gradient(rgba(4, 1, 1, 0.1), rgba(4, 1, 1, 0.1)),
+    url(./images/hero/hero-bcg-dark.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
-      rgba(100, 100, 100, 0.1),
-      rgba(5, 5, 5, 0.7),
-      rgba(5, 5, 5, 0.1)
+      rgba(4, 1, 1, 0.1),
+      rgba(5, 5, 5, 0.1),
+      rgba(4, 1, 1, 0.1)
     ),
-    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
+    url(./images/hero/hero-bcg-dark.svg) center repeat fixed;
   --contact-bcg: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
     url(./images/contact/contact-bcg.png) center repeat;
 
@@ -104,14 +104,14 @@ Variables
 .light {
   /* bcg */
   --toggle-color: #000;
-  --nav-bcg: linear-gradient(rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.1)),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --nav-bcg: linear-gradient(rgba(160, 160, 160, 0.1), rgba(160, 160, 160, 0.1)),
+    url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
       rgba(160, 160, 160, 0.1),
-      rgba(250, 250, 250, 0.7),
-      rgba(250, 250, 250, 0.1)
+      rgba(160, 160, 160, 0.1),
+      rgba(250, 250, 250, 0.5)
     ),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+    url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --contact-bcg: linear-gradient(
       rgba(160, 160, 160, 0.3),
       rgba(160, 160, 160, 0.3)
@@ -388,7 +388,7 @@ NAVBAR
 
 nav {
   background: var(--clr-body-bcg);
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   z-index: 100;
 }
 .nav-fixed {
@@ -635,7 +635,7 @@ header {
   background: var(--hero-bcg);
 }
 .banner {
-  min-height: calc(100vh - 75px);
+  min-height: calc(100vh - 72px - 48px);
   display: grid;
   place-items: center;
   padding-bottom: 7rem;
@@ -699,9 +699,9 @@ header {
   white-space: nowrap;
   opacity: 0;
   line-height: 1.5;
-  animation: type 4s steps(20, end) alternate, blink 1s step-end infinite;
+  animation: type 4s steps(20, end) alternate, blink 4s step-end;
   animation-fill-mode: forwards;
-  border-right: 3px solid var(--clr-font);
+  border-right: 2px solid var(--clr-font);
   overflow: hidden;
 }
 
@@ -736,7 +736,25 @@ header {
 }
 
 @keyframes blink {
-  50% {
+  15% {
+    border-color: transparent;
+  }
+  30% {
+    border-color: var(--clr-font);
+  }
+  45% {
+    border-color: transparent;
+  }
+  60% {
+    border-color: var(--clr-font);
+  }
+  75% {
+    border-color: transparent;
+  }
+  90% {
+    border-color: var(--clr-font);
+  }
+  100% {
     border-color: transparent;
   }
 }
@@ -754,7 +772,7 @@ header {
     text-align: left;
   }
   .hero-info p {
-    max-width: 45rem;
+    max-width: 40rem;
   }
   .hero-btn-container,
   #my-name {
@@ -1593,4 +1611,8 @@ LINKS PAGE
   color: white;
   margin-left: 0.25rem;
   font-size: 1.25rem;
+}
+
+.fa {
+  vertical-align: middle;
 }
