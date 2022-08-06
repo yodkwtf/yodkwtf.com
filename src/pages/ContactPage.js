@@ -1,18 +1,14 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { NavForPages } from '../components';
+import { Head, NavForPages } from '../components';
 import { FaArrowRight } from 'react-icons/fa';
 
 const ContactPage = () => {
   return (
     <>
-      <Helmet>
-        <title>Durgesh | Contact Me</title>
-        <meta
-          name="description"
-          content="Here are my contact details. Find me on any of the socials mentioned or just send me a message via the form below. Alternatively, you can also send me an email and I'll get back to within 24 hours."
-        />
-      </Helmet>
+      <Head
+        title={'Durgesh Chaudhary - Full Stack Developer | Contact'}
+        description={`Please find my contact details below. Find me on any of the socials mentioned or send me a direct message via the form below. Alternatively, you can also send me an email and I'll get back to you within 24 hours.`}
+      />
 
       <section className="page">
         {/* navbar */}

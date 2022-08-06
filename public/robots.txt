@@ -1,3 +1,9 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
+
+# Host
+Host: https://yodkwtf.com
+
+# Sitemaps
+Sitemap: https://yodkwtf.com/sitemap.xml

@@ -1,6 +1,7 @@
 {
-  "name": "durgesh-yodkwtf",
+  "name": "yodkwtf.com",
   "homepage": "https://yodkwtf.com/",
+  "description": "My portfolio website built with React,js using modern react hooks with context API and Airtable CMS.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yodkwtf/yodkwtf.com"
+  },
+  "bugs": {
+    "url": "https://github.com/yodkwtf/yodkwtf.com/issues"
   }
 }

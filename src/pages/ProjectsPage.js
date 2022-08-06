@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Loading, NavForPages, SingleProject } from '../components';
+import { Head, Loading, NavForPages, SingleProject } from '../components';
 import Airtable from 'airtable-node';
 
 // COMPONENT
@@ -30,7 +29,6 @@ const ProjectsPage = () => {
         stack,
       };
     });
-    console.log(projects);
     setAllProjects(projects);
     setCategories([
       'all',
@@ -70,13 +68,13 @@ const ProjectsPage = () => {
   // jsx
   return (
     <>
-      <Helmet>
-        <title>Durgesh | My Projects</title>
-        <meta
-          name="description"
-          content="The list of a few of projects built by yodkwtf, aka, Durgesh. These are built with a variety of technology including html & css, javascript, reactjs, nodejs, bootstrap, gatsby, jQuery, etc. Take a look at the github profile for more info."
-        />
-      </Helmet>
+      <Head
+        title={'Durgesh Chaudhary - Full Stack Developer | Projects'}
+        description={
+          'This is a collection of some of my favorite projects. Built with a wide variety of tech including React.js, Next.js, Javascript, TypeScript, Nodejs, MongoDB, Git & GitHub, MERN stack, Figma, GraphQL, Gatsby, Redux, HTML, CSS & its frameworks, SEO Fundamentals, Headless CMSs, Python.'
+        }
+        image={'/covers/projects.png'}
+      />
 
       <section className="page">
         {/* navbar */}
