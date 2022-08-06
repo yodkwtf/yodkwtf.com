@@ -10,6 +10,8 @@ import mongodb from '../images/skills/mongo.svg';
 import gatsby from '../images/skills/gatsby.svg';
 import git from '../images/skills/git.svg';
 import figma from '../images/skills/figma.svg';
+import nextjs from '../images/skills/nextjs.svg';
+// import typescript from '../images/skills/typescript.svg';
 
 // ###########
 // skills
@@ -38,37 +40,48 @@ export const skills = [
   },
   {
     id: 5,
-    title: 'Gatsby',
-    icon: gatsby,
+    title: 'NextJs',
+    icon: nextjs,
   },
   {
     id: 6,
-    title: 'styled-components',
-    icon: styledComponents,
-  },
-  {
-    id: 7,
     title: 'Nodejs',
     icon: node,
   },
   {
-    id: 8,
+    id: 7,
     title: 'MongoDB',
     icon: mongodb,
   },
   {
-    id: 9,
+    id: 8,
     title: 'Git & GitHub',
     icon: git,
   },
   {
+    id: 9,
+    title: 'Gatsby',
+    icon: gatsby,
+  },
+  {
     id: 10,
-    title: 'Python',
-    icon: python,
+    title: 'styled-components',
+    icon: styledComponents,
   },
   {
     id: 11,
     title: 'Figma',
     icon: figma,
   },
+  {
+    id: 12,
+    title: 'Python',
+    icon: python,
+  },
+
+  // {
+  //   id: 13,
+  //   title: 'TypeScript',
+  //   icon: typescript,
+  // },
 ];

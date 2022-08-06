@@ -1,6 +1,7 @@
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Roboto&family=Source+Sans+Pro:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 /*
 ===============
@@ -11,14 +12,14 @@ Variables
 :root {
   /* bcg */
   --toggle-color: #000;
-  --nav-bcg: linear-gradient(rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.1)),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --nav-bcg: linear-gradient(rgba(160, 160, 160, 0.1), rgba(160, 160, 160, 0.1)),
+    url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
       rgba(160, 160, 160, 0.1),
-      rgba(250, 250, 250, 0.7),
-      rgba(250, 250, 250, 0.1)
+      rgba(160, 160, 160, 0.1),
+      rgba(250, 250, 250, 0.5)
     ),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+    url(./images/hero/hero-bcg-light.svg) center repeat;
   --contact-bcg: linear-gradient(
       rgba(160, 160, 160, 0.3),
       rgba(160, 160, 160, 0.3)
@@ -27,7 +28,7 @@ Variables
 
   /* white colors */
   --clr-body-bcg: #fff;
-  --clr-body-bcg-2: #f5f6f7;
+  --clr-body-bcg-2: rgb(250, 250, 250);
   --clr-body-bcg-3: #f0f0f0;
   /* black colors  */
   --clr-font: #101114;
@@ -63,6 +64,7 @@ Variables
   /* font families */
   --ff-primary: 'Roboto', sans-serif;
   --ff-secondary: 'Ubuntu', sans-serif;
+  --ff-tertiary: 'Poppins', sans-serif;
   /* transitions */
   --transition: all 0.3s linear;
   --long-transition: all 1s ease;
@@ -77,41 +79,46 @@ Variables
 .dark {
   /* bcg */
   --toggle-color: rgb(61, 124, 182);
-  --nav-bcg: linear-gradient(rgba(75, 75, 75, 0.1), rgba(75, 75, 75, 0.1)),
-    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
+  --nav-bcg: linear-gradient(rgba(4, 1, 1, 0.1), rgba(4, 1, 1, 0.1)),
+    url(./images/hero/hero-bcg-dark.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
-      rgba(100, 100, 100, 0.1),
-      rgba(5, 5, 5, 0.7),
-      rgba(5, 5, 5, 0.1)
+      rgba(4, 1, 1, 0.1),
+      rgba(5, 5, 5, 0.1),
+      rgba(4, 1, 1, 0.1)
     ),
-    url(./images/hero/hero-bcg-dark.png) center repeat fixed;
-  --contact-bcg: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
+    url(./images/hero/hero-bcg-dark.svg) center repeat;
+  --contact-bcg: linear-gradient(
+      to bottom right,
+      rgba(20, 20, 20, 0.75),
+      rgba(20, 20, 20, 0.5),
+      rgba(20, 20, 20, 0.75)
+    ),
     url(./images/contact/contact-bcg.png) center repeat;
 
   /* black colors */
-  --clr-body-bcg: #101114;
-  --clr-body-bcg-2: #191a1d;
-  --clr-body-bcg-3: #252525;
+  --clr-body-bcg: #0a0a0b;
+  --clr-body-bcg-2: #0e0d0d;
+  --clr-body-bcg-3: #181717;
   /* white colors  */
-  --clr-font: #fff;
+  --clr-font: rgba(255, 255, 255, 0.9);
   --clr-font-2: #f5f6f7;
   --clr-font-3: #f0f0f0;
   /* shadows */
-  --light-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-  --dark-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  --light-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+  --dark-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
 }
 
 .light {
   /* bcg */
   --toggle-color: #000;
-  --nav-bcg: linear-gradient(rgba(180, 180, 180, 0.1), rgba(180, 180, 180, 0.1)),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+  --nav-bcg: linear-gradient(rgba(160, 160, 160, 0.1), rgba(160, 160, 160, 0.1)),
+    url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
       rgba(160, 160, 160, 0.1),
-      rgba(250, 250, 250, 0.7),
-      rgba(250, 250, 250, 0.1)
+      rgba(160, 160, 160, 0.1),
+      rgba(250, 250, 250, 0.5)
     ),
-    url(./images/hero/hero-bcg-light.png) center repeat fixed;
+    url(./images/hero/hero-bcg-light.svg) center repeat;
   --contact-bcg: linear-gradient(
       rgba(160, 160, 160, 0.3),
       rgba(160, 160, 160, 0.3)
@@ -120,7 +127,7 @@ Variables
 
   /* white colors */
   --clr-body-bcg: #fff;
-  --clr-body-bcg-2: #f5f6f7;
+  --clr-body-bcg-2: rgb(250, 250, 250);
   --clr-body-bcg-3: #f0f0f0;
   /* black colors  */
   --clr-font: #101114;
@@ -165,7 +172,7 @@ html::-webkit-scrollbar-track {
 }
 
 body {
-  font-family: var(--ff-primary);
+  font-family: var(--ff-tertiary);
   background: var(--clr-body-bcg);
   color: var(--clr-font);
   line-height: 1.5;
@@ -288,7 +295,7 @@ p {
 }
 
 .section-title {
-  font-family: var(--ff-secondary);
+  font-family: var(--ff-primary);
   margin-bottom: 4rem;
   text-align: center;
   text-transform: capitalize;
@@ -388,7 +395,7 @@ NAVBAR
 
 nav {
   background: var(--clr-body-bcg);
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   z-index: 100;
 }
 .nav-fixed {
@@ -453,8 +460,7 @@ nav {
 .logo h5 {
   color: var(--clr-primary);
   font-size: 1.75rem;
-  letter-spacing: 2px;
-  font-family: 'Acme', sans-serif;
+  letter-spacing: -1px;
   transition: var(--transition);
 }
 .logo h5:hover {
@@ -469,7 +475,7 @@ nav {
 }
 .nav-links .link {
   text-transform: uppercase;
-  color: var(--clr-primary);
+  color: var(--clr-secondary);
   font-weight: bold;
   text-shadow: 1px 1px 1px var(--clr-body-bcg);
   transition: var(--transition);
@@ -489,7 +495,7 @@ nav {
 }
 
 .nav-links .link:hover {
-  color: var(--clr-secondary);
+  color: var(--clr-primary);
 }
 .nav-links .link:hover::after {
   width: 100%;
@@ -597,7 +603,7 @@ SIDEBAR
   padding: 1.5rem 2rem;
   border: 4px solid var(--clr-primary);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   place-items: center;
   margin-top: 2rem;
   background: var(--clr-body-bcg-2);
@@ -635,7 +641,7 @@ header {
   background: var(--hero-bcg);
 }
 .banner {
-  min-height: calc(100vh - 75px);
+  min-height: calc(100vh - 72px - 48px);
   display: grid;
   place-items: center;
   padding-bottom: 7rem;
@@ -657,7 +663,7 @@ header {
 }
 .hero-info h1 {
   text-shadow: 1px 1px 1px var(--clr-primary);
-  font-family: var(--ff-secondary);
+  font-family: var(--ff-primary);
 }
 #my-name span {
   color: var(--clr-primary);
@@ -670,7 +676,7 @@ header {
 .hero-btn-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 2rem;
+  column-gap: 1rem;
   text-align: center;
   max-width: 30rem;
   margin: 0 auto;
@@ -699,9 +705,9 @@ header {
   white-space: nowrap;
   opacity: 0;
   line-height: 1.5;
-  animation: type 4s steps(20, end) alternate, blink 1s step-end infinite;
+  animation: type 4s steps(20, end) alternate, blink 4s step-end;
   animation-fill-mode: forwards;
-  border-right: 3px solid var(--clr-font);
+  border-right: 2px solid var(--clr-font);
   overflow: hidden;
 }
 
@@ -709,12 +715,13 @@ header {
   #my-name {
     width: 520px;
   }
+  .hero-btn-container {
+    column-gap: 2rem;
+  }
 }
 @media screen and (max-width: 548px) {
-  .hero-btn-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 1rem;
+  .hero-btn {
+    font-size: 0.75rem;
   }
   #my-name {
     font-size: 2rem;
@@ -736,7 +743,25 @@ header {
 }
 
 @keyframes blink {
-  50% {
+  15% {
+    border-color: transparent;
+  }
+  30% {
+    border-color: var(--clr-font);
+  }
+  45% {
+    border-color: transparent;
+  }
+  60% {
+    border-color: var(--clr-font);
+  }
+  75% {
+    border-color: transparent;
+  }
+  90% {
+    border-color: var(--clr-font);
+  }
+  100% {
     border-color: transparent;
   }
 }
@@ -754,7 +779,7 @@ header {
     text-align: left;
   }
   .hero-info p {
-    max-width: 45rem;
+    max-width: 40rem;
   }
   .hero-btn-container,
   #my-name {
@@ -812,6 +837,9 @@ ABOUT
     padding: 1.5rem 0 1.5rem 3rem;
     max-width: 42rem;
     justify-self: center;
+  }
+  .about-info p {
+    text-align: left;
   }
   .about-img-small {
     display: none;
@@ -979,7 +1007,7 @@ PROJECTS
     height: 100%;
     background: linear-gradient(
       to bottom left,
-      rgba(0, 128, 55, 0.9),
+      rgba(0, 128, 55, 0.6),
       rgba(0, 0, 0, 0.5)
     );
     transition: var(--transition);
@@ -988,7 +1016,7 @@ PROJECTS
   .project:nth-of-type(even) .project-img::after {
     background: linear-gradient(
       to bottom right,
-      rgba(0, 128, 55, 0.9),
+      rgba(0, 128, 55, 0.6),
       rgba(0, 0, 0, 0.5)
     );
   }
@@ -1001,7 +1029,7 @@ PROJECTS
     border-radius: var(--radius);
     box-shadow: var(--light-shadow);
     z-index: 1;
-    grid-column: 5 /12;
+    grid-column: 6 / -1;
     grid-row: 1 / 1;
     padding: 2rem 1.5rem;
   }
@@ -1011,7 +1039,7 @@ PROJECTS
     grid-row: 1 / 1;
   }
   .project:nth-of-type(even) .project-details {
-    grid-column: 2 / span 7;
+    grid-column: 1 / span 7;
     grid-row: 1 / 1;
     text-align: left;
   }
@@ -1037,7 +1065,7 @@ PROJECTS
     border-radius: 0;
     background: transparent;
     display: block;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
   }
   .project-footer:first-child {
     order: 1;
@@ -1092,7 +1120,7 @@ SKILLS
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1.5rem 1rem;
+  gap: 1.5rem 0.75rem;
 }
 
 .skill-icon {
@@ -1121,16 +1149,19 @@ CONTACT
   text-shadow: 2px 2px 2px var(--clr-body-bcg);
   margin-bottom: 1.5rem;
 }
+.contact-info p {
+  max-width: 35rem;
+}
 
 .social-icons {
-  background: var(--clr-font-2);
+  background: #202020;
 }
 .social-icons h4 {
   display: none;
 }
 .social-icons-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   max-width: var(--fixed-width);
   padding: 0.8rem 0;
   margin: 0 auto;
@@ -1176,13 +1207,13 @@ CONTACT
   display: none;
 }
 .social-icon:hover .fa {
-  color: var(--clr-body-bcg);
+  transform: scale(1.1);
 }
 
 @media screen and (min-width: 792px) {
   .contact-center {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     align-items: center;
     padding: 4rem 2rem;
     margin: 0 auto;
@@ -1192,7 +1223,7 @@ CONTACT
   }
   .social-icons {
     background: transparent;
-    padding: 0 5rem;
+    padding: 0 4rem;
   }
   .social-icons h4 {
     display: block;
@@ -1202,14 +1233,17 @@ CONTACT
   }
   .social-icons-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 1rem 2rem;
+    width: max-content;
   }
   .social-icon {
+    justify-self: left;
     font-size: 1.75rem;
     display: flex;
     align-items: center;
     line-height: 1.5;
+    text-align: center;
   }
   .social-icon:hover .fa {
     color: var(--clr-font);
@@ -1217,7 +1251,7 @@ CONTACT
   .social-icons-container span {
     display: inline;
     color: var(--clr-font);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-left: 1rem;
     text-transform: capitalize;
     transition: var(--transition);
@@ -1393,40 +1427,39 @@ PROJECTS PAGE
 
 .category-btn-container {
   max-width: 900px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-wrap: wrap;
   padding: 1rem 0;
-  gap: 1rem;
+  gap: 1rem 0.5rem;
   margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 .category-btn:first-child {
-  background: var(--clr-secondary);
-  opacity: 1;
+  background: var(--clr-white);
+  color: var(--clr-primary);
 }
 .category-btn {
-  width: 100%;
-  max-width: 160px;
-  border: 2px solid transparent;
   margin: 0 auto;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: var(--clr-white);
   transition: all 0.2;
   border-radius: var(--radius);
-  opacity: 0.8;
   outline: none;
   background: var(--clr-secondary);
+  font-size: 0.75rem;
+  border: 1px solid var(--clr-primary);
 }
 .category-btn:hover {
-  opacity: 1;
+  background: var(--clr-white);
+  color: var(--clr-primary);
 }
 .active {
-  background: var(--clr-primary);
-  opacity: 1;
+  background: var(--clr-white);
+  color: var(--clr-primary);
 }
 .unactive {
   background: var(--clr-secondary) !important;
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
+  color: var(--clr-white) !important;
 }
 .projects-container {
   display: grid;
@@ -1440,6 +1473,12 @@ PROJECTS PAGE
     gap: 4rem;
   }
 }
+@media screen and (min-width: 792px) {
+  .category-btn {
+    font-size: 1rem;
+  }
+}
+
 @media screen and (min-width: 1080px) {
   .projects-container {
     grid-template-columns: 1fr 1fr 1fr;
@@ -1593,4 +1632,8 @@ LINKS PAGE
   color: white;
   margin-left: 0.25rem;
   font-size: 1.25rem;
+}
+
+.fa {
+  vertical-align: middle;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { FaHandshake, FaTimes } from 'react-icons/fa';
 import { AppContext } from '../context';
 import SocialIcons from './SocialIcons';
 import NavLinks from './NavLinks';
@@ -32,7 +32,9 @@ export const Sidebar = () => {
 
       {/* sidebar-icons */}
       <div className="sidebar-icons">
-        <h4>Connect With Me! 📱</h4>
+        <h4>
+          Social Links <FaHandshake className="fa" />
+        </h4>
         <div className="icons-container">
           <SocialIcons />
         </div>

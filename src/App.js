@@ -1,13 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import pages
-import {
-  HomePage,
-  ContactPage,
-  ProjectsPage,
-  ErrorPage,
-  Links,
-} from './pages';
+import { HomePage, ContactPage, ProjectsPage, ErrorPage, Links } from './pages';
 // import components
 import { Contact, Footer, Widget, ScrollToTop } from './components';
 

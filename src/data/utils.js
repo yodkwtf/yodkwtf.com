@@ -1,9 +1,9 @@
 import {
-  FaInstagram,
+  // FaInstagram,
   FaTwitter,
   FaLinkedin,
   FaGithub,
-  FaCodepen,
+  // FaCodepen,
   FaYoutube,
 } from 'react-icons/fa';
 
@@ -11,12 +11,12 @@ import {
 // social icons
 // **************************
 export const socialIcons = [
-  {
-    id: 1,
-    icon: <FaInstagram className="fa instagram" />,
-    url: 'https://www.instagram.com/yodkwtf',
-    title: 'Instagram',
-  },
+  // {
+  //   id: 1,
+  //   icon: <FaInstagram className="fa instagram" />,
+  //   url: 'https://www.instagram.com/yodkwtf',
+  //   title: 'Instagram',
+  // },
   {
     id: 2,
     icon: <FaTwitter className="fa twitter" />,
@@ -42,12 +42,12 @@ export const socialIcons = [
     url: 'https://github.com/yodkwtf',
     title: 'GitHub',
   },
-  {
-    id: 6,
-    icon: <FaCodepen className="fa codepen" />,
-    url: 'https://codepen.io/yodkwtf',
-    title: 'Codepen',
-  },
+  // {
+  //   id: 6,
+  //   icon: <FaCodepen className="fa codepen" />,
+  //   url: 'https://codepen.io/yodkwtf',
+  //   title: 'Codepen',
+  // },
 ];
 
 // **************************
