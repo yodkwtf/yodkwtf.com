@@ -87,7 +87,12 @@ Variables
       rgba(4, 1, 1, 0.1)
     ),
     url(./images/hero/hero-bcg-dark.svg) center repeat;
-  --contact-bcg: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
+  --contact-bcg: linear-gradient(
+      to bottom right,
+      rgba(20, 20, 20, 0.75),
+      rgba(20, 20, 20, 0.5),
+      rgba(20, 20, 20, 0.75)
+    ),
     url(./images/contact/contact-bcg.png) center repeat;
 
   /* black colors */
@@ -598,7 +603,7 @@ SIDEBAR
   padding: 1.5rem 2rem;
   border: 4px solid var(--clr-primary);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   place-items: center;
   margin-top: 2rem;
   background: var(--clr-body-bcg-2);
@@ -1146,14 +1151,14 @@ CONTACT
 }
 
 .social-icons {
-  background: var(--clr-font-2);
+  background: #202020;
 }
 .social-icons h4 {
   display: none;
 }
 .social-icons-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   max-width: var(--fixed-width);
   padding: 0.8rem 0;
   margin: 0 auto;
@@ -1199,13 +1204,13 @@ CONTACT
   display: none;
 }
 .social-icon:hover .fa {
-  color: var(--clr-body-bcg);
+  transform: scale(1.1);
 }
 
-@media screen and (min-width: 792px) {
+@media screen and (min-width: 992px) {
   .contact-center {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     align-items: center;
     padding: 4rem 2rem;
     margin: 0 auto;
@@ -1215,7 +1220,7 @@ CONTACT
   }
   .social-icons {
     background: transparent;
-    padding: 0 5rem;
+    padding: 0 4rem;
   }
   .social-icons h4 {
     display: block;
