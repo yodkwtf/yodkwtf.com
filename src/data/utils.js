@@ -1,9 +1,9 @@
 import {
-  FaInstagram,
+  // FaInstagram,
   FaTwitter,
   FaLinkedin,
   FaGithub,
-  FaCodepen,
+  // FaCodepen,
   FaYoutube,
 } from 'react-icons/fa';
 

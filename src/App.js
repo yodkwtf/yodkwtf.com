@@ -29,7 +29,7 @@ const App = () => {
         </Switch>
         <Contact />
         <Footer />
-        {/* <Widget /> */}
+        <Widget />
       </Router>
     </main>
   );

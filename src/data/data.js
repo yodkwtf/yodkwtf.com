@@ -11,7 +11,7 @@ import gatsby from '../images/skills/gatsby.svg';
 import git from '../images/skills/git.svg';
 import figma from '../images/skills/figma.svg';
 import nextjs from '../images/skills/nextjs.svg';
-import typescript from '../images/skills/typescript.svg';
+// import typescript from '../images/skills/typescript.svg';
 
 // ###########
 // skills

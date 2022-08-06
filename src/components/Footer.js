@@ -4,12 +4,12 @@ import airtable from '../images/airtable.svg';
 
 export const Footer = () => {
   // states
-  const [date, setDate] = React.useState(2021);
+  // const [date, setDate] = React.useState(2021);
 
   // useEffect
-  React.useEffect(() => {
-    setDate(new Date().getFullYear());
-  }, []);
+  // React.useEffect(() => {
+  //   setDate(new Date().getFullYear());
+  // }, []);
 
   // jsx
   return (
