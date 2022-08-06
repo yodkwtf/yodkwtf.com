@@ -163,6 +163,11 @@ html::-webkit-scrollbar-track {
   background: #ccc;
 }
 
+::selection {
+  color: var(--clr-white);
+  background: var(--clr-secondary);
+}
+
 *,
 ::after,
 ::before {
@@ -1007,7 +1012,7 @@ PROJECTS
     height: 100%;
     background: linear-gradient(
       to bottom left,
-      rgba(0, 128, 55, 0.6),
+      rgba(0, 128, 55, 0.5),
       rgba(0, 0, 0, 0.5)
     );
     transition: var(--transition);
@@ -1016,7 +1021,7 @@ PROJECTS
   .project:nth-of-type(even) .project-img::after {
     background: linear-gradient(
       to bottom right,
-      rgba(0, 128, 55, 0.6),
+      rgba(0, 128, 55, 0.5),
       rgba(0, 0, 0, 0.5)
     );
   }
@@ -1189,10 +1194,10 @@ CONTACT
   color: #ea6960;
 }
 .linkedin {
-  color: #0073b1;
+  color: #238fc8;
 }
 .youtube {
-  color: #f10000;
+  color: #fd3131;
 }
 .codepen {
   color: #4ec3b8;

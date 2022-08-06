@@ -12,6 +12,7 @@ import { Widget } from './Widget';
 import Loading from './Loading';
 import SingleProject from './SingleProject';
 import ScrollToTop from './ScrollToTop';
+import Head from './Head';
 
 export {
   NavAlert,
@@ -28,4 +29,5 @@ export {
   ScrollToTop,
   Loading,
   SingleProject,
+  Head,
 };

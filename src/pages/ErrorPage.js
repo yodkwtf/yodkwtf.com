@@ -1,18 +1,12 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { NavForPages } from '../components';
+import { Head, NavForPages } from '../components';
 
 const ErrorPage = () => {
   return (
     <>
-      <Helmet>
-        <title>404 | Page Not Found</title>
-        <meta
-          name="description"
-          content="The page you are looking for does not exist..."
-        />
-      </Helmet>
+      <Head title={'404 | Page Not Found'} />
 
       <section className="page">
         <NavForPages />
@@ -20,7 +14,7 @@ const ErrorPage = () => {
           <div className="section-center ">
             <h2>OOPS! The page you're looking for doesn't exist 🙁</h2>
             <Link to="/" className="btn" title="Back to Homepage">
-              back to home 🏡
+              back to home <FaHome className="fa" />
             </Link>
           </div>
         </div>

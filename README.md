@@ -7,7 +7,7 @@ The design is a complete orginal created from scratch in Figma. I'm using airtab
 
 [www.yodkwtf.com - Live Site](https://yodkwtf.com)
 
-![yodkwtf.com](./public/cover.png)
+![yodkwtf.com](./public/covers/home.png)
 
 ## Stack
 
