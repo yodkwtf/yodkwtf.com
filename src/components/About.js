@@ -49,15 +49,15 @@ export const About = () => {
         <article className="about-info">
           <p>
             {/* text */}
-            Hello Friend. <br />
             I'm <strong>Durgesh</strong>, a <span>{age}</span> year old
-            self-taught web developer. I mainly work with the MERN stack but I
-            have a profound knowledge of HTML & CSS, Javascript, Python, and
-            Gatsby too.
+            <strong> Full Stack Developer</strong> with 2+ years of experience.
+            I work with Javascript and its endless list of frameworks, primarily
+            with <strong>React.js</strong>, <strong>Next.js</strong>,{' '}
+            <strong>Nodejs</strong>, and <strong>Gatsby</strong>.
             <br />
             <br />
-            Currently I'm working as a <strong>
-              freelance web developer
+            Occasionally, I work as a <strong>
+              Freelance Web Developer
             </strong>{' '}
             where I deliver highly optimized websites to my clients and help
             them scale their businesses digitally. I also run a&nbsp;&nbsp;
@@ -74,7 +74,7 @@ export const About = () => {
             <br />
             When I'm not coding, I love to binge-watch pop culture stuff. I also
             love to play guitar and create sketches. Even though I'm not very
-            good, it does help me to get creative designs for my sites.
+            good, it does help my creative side when I'm building websites.
           </p>
 
           {/* stack */}
