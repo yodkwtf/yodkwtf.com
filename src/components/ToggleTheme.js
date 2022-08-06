@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaToggleOn, FaToggleOff } from 'react-icons/fa';
+import { FaSun, FaMoon } from 'react-icons/fa';
 import { AppContext } from '../context';
 
 const ToggleTheme = () => {
@@ -8,12 +8,15 @@ const ToggleTheme = () => {
 
   // jsx
   return (
-    <span className="toggle-theme" onClick={switchTheme}>
-      {theme === 'light' ? (
-        <FaToggleOff className="fa" />
-      ) : (
-        <FaToggleOn className="fa" />
-      )}
+    <span
+      className="toggle-theme btn"
+      onClick={switchTheme}
+      title={
+        theme === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'
+      }
+    >
+      <h5>Theme</h5>
+      {theme === 'light' ? <FaMoon className="fa" /> : <FaSun className="fa" />}
     </span>
   );
 };
