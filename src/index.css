@@ -11,7 +11,7 @@ Variables
 
 :root {
   /* bcg */
-  --toggle-color: #000;
+  --toggle-color: #f4f6f0;
   --nav-bcg: linear-gradient(rgba(160, 160, 160, 0.1), rgba(160, 160, 160, 0.1)),
     url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
@@ -78,7 +78,7 @@ Variables
 }
 .dark {
   /* bcg */
-  --toggle-color: rgb(61, 124, 182);
+  --toggle-color: #fce570;
   --nav-bcg: linear-gradient(rgba(4, 1, 1, 0.1), rgba(4, 1, 1, 0.1)),
     url(./images/hero/hero-bcg-dark.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
@@ -110,7 +110,7 @@ Variables
 
 .light {
   /* bcg */
-  --toggle-color: #000;
+  --toggle-color: #f4f6f0;
   --nav-bcg: linear-gradient(rgba(160, 160, 160, 0.1), rgba(160, 160, 160, 0.1)),
     url(./images/hero/hero-bcg-light.svg) center repeat fixed;
   --hero-bcg: linear-gradient(
@@ -393,7 +393,7 @@ NAVBAR
   cursor: pointer;
 }
 .toggle-theme .fa {
-  font-size: 2.5rem;
+  font-size: 1.25rem;
   color: var(--toggle-color);
   background: transparent;
 }
@@ -476,7 +476,6 @@ nav {
   width: 100%;
   max-width: 480px;
   padding: 0 1rem;
-  margin-right: 4.5rem;
 }
 .nav-links .link {
   text-transform: uppercase;
@@ -526,7 +525,9 @@ nav {
     align-items: center;
   }
   .toggle-theme {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 }
 
@@ -537,9 +538,17 @@ SIDEBAR
 */
 
 .sidebar .toggle-theme {
-  display: block;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
   margin-left: 1rem;
 }
+
+.sidebar .toggle-theme h5 {
+  display: none;
+}
+
 .sidebar-header-col {
   display: flex;
   align-items: center;
@@ -1362,6 +1371,7 @@ main {
   }
   .nav-2 .toggle-theme {
     display: block;
+    background: var(--clr-primary-gradient);
   }
 }
 
