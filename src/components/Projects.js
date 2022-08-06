@@ -72,7 +72,7 @@ export const Projects = () => {
       {/* all projects btn */}
       <div className="btn-container">
         <Link to="/projects" className="btn">
-          more projects 📚
+          view more <FaShareSquare className="fa" />
         </Link>
       </div>
     </section>
