@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { NavForPages } from '../components';
+import { FaArrowRight } from 'react-icons/fa';
 
 const ContactPage = () => {
   return (
@@ -82,7 +83,7 @@ const ContactPage = () => {
               </div>
               <div className="btn-container">
                 <button className="btn submit-btn" type="submit">
-                  submit 🛴
+                  submit <FaArrowRight className="fa" />
                 </button>
               </div>
             </form>

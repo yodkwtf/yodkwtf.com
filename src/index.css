@@ -475,7 +475,7 @@ nav {
 }
 .nav-links .link {
   text-transform: uppercase;
-  color: var(--clr-primary);
+  color: var(--clr-secondary);
   font-weight: bold;
   text-shadow: 1px 1px 1px var(--clr-body-bcg);
   transition: var(--transition);
@@ -495,7 +495,7 @@ nav {
 }
 
 .nav-links .link:hover {
-  color: var(--clr-secondary);
+  color: var(--clr-primary);
 }
 .nav-links .link:hover::after {
   width: 100%;
@@ -986,7 +986,7 @@ PROJECTS
     margin: 8rem auto;
   }
   .project-img {
-    grid-column: 1 / span 7;
+    grid-column: 1 / span 8;
     grid-row: 1 / 1;
     height: 30rem;
     border-radius: var(--radius);
@@ -1007,7 +1007,7 @@ PROJECTS
     height: 100%;
     background: linear-gradient(
       to bottom left,
-      rgba(0, 128, 55, 0.5),
+      rgba(0, 128, 55, 0.6),
       rgba(0, 0, 0, 0.5)
     );
     transition: var(--transition);
@@ -1016,7 +1016,7 @@ PROJECTS
   .project:nth-of-type(even) .project-img::after {
     background: linear-gradient(
       to bottom right,
-      rgba(0, 128, 55, 0.5),
+      rgba(0, 128, 55, 0.6),
       rgba(0, 0, 0, 0.5)
     );
   }
@@ -1029,17 +1029,17 @@ PROJECTS
     border-radius: var(--radius);
     box-shadow: var(--light-shadow);
     z-index: 1;
-    grid-column: 6 /12;
+    grid-column: 6 / -1;
     grid-row: 1 / 1;
     padding: 2rem 1.5rem;
   }
 
   .project:nth-of-type(even) .project-img {
-    grid-column: 6 / -1;
+    grid-column: 5 / -1;
     grid-row: 1 / 1;
   }
   .project:nth-of-type(even) .project-details {
-    grid-column: 2 / span 6;
+    grid-column: 1 / span 7;
     grid-row: 1 / 1;
     text-align: left;
   }
@@ -1065,7 +1065,7 @@ PROJECTS
     border-radius: 0;
     background: transparent;
     display: block;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
   }
   .project-footer:first-child {
     order: 1;
@@ -1149,6 +1149,9 @@ CONTACT
   text-shadow: 2px 2px 2px var(--clr-body-bcg);
   margin-bottom: 1.5rem;
 }
+.contact-info p {
+  max-width: 35rem;
+}
 
 .social-icons {
   background: #202020;
@@ -1207,7 +1210,7 @@ CONTACT
   transform: scale(1.1);
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 792px) {
   .contact-center {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -1230,14 +1233,17 @@ CONTACT
   }
   .social-icons-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 1rem 2rem;
+    width: max-content;
   }
   .social-icon {
+    justify-self: left;
     font-size: 1.75rem;
     display: flex;
     align-items: center;
     line-height: 1.5;
+    text-align: center;
   }
   .social-icon:hover .fa {
     color: var(--clr-font);
@@ -1245,7 +1251,7 @@ CONTACT
   .social-icons-container span {
     display: inline;
     color: var(--clr-font);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-left: 1rem;
     text-transform: capitalize;
     transition: var(--transition);
@@ -1421,40 +1427,39 @@ PROJECTS PAGE
 
 .category-btn-container {
   max-width: 900px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-wrap: wrap;
   padding: 1rem 0;
-  gap: 1rem;
+  gap: 1rem 0.5rem;
   margin: 0 auto;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 .category-btn:first-child {
-  background: var(--clr-secondary);
-  opacity: 1;
+  background: var(--clr-white);
+  color: var(--clr-primary);
 }
 .category-btn {
-  width: 100%;
-  max-width: 160px;
-  border: 2px solid transparent;
   margin: 0 auto;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: var(--clr-white);
   transition: all 0.2;
   border-radius: var(--radius);
-  opacity: 0.8;
   outline: none;
   background: var(--clr-secondary);
+  font-size: 0.75rem;
+  border: 1px solid var(--clr-primary);
 }
 .category-btn:hover {
-  opacity: 1;
+  background: var(--clr-white);
+  color: var(--clr-primary);
 }
 .active {
-  background: var(--clr-primary);
-  opacity: 1;
+  background: var(--clr-white);
+  color: var(--clr-primary);
 }
 .unactive {
   background: var(--clr-secondary) !important;
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
+  color: var(--clr-white) !important;
 }
 .projects-container {
   display: grid;
@@ -1468,6 +1473,12 @@ PROJECTS PAGE
     gap: 4rem;
   }
 }
+@media screen and (min-width: 792px) {
+  .category-btn {
+    font-size: 1rem;
+  }
+}
+
 @media screen and (min-width: 1080px) {
   .projects-container {
     grid-template-columns: 1fr 1fr 1fr;

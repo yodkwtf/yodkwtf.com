@@ -21,7 +21,8 @@ export const Projects = () => {
     const { records } = await airtable.list();
     let projects = records.map((record) => {
       const { id } = record;
-      const { title, desc, image, stack, url, github } = record.fields;
+      const { title, desc, image, stack, url, github, isClientWork } =
+        record.fields;
       const imgUrl = image[0].url;
 
       return {
@@ -32,6 +33,7 @@ export const Projects = () => {
         stack,
         url,
         github,
+        isClientWork,
       };
     });
     projects = projects.sort((a, b) => a.title.localeCompare(b.title));
@@ -79,7 +81,15 @@ export const Projects = () => {
   );
 };
 
-const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
+const SingleProject = ({
+  imgUrl,
+  title,
+  desc,
+  stack,
+  url,
+  github,
+  isClientWork,
+}) => {
   const [showDesc, setShowDesc] = useState(false);
 
   // jsx
@@ -121,7 +131,7 @@ const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
         <div className="project-footer">
           <a href={url} target="_blank" rel="noreferrer" title="Live Site">
             <strong>
-              <FaShareSquare className="fa" /> <span>live demo</span>
+              <FaShareSquare className="fa" /> <span>live site</span>
             </strong>
           </a>
           <a href={github} target="_blank" rel="noreferrer" title="GitHub Code">

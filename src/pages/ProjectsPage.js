@@ -15,7 +15,7 @@ const ProjectsPage = () => {
     .table('projects');
 
   const fetchProjects = async () => {
-    const { records } = await airtable.list();
+    const { records } = await airtable.list({ maxRecords: 100 });
     const projects = records.map((record) => {
       const { id } = record;
       const { title, stack, image, url, github } = record.fields;
@@ -30,7 +30,7 @@ const ProjectsPage = () => {
         stack,
       };
     });
-
+    console.log(projects);
     setAllProjects(projects);
     setCategories([
       'all',

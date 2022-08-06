@@ -5,8 +5,8 @@ export const NavAlert = () => {
   return (
     <section className="nav-alert">
       <span>
-        🔥 I just created an awesome Python Cheatsheet.{' '}
-        <Link to="/links">Download now</Link> for free. 🔥
+        🚀 Looking to hire a FullStack Developer? Please review{' '}
+        <Link to="/links">my resume</Link> and projects. 🚀
       </span>
     </section>
   );

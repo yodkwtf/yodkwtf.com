@@ -27,7 +27,7 @@ export const Footer = () => {
           </a>
         </p>
 
-        <p>Copyright &copy; {date}. All Rights Reserved.</p>
+        {/* <p>Copyright &copy; {date}. All Rights Reserved.</p> */}
 
         <p className="footer-text-2">
           {' '}
