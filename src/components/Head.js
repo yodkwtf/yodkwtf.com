@@ -16,24 +16,60 @@ const Head = ({ title, description, image }) => {
     <Helmet>
       {/* Primary Meta Tags  */}
       <title>{metaData.title}</title>
-      <meta name="title" content={metaData.title} />
-      <meta name="description" content={metaData.description} />
-      <meta name="keywords" content={keywords} />
+      <meta name="title" content={metaData.title} data-react-helmet="true" />
+      <meta
+        name="description"
+        content={metaData.description}
+        data-react-helmet="true"
+      />
+      <meta name="keywords" content={keywords} data-react-helmet="true" />
 
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={siteUrl} />
-      <meta property="og:title" content={metaData.title} />
-      <meta property="og:description" content={metaData.description} />
-      <meta property="og:image" content={metaData.image} />
+      <meta property="og:type" content="website" data-react-helmet="true" />
+      <meta property="og:url" content={siteUrl} data-react-helmet="true" />
+      <meta
+        property="og:title"
+        content={metaData.title}
+        data-react-helmet="true"
+      />
+      <meta
+        property="og:description"
+        content={metaData.description}
+        data-react-helmet="true"
+      />
+      <meta
+        property="og:image"
+        content={metaData.image}
+        data-react-helmet="true"
+      />
 
       {/* Twitter */}
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content="@yodkwtf" />
-      <meta property="twitter:url" content={siteUrl} />
-      <meta property="twitter:title" content={metaData.title} />
-      <meta property="twitter:description" content={metaData.description} />
-      <meta property="twitter:image" content={metaData.image} />
+      <meta
+        property="twitter:card"
+        content="summary_large_image"
+        data-react-helmet="true"
+      />
+      <meta
+        name="twitter:creator"
+        content="@yodkwtf"
+        data-react-helmet="true"
+      />
+      <meta property="twitter:url" content={siteUrl} data-react-helmet="true" />
+      <meta
+        property="twitter:title"
+        content={metaData.title}
+        data-react-helmet="true"
+      />
+      <meta
+        property="twitter:description"
+        content={metaData.description}
+        data-react-helmet="true"
+      />
+      <meta
+        property="twitter:image"
+        content={metaData.image}
+        data-react-helmet="true"
+      />
     </Helmet>
   );
 };
