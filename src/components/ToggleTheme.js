@@ -15,7 +15,6 @@ const ToggleTheme = () => {
         theme === 'light' ? 'Switch to Dark Theme' : 'Switch to Light Theme'
       }
     >
-      <h5>Theme</h5>
       {theme === 'light' ? <FaMoon className="fa" /> : <FaSun className="fa" />}
     </span>
   );
