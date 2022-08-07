@@ -113,7 +113,12 @@ const SingleProject = ({
             className="project-text-toggle"
             onClick={() => setShowDesc(!showDesc)}
           >
-            Description {showDesc ? <FaAngleUp /> : <FaAngleDown />}
+            Description{' '}
+            {showDesc ? (
+              <FaAngleUp className="fa" />
+            ) : (
+              <FaAngleDown className="fa" />
+            )}
           </button>
 
           <p className={`project-text ${showDesc ? 'show-project-text' : ''}`}>

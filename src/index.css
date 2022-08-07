@@ -181,7 +181,7 @@ body {
   background: var(--clr-body-bcg);
   color: var(--clr-font);
   line-height: 1.5;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 ul {
   list-style-type: none;
@@ -264,6 +264,11 @@ p {
 }
 .btn:hover {
   background: var(--clr-secondary);
+}
+@media screen and (max-width: 548px) {
+  .btn {
+    font-size: 0.75rem;
+  }
 }
 
 /* section */
@@ -932,10 +937,6 @@ PROJECTS
   letter-spacing: 1px;
 }
 
-.project-text-toggle svg {
-  vertical-align: text-top;
-}
-
 .project-text {
   margin: 0 auto;
   display: none;
@@ -1370,8 +1371,9 @@ main {
     min-height: calc(100vh - 80px - 49px);
   }
   .nav-2 .toggle-theme {
-    display: block;
-    background: var(--clr-primary-gradient);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 }
 
