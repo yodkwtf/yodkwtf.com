@@ -45,3 +45,11 @@ To run this project locally, run
 ```bash
   npm install && npm start
 ```
+
+## ToDo's
+
+- [ ] Add dummy images to projects on project page for loading
+- [ ] Document the repo
+- [ ] Update the projects
+- [ ] Work on lighthouse feedback
+- [ ] Give fix size to link page avatar
