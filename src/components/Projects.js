@@ -81,15 +81,7 @@ export const Projects = () => {
   );
 };
 
-const SingleProject = ({
-  imgUrl,
-  title,
-  desc,
-  stack,
-  url,
-  github,
-  isClientWork,
-}) => {
+const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
   const [showDesc, setShowDesc] = useState(false);
 
   // jsx
@@ -107,7 +99,7 @@ const SingleProject = ({
       <div className="project-details">
         {/* info */}
         <div className="project-info">
-          <h4 className="project-title">{title}</h4>
+          <h3 className="project-title">{title}</h3>
 
           <button
             className="project-text-toggle"

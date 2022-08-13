@@ -44,12 +44,7 @@ export const Hero = () => {
 
           {/* hero-image */}
           <article className="hero-img">
-            <img
-              src={heroImg}
-              alt="Hero"
-              className="hero-image"
-              loading="lazy"
-            />
+            <img src={heroImg} alt="Hero" className="hero-image" />
           </article>
         </div>
       </div>

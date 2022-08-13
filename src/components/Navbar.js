@@ -16,7 +16,7 @@ export const Navbar = () => {
         {/* nav-header */}
         <div className="nav-header">
           <Logo />
-          <button className="nav-btn" onClick={openSidebar}>
+          <button className="nav-btn" onClick={openSidebar} aria-label="menu">
             <FaBars />
           </button>
         </div>
