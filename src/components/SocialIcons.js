@@ -14,7 +14,8 @@ const SocialIcons = () => {
             rel="noreferrer"
             title={title}
           >
-            {icon}&nbsp;<span>{title}</span>
+            <img src={icon} alt={title} />
+            &nbsp;<span>{title}</span>
           </a>
         );
       })}
