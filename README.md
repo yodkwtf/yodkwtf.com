@@ -48,8 +48,8 @@ To run this project locally, run
 
 ## ToDo's
 
-- [ ] Add dummy images to projects on project page for loading
+- [x] Add dummy images to projects on project page for loading
 - [ ] Document the repo
-- [ ] Update the projects
+- [x] Update the projects
 - [ ] Work on lighthouse feedback
-- [ ] Give fix size to link page avatar
+- [x] Give fix size to link page avatar

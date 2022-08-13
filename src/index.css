@@ -824,6 +824,9 @@ ABOUT
   padding: 0.1rem;
   border: 3px solid var(--clr-primary);
 }
+.links-page-img {
+  min-height: 134.8px;
+}
 .about-image-small,
 .links-page-image {
   border-radius: 50%;
@@ -1175,7 +1178,7 @@ CONTACT
 }
 .social-icons-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   max-width: var(--fixed-width);
   padding: 0.8rem 0;
   margin: 0 auto;
@@ -1192,7 +1195,7 @@ CONTACT
     line-height: 0;
   }
 }
-.social-icon .fa {
+.social-icon img {
   transition: var(--transition);
   vertical-align: middle;
 }
@@ -1220,7 +1223,12 @@ CONTACT
 .social-icons-container span {
   display: none;
 }
-.social-icon:hover .fa {
+.social-icon img {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.social-icon:hover {
   transform: scale(1.1);
 }
 

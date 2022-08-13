@@ -1,44 +1,41 @@
-import {
-  // FaInstagram,
-  FaTwitter,
-  FaLinkedin,
-  FaGithub,
-  // FaCodepen,
-  FaYoutube,
-} from 'react-icons/fa';
+import linkedin from '../images/contact/linkedin.svg';
+import twitter from '../images/contact/twitter.svg';
+import youtube from '../images/contact/youtube.svg';
+import gmail from '../images/contact/gmail.svg';
+import github from '../images/contact/github.svg';
 
 // **************************
 // social icons
 // **************************
 export const socialIcons = [
-  // {
-  //   id: 1,
-  //   icon: <FaInstagram className="fa instagram" />,
-  //   url: 'https://www.instagram.com/yodkwtf',
-  //   title: 'Instagram',
-  // },
+  {
+    id: 1,
+    icon: gmail,
+    url: 'mailto:48durgesh.kumar@gmail.com',
+    title: 'Gmail',
+  },
   {
     id: 2,
-    icon: <FaTwitter className="fa twitter" />,
+    icon: twitter,
     url: 'https://twitter.com/yodkwtf',
     title: 'Twitter',
   },
 
   {
     id: 3,
-    icon: <FaYoutube className="fa youtube" />,
+    icon: youtube,
     url: 'https://youtube.com/yodkwtf',
     title: 'YouTube',
   },
   {
     id: 4,
-    icon: <FaLinkedin className="fa linkedin" />,
+    icon: linkedin,
     url: 'https://www.linkedin.com/in/durgesh-chaudhary',
     title: 'LinkedIn',
   },
   {
     id: 5,
-    icon: <FaGithub className="fa github" />,
+    icon: github,
     url: 'https://github.com/yodkwtf',
     title: 'GitHub',
   },
