@@ -1479,32 +1479,33 @@ PROJECTS PAGE
   margin: 0 auto;
 }
 .category-btn:first-child {
-  background: var(--clr-white);
-  color: var(--clr-primary);
+  background: var(--clr-secondary);
+  color: var(--clr-white);
 }
 .category-btn {
   margin: 0 auto;
   letter-spacing: 1px;
-  color: var(--clr-white);
   transition: all 0.2;
   border-radius: var(--radius);
   outline: none;
-  background: var(--clr-secondary);
   font-size: 0.75rem;
-  border: 1px solid var(--clr-primary);
+  border: 1px solid var(--clr-secondary);
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  color: var(--clr-secondary);
 }
 .category-btn:hover {
-  background: var(--clr-white);
-  color: var(--clr-primary);
+  background: var(--clr-secondary);
+  color: var(--clr-white);
 }
 .active {
-  background: var(--clr-white);
-  color: var(--clr-primary);
+  background: var(--clr-secondary);
+  color: var(--clr-white);
 }
 .unactive {
-  background: var(--clr-secondary) !important;
   opacity: 0.9 !important;
-  color: var(--clr-white) !important;
+  background: transparent !important;
+  color: var(--clr-secondary) !important;
 }
 .projects-container {
   display: grid;
