@@ -4,7 +4,7 @@ A developer portfolio website built using ReactJS and Context API & React Hooks.
 
 The website's design was created using Figma and features SVG illustrations from Undraw and SVG icons from Icons8. Form handling is done using Formspree, and the website is styled using CSS, including animations and transitions.
 
-The website also has a Dark Mode which used localStorage API to save user's preferred theme.
+The website also has a Dark Mode which uses localStorage API to save user's preferred theme.
 
 Overall, this is a powerful and versatile ReactJS portfolio website that makes it easy to showcase a developer's skills and projects. It offers easy customization and deployment options, making it an ideal choice for developers looking to create a professional online presence.
 
@@ -87,7 +87,7 @@ Contributions to this project are welcome! If you would like to contribute, plea
 
 1. Submit a pull request with your changes.
 
-1. Your pull request will be reviewed by the maintainers. If there are any issues, they will provide feedback on how to address them.
+1. Your pull request will be reviewed by me. If there are any issues, I will provide feedback on how to address them.
 
 1. Once your pull request is approved, it will be merged into the main branch.
 
