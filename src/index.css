@@ -1019,14 +1019,14 @@ PROJECTS
   .project-img {
     grid-column: 1 / span 8;
     grid-row: 1 / 1;
-    height: 30rem;
+    height: 32rem;
     border-radius: var(--radius);
     box-shadow: var(--light-shadow);
     position: relative;
   }
   .project-image {
-    height: 30rem;
-    width: 25rem;
+    height: 32rem;
+    width: 18rem;
     object-fit: cover;
   }
 
@@ -1055,6 +1055,10 @@ PROJECTS
 
   .project-img:hover::after {
     opacity: 0;
+  }
+
+  .project-img:hover {
+    z-index: 2;
   }
 
   .project-details {

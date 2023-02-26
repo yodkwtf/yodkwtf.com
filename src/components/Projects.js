@@ -81,7 +81,15 @@ export const Projects = () => {
   );
 };
 
-const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
+const SingleProject = ({
+  imgUrl,
+  title,
+  desc,
+  stack,
+  url,
+  github,
+  isClientWork,
+}) => {
   const [showDesc, setShowDesc] = useState(false);
 
   // jsx
@@ -131,9 +139,16 @@ const SingleProject = ({ imgUrl, title, desc, stack, url, github }) => {
               <FaShareSquare className="fa" /> <span>live site</span>
             </strong>
           </a>
-          <a href={github} target="_blank" rel="noreferrer" title="GitHub Code">
-            <FaGithub className="fa" /> <span>source code</span>
-          </a>
+          {!isClientWork && (
+            <a
+              href={github}
+              target="_blank"
+              rel="noreferrer"
+              title="GitHub Code"
+            >
+              <FaGithub className="fa" /> <span>source code</span>
+            </a>
+          )}
         </div>
       </div>
     </article>
