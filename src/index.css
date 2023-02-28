@@ -1339,7 +1339,6 @@ FOOTER
 .footer-img-block,
 .footer-text-2 {
   display: flex;
-  gap: 0.25rem;
   justify-content: center;
   align-items: center;
 }

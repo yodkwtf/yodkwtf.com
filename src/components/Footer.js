@@ -30,14 +30,13 @@ export const Footer = () => {
         {/* <p>Copyright &copy; {date}. All Rights Reserved.</p> */}
 
         <p className="footer-text-2">
-          {' '}
-          Created with
+          Created with&nbsp;
           <span className="footer-img-block">
-            <img src={react} alt="react-js" className="footer-img" />{' '}
+            <img src={react} alt="react-js" className="footer-img" />
+            &nbsp;
             <img src={airtable} alt="airtable" className="footer-img" />
           </span>
-          {'  '}
-          by{'  '}
+          &nbsp;by&nbsp;
           <a
             href="https://twitter.com/yodkwtf"
             target="_blank"
