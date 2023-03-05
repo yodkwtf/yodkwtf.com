@@ -1638,9 +1638,15 @@ LINKS PAGE
   margin: 1.5rem 0;
   background: var(--clr-secondary);
 }
+
 .links-page-btn:last-child {
   margin-bottom: 0;
 }
+
+.links-page-btn.hide-link {
+  display: none;
+}
+
 .links-page-btn.latest-link {
   animation: scale-link 1.5s infinite ease-in-out;
 }
