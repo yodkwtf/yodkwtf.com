@@ -17,7 +17,8 @@ const Links = () => {
 
     const resources = records.map((record) => {
       const { id } = record;
-      const { text, icon, title, url, order, isLatest } = record.fields;
+      const { text, icon, title, url, order, isLatest, hideField } =
+        record.fields;
       const iconUrl = icon[0].url;
 
       return {
@@ -28,6 +29,7 @@ const Links = () => {
         iconUrl,
         order,
         isLatest,
+        hideField,
       };
     });
 
@@ -76,19 +78,33 @@ const Links = () => {
               <>
                 {resources
                   .sort((a, b) => a.order - b.order)
-                  .map(({ id, title, iconUrl, text, url, isLatest }) => (
-                    <a
-                      href={url}
-                      className={`btn links-page-btn ${
-                        isLatest ? 'latest-link' : ''
-                      }`}
-                      title={title}
-                      key={id}
-                    >
-                      {text}
-                      <img src={iconUrl} alt="icon" />
-                    </a>
-                  ))}
+                  .map(
+                    ({
+                      id,
+                      title,
+                      iconUrl,
+                      text,
+                      url,
+                      isLatest,
+                      hideField,
+                    }) => (
+                      <a
+                        href={url}
+                        className={`
+                          btn links-page-btn 
+                          ${isLatest ? 'latest-link' : null}
+                          ${hideField ? 'hide-link' : null}
+                        `}
+                        title={title}
+                        key={id}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {text}
+                        <img src={iconUrl} alt="icon" />
+                      </a>
+                    )
+                  )}
               </>
             )}
           </article>
