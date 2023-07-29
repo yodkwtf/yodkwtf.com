@@ -188,6 +188,7 @@ body {
   color: var(--clr-font);
   line-height: 1.5;
   font-size: 0.875rem;
+  cursor: url('./images/cursor.svg'), auto;
 }
 ul {
   list-style-type: none;
@@ -357,9 +358,10 @@ WIDGET
   transition: transform 0.5s ease-in-out;
   outline: 1px solid var(--clr-black);
   outline-offset: -2px;
+  z-index: 10;
 }
 .widget:hover {
-  transform: rotate(760deg);
+  transform: rotate(1080deg);
 }
 
 .widget-img {
@@ -1055,10 +1057,6 @@ PROJECTS
 
   .project-img:hover::after {
     opacity: 0;
-  }
-
-  .project-img:hover {
-    z-index: 2;
   }
 
   .project-details {
