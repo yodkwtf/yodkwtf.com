@@ -1178,7 +1178,7 @@ CONTACT
   background: var(--contact-bcg);
 }
 .contact-info {
-  padding: 4rem 2rem;
+  padding: 2rem;
 }
 .contact-info h2 {
   text-shadow: 2px 2px 2px var(--clr-body-bcg);
@@ -1255,7 +1255,7 @@ CONTACT
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
     margin: 0 auto;
     max-width: var(--max-width);
     text-align: left;
@@ -1269,11 +1269,11 @@ CONTACT
     display: block;
     text-transform: none;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   .social-icons-container {
     display: grid;
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr; */
     gap: 1rem 2rem;
     width: max-content;
   }
@@ -1289,7 +1289,7 @@ CONTACT
     color: var(--clr-font);
   }
   .social-icons-container span {
-    display: inline;
+    display: none;
     color: var(--clr-font);
     font-size: 1.25rem;
     margin-left: 1rem;
