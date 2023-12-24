@@ -18,10 +18,10 @@ export const Hero = () => {
               hey,<span> i'm durgesh</span>
             </h1>
             <p>
-              Full-Stack Web Developer with 2+ years of experience. I
-              occasionally work as a freelance web developer, delivering highly
-              optimized websites to my clients and assisting them in digitally
-              scaling their businesses.
+              Full-Stack Web Developer with 2+ years of experience. Currently,
+              I'm working as a Software Engineer at Hughes Systique Corporation,
+              where I specialize in developing highly optimized software
+              solutions and web applications.
             </p>
             <div className="hero-btn-container">
               <a
