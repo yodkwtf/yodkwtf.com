@@ -1,6 +1,5 @@
 import React from 'react';
-import aboutSmallImg from '../images/about/about-img-small.jpg';
-import aboutBigImg from '../images/about/about-img.jpg';
+import aboutImg from '../images/about/about-img.PNG';
 import { Skills } from './Skills';
 
 export const About = () => {
@@ -26,21 +25,11 @@ export const About = () => {
       <div className="section-center about-center">
         {/* about-img  */}
         <article>
-          {/* small image */}
-          <div className="about-img-small">
+          <div className="about-img">
             <img
-              src={aboutSmallImg}
+              src={aboutImg}
               alt="Durgesh"
-              className="about-image-small"
-              loading="lazy"
-            />
-          </div>
-          {/* big image */}
-          <div className="about-img-big">
-            <img
-              src={aboutBigImg}
-              alt="Durgesh"
-              className="about-image-big"
+              className="about-image"
               loading="lazy"
             />
           </div>

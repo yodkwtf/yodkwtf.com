@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Head, Loading, NavForPages } from '../components';
-import aboutSmallImg from '../images/about/about-img-small.jpg';
+import aboutImg from '../images/about/about-img.PNG';
 import Airtable from 'airtable-node';
 
 const Links = () => {
@@ -59,11 +59,7 @@ const Links = () => {
         <section className="section">
           <article className="links-info">
             <div className="links-page-img">
-              <img
-                src={aboutSmallImg}
-                alt="Durgesh"
-                className="links-page-image"
-              />
+              <img src={aboutImg} alt="Durgesh" className="links-page-image" />
             </div>
             <h4>Durgesh</h4>
             <p>@yodkwtf</p>
