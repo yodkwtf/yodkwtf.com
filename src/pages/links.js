@@ -1,38 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Head, Loading, NavForPages } from '../components';
 import aboutImg from '../images/about/about-img.PNG';
-import Airtable from 'airtable-node';
+import AIRTABLE_DATA from '../data/airtableData';
 
 const Links = () => {
   // state
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const airtable = new Airtable({ apiKey: process.env.REACT_APP_API_KEY })
-    .base(process.env.REACT_APP_BASE_ID)
-    .table('resources');
-
   const fetchResources = async () => {
-    const { records } = await airtable.list();
-
-    const resources = records.map((record) => {
-      const { id } = record;
-      const { text, icon, title, url, order, isLatest, hideField } =
-        record.fields;
-      const iconUrl = icon[0].url;
-
-      return {
-        id,
-        text,
-        title,
-        url,
-        iconUrl,
-        order,
-        isLatest,
-        hideField,
-      };
-    });
-
+    const resources = AIRTABLE_DATA.resources;
     setResources(resources);
     setLoading(false);
   };

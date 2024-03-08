@@ -6,36 +6,15 @@ import {
   FaAngleDown,
   FaAngleUp,
 } from 'react-icons/fa';
-import Airtable from 'airtable-node';
 import { Loading } from '.';
+import AIRTABLE_DATA from '../data/airtableData';
 
 export const Projects = () => {
   const [projects, setProjects] = useState();
   const [loading, setLoading] = useState(true);
 
-  const airtable = new Airtable({ apiKey: process.env.REACT_APP_API_KEY })
-    .base(process.env.REACT_APP_BASE_ID)
-    .table('recent-works');
-
   const fetchProjects = async () => {
-    const { records } = await airtable.list();
-    let projects = records.map((record) => {
-      const { id } = record;
-      const { title, desc, image, stack, url, github, isClientWork } =
-        record.fields;
-      const imgUrl = image[0].url;
-
-      return {
-        id,
-        title,
-        desc,
-        imgUrl,
-        stack,
-        url,
-        github,
-        isClientWork,
-      };
-    });
+    let projects = AIRTABLE_DATA.featuredProjects;
     projects = projects.sort((a, b) => a.title.localeCompare(b.title));
     setProjects(projects);
     setLoading(false);
