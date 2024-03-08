@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Head, Loading, NavForPages, SingleProject } from '../components';
-import Airtable from 'airtable-node';
+import AIRTABLE_DATA from '../data/airtableData';
 
 // COMPONENT
 const ProjectsPage = () => {
@@ -9,26 +9,8 @@ const ProjectsPage = () => {
   const [projects, setProjects] = useState();
   const [loading, setLoading] = useState(true);
 
-  const airtable = new Airtable({ apiKey: process.env.REACT_APP_API_KEY })
-    .base(process.env.REACT_APP_BASE_ID)
-    .table('projects');
-
-  const fetchProjects = async () => {
-    const { records } = await airtable.list({ maxRecords: 100 });
-    const projects = records.map((record) => {
-      const { id } = record;
-      const { title, stack, image, url, github } = record.fields;
-      const imgUrl = image[0].url;
-
-      return {
-        id,
-        title,
-        imgUrl,
-        github,
-        url,
-        stack,
-      };
-    });
+  const fetchProjects = () => {
+    const projects = AIRTABLE_DATA.projects;
     setAllProjects(projects);
     setCategories([
       'all',
