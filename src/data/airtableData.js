@@ -438,7 +438,7 @@ const AIRTABLE_DATA = {
       title: '2. Cinematica - MERN Application',
       desc: 'Cinematica is a feature-rich MERN (MongoDB, Express, React, Node.js) application that allows users to seamlessly track and manage the movies and shows they watch or plan to watch. With user account management, full CRUD (Create, Read, Update, Delete) functionality, and a user-friendly interface, Cinematica is your go-to tool for organizing your entertainment preferences.',
       imgUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/_yhwAeiRgGv5wLJwTRDlzw/tHSekzCkbfph_XrLAox3Mnul7VBPh_d-H6bLghgaioLB27j_zkZ2S6gyv31nyTISVEI9_Hr0GD17IDxHihRaZ5rwtBvRmNNXI1zUddSXjEthHtI5WMwPVOyho9kyG3FxyG48ILPaV88kqSgn5X82hw/Ub8c15_cn_lNo7bk0aevGlfVIFGZ6nV00hja9KfYdro',
+        'https://v5.airtableusercontent.com/v3/u/26/26/1710014400000/oGQQOKhQMBbFzrxaHaC5mw/2_8_3GE4ohpNpYrm2pzT6Ab-NjAvIGgUEH2H8uCeS2pdm_Offqv3gYhcHI3_nby-tW91B0giLltRsU4cv_cxQo25CY2do_P2gDcqHC1a76kTrlBCenabhpbjuUy0BtIwC2lbqNX_1ykqxs_CdAmLwA/CVYWKN5oIGfSFKkoFXv2nfb1EkI-tJqnpuAAo77eCwk',
       isClientWork: false,
       stack: ['ReactJS', 'nodejs', 'express', 'MongoDB', 'JWT', 'Swagger'],
       url: 'https://cinematica-mern.vercel.app/',
