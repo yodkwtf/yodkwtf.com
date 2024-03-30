@@ -489,7 +489,7 @@ const AIRTABLE_DATA = {
       iconUrl:
         'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798741/yodkwtf.com/resources/res_zmaixq.png',
       title: 'Download My Resume',
-      url: 'https://rxresu.me/48durgesh.kumar/full-stack-developer',
+      url: 'https://rxresu.me/yodkwtf/full-stack-developer',
       isLatest: true,
       hideField: false,
     },
