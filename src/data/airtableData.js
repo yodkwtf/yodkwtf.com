@@ -487,7 +487,7 @@ const AIRTABLE_DATA = {
       text: 'resume/cv',
       order: 0,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/8H6Q_l-yvcNKg8MEpvB1Yg/W54OP6E8sm8KQJLYQ2Lt0OiFuBcEtSgOTbX6mSWHyHQlc6ZdhRLff0YWDgO5qUfh-36SP-q1a6eKc5jUbSiUwU4Mp20NzlsSZj5ntvAExgTW8zefxnyg2KHqsVljq0TyvEMD_5h6MVeuEnp0KcsM8A/kRaQPQViZlAu5GeQWduP6NJ8OGW5VrWCWxXQDDWp0so',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798741/yodkwtf.com/resources/res_zmaixq.png',
       title: 'Download My Resume',
       url: 'https://rxresu.me/48durgesh.kumar/full-stack-developer',
       isLatest: true,
@@ -498,7 +498,7 @@ const AIRTABLE_DATA = {
       text: 'latest client work',
       order: 0,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/pNQc0U0GAZvOwGU4t0WO7w/JMzwNsq8DUhH2pQXDmT_dmQAAFRQYHWMUi_cForX4faC7-jvqjAXKUU4KqHQ35tGdhT16NR64bZzBV2QSilpVWhjfD4CGlb4DQ58MNt3Hj71PA3mLE1RfhDpZhKddJqPoVsRXhoxzaLDObByL22O-A/T1hKcRaJqaCvZrI4rwOIY7PWsSCuiuMUUQP98zvE_z8',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798739/yodkwtf.com/resources/tttt_lsduby.png',
       title: 'My Latest Freelance Project',
       url: 'https://devbysid.com/',
       isLatest: false,
@@ -509,7 +509,7 @@ const AIRTABLE_DATA = {
       text: 'Latest Project',
       order: 1,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/lFwBtZ12d8oP2snvCSKoYg/tHiu094h6CWu5QA_bkPv5PUL1JuB9-T9529p1o58oHSzsPV6Gk72jDGISz6s4dr4duCHvRhPdAMRjgR7Gs6e6aYciAEEOAHcIa6eYmY_-jMPpiECsycR6FaJ6r8ZMQ4HtoPgp52QB6aQ_tOEH2GEyQ/M66iIVbdmPZI11u8f8NgAEhUloeoW75swQMK6SZ8waE',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798735/yodkwtf.com/resources/icons8-code-48_o0k76k.png',
       title: 'Latest Personal Project',
       url: 'https://cinematica-mern.vercel.app/',
       isLatest: true,
@@ -520,7 +520,7 @@ const AIRTABLE_DATA = {
       text: 'my website',
       order: 2,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/RI8zVVnS5pgDbKf6ZkdLGQ/VlSKU3OIMzwAf3uElGcTdZHmD0J60BAjMH-84784J4wawSLSN_pDFdWuS8hwkp0UJUgmummk4m-MZSLVmgcn2_GkXKCi8HngmjEmXTrmFnvhGlscapvRFgBKs_EEqmyZRe4wnyiXEFG9GBucP7AYkkpIO687LIUfP-fJ65lUkq8/uknG19gqP8Y2y8IWy5vThfHkuoifsKXw9ulyeb7kpWk',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798734/yodkwtf.com/resources/icons8-website-48_kpx5cc.png',
       title: 'yodkwtf.com | My Portfolio',
       url: 'https://drive.google.com/file/d/1FPYiX-m3Mq6FXva-M0LTAkjkb7biIoOc/view?usp=share_link',
       isLatest: false,
@@ -531,7 +531,7 @@ const AIRTABLE_DATA = {
       text: 'Java Cheatsheet',
       order: 2,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/wxL6je96o20VFIU5EgfUzw/JNxOUtWsc6jR2V3cpYAOWWn4UmsrqSJGidELQDMCyNdRiPSuf3YORiwxN99zhrR0eXx33ZA23gM8oEmDCyR51TMxMSKSuTERNQT9XcRyrhzW2OaSGVQznETzj0OUWbxS-rcdREFhnA1lYmeEP9jytQ/hqV_rv6W9_Jd_bGivxMdERM8lub7ar4zQhJtTeQSlA4',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798733/yodkwtf.com/resources/java_jcjbfc.png',
       title: 'Java Fundamentals - Cheatsheeet (PDF)',
       url: 'https://drive.google.com/file/d/1FPYiX-m3Mq6FXva-M0LTAkjkb7biIoOc/view?usp=share_link',
       isLatest: false,
@@ -542,7 +542,7 @@ const AIRTABLE_DATA = {
       text: 'Angular Cheatsheet',
       order: 3,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/AU7XJS_A7QE5idN_H3pQkQ/1tshDEVPy-_ryFfMkUHsLN11AgtsbRQ7WLNvHWkViSgPO-XsVjqJHTeeYsc9Jpim9Q9UQIcSnJgevv7Emhsrkc3xqkVWi3js6uDDUCraEQpl-T_IrAgeRv8API5FTfC6cRqtKEt4diwZNnnqkk1T1Q/_h-nmVZau0sWizSs2JCfydjRebOJddmvMuHVEFv1g-g',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798732/yodkwtf.com/resources/icons8-angular_kuenja.svg',
       title: 'A Basic Guide to Angular',
       url: 'https://drive.google.com/file/d/1Pwv-O9mkwrszYUyrnOonjwcWROd5RXPw/view?usp=drive_link',
       isLatest: false,
@@ -553,8 +553,8 @@ const AIRTABLE_DATA = {
       text: 'Docker Guide',
       order: 3,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/nagmQvb0oEe5CcknyULzMg/meG7VgeJugR00RmzSfynfFFWwAXdaPZ8Q4fw8begpPAzZgIW2k44imz4jS3qCOiVuUXD7gWCReiONeUlzj1EvgbkbwEQTdboR5qByk4FBTb73BKzb5sZDo5TpW-eaoc019jtxU8-Vqn_mWDrDcoMcQ/eDUbaxI3hUrPqm5O9enLu69URNVYq-hRdxJjmFanlrE',
-      title: 'The Complete Introduction to Dokcer',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798742/yodkwtf.com/resources/icons8-docker-48_pnmbc5.png',
+      title: 'The Complete Introduction to Docker',
       url: 'https://drive.google.com/file/d/1QnHtPVg7yn-eGyuPYhayhujBYWu-gulV/view?usp=drive_link',
       isLatest: true,
       hideField: false,
@@ -564,7 +564,7 @@ const AIRTABLE_DATA = {
       text: 'vscode tutorial series',
       order: 4,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/-4CvppP3zhD2WBnwyvPj2w/2f-8--nO9ljnySwyQvm2XEPcw2TdlmcBglyEGZgqKpYQzq_YNXu7UBS6OECilmJRGaasONNGTxk22MxZckt2NhFG_ltTXtTFtPpiYCSHpk9-bB9-pXQAxZf1KK5tenhuqi_O6dS74NfUbSf64wrheCwaKRAj2zMhhEvKOl03mK4/yt7RgXwFAWFMUzTtwKdvgX9PLX5bAIViLsLYEtuMsIo',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798731/yodkwtf.com/resources/icons8-visual-studio-code-2019_sdncij.svg',
       title: 'My VSCode Crash Course on YouTube',
       url: 'https://youtube.com/playlist?list=PLG9-T0wrWJ8BUFxog71QQW-NnAHrPWZ4o',
       isLatest: false,
@@ -575,7 +575,7 @@ const AIRTABLE_DATA = {
       text: 'git commands cheatsheet',
       order: 5,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/0dQcAqQnTw8c9QaeUXwRjg/hneNqAoSpMuT94bf1xxVLkr3UOUrSVAEm1MmosDyLucOkIH0VDHeCCCYmSknxN6UplPa4KPKEXjEDEqxsd6OJpOY8kXqEXuQI78NwqKa2sirf2eMsTxI4GPDJtQzf2jOpX2qHhot8woDkt0czYEeVg/fBV5WLHOtsGvMW8o8_xby0ZP17CO3391Zb6qwyLVeog',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798730/yodkwtf.com/resources/icons8-git-48_ru710h.png',
       title: 'Git Commands - Cheatsheet',
       url: 'https://drive.google.com/file/d/1Hr2bzduRZXtDO5jiYDcBeyqIa8xgjefI/view?usp=sharing',
       isLatest: false,
@@ -586,7 +586,7 @@ const AIRTABLE_DATA = {
       text: 'youtube channel',
       order: 6,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/IJCFq916iG9U_kzXUrQEzg/WmIhJ5DhOLDNWOmKr2Ny6AohCGF8FZZcgS9c8OmKsxWlgXN9vCjhHrMgwQQuTQAUZ0bdUZaYCBEyRHrqktZHUYyMZgUOh8fiN75k3cafobK_3cv-v36RaBkjb3AiElbx3alD4mmQg40R74kEUGXaAg/H9h0uDP_Sbfv9K3X09UB56T1eEsQvB9ndNDEVCS6-5A',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798728/yodkwtf.com/resources/youtube_jcgssn.png',
       title: 'Yodkwtf Academy | My YouTube Channel',
       url: 'https://youtube.com/c/yodkwtf',
       isLatest: false,
@@ -597,7 +597,7 @@ const AIRTABLE_DATA = {
       text: 'my typescript cheatsheet',
       order: 7,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/qf9I8rVyE_2KM53bn8RyTg/6mhI0isWR6lGKwJhtlOoBpKctiq09CjI2mwpRM0LfJ0jvAVVcwPRSjILGJAzNZQdedJ85JrrtAhJnmy1v14CB_ldvBggeC4fMnw63SYIRQX34UutzS8Xus9cjAbzqmSZifmtqLJXp8zur2QFatGtGg/9FfdPg2dYLwP6OsaQdgmSUBBEwlZJxubJMiZNcEX_2c',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798728/yodkwtf.com/resources/ts_uvmei4.png',
       title: 'TypeScript Cheatsheet - PDF',
       url: 'https://drive.google.com/file/d/1H-Sn67-XpCIWr-nGPQpk7lm0JAuXrRBB/view?usp=sharing',
       isLatest: false,
@@ -608,7 +608,7 @@ const AIRTABLE_DATA = {
       text: 'download my python cheatsheet',
       order: 8,
       iconUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1709942400000/ae-dNC0ObP1_A-sL06mUzQ/9ligGd2zyF6puvY7bfhQPBBWnKlouuPy0Sjj8k3XvkIh-bYVNvswLErQaqeRCTy_KYfdP3pixq0px8QM8CQ0_ZpluFMyW2H37hETL0aQjVgD6eJ10lL9FojM_1pJstpx1I7t1iHR-31HONmJHB_QUQ/cwnprxGSsYchM1wdRVIwYHJu5j1cNmUzQehQhoVpXQ0',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711798728/yodkwtf.com/resources/python_rd8slp.png',
       title: 'Python Fundamentals - Cheatsheet (PDF)',
       url: 'https://drive.google.com/file/d/1KSPASGV9Nz1rZuVT4wXIfEcPkClNuu1s/view',
       isLatest: false,
