@@ -438,7 +438,7 @@ const AIRTABLE_DATA = {
       title: '2. Cinematica - MERN Application',
       desc: 'Cinematica is a feature-rich MERN (MongoDB, Express, React, Node.js) application that allows users to seamlessly track and manage the movies and shows they watch or plan to watch. With user account management, full CRUD (Create, Read, Update, Delete) functionality, and a user-friendly interface, Cinematica is your go-to tool for organizing your entertainment preferences.',
       imgUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1710014400000/oGQQOKhQMBbFzrxaHaC5mw/2_8_3GE4ohpNpYrm2pzT6Ab-NjAvIGgUEH2H8uCeS2pdm_Offqv3gYhcHI3_nby-tW91B0giLltRsU4cv_cxQo25CY2do_P2gDcqHC1a76kTrlBCenabhpbjuUy0BtIwC2lbqNX_1ykqxs_CdAmLwA/CVYWKN5oIGfSFKkoFXv2nfb1EkI-tJqnpuAAo77eCwk',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711799220/yodkwtf.com/recent-works/cinematica_h8vpjv.png',
       isClientWork: false,
       stack: ['ReactJS', 'nodejs', 'express', 'MongoDB', 'JWT', 'Swagger'],
       url: 'https://cinematica-mern.vercel.app/',
@@ -449,7 +449,7 @@ const AIRTABLE_DATA = {
       title: '3. Developer Portfolio | Freelance Project',
       desc: 'A portfolio website of a game developer built with Gatsby and Contentful headless CMS. GraphQL endpoints are used to retrieve all of the data. The website features modern animations created with the framer motion library. It also includes an advanced SEO component with social media cards and open graph meta tags. The single project pages are generated programmatically by using the file system route API approach.\n\nThe wireframe for the website was created completely from scratch in Figma.',
       imgUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1710014400000/yyBFNXtNJpjXhB-YddK2jg/2CFcsVq36W1J2jqwIa1RwQ_f0CCgKnp-lBel5ZL4_UJgUizX5_k4r7NqT0pWU-KrsXh9B9CoiptWAjCSOkLcPeDYdUt9YEQtQ5yzo9ANjzsuoWB1nEFBjvT3zYqI8QV42Sv2kOBAgIx3domRVuYx1Q/RH4Krz6Zq1Y2_Mtag6CSjI9upOVsOO8D5kWCK-aOglM',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711799221/yodkwtf.com/recent-works/Screenshot_584_-min_bgxfxr.jpg',
       isClientWork: true,
       stack: [
         'Gatsby',
@@ -466,7 +466,7 @@ const AIRTABLE_DATA = {
       title: '1. Nexus - Chat Application',
       desc: 'Nexus Chat Application is a modern chat application built with the latest technologies, including Next.js, TypeScript, Tailwind CSS, MongoDB, Prisma, and NextAuth. It features real-time chatting, group creation, profile customization, online status tracking, imgUrl uploads, and various authentication methods, including email and social logins with Github, Google, and Twitter.',
       imgUrl:
-        'https://v5.airtableusercontent.com/v3/u/26/26/1710014400000/VegZv4kKrP0yyF_4cMWAaw/1aAXWt6Yosa0COqgEpaD0undAocmjZ-HpLVNzIvaRkY3psSZS-r4vXTmIAMjtLpYgqUHjzd1G64uWMzGovdkmv_xU1-yAjZiy6clilB2ADt-rTsX-1_LrvvVs9Qya0Ypx5ZbixmJhZ8mDZZkqrFOIg/2P1N4CQmaSRd8gz4ux4mjL729QB6m2emHygSfII16bE',
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1711799221/yodkwtf.com/recent-works/nexus_pkc2lq.png',
       isClientWork: true,
       stack: [
         'Nextjs',
