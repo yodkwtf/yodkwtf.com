@@ -467,7 +467,7 @@ const AIRTABLE_DATA = {
       desc: 'Nexus Chat Application is a modern chat application built with the latest technologies, including Next.js, TypeScript, Tailwind CSS, MongoDB, Prisma, and NextAuth. It features real-time chatting, group creation, profile customization, online status tracking, imgUrl uploads, and various authentication methods, including email and social logins with Github, Google, and Twitter.',
       imgUrl:
         'https://res.cloudinary.com/dds18bzdy/image/upload/v1711799221/yodkwtf.com/recent-works/nexus_pkc2lq.png',
-      isClientWork: true,
+      isClientWork: false,
       stack: [
         'Nextjs',
         'Typescript',
