@@ -11,7 +11,7 @@ export const socialIcons = [
   {
     id: 1,
     icon: gmail,
-    url: 'mailto:48durgesh.kumar@gmail.com',
+    url: 'mailto:48durgesh.chaudhary@gmail.com',
     title: 'Gmail',
   },
   {
