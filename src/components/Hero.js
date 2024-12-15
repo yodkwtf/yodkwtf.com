@@ -33,7 +33,7 @@ export const Hero = () => {
                 projects <FaCode className="fa" />
               </a>
               <a
-                href="mailto:48durgesh.kumar@gmail.com"
+                href="mailto:48durgesh.chaudhary@gmail.com"
                 className="btn hero-btn"
                 title="Email Me Now"
               >

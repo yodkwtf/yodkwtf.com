@@ -26,8 +26,8 @@ const ContactPage = () => {
               get back to you within 24 hours.
               <br />
               Alternatively, you can also drop an email at{' '}
-              <a href="mailto:48durgesh.kumar@gmail.com" title="Email Me">
-                48durgesh.kumar@gmail.com
+              <a href="mailto:48durgesh.chaudhary@gmail.com" title="Email Me">
+                48durgesh.chaudhary@gmail.com
               </a>
             </p>
           </div>
