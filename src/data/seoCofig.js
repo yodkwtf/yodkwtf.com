@@ -1,8 +1,8 @@
 const seoConfig = {
   defaultTitle:
-    'Durgesh Chaudhary - Full Stack Developer (React.js and other JavaScript Frameworks)',
+    'Durgesh Chaudhary - SDE 2 @ Konrad Group | Full Stack Developer',
   defaultDescription:
-    'Full-Stack Web Developer with 2+ years of experience. Durgesh occasionally works as a freelance web developer, delivering highly optimized websites to his clients and assisting them in digitally scaling their businesses. He also runs a YouTube channel, Yodkwtf Academy, where he posts weekly web development tutorials.',
+    'Full Stack Developer with 2.5+ years of experience and a portfolio of 120+ projects, including web apps, CRUD-based blogs, e-commerce platforms, landing pages, portfolio websites, and a dozen production-level client websites. I am passionate about building scalable applications and always looking for new ways to learn and grow (mostly professionally, but also as a Rocket League Player).',
   siteUrl: 'https://yodkwtf.com',
   defaultImage: '/covers/home.png',
   keywords:
