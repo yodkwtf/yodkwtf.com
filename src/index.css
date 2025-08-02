@@ -833,20 +833,25 @@ ABOUT
 .links-page-img {
   margin: 0 auto;
   max-width: 300px;
-  border-radius: 50%;
   overflow: hidden;
   padding: 0.1rem;
   border: 3px solid var(--clr-primary);
 }
+.about-img {
+  border-radius: 0.5rem;
+  max-height: 35rem;
+}
 .links-page-img {
   min-height: 134.8px;
+  border-radius: 50%;
 }
 .about-image,
 .links-page-image {
-  border-radius: 50%;
   width: 100%;
-  object-fit: contain;
-  width: 15rem;
+  object-fit: cover;
+}
+.links-page-image {
+  border-radius: 50%;
 }
 
 .about-info {
@@ -856,6 +861,7 @@ ABOUT
 .about-info a {
   color: var(--clr-primary);
   text-decoration: underline;
+  font-weight: bold;
 }
 
 @media screen and (min-width: 992px) {

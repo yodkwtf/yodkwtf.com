@@ -129,7 +129,7 @@ const AIRTABLE_DATA = {
       stack: 'HTML & CSS',
       imgUrl:
         'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800501/yodkwtf.com/projects/fb-card_d1golz.webp',
-      url: 'https://facebookcard-dk.netlify.app/',
+      url: 'https://fbcard-dk.netlify.app/',
       github:
         'https://github.com/yodkwtf/html-css-projects/tree/main/06)%20Facebook%20Card',
     },
@@ -430,6 +430,42 @@ const AIRTABLE_DATA = {
       url: 'https://github.com/yodkwtf/joblink-react-native',
       github: 'https://github.com/yodkwtf/joblink-react-native',
     },
+    {
+      id: 47,
+      title: 'The Astro Tech Blog',
+      stack: 'Others',
+      imgUrl:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175462/yodkwtf.com/projects/og-image-min_kmmsni.png',
+      url: 'https://thetechblog-dk.netlify.app/',
+      github: 'https://github.com/yodkwtf/the-astro-tech-blog',
+    },
+    {
+      id: 48,
+      title: 'EdVault - Online Marketplace',
+      stack: 'Nextjs',
+      imgUrl:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175463/yodkwtf.com/projects/thumbnail-min_hazyzb.jpg',
+      url: 'https://ed-vault.up.railway.app/',
+      github: 'https://github.com/yodkwtf/ed-vault-nextjs',
+    },
+    {
+      id: 49,
+      title: 'CaeDzire - Car Simulator',
+      stack: 'Javascript',
+      imgUrl:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175463/yodkwtf.com/projects/cover_gz8dqs.jpg',
+      url: 'https://cardzire-dk.netlify.app/',
+      github: 'https://github.com/yodkwtf/car-dzire-javascript',
+    },
+    {
+      id: 50,
+      title: 'GigsVue',
+      stack: 'Others',
+      imgUrl:
+        'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175463/yodkwtf.com/projects/cover-min_lj5yrz.png',
+      url: 'https://gigsvue.netlify.app/',
+      github: 'https://github.com/yodkwtf/gigsvue-with-vuejs',
+    },
   ],
 
   featuredProjects: [
@@ -440,13 +476,13 @@ const AIRTABLE_DATA = {
       imgUrl:
         'https://res.cloudinary.com/dds18bzdy/image/upload/v1711799220/yodkwtf.com/recent-works/cinematica_h8vpjv.png',
       isClientWork: false,
-      stack: ['ReactJS', 'nodejs', 'express', 'MongoDB', 'JWT', 'Swagger'],
+      stack: ['Reactjs', 'nodejs', 'express', 'MongoDB', 'JWT', 'Swagger'],
       url: 'https://cinematica-mern.vercel.app/',
       github: 'https://github.com/yodkwtf/cinematica-mern',
     },
     {
       id: 2,
-      title: '3. Developer Portfolio | Freelance Project',
+      title: '1. Developer Portfolio | Freelance Project',
       desc: 'A portfolio website of a game developer built with Gatsby and Contentful headless CMS. GraphQL endpoints are used to retrieve all of the data. The website features modern animations created with the framer motion library. It also includes an advanced SEO component with social media cards and open graph meta tags. The single project pages are generated programmatically by using the file system route API approach.\n\nThe wireframe for the website was created completely from scratch in Figma.',
       imgUrl:
         'https://res.cloudinary.com/dds18bzdy/image/upload/v1711799221/yodkwtf.com/recent-works/Screenshot_584_-min_bgxfxr.jpg',
@@ -463,7 +499,7 @@ const AIRTABLE_DATA = {
     },
     {
       id: 3,
-      title: '1. Nexus - Chat Application',
+      title: '3. Nexus - Chat Application',
       desc: 'Nexus Chat Application is a modern chat application built with the latest technologies, including Next.js, TypeScript, Tailwind CSS, MongoDB, Prisma, and NextAuth. It features real-time chatting, group creation, profile customization, online status tracking, imgUrl uploads, and various authentication methods, including email and social logins with Github, Google, and Twitter.',
       imgUrl:
         'https://res.cloudinary.com/dds18bzdy/image/upload/v1711799221/yodkwtf.com/recent-works/nexus_pkc2lq.png',

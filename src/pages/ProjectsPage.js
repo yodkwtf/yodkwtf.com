@@ -51,7 +51,7 @@ const ProjectsPage = () => {
   return (
     <>
       <Head
-        title={'Durgesh Chaudhary - Full Stack Developer | Projects'}
+        title={'Durgesh Chaudhary - Software Developer | Projects'}
         description={
           'This is a collection of some of my favorite projects. Built with a wide variety of tech including React.js, Next.js, Javascript, TypeScript, Nodejs, MongoDB, Git & GitHub, MERN stack, Figma, GraphQL, Gatsby, Redux, HTML, CSS & its frameworks, SEO Fundamentals, Headless CMSs, Python.'
         }

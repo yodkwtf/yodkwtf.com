@@ -11,7 +11,11 @@ import gatsby from '../images/skills/gatsby.svg';
 import git from '../images/skills/git.svg';
 import figma from '../images/skills/figma.svg';
 import nextjs from '../images/skills/nextjs.svg';
-// import typescript from '../images/skills/typescript.svg';
+import typescript from '../images/skills/typescript.svg';
+import mysql from '../images/skills/mysql.svg';
+import postgres from '../images/skills/postgres.svg';
+import graphql from '../images/skills/graphql.svg';
+import tailwindCss from '../images/skills/tailwind-css.svg';
 
 // ###########
 // skills
@@ -78,10 +82,29 @@ export const skills = [
     title: 'Python',
     icon: python,
   },
-
-  // {
-  //   id: 13,
-  //   title: 'TypeScript',
-  //   icon: typescript,
-  // },
+  {
+    id: 13,
+    title: 'TypeScript',
+    icon: typescript,
+  },
+  {
+    id: 14,
+    title: 'MySQL',
+    icon: mysql,
+  },
+  {
+    id: 15,
+    title: 'Postgres',
+    icon: postgres,
+  },
+  {
+    id: 16,
+    title: 'GraphQL',
+    icon: graphql,
+  },
+  {
+    id: 17,
+    title: 'Tailwind CSS',
+    icon: tailwindCss,
+  },
 ];

@@ -1,18 +1,8 @@
 import React from 'react';
-import aboutImg from '../images/about/about-img.PNG';
+import aboutImg from '../images/about/about.jpg';
 import { Skills } from './Skills';
 
 export const About = () => {
-  // state
-  const [age, setAge] = React.useState(20);
-
-  React.useEffect(() => {
-    setAge(
-      Math.floor((new Date() - new Date('2001-08-04').getTime()) / 3.15576e10)
-    );
-  }, []);
-
-  // jsx
   return (
     <section id="about" className="section about">
       <div className="section-title">
@@ -38,32 +28,25 @@ export const About = () => {
         <article className="about-info">
           <p>
             {/* text */}
-            I'm <strong>Durgesh</strong>, a <span>{age}</span> year old
-            <strong> Full Stack Developer</strong> with 2+ years of experience.
-            I work with Javascript and its endless list of frameworks, primarily
-            with <strong>React.js</strong>, <strong>Next.js</strong>,{' '}
-            <strong>Nodejs</strong>, and <strong>Gatsby</strong>.
+            I'm <strong>Durgesh</strong>, a{' '}
+            <strong> Full Stack Developer</strong> with over{' '}
+            <strong>2.5 years of professional experience</strong> and a
+            portfolio of <strong>120+ projects</strong>, including web apps,
+            CRUD-based blogs, e-commerce platforms, landing pages, portfolio
+            websites, and a dozen production-level client websites. I have
+            extensive expertise in <strong>JavaScript</strong> and its
+            frameworks—especially <strong>React.js</strong> and{' '}
+            <strong>Node.js</strong>.
             <br />
             <br />
-            Occasionally, I work as a <strong>
-              Freelance Web Developer
-            </strong>{' '}
-            where I deliver highly optimized websites to my clients and help
-            them scale their businesses digitally. I also run a&nbsp;&nbsp;
-            <a
-              href="https://youtube.com/c/yodkwtf"
-              target="_blank"
-              rel="noreferrer"
-              title="Yodkwtf Academy - My YouTube Channel"
-            >
-              YouTube channel
-            </a>
-            &nbsp; where I post web dev tutorials.
-            <br />
-            <br />
-            When I'm not coding, I love to binge-watch pop culture stuff. I also
-            love to play guitar and create sketches. Even though I'm not very
-            good, it does help my creative side when I'm building websites.
+            Outside of work, I'm a massive movie geek—from thrillers to
+            tearjerkers to “so-bad-they're-good” action flicks, I probably have
+            a Letterboxd review for it. When I'm not bingeing films or arguing
+            over IMDb ratings, you'll catch me watching cricket, cruising
+            through Los Santos in GTA V, or missing open goals in Rocket League
+            (blame lag, obviously). <br /> <br />
+            If you ever want to talk tech, cricket stats, F**** C***, or whether
+            Trevor from GTA is misunderstood—I'm your guy.
           </p>
 
           {/* stack */}

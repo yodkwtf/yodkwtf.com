@@ -6,7 +6,7 @@ const ContactPage = () => {
   return (
     <>
       <Head
-        title={'Durgesh Chaudhary - Full Stack Developer | Contact'}
+        title={'Durgesh Chaudhary - Software Developer | Contact'}
         description={`Please find my contact details below. Find me on any of the socials mentioned or send me a direct message via the form below. Alternatively, you can also send me an email and I'll get back to you within 24 hours.`}
       />
 
