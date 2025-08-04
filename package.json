@@ -52,6 +52,7 @@
     "url": "https://github.com/yodkwtf/yodkwtf.com/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
     "react-snap": "^1.23.0"
   }
 }
