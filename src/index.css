@@ -858,6 +858,10 @@ ABOUT
   text-align: center;
 }
 
+.about-info p {
+  text-align: justify;
+}
+
 .about-info a {
   color: var(--clr-primary);
   text-decoration: underline;
@@ -875,9 +879,6 @@ ABOUT
     padding: 1.5rem 0 1.5rem 3rem;
     max-width: 42rem;
     justify-self: center;
-  }
-  .about-info p {
-    text-align: left;
   }
 
   .about-img {
@@ -947,6 +948,7 @@ PROJECTS
 .project-text {
   margin: 0 auto;
   display: none;
+  text-align: justify;
 }
 .project-text.show-project-text {
   display: block;
