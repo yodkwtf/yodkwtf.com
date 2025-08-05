@@ -45,7 +45,7 @@ export const About = () => {
             over IMDb ratings, you'll catch me watching cricket, cruising
             through Los Santos in GTA V, or missing open goals in Rocket League
             (blame lag, obviously). <br /> <br />
-            If you ever want to talk tech, cricket stats, F**** C***, or whether
+            If you ever want to talk tech, cricket stats, DCEU, or whether
             Trevor from GTA is misunderstood—I'm your guy.
           </p>
 
