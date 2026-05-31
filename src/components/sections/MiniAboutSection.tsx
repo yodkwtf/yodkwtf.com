@@ -2,11 +2,29 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Coffee, Code2 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/AnimateIn";
 import { siteConfig } from "@/config/site";
+import { getAboutPage } from "@/sanity/lib/queries";
 
-export function MiniAboutSection() {
+const FALLBACK_BIO = [
+  `I'm a full-stack engineer with 5+ years of experience crafting web applications that are fast, accessible, and a joy to use. I believe great software comes from caring equally about the user experience and the code quality underneath it.`,
+  `When I'm not building, I'm writing about web development, contributing to open source, or exploring the latest in the JavaScript ecosystem.`,
+];
+
+export async function MiniAboutSection() {
+  let bio: string[] = FALLBACK_BIO;
+
+  try {
+    const about = await getAboutPage();
+    if (about?.bio?.length) {
+      const extracted = (about.bio as { children?: { text: string }[] }[])
+        .map((block) => block.children?.map((c) => c.text).join("") ?? "")
+        .filter(Boolean);
+      if (extracted.length) bio = extracted.slice(0, 2);
+    }
+  } catch {}
+
   return (
     <section className="py-20 px-6 border-t border-border">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: text */}
           <AnimateIn>
@@ -18,16 +36,12 @@ export function MiniAboutSection() {
                 Building at the intersection of{" "}
                 <em className="not-italic text-gradient">engineering and design</em>.
               </h2>
-              <p className="text-ink-muted leading-relaxed">
-                I&apos;m a full-stack engineer with 5+ years of experience crafting web applications
-                that are fast, accessible, and a joy to use. I believe great software comes from
-                caring equally about the user experience and the code quality underneath it.
-              </p>
-              <p className="text-ink-muted leading-relaxed">
-                When I&apos;m not building, I&apos;m writing about web development, contributing to
-                open source, or exploring the latest in the JavaScript ecosystem.
-              </p>
-              <div className="flex items-center gap-4 text-sm text-ink-muted pt-2">
+              {bio.map((para, i) => (
+                <p key={i} className="text-ink-muted leading-relaxed">
+                  {para}
+                </p>
+              ))}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-ink-muted pt-2">
                 <span className="flex items-center gap-1.5">
                   <MapPin size={14} className="text-accent-500" />
                   {siteConfig.location}

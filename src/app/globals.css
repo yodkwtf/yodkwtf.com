@@ -153,6 +153,13 @@ body {
   border: 1px solid var(--border);
 }
 
+/* Opaque variant for nav when scrolled — prevents text bleed-through */
+.glass-nav {
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
 /* ─── Animated underline ────────────────────────────────────────────────── */
 .underline-anim {
   position: relative;
@@ -266,13 +273,39 @@ body {
 .prose blockquote p { margin: 0; }
 
 .prose table {
-  border-collapse: collapse;
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-spacing: 0;
+  border-collapse: separate;
+  background: var(--bg-card);
   font-size: 0.9em;
 }
 
 .prose th {
   background: var(--bg-subtle);
   font-weight: 600;
+  color: var(--text);
+}
+
+.prose th,
+.prose td {
+  min-width: 9rem;
+  border-right: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.75rem 1rem;
+  vertical-align: top;
+}
+
+.prose th:last-child,
+.prose td:last-child {
+  border-right: 0;
+}
+
+.prose tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 /* ─── Code block theming (rehype-pretty-code output) ────────────────────── */
@@ -307,7 +340,7 @@ pre[data-language] span[data-highlighted-line] {
 .tag-pill {
   display: inline-flex;
   align-items: center;
-  padding: 0.2em 0.65em;
+  padding: 0.25em 0.85em;
   font-size: 0.75rem;
   font-family: 'DM Mono', monospace;
   font-weight: 400;
@@ -342,11 +375,11 @@ pre[data-language] span[data-highlighted-line] {
   outline: none;
 }
 .btn-primary {
-  background: var(--accent-500);
+  background: var(--accent-600);
   color: #fff;
 }
 .btn-primary:hover {
-  background: var(--accent-600);
+  background: var(--accent-700);
   transform: translateY(-1px);
   box-shadow: 0 8px 24px var(--glow-strong);
 }

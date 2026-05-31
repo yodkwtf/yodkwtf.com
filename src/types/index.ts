@@ -81,6 +81,7 @@ export interface BlogFrontmatter {
   description: string;
   publishedAt: string;
   updatedAt?: string;
+  category?: string;
   tags: string[];
   coverImage?: string;
   featured?: boolean;

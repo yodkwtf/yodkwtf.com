@@ -1,0 +1,169 @@
+---
+title: 'MDX Components Showcase'
+description: 'A sample post that exercises headings, prose, media, callouts, code blocks, tables, lists, and custom MDX components.'
+publishedAt: '2026-06-01'
+category: 'Reference'
+tags: ['MDX', 'Design', 'Reference']
+featured: false
+coverImage: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80'
+youtubeId: 'dQw4w9WgXcQ'
+draft: false
+---
+
+This page is a kitchen-sink sample for checking blog typography and MDX component styling. It includes inline code like `const enabled = true`, highlighted code fences, tables, lists, images, callouts, and embedded media.
+
+## Heading level two
+
+Use regular paragraphs for comfortable long-form reading. Links should blend into prose, like [the Next.js website](https://nextjs.org), while still being visible enough to scan.
+
+### Heading level three
+
+This section checks bold, italic, and inline code styles in the same paragraph. You can write **bold text**, _italic text_, and `inlineCode()` without breaking line height.
+
+#### Heading level four
+
+Smaller headings should still feel connected to the content below them.
+
+## Lists
+
+Unordered lists:
+
+- Fast page loads
+- Accessible interactions
+- Clear content hierarchy
+- Responsive layouts
+
+Ordered lists:
+
+1. Draft the content.
+2. Add metadata and media.
+3. Verify the rendered page.
+4. Ship the post.
+
+Nested lists:
+
+- Frontend
+  - React
+  - Next.js
+  - Tailwind CSS
+- Backend
+  - Node.js
+  - PostgreSQL
+  - Redis
+
+Task lists:
+
+- [x] Render markdown content
+- [x] Render custom components
+- [ ] Replace sample media before publishing
+
+## Blockquote
+
+> Good documentation is not just complete. It is shaped so the reader can keep moving.
+
+## Callouts
+
+<Callout type="info" title="Information">
+  Use info callouts for neutral context, caveats, or extra notes.
+</Callout>
+
+<Callout type="tip" title="Tip">
+  Use tip callouts for shortcuts and recommendations.
+</Callout>
+
+<Callout type="warning" title="Warning">
+  Use warning callouts when a step can cause confusion or unexpected behavior.
+</Callout>
+
+<Callout type="error" title="Error">
+  Use error callouts for failure states, broken assumptions, or things to avoid.
+</Callout>
+
+## Code
+
+Inline code should look good inside prose: `npm run build`, `useEffect`, and `src/app/page.tsx`.
+
+Code with a filename should show the filename in the code block header:
+
+```tsx
+// filename: app/components/StatusBadge.tsx
+export function StatusBadge({ active }: { active: boolean }) {
+  return (
+    <span className={active ? 'text-accent-500' : 'text-ink-muted'}>
+      {active ? 'Active' : 'Paused'}
+    </span>
+  );
+}
+```
+
+Code without a filename should still get the copy button:
+
+```ts
+const posts = ['design-notes', 'release-log', 'mdx-showcase'];
+
+const slugs = posts.map((post) => `/blog/${post}`);
+```
+
+Plain multiline code:
+
+```
+content/
+  blogs/
+    mdx-components-showcase.mdx
+src/
+  components/
+    mdx/
+      MDXComponents.tsx
+```
+
+## Table
+
+| Component   | Purpose                          | Notes                                     |
+| ----------- | -------------------------------- | ----------------------------------------- |
+| `Callout`   | Highlight contextual content     | Supports info, tip, warning, and error    |
+| `BlogImage` | Render a single responsive image | Supports captions                         |
+| `ImageGrid` | Render multiple images           | Useful for comparisons                    |
+| `Details`   | Hide optional detail             | Uses native disclosure behavior           |
+| `YouTube`   | Embed a video                    | Also supported by `youtubeId` frontmatter |
+
+## Media
+
+<BlogImage
+  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80"
+  alt="Laptop showing code on a desk"
+  caption="A single image with a caption."
+/>
+
+<ImageGrid>
+  <BlogImage
+    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80"
+    alt="Workspace with laptop"
+    caption="Workspace"
+  />
+  <BlogImage
+    src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1000&q=80"
+    alt="Team collaborating at a table"
+    caption="Collaboration"
+  />
+</ImageGrid>
+
+## Embedded video component
+
+<YouTube id="dQw4w9WgXcQ" />
+
+## Details
+
+<Details summary="Open for extra implementation notes">
+  This content is hidden by default. It is useful for optional context,
+  references, spoilers, or longer explanations.
+</Details>
+
+## Horizontal rule
+
+---
+
+The rule above checks markdown separators inside blog prose.
+
+## Final paragraph
+
+This sample post should make it easy to inspect the single blog page across desktop and mobile without inventing content each time.

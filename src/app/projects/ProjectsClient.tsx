@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useMemo } from "react";
-import { Search, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ProjectCard } from "@/components/ui/ProjectCard";
-import { TagPill } from "@/components/ui/TagPill";
-import type { Project } from "@/types";
+import { useState, useMemo } from 'react';
+import { Search, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ProjectCard } from '@/components/ui/ProjectCard';
+import { TagPill } from '@/components/ui/TagPill';
+import type { Project } from '@/types';
 
-const ALL = "All";
+const ALL = 'All';
 
 export function ProjectsClient({ projects }: { projects: Project[] }) {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [activeTag, setActiveTag] = useState(ALL);
 
   const allTags = useMemo(() => {
@@ -33,40 +33,46 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
   }, [projects, activeTag, search]);
 
   return (
-    <div className="space-y-8">
-      {/* Controls */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-1 max-w-sm">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint" />
-          <input
-            type="text"
-            placeholder="Search projects…"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-9 py-2.5 rounded-lg border border-border bg-surface-card text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent-500 transition-colors"
+    <div className="space-y-6">
+      {/* Search — full width */}
+      <div className="relative">
+        <Search
+          size={15}
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint"
+        />
+        <input
+          type="text"
+          placeholder="Search by name, tech, or tag…"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full pl-9 pr-9 py-3 rounded-xl border border-border bg-surface-card text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent-500 transition-colors"
+        />
+        {search && (
+          <button
+            onClick={() => setSearch('')}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-faint hover:text-ink transition-colors"
+          >
+            <X size={14} />
+          </button>
+        )}
+      </div>
+
+      {/* Tag filters — separate row, wrap freely */}
+      <div className="flex flex-wrap gap-2">
+        {allTags.map((tag) => (
+          <TagPill
+            key={tag}
+            label={tag}
+            active={activeTag === tag}
+            onClick={() => setActiveTag(tag)}
           />
-          {search && (
-            <button onClick={() => setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-faint hover:text-ink transition-colors">
-              <X size={14} />
-            </button>
-          )}
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {allTags.map((tag) => (
-            <TagPill
-              key={tag}
-              label={tag}
-              active={activeTag === tag}
-              onClick={() => setActiveTag(tag)}
-            />
-          ))}
-        </div>
+        ))}
       </div>
 
       {/* Count */}
       <p className="text-xs font-mono text-ink-faint">
-        {filtered.length} project{filtered.length !== 1 ? "s" : ""}
-        {activeTag !== ALL && ` in "${activeTag}"`}
+        {filtered.length} project{filtered.length !== 1 ? 's' : ''}
+        {activeTag !== ALL && ` tagged "${activeTag}"`}
         {search && ` matching "${search}"`}
       </p>
 
@@ -75,7 +81,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
         {filtered.length > 0 ? (
           <motion.div
             layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-7 xl:gap-x-10"
           >
             {filtered.map((project) => (
               <motion.div
@@ -96,10 +102,17 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
             animate={{ opacity: 1 }}
             className="py-24 text-center"
           >
-            <p className="font-display text-2xl text-ink-muted mb-2">No projects found.</p>
-            <p className="text-sm text-ink-faint">Try a different search or filter.</p>
+            <p className="font-display text-2xl text-ink-muted mb-2">
+              No projects found.
+            </p>
+            <p className="text-sm text-ink-faint">
+              Try a different search or filter.
+            </p>
             <button
-              onClick={() => { setSearch(""); setActiveTag(ALL); }}
+              onClick={() => {
+                setSearch('');
+                setActiveTag(ALL);
+              }}
               className="btn btn-outline mt-4 text-sm"
             >
               Clear filters

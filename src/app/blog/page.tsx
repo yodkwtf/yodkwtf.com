@@ -62,7 +62,7 @@ export default function BlogPage() {
 
   return (
     <div className="pt-28 pb-24 px-6">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-7xl">
         <AnimateIn className="mb-12 max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">Writing</span>
           <h1 className="font-display text-5xl md:text-6xl text-ink mt-3 mb-4 leading-tight">Blog.</h1>

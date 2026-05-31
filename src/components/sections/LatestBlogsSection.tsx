@@ -12,7 +12,7 @@ export function LatestBlogsSection() {
 
   return (
     <section className="py-24 px-6">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <div className="flex items-end justify-between mb-12">
           <SectionHeader
             label="Writing"
@@ -25,7 +25,7 @@ export function LatestBlogsSection() {
           </Link>
         </div>
 
-        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <StaggerContainer className="flex flex-col gap-10 max-w-3xl mx-auto">
           {posts.map((post) => (
             <StaggerItem key={post.slug}>
               <BlogCard post={post} className="h-full" />

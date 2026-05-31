@@ -1,0 +1,71 @@
+'use client';
+
+import { useEffect } from 'react';
+
+export function BlogCodeEnhancer() {
+  useEffect(() => {
+    const copyIcon =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>';
+    const checkIcon =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>';
+
+    const blocks = document.querySelectorAll<HTMLPreElement>(
+      '.prose pre:not([data-code-enhanced])',
+    );
+
+    blocks.forEach((pre) => {
+      pre.dataset.codeEnhanced = 'true';
+      pre.classList.add('m-0', 'rounded-t-none', 'border-0', 'overflow-x-auto');
+      pre.style.margin = '0';
+      pre.style.border = '0';
+      pre.style.borderTopLeftRadius = '0';
+      pre.style.borderTopRightRadius = '0';
+
+      const filename = pre.dataset.filename;
+      const wrapper = document.createElement('div');
+      wrapper.className =
+        'not-prose my-7 overflow-hidden rounded-xl border border-border bg-surface-card';
+
+      const toolbar = document.createElement('div');
+      toolbar.className =
+        'flex min-h-10 items-center justify-between gap-3 border-b border-border bg-surface-subtle px-3';
+
+      const label = document.createElement('div');
+      label.className =
+        'max-w-[calc(100%-3rem)] truncate px-1 font-mono text-[11px] text-ink-muted';
+      label.textContent = filename || 'Code';
+
+      if (filename) {
+        label.className =
+          'max-w-[calc(100%-3rem)] truncate px-1 font-mono text-[11px] text-ink-muted';
+      }
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className =
+        'inline-flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-surface-card hover:text-ink';
+      button.style.cursor = 'pointer';
+      button.innerHTML = copyIcon;
+      button.setAttribute('aria-label', 'Copy code');
+      button.setAttribute('title', 'Copy code');
+
+      button.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(pre.innerText.trimEnd());
+        button.innerHTML = checkIcon;
+        button.setAttribute('aria-label', 'Code copied');
+        button.setAttribute('title', 'Code copied');
+        window.setTimeout(() => {
+          button.innerHTML = copyIcon;
+          button.setAttribute('aria-label', 'Copy code');
+          button.setAttribute('title', 'Copy code');
+        }, 1600);
+      });
+
+      toolbar.append(label, button);
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.append(toolbar, pre);
+    });
+  }, []);
+
+  return null;
+}

@@ -7,12 +7,14 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
-import { rehypeExtractFilename } from "@/lib/rehype-extract-filename";
 import { getBlogBySlug, getAllBlogsMeta } from "@/lib/blogs";
+import { rehypeExtractFilename } from "@/lib/rehype-extract-filename";
+import { rehypeFlattenCodeFigure } from "@/lib/rehype-flatten-code-figure";
 import { formatDate } from "@/lib/utils";
 import { TagPill } from "@/components/ui/TagPill";
 import { AnimateIn } from "@/components/ui/AnimateIn";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
+import { BlogCodeEnhancer } from "@/components/mdx/BlogCodeEnhancer";
 import { ShareButtons } from "@/components/ui/ShareButtons";
 import { BlogCard } from "@/components/ui/BlogCard";
 import { siteConfig } from "@/config/site";
@@ -27,7 +29,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogBySlug(slug);
-  if (!post) return { title: "Post Not Found" };
+  if (!post || post.draft) return { title: "Post Not Found" };
   return {
     title: post.title,
     description: post.description,
@@ -44,7 +46,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function BlogDetailPage({ params }: Params) {
   const { slug } = await params;
   const post = getBlogBySlug(slug);
-  if (!post) notFound();
+  if (!post || post.draft) notFound();
 
   const allPosts = getAllBlogsMeta();
   const related = allPosts
@@ -107,6 +109,9 @@ export default async function BlogDetailPage({ params }: Params) {
         {post.youtubeId && (
           <AnimateIn delay={0.1} className="px-6 mb-10">
             <div className="mx-auto max-w-3xl">
+              <p className="mb-3 text-sm font-mono text-ink-faint">
+                Video version of this blog
+              </p>
               <div className="rounded-xl overflow-hidden border border-border aspect-video">
                 <iframe src={`https://www.youtube.com/embed/${post.youtubeId}`} allowFullScreen className="w-full h-full" title={post.title} />
               </div>
@@ -123,14 +128,16 @@ export default async function BlogDetailPage({ params }: Params) {
                   mdxOptions: {
                     remarkPlugins: [remarkGfm],
                     rehypePlugins: [
-                      rehypeSlug,
                       rehypeExtractFilename,
+                      rehypeSlug,
                       [rehypePrettyCode, { theme: "github-dark", keepBackground: true }],
+                      rehypeFlattenCodeFigure,
                     ],
                   },
                 }}
                 components={mdxComponents}
               />
+              <BlogCodeEnhancer />
             </div>
           </div>
         </div>

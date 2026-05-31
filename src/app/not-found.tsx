@@ -70,8 +70,7 @@ export default function NotFound() {
             <span className="ml-2 text-ink-faint text-[10px]">error.log</span>
           </div>
           <div className="space-y-1">
-            <div><span className="text-red-400">ERROR</span> <span className="text-ink-muted">404: Route not found</span></div>
-            <div><span className="text-ink-faint">  at</span> <span className="text-accent-400">Router.resolve</span> <span className="text-ink-faint">(next/dist/server)</span></div>
+            <div><span className="text-red-400">ERROR</span> <span className="text-ink-muted">404: Page not found</span></div>
             <div><span className="text-amber-400/80">HINT</span> <span className="text-ink-muted">Did you mean one of these?</span></div>
             {LINKS.map((l) => (
               <div key={l.href}>

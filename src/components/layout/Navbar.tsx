@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, Code2 } from "lucide-react";
-import { useTheme } from "@/components/ui/ThemeProvider";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Sun, Moon, Code2 } from 'lucide-react';
+import { useTheme } from '@/components/ui/ThemeProvider';
+import { siteConfig } from '@/config/site';
+import { cn } from '@/lib/utils';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -17,8 +17,8 @@ export function Navbar() {
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
   }, []);
 
   useEffect(() => setMobileOpen(false), [pathname]);
@@ -27,40 +27,41 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          'fixed top-0 left-0 right-0 z-50 px-6 transition-all duration-300',
           scrolled
-            ? "py-3 glass border-b border-border/60"
-            : "py-5 bg-transparent",
+            ? 'py-3 glass-nav border-b border-border/60'
+            : 'py-5 bg-transparent',
         )}
       >
-        <nav className="mx-auto max-w-6xl px-6 flex items-center justify-between">
+        <nav className="mx-auto max-w-7xl flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2 group"
-            aria-label="Alex Rivera — home"
+            aria-label="Durgesh Chaudhary — home"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-500 text-white transition-transform group-hover:scale-105">
               <Code2 size={16} strokeWidth={2.5} />
             </span>
             <span className="font-display text-lg text-ink hidden sm:block">
-              Alex Rivera
+              @yodkwtf
             </span>
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {siteConfig.nav.map((item) => {
-              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              const active =
+                pathname === item.href || pathname.startsWith(item.href + '/');
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200",
+                    'px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
                     active
-                      ? "text-accent-500 bg-accent-500/8"
-                      : "text-ink-muted hover:text-ink hover:bg-surface-subtle",
+                      ? 'text-accent-500 bg-accent-500/8'
+                      : 'text-ink-muted hover:text-ink hover:bg-surface-subtle',
                   )}
                 >
                   {item.label}
@@ -74,7 +75,7 @@ export function Navbar() {
             <button
               onClick={toggleTheme}
               className="btn-ghost rounded-lg p-2 transition-all"
-              aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
+              aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -84,7 +85,7 @@ export function Navbar() {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  {resolvedTheme === "dark" ? (
+                  {resolvedTheme === 'dark' ? (
                     <Sun size={17} className="text-ink-muted" />
                   ) : (
                     <Moon size={17} className="text-ink-muted" />
@@ -126,7 +127,9 @@ export function Navbar() {
           >
             <nav className="flex flex-col gap-1 px-6 py-4">
               {siteConfig.nav.map((item, i) => {
-                const active = pathname === item.href || pathname.startsWith(item.href + "/");
+                const active =
+                  pathname === item.href ||
+                  pathname.startsWith(item.href + '/');
                 return (
                   <motion.div
                     key={item.href}
@@ -137,10 +140,10 @@ export function Navbar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors",
+                        'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
                         active
-                          ? "text-accent-500 bg-accent-500/8"
-                          : "text-ink-muted hover:text-ink hover:bg-surface-subtle",
+                          ? 'text-accent-500 bg-accent-500/8'
+                          : 'text-ink-muted hover:text-ink hover:bg-surface-subtle',
                       )}
                     >
                       {item.label}
