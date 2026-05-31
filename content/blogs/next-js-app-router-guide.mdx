@@ -1,0 +1,171 @@
+---
+title: "The Definitive Guide to Next.js App Router"
+description: "Everything you need to know about the App Router, Server Components, streaming, and the future of React rendering — with practical code examples."
+publishedAt: "2024-03-15"
+updatedAt: "2024-03-20"
+tags: ["Next.js", "React", "Tutorial"]
+featured: true
+---
+
+The App Router fundamentally changes how we think about rendering in Next.js. After shipping several production apps with it, here's what I've learned.
+
+## What changed
+
+The Pages Router treated every component as a client component by default. The App Router inverts this — everything is a **Server Component** unless you explicitly opt in to client rendering with `"use client"`.
+
+This has profound implications for performance. Server Components:
+
+- Run only on the server (zero JS sent to the browser)
+- Can directly access databases, file systems, and secrets
+- Don't hydrate — they render to static HTML
+- Cannot use hooks, browser APIs, or event handlers
+
+## Server vs Client components
+
+The mental model is simple: if a component needs interactivity or browser APIs, it's a client component. Everything else should be a server component.
+
+```tsx
+// filename: app/posts/page.tsx
+// This is a Server Component — no "use client" directive
+import { db } from "@/lib/db";
+
+export default async function PostsPage() {
+  // Direct database access — no API route needed
+  const posts = await db.post.findMany({ orderBy: { createdAt: "desc" } });
+
+  return (
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+Client components look the same as before:
+
+```tsx
+// filename: components/LikeButton.tsx
+"use client";
+
+import { useState } from "react";
+
+export function LikeButton({ initialCount }: { initialCount: number }) {
+  const [count, setCount] = useState(initialCount);
+  return (
+    <button onClick={() => setCount(c => c + 1)}>
+      ❤️ {count}
+    </button>
+  );
+}
+```
+
+## Data fetching patterns
+
+Forget `getServerSideProps` and `getStaticProps`. In the App Router, you fetch data directly in your components using async/await.
+
+```tsx
+// filename: app/blog/[slug]/page.tsx
+interface Params {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function BlogPost({ params }: Params) {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug); // fetch, db call, whatever
+
+  if (!post) notFound();
+
+  return <article>{/* ... */}</article>;
+}
+```
+
+## Caching behavior
+
+This is where most people get confused. Next.js has three layers of caching:
+
+1. **Request Memoization** — deduplicates identical fetch calls in a single render
+2. **Data Cache** — persists fetch results across requests (opt out with `cache: "no-store"`)
+3. **Full Route Cache** — caches entire rendered pages at build time
+
+```tsx
+// Cached indefinitely (default for static pages)
+const data = await fetch("/api/data");
+
+// Revalidated every 60 seconds
+const data = await fetch("/api/data", { next: { revalidate: 60 } });
+
+// Never cached — always fresh
+const data = await fetch("/api/data", { cache: "no-store" });
+```
+
+## Streaming with Suspense
+
+One of my favourite App Router features. You can stream slow data without blocking the entire page:
+
+```tsx
+// filename: app/dashboard/page.tsx
+import { Suspense } from "react";
+import { Analytics } from "./Analytics";
+import { AnalyticsSkeleton } from "./AnalyticsSkeleton";
+
+export default function DashboardPage() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      {/* This streams in when ready */}
+      <Suspense fallback={<AnalyticsSkeleton />}>
+        <Analytics />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+The page renders instantly. The `Analytics` component fetches its data independently and streams in when ready. Users see content faster.
+
+## Common gotchas
+
+After shipping several App Router apps, here's what trips people up:
+
+**Context providers must be client components** — wrap them at the lowest level possible to avoid converting large subtrees to client components unnecessarily.
+
+**Third-party libraries** that don't have `"use client"` directives may error. Wrap them:
+
+```tsx
+// filename: components/ToastProvider.tsx
+"use client";
+export { Toaster } from "some-toast-library";
+```
+
+**`cookies()` and `headers()`** make routes dynamic. Call them as close to where you need them as possible.
+
+## My recommended structure
+
+After experimenting, here's the folder structure I keep coming back to:
+
+```
+app/
+  (marketing)/        ← route group, shared layout
+    page.tsx
+    about/page.tsx
+  (dashboard)/        ← different layout
+    dashboard/page.tsx
+  api/
+    [...route]/route.ts
+components/
+  ui/                 ← pure presentational, usually server
+  features/           ← feature-specific, mixed
+lib/
+  db.ts
+  utils.ts
+```
+
+## Wrapping up
+
+The App Router is a significant shift, but it's genuinely better once it clicks. The key insight is that **Server Components are the default** and they're fast precisely because they ship no JavaScript.
+
+Start with everything as a server component. Add `"use client"` only when you need interactivity. Keep client components as leaf nodes in your tree whenever possible.
+
+That's the whole model.

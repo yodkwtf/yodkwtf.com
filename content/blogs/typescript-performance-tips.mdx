@@ -1,0 +1,93 @@
+---
+title: "10 TypeScript Patterns That Make Your Code Fly"
+description: "Practical TypeScript patterns I've learned shipping production applications — from discriminated unions to branded types and const assertions."
+publishedAt: "2024-02-20"
+tags: ["TypeScript", "Performance"]
+featured: false
+---
+
+TypeScript is not just about adding types to JavaScript. Used well, it shapes how you design your APIs and catches entire classes of bugs at compile time. Here are the patterns I reach for most.
+
+## 1. Discriminated unions for state machines
+
+This is the most underused TypeScript pattern. Instead of a bag of optional properties, use a union discriminated on a `status` field:
+
+```typescript
+// ❌ The naive approach — any combination is valid
+interface Request {
+  status: "idle" | "loading" | "success" | "error";
+  data?: User;
+  error?: string;
+}
+
+// ✅ Discriminated union — impossible states are unrepresentable
+type Request =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: User }
+  | { status: "error"; error: string };
+
+function renderRequest(req: Request) {
+  switch (req.status) {
+    case "success":
+      return req.data.name; // TypeScript knows data exists here
+    case "error":
+      return req.error;     // TypeScript knows error exists here
+  }
+}
+```
+
+## 2. Branded types for runtime safety
+
+Prevent passing a `UserId` where a `PostId` is expected — they're both strings, but TypeScript can differentiate them:
+
+```typescript
+type Brand<T, B> = T & { readonly __brand: B };
+
+type UserId = Brand<string, "UserId">;
+type PostId = Brand<string, "PostId">;
+
+function getUser(id: UserId): User { /* ... */ }
+
+const postId = "abc123" as PostId;
+getUser(postId); // ❌ Compile error! Type 'PostId' is not assignable to 'UserId'
+```
+
+## 3. Const assertions for literal types
+
+```typescript
+const ROUTES = {
+  home: "/",
+  about: "/about",
+  blog: "/blog",
+} as const;
+
+type Route = typeof ROUTES[keyof typeof ROUTES];
+// type Route = "/" | "/about" | "/blog"
+```
+
+## 4. Satisfies operator (TS 4.9+)
+
+Validate a value against a type without widening it:
+
+```typescript
+const palette = {
+  red: [255, 0, 0],
+  green: "#00ff00",
+} satisfies Record<string, string | number[]>;
+
+// palette.red is still number[] (not string | number[])
+palette.red.map(v => v * 2); // ✅ Works fine
+```
+
+## 5. Template literal types
+
+```typescript
+type EventName = `on${Capitalize<string>}`;
+// Matches: "onClick", "onChange", "onSubmit", etc.
+
+type CSSProperty = `${string}-${string}`;
+// Matches: "margin-top", "font-size", etc.
+```
+
+These are just the beginning — TypeScript's type system is extraordinarily powerful when you lean into it.
