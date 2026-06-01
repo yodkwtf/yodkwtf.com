@@ -55,7 +55,9 @@ export async function getAboutPage(): Promise<AboutPage | null> {
     `*[_type == "about"][0] {
       _id, headline, subheadline, bio, journey, philosophy,
       avatar { asset, alt },
-      resumeUrl
+      "resumeUrl": resume.asset->url,
+      education[] { institution, degree, period, note },
+      stats[] { num, label, sub }
     }`,
   );
 }
@@ -65,4 +67,12 @@ export async function getSocialLinks(): Promise<SocialLink[]> {
   return sanityFetch(
     `*[_type == "socialLink"] | order(order asc) { _id, platform, url, icon, order }`,
   );
+}
+
+// ─── Resume URL (from About doc) ──────────────────────────────────────────────
+export async function getResumeUrl(): Promise<string | null> {
+  const result = await sanityFetch<{ resumeUrl?: string } | null>(
+    `*[_type == "about"][0] { "resumeUrl": resume.asset->url }`,
+  );
+  return result?.resumeUrl ?? null;
 }

@@ -73,6 +73,8 @@ export interface AboutPage {
   philosophy: any[];
   avatar: SanityImage;
   resumeUrl?: string;
+  education?: { institution: string; degree: string; period: string; note?: string }[];
+  stats?: { num: string; label: string; sub: string }[];
 }
 
 // ─── Blog (MDX) ──────────────────────────────────────────────────────────────

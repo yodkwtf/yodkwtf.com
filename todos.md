@@ -1,15 +1,18 @@
 ## ToDos:
 
-#### Design
-
-- For blogs page - evrything is perfect, just that the blog cards are center align so it creates a space on the left, fix that and also remove the border bottom for the last blog card.
-
-#### Content
-
-- [ ] Update content on the entire website
-
-#### Think
-
-- [ ] If skills section can be moved to about page
-
-Some of the sections are not good looking responsiveness wise, like the blogs section home page (hide image maybe), experience section on about page and for blogs page, use pagination only instead of infinite scroll so we can have the search and filter options below the cards for small screens otherwise, you'll never be able to reach if there are many blogs. See general responsiveness of the website and fix the issues w/o affecting anything for the big screens.
+- [ ] Update all the fallback content first
+- [ ] Test the entire website with the fallback content
+- [ ] Test empty error states
+- [ ] Test pagination
+- [ ] Test blog and all MDX components
+- [ ] Test single project page
+- [ ] Test all project pages with full search and filtering functionality
+- [ ] Add all branding information to the site config
+- [ ] Update all the meta information for all pages, including Open Graph and Twitter cards
+- [ ] Connect to sanity with the main account and the correct project id
+- [ ] Add all the content to sanity
+- [ ] Test the entire website with the sanity content
+- [ ] Deploy the website to production
+- [ ] Add a custom domain to the website
+- [ ] Announce the launch of the new website on all social media platforms
+- [ ] Check for a custom domain based email address and set it up if available

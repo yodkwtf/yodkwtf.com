@@ -263,7 +263,7 @@ export function BlogListClient({
             placeholder="Search posts…"
             value={search}
             onChange={(e) => updateSearch(e.target.value)}
-            className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-border bg-surface-card text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent-500 transition-colors"
+            className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-border bg-surface-card text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent-500/60 focus:bg-accent-500/4 transition-colors"
           />
           {search && (
             <button

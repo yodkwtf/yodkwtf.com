@@ -43,7 +43,35 @@ export const aboutSchema = defineType({
     defineField({ name: "journey", type: "array", of: [{ type: "block" }] }),
     defineField({ name: "philosophy", type: "array", of: [{ type: "block" }] }),
     defineField({ name: "avatar", type: "image", options: { hotspot: true }, fields: [{ name: "alt", type: "string" }] }),
-    defineField({ name: "resumeUrl", type: "url" }),
+    defineField({ name: "resume", type: "file", options: { accept: "application/pdf,.pdf" }, description: "Upload the resume PDF — the download link on the site will point to this file." }),
+    defineField({
+      name: "education",
+      type: "array",
+      of: [{
+        type: "object",
+        fields: [
+          defineField({ name: "institution", type: "string" }),
+          defineField({ name: "degree", type: "string" }),
+          defineField({ name: "period", type: "string", description: 'e.g. "2015 — 2019"' }),
+          defineField({ name: "note", type: "string" }),
+        ],
+        preview: { select: { title: "degree", subtitle: "institution" } },
+      }],
+    }),
+    defineField({
+      name: "stats",
+      type: "array",
+      description: "Numbers shown in the home page mini-about section.",
+      of: [{
+        type: "object",
+        fields: [
+          defineField({ name: "num", type: "string", description: 'e.g. "5+" or "∞"' }),
+          defineField({ name: "label", type: "string" }),
+          defineField({ name: "sub", type: "string" }),
+        ],
+        preview: { select: { title: "label", subtitle: "num" } },
+      }],
+    }),
   ],
 });
 

@@ -1,24 +1,25 @@
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/AnimateIn";
 import { cn } from "@/lib/utils";
+import { FALLBACK_SKILLS, SKILL_CATEGORY_COLORS } from "@/data/fallback-skills";
+import { getSkills } from "@/sanity/lib/queries";
 
-const SKILLS = {
-  Frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Radix UI"],
-  Backend:  ["Node.js", "Express", "Fastify", "REST APIs", "GraphQL", "tRPC"],
-  Database: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "Drizzle ORM", "Supabase"],
-  DevOps:   ["Docker", "Vercel", "AWS", "CI/CD", "GitHub Actions", "Linux"],
-  Tools:    ["Git", "Figma", "Sanity CMS", "Stripe", "Sentry", "Posthog"],
-};
+export async function SkillsSection() {
+  let skills = FALLBACK_SKILLS;
 
-const categoryColors: Record<string, string> = {
-  Frontend: "text-accent-400",
-  Backend:  "text-violet-400",
-  Database: "text-amber-400",
-  DevOps:   "text-sky-400",
-  Tools:    "text-rose-400",
-};
+  try {
+    const fetched = await getSkills();
+    if (fetched?.length) {
+      // Group flat Sanity skill documents into Record<category, name[]>
+      const grouped: Record<string, string[]> = {};
+      for (const skill of fetched) {
+        if (!grouped[skill.category]) grouped[skill.category] = [];
+        grouped[skill.category].push(skill.name);
+      }
+      skills = grouped;
+    }
+  } catch {}
 
-export function SkillsSection() {
   return (
     <section className="py-24 px-6">
       <div className="mx-auto max-w-7xl">
@@ -29,14 +30,17 @@ export function SkillsSection() {
         />
 
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {Object.entries(SKILLS).map(([category, skills]) => (
+          {Object.entries(skills).map(([category, skillList]) => (
             <StaggerItem key={category}>
               <div className="glass rounded-xl p-5 h-full border border-border hover:border-accent-500/30 transition-colors group">
-                <h3 className={cn("font-mono text-xs uppercase tracking-widest font-medium mb-4", categoryColors[category])}>
+                <h3 className={cn(
+                  "font-mono text-xs uppercase tracking-widest font-medium mb-4",
+                  SKILL_CATEGORY_COLORS[category] ?? "text-ink-muted",
+                )}>
                   {category}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {skills.map((skill) => (
+                  {skillList.map((skill) => (
                     <span
                       key={skill}
                       className="text-sm text-ink-muted bg-surface-subtle border border-border px-2.5 py-1 rounded-lg font-mono text-xs

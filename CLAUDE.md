@@ -33,7 +33,39 @@ This is a personal portfolio site built with **Next.js 16** (App Router), **Reac
 - `src/config/site.ts` — single source of truth for all site metadata, nav links, social URLs, and the accent color theme
 - `src/types/index.ts` — all shared TypeScript interfaces
 - `src/app/globals.css` — CSS custom properties that power the design system (colors, radii, transitions)
-- `src/sanity/schemas/` — Sanity document schemas (`project`, `skill`, `experience`, `about`, `socialLink`)
+- `src/sanity/schemas/` — Sanity document schemas (`project`, `skill`, `experience`, `about`, `socialLink`). The `about` schema's `resume` field is a **file upload** (not a URL); the GROQ query projects `resume.asset->url` into `resumeUrl` so consumers always get a plain string.
+- `src/lib/utils.ts` — `cn()` helper (clsx + tailwind-merge) for conditional class names
+
+### RSC / Client Split
+
+Pages are React Server Components. Interactive UI is extracted into `*Client.tsx` files that are `'use client'` and receive data as props:
+- `src/app/projects/ProjectsClient.tsx` — client-side search and tag filtering for the projects grid
+- `src/app/blog/BlogListClient.tsx` — client-side search and tag filtering for the blog list
+
+`src/app/error.tsx` is the app-wide error boundary (must be `'use client'`). It receives `error` and `reset` props and renders a "Try again / Go home" UI.
+
+### Fallback Data
+
+When Sanity is unreachable, pages fall back to static data in `src/data/`:
+- `fallback-projects.ts` — `FALLBACK_PROJECTS` (array) + `FALLBACK_PROJECT_MAP` (slug-keyed, with metrics/challenge/solution)
+- `fallback-experience.ts` — `FALLBACK_EXPERIENCE` + `FALLBACK_EDUCATION`
+- `fallback-skills.ts` — `FALLBACK_SKILLS` (Record\<category, string[]\>) + `SKILL_CATEGORY_COLORS`
+
+Every section that fetches from Sanity wraps the call in `try/catch` and substitutes the matching fallback on failure. `SkillsSection` is async and groups the flat `Skill[]` from Sanity into the category-keyed shape automatically.
+
+### Sanity Image URLs
+
+Use `urlFor` from `src/sanity/lib/client.ts` to build image URLs from `SanityImage` refs. It is safe to use in both server and client components (relies only on `NEXT_PUBLIC_` env vars):
+```ts
+import { urlFor } from "@/sanity/lib/client";
+urlFor(image).width(800).url()
+```
+
+### Animation Primitives
+
+`src/components/ui/AnimateIn.tsx` exports three Framer Motion wrappers:
+- `AnimateIn` — fade-in with directional slide (`direction`: `up | down | left | right | none`)
+- `StaggerContainer` + `StaggerItem` — orchestrated stagger for lists
 
 ### Styling System
 
@@ -68,6 +100,20 @@ SANITY_API_TOKEN=          # only needed for write operations
 NEXT_PUBLIC_SITE_URL=
 ```
 
+### MDX Custom Components
+
+Available in all blog posts via `src/components/mdx/MDXComponents.tsx`:
+- `<Callout type="info|warning|tip|error" title="">` — styled callout blocks
+- `<YouTube id="..." />` — embedded YouTube player
+- `<BlogImage src alt caption />` — optimized image with caption
+- `<ImageGrid images={[{src, alt, caption}]} />` — 2-column image grid
+- `<Details summary="">` — collapsible `<details>` element
+
+Code blocks are syntax-highlighted via `rehype-pretty-code` with the `github-dark-default` theme. The background is always dark even in light mode (forced via `globals.css`). Add a filename comment at the top of a fenced code block to show a filename tab in the toolbar:
+```
+// filename: path/to/file.ts
+```
+
 ### Adding a Blog Post
 
 Create `content/blogs/<slug>.mdx` with this frontmatter:
@@ -76,6 +122,7 @@ Create `content/blogs/<slug>.mdx` with this frontmatter:
 title: ""
 description: ""
 publishedAt: "YYYY-MM-DD"
+category: ""        # shown as a distinct pill in the blog list sidebar
 tags: []
 featured: false
 draft: false

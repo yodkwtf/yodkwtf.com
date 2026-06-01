@@ -130,7 +130,7 @@ export default async function BlogDetailPage({ params }: Params) {
                     rehypePlugins: [
                       rehypeExtractFilename,
                       rehypeSlug,
-                      [rehypePrettyCode, { theme: "github-dark", keepBackground: true }],
+                      [rehypePrettyCode, { theme: "github-dark-default", keepBackground: true }],
                       rehypeFlattenCodeFigure,
                     ],
                   },

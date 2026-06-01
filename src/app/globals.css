@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap');
 
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 @config "../../tailwind.config.ts";
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
   /* Accent — emerald palette (change here to re-theme) */
-  --accent-50:  #ecfdf5;
+  --accent-50: #ecfdf5;
   --accent-100: #d1fae5;
   --accent-200: #a7f3d0;
   --accent-300: #6ee7b7;
@@ -19,14 +19,14 @@
   --accent-900: #064e3b;
 
   /* Surface — light mode */
-  --bg:         #f8f8f5;
-  --bg-subtle:  #f0efe9;
-  --bg-card:    #ffffff;
-  --border:     #e5e4de;
+  --bg: #f8f8f5;
+  --bg-subtle: #f0efe9;
+  --bg-card: #ffffff;
+  --border: #e5e4de;
   --border-subtle: #eeede8;
 
   /* Text */
-  --text:       #1a1917;
+  --text: #1a1917;
   --text-muted: #6b6b62;
   --text-faint: #a8a89e;
 
@@ -45,22 +45,26 @@
 }
 
 .dark {
-  --bg:         #0e0e0c;
-  --bg-subtle:  #161613;
-  --bg-card:    #1a1a17;
-  --border:     #2a2a26;
+  --bg: #0e0e0c;
+  --bg-subtle: #161613;
+  --bg-card: #1a1a17;
+  --border: #2a2a26;
   --border-subtle: #222220;
 
-  --text:       #f0efe9;
+  --text: #f0efe9;
   --text-muted: #8a8a7e;
-  --text-faint: #4a4a44;
+  --text-faint: #6e6e66;
 
   --glow: rgba(52, 211, 153, 0.12);
   --glow-strong: rgba(52, 211, 153, 0.2);
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
   scroll-behavior: smooth;
@@ -75,7 +79,9 @@ body {
   font-family: 'Outfit', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.65;
-  transition: background-color 0.3s var(--ease), color 0.2s var(--ease);
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.2s var(--ease);
 }
 
 /* ─── Selection ─────────────────────────────────────────────────────────── */
@@ -85,25 +91,45 @@ body {
 }
 
 /* ─── Scrollbar ─────────────────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 ::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+}
 
 /* ─── Focus ──────────────────────────────────────────────────────────────── */
-:focus-visible {
+/* Exclude inputs/selects — they use border-color + bg change instead of a ring */
+:focus-visible:not(input):not(textarea):not(select) {
   outline: 2px solid var(--accent-500);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
 
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
 /* ─── Typography ────────────────────────────────────────────────────────── */
-.font-display { font-family: 'Instrument Serif', Georgia, serif; }
-.font-mono    { font-family: 'DM Mono', 'Fira Code', monospace; }
-.font-sans    { font-family: 'Outfit', system-ui, sans-serif; }
+.font-display {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+.font-mono {
+  font-family: 'DM Mono', 'Fira Code', monospace;
+}
+.font-sans {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
 
 /* ─── Noise texture ─────────────────────────────────────────────────────── */
 .noise::after {
@@ -139,7 +165,9 @@ body {
 
 /* ─── Glow effects ──────────────────────────────────────────────────────── */
 .glow-accent {
-  box-shadow: 0 0 40px var(--glow), 0 0 80px var(--glow);
+  box-shadow:
+    0 0 40px var(--glow),
+    0 0 80px var(--glow);
 }
 .glow-accent-sm {
   box-shadow: 0 0 20px var(--glow);
@@ -174,12 +202,20 @@ body {
   background: var(--accent-500);
   transition: width 0.3s var(--ease);
 }
-.underline-anim:hover::after { width: 100%; }
+.underline-anim:hover::after {
+  width: 100%;
+}
 
 /* ─── Section fade-in ───────────────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .animate-fade-up {
   animation: fadeUp 0.6s var(--ease) both;
@@ -187,8 +223,13 @@ body {
 
 /* ─── Blink cursor ──────────────────────────────────────────────────────── */
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 .cursor-blink {
   display: inline-block;
@@ -202,12 +243,16 @@ body {
 
 /* ─── Reduced motion ────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* ─── Prose overrides (MDX) ─────────────────────────────────────────────── */
@@ -230,14 +275,17 @@ body {
   --tw-prose-td-borders: var(--border-subtle);
 }
 
-.prose h1, .prose h2, .prose h3 {
+.prose h1,
+.prose h2,
+.prose h3 {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
 }
 
 .prose a {
   text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--accent-500) 40%, transparent);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--accent-500) 40%, transparent);
   transition: border-color 0.2s;
 }
 .prose a:hover {
@@ -251,6 +299,12 @@ body {
   border-radius: 4px;
   font-size: 0.875em;
   font-family: 'DM Mono', monospace;
+}
+
+/* Remove Tailwind typography's default backtick decoration around inline code */
+.prose code::before,
+.prose code::after {
+  content: none !important;
 }
 
 .prose pre {
@@ -270,7 +324,9 @@ body {
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
-.prose blockquote p { margin: 0; }
+.prose blockquote p {
+  margin: 0;
+}
 
 .prose table {
   display: block;
@@ -351,7 +407,8 @@ pre[data-language] span[data-highlighted-line] {
   color: var(--text-muted);
   transition: all 0.2s var(--ease);
 }
-.tag-pill:hover, .tag-pill.active {
+.tag-pill:hover,
+.tag-pill.active {
   background: color-mix(in srgb, var(--accent-500) 12%, transparent);
   border-color: color-mix(in srgb, var(--accent-500) 40%, transparent);
   color: var(--accent-500);

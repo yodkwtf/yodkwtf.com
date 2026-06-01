@@ -7,92 +7,37 @@ import { CTASection } from "@/components/sections/CTASection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { siteConfig } from "@/config/site";
 import { GraduationCap, ExternalLink, Download } from "lucide-react";
-import type { Experience } from "@/types";
 import { getAboutPage, getExperience } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/client";
+import { FALLBACK_EXPERIENCE, FALLBACK_EDUCATION } from "@/data/fallback-experience";
 
 export const metadata: Metadata = {
   title: "About",
   description: `Learn more about ${siteConfig.name} — full-stack engineer, background, experience, and skills.`,
 };
 
-const FALLBACK_EXPERIENCE: (Omit<Experience, "_id" | "description"> & {
-  description: string[];
-})[] = [
-  {
-    company: "Acme Corp",
-    role: "Senior Full-Stack Engineer",
-    startDate: "2022-01-01",
-    endDate: undefined,
-    current: true,
-    description: [
-      "Lead engineer on the core product team",
-      "Architected and shipped a real-time collaboration feature used by 100k+ users",
-      "Reduced bundle size by 40% through code splitting and lazy loading",
-      "Mentored 3 junior engineers",
-    ],
-    techStack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "Redis", "AWS"],
-    companyUrl: "https://example.com",
-    order: 1,
-  },
-  {
-    company: "Bright Labs",
-    role: "Full-Stack Developer",
-    startDate: "2020-01-01",
-    endDate: "2022-01-01",
-    current: false,
-    description: [
-      "Built and maintained multiple client-facing SaaS products",
-      "Owned the full frontend architecture migration from CRA to Next.js",
-      "Integrated Stripe payments processing $2M+ annually",
-    ],
-    techStack: ["React", "Node.js", "MongoDB", "Stripe", "Docker"],
-    companyUrl: "https://example.com",
-    order: 2,
-  },
-  {
-    company: "Freelance",
-    role: "Web Developer",
-    startDate: "2019-01-01",
-    endDate: "2020-01-01",
-    current: false,
-    description: [
-      "Worked with 10+ clients across e-commerce, healthcare, and fintech",
-      "Delivered full-stack web applications on time and within budget",
-    ],
-    techStack: ["React", "Express", "MySQL", "Tailwind CSS"],
-    companyUrl: undefined,
-    order: 3,
-  },
-];
-
-const EDUCATION = [
-  {
-    institution: "University of California, Berkeley",
-    degree: "B.S. Computer Science",
-    period: "2015 — 2019",
-    note: "Dean's List · GPA 3.8",
-  },
-];
-
 export default async function AboutPage() {
   let experience = FALLBACK_EXPERIENCE as any[];
+  let education: typeof FALLBACK_EDUCATION = FALLBACK_EDUCATION;
   let avatarUrl: string | null = null;
+  let resumeUrl = siteConfig.links.resume;
 
   try {
     const [fetchedExp, about] = await Promise.all([getExperience(), getAboutPage()]);
     if (fetchedExp?.length) experience = fetchedExp;
     if (about?.avatar) avatarUrl = urlFor(about.avatar).width(480).height(480).url();
+    if (about?.resumeUrl) resumeUrl = about.resumeUrl;
+    if (about?.education?.length) education = about.education;
   } catch {}
 
   return (
     <>
       {/* ── Page header ─────────────────────────────── */}
-      <div className="pt-28 pb-12 px-6">
+      <div className="pt-32 pb-8 px-6">
         <div className="mx-auto max-w-5xl">
 
           {/* ── Header: two-column — text left, profile image right ── */}
-          <AnimateIn className="mb-20">
+          <AnimateIn>
             <div className="grid lg:grid-cols-[1fr_280px] gap-12 items-center">
               <div className="space-y-5 max-w-xl">
                 <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">About</span>
@@ -107,7 +52,7 @@ export default async function AboutPage() {
                 <div className="flex flex-wrap gap-3 pt-1">
                   <a href={`mailto:${siteConfig.email}`} className="btn btn-primary">Say hello</a>
                   <a
-                    href={siteConfig.links.resume}
+                    href={resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline gap-2"
@@ -239,7 +184,7 @@ export default async function AboutPage() {
             <div className="max-w-3xl mx-auto">
             <SectionHeader label="Education" heading="Academic background." />
             <StaggerContainer className="space-y-4">
-              {EDUCATION.map((edu, i) => (
+              {education.map((edu, i) => (
                 <StaggerItem key={i}>
                   <div className="glass rounded-xl p-5 border border-border flex flex-wrap items-center gap-4">
                     <div className="w-10 h-10 rounded-lg bg-surface-subtle border border-border flex items-center justify-center shrink-0">

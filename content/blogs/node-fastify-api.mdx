@@ -1,0 +1,105 @@
+---
+title: "Building a Production REST API with Node.js and Fastify"
+description: "Fastify is faster than Express, has built-in schema validation, and generates OpenAPI docs automatically. Here's how to structure a real API with it."
+publishedAt: "2024-02-20"
+category: "Tutorial"
+tags: ["Node.js", "Backend", "API"]
+featured: false
+draft: false
+---
+
+Express is fine, but Fastify is better for APIs. It's up to 2× faster, has first-class TypeScript support, and bakes in JSON Schema validation so you stop writing manual `if (!req.body.email)` checks.
+
+## Project Structure
+
+```
+// filename: project structure
+src/
+  plugins/       # Fastify plugins (db, auth, cors)
+  routes/        # Route handlers
+  schemas/       # JSON Schema objects
+  services/      # Business logic
+  server.ts      # App entrypoint
+```
+
+## Setting Up the Server
+
+```ts
+// filename: src/server.ts
+import Fastify from 'fastify';
+import { userRoutes } from './routes/users';
+
+const app = Fastify({ logger: true });
+
+app.register(userRoutes, { prefix: '/api/v1' });
+
+app.listen({ port: 3000, host: '0.0.0.0' }, (err) => {
+  if (err) { app.log.error(err); process.exit(1); }
+});
+```
+
+## Schema Validation
+
+Define schemas once and Fastify validates request body, querystring, params, and response — and generates OpenAPI docs automatically.
+
+```ts
+// filename: src/schemas/user.ts
+export const createUserSchema = {
+  body: {
+    type: 'object',
+    required: ['email', 'name'],
+    properties: {
+      email: { type: 'string', format: 'email' },
+      name:  { type: 'string', minLength: 2 },
+    },
+    additionalProperties: false,
+  },
+  response: {
+    201: {
+      type: 'object',
+      properties: {
+        id:    { type: 'string' },
+        email: { type: 'string' },
+        name:  { type: 'string' },
+      },
+    },
+  },
+} as const;
+```
+
+## Route Handler
+
+```ts
+// filename: src/routes/users.ts
+import { FastifyPluginAsync } from 'fastify';
+import { createUserSchema } from '../schemas/user';
+import { UserService } from '../services/user';
+
+export const userRoutes: FastifyPluginAsync = async (app) => {
+  app.post('/users', { schema: createUserSchema }, async (req, reply) => {
+    const user = await UserService.create(req.body);
+    return reply.code(201).send(user);
+  });
+};
+```
+
+## Error Handling
+
+Fastify has a built-in `setErrorHandler` that centralises all error responses:
+
+```ts
+// filename: src/server.ts
+app.setErrorHandler((error, req, reply) => {
+  app.log.error(error);
+  reply.code(error.statusCode ?? 500).send({
+    error: error.message,
+    statusCode: error.statusCode ?? 500,
+  });
+});
+```
+
+Schema validation failures automatically return a structured 400 with the field path. No boilerplate needed.
+
+## Verdict
+
+If you're starting a new Node.js API, Fastify is the better default. The schema-first approach forces you to document as you build, and the performance headroom means you'll rarely need to optimise the framework layer.

@@ -7,6 +7,7 @@ import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/ui/SocialIcons";
 import type { Project } from "@/types";
 import { cn } from "@/lib/utils";
+import { urlFor } from "@/sanity/lib/client";
 
 interface FeaturedProjectCardProps {
   project: Project;
@@ -35,7 +36,7 @@ export function FeaturedProjectCard({ project, index, className }: FeaturedProje
       >
         {project.thumbnail ? (
           <Image
-            src={`https://cdn.sanity.io/images/placeholder/production/${project.thumbnail.asset._ref.replace("image-", "").replace(/-(\w+)$/, ".$1")}`}
+            src={urlFor(project.thumbnail).width(1200).height(675).url()}
             alt={project.thumbnail.alt ?? project.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -80,8 +81,21 @@ export function FeaturedProjectCard({ project, index, className }: FeaturedProje
         </div>
 
         {/* Title */}
-        <h3 className="font-display text-2xl md:text-3xl text-ink group-hover:text-accent-500 transition-colors leading-tight mb-3">
-          {project.title}
+        <h3 className="font-display text-2xl md:text-3xl leading-tight mb-3">
+          {project.liveUrl ? (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink hover:text-accent-500 transition-colors"
+            >
+              {project.title}
+            </a>
+          ) : (
+            <span className="text-ink group-hover:text-accent-500 transition-colors">
+              {project.title}
+            </span>
+          )}
         </h3>
 
         {/* Description */}

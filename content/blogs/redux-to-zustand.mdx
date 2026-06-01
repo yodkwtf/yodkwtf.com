@@ -1,0 +1,78 @@
+---
+title: "Why I Migrated Three Apps from Redux to Zustand"
+description: "Redux is powerful and battle-tested. Zustand is simpler and gets out of your way. After running both in production, here's what I actually think."
+publishedAt: "2024-02-05"
+category: "Opinion"
+tags: ["React", "State Management"]
+featured: false
+draft: false
+---
+
+I've shipped Redux in production apps since 2017. I'm not here to say it's bad — it's not. But after migrating three mid-sized apps to Zustand, I'm not going back.
+
+## The Boilerplate Problem
+
+Setting up a Redux slice for something as simple as "is this modal open" looks like this:
+
+```ts
+// filename: store/modalSlice.ts
+import { createSlice } from '@reduxjs/toolkit';
+
+const modalSlice = createSlice({
+  name: 'modal',
+  initialState: { isOpen: false },
+  reducers: {
+    open: (state) => { state.isOpen = true; },
+    close: (state) => { state.isOpen = false; },
+  },
+});
+
+export const { open, close } = modalSlice.actions;
+export default modalSlice.reducer;
+// + wire it into combineReducers + configure store...
+```
+
+The same thing in Zustand:
+
+```ts
+// filename: store/modal.ts
+import { create } from 'zustand';
+
+export const useModal = create<{ isOpen: boolean; open(): void; close(): void }>(
+  (set) => ({
+    isOpen: false,
+    open:  () => set({ isOpen: true }),
+    close: () => set({ isOpen: false }),
+  })
+);
+```
+
+That's it. No reducers, no selectors, no provider wrapping.
+
+## When Redux Still Wins
+
+Zustand isn't always the right call. Redux has advantages for:
+
+- **Time-travel debugging** — Redux DevTools middleware is exceptional
+- **Strict unidirectional data flow** — useful when you have many engineers working on the same store
+- **Complex async middleware** — `redux-saga` and `redux-observable` are more powerful than anything Zustand provides out of the box
+
+If your team is large and the store is the source of truth for everything, Redux's constraints become features.
+
+## The Migration Path
+
+Migrating incrementally is straightforward. Zustand stores are just hooks — you can introduce them alongside Redux without a big-bang rewrite:
+
+1. Pick the most painful slice (usually UI state like modals, toasts, filters)
+2. Extract it to a Zustand store
+3. Replace selectors and dispatch calls at the usage sites
+4. Delete the Redux slice
+
+Most UI-state slices migrate in under an hour.
+
+## My Current Recommendation
+
+- **New projects:** Start with Zustand. Reach for Redux only if you know you need its specific guarantees.
+- **Existing Redux apps:** Don't migrate for the sake of it. Do migrate if the boilerplate is slowing your team down.
+
+Simpler tools for simpler problems. The goal is shipping, not store architecture.

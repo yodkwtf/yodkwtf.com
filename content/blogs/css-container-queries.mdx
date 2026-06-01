@@ -1,0 +1,68 @@
+---
+title: "CSS Container Queries Are the Layout Feature We've Been Waiting For"
+description: "Media queries respond to the viewport. Container queries respond to the parent. Here's why that distinction changes everything about component-driven design."
+publishedAt: "2024-03-28"
+category: "Tutorial"
+tags: ["CSS", "Web Design"]
+featured: false
+draft: false
+---
+
+For years we've been writing layout CSS that talks to the wrong thing. Media queries ask the viewport how wide it is — but your component doesn't live in the viewport; it lives in its parent container.
+
+Container queries fix that.
+
+## The Problem with Media Queries for Components
+
+Say you have a card component. You want it to show a horizontal layout when it has enough width. With media queries:
+
+```css
+/* filename: card.css */
+/* This fires based on VIEWPORT width, not card width */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+  }
+}
+```
+
+This breaks the moment you place the same card in a narrow sidebar on a wide screen. The viewport is wide, but the card has no room.
+
+## Enter Container Queries
+
+```css
+/* filename: card.css */
+.card-wrapper {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* This fires based on .card-wrapper's width */
+@container card (min-width: 400px) {
+  .card {
+    flex-direction: row;
+  }
+}
+```
+
+Now the card responds to *its own available space*, not the screen size.
+
+## Tailwind v4 Support
+
+Tailwind CSS v4 ships container query support out of the box:
+
+```html
+<div class="@container">
+  <div class="flex flex-col @sm:flex-row">
+    <!-- Switches to row when the container is sm-wide -->
+  </div>
+</div>
+```
+
+No plugin needed. Just add `@container` to the wrapper and use `@sm:`, `@md:`, `@lg:` etc. on children.
+
+## Browser Support
+
+Container queries are now supported in all modern browsers (Chrome 105+, Safari 16+, Firefox 110+). If you're not using them, you're hand-writing responsive logic that's fragile by design.
+
+Start with one component. Pick a card that lives in multiple contexts. Replace its media queries with container queries. You'll never go back.

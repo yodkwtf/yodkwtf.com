@@ -24,26 +24,26 @@ export function BlogCodeEnhancer() {
       const filename = pre.dataset.filename;
       const wrapper = document.createElement('div');
       wrapper.className =
-        'not-prose my-7 overflow-hidden rounded-xl border border-border bg-surface-card';
+        'not-prose my-7 overflow-hidden rounded-xl border border-[#30363d]';
+      wrapper.style.background = '#0d1117';
 
       const toolbar = document.createElement('div');
       toolbar.className =
-        'flex min-h-10 items-center justify-between gap-3 border-b border-border bg-surface-subtle px-3';
+        'flex min-h-10 items-center justify-between gap-3 px-3';
+      toolbar.style.cssText =
+        'background:#161b22;border-bottom:1px solid #30363d;';
 
       const label = document.createElement('div');
       label.className =
-        'max-w-[calc(100%-3rem)] truncate px-1 font-mono text-[11px] text-ink-muted';
+        'max-w-[calc(100%-3rem)] truncate px-1 font-mono text-[11px]';
+      label.style.color = '#8b949e';
       label.textContent = filename || 'Code';
-
-      if (filename) {
-        label.className =
-          'max-w-[calc(100%-3rem)] truncate px-1 font-mono text-[11px] text-ink-muted';
-      }
 
       const button = document.createElement('button');
       button.type = 'button';
       button.className =
-        'inline-flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-surface-card hover:text-ink';
+        'inline-flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md transition-colors';
+      button.style.color = '#8b949e';
       button.style.cursor = 'pointer';
       button.innerHTML = copyIcon;
       button.setAttribute('aria-label', 'Copy code');

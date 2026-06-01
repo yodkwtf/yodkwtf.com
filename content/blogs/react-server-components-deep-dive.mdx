@@ -1,0 +1,75 @@
+---
+title: "React Server Components: A Practical Deep Dive"
+description: "Move past the hype. Here's what RSCs actually do, where they genuinely help, and the tradeoffs you need to understand before adopting them."
+publishedAt: "2024-04-10"
+category: "Tutorial"
+tags: ["React", "Next.js", "Performance"]
+featured: false
+draft: false
+---
+
+React Server Components (RSCs) are the biggest shift in how we write React apps since hooks. After shipping three production RSC-based apps, here's the mental model that finally made everything click.
+
+## The Core Idea
+
+A Server Component runs **only on the server**. It never ships JavaScript to the browser. That means:
+
+- Zero bundle size contribution
+- Direct database/filesystem access
+- No `useState`, no `useEffect`, no browser APIs
+
+```tsx
+// filename: app/dashboard/page.tsx
+// This runs only on the server — no JS sent to the browser
+async function DashboardPage() {
+  const data = await db.query('SELECT * FROM metrics LIMIT 10');
+
+  return (
+    <div>
+      {data.map(row => <MetricCard key={row.id} metric={row} />)}
+    </div>
+  );
+}
+```
+
+## When to Reach for RSCs
+
+Use Server Components by default. Switch to Client Components (`'use client'`) only when you need:
+
+- Event handlers (`onClick`, `onChange`)
+- Browser APIs (`localStorage`, `window`, `navigator`)
+- React state or lifecycle hooks
+- Third-party libraries that rely on browser globals
+
+## The Boundary Model
+
+The key insight is that `'use client'` marks a **boundary**, not an individual component. Everything below that boundary in the tree becomes client-side, unless you explicitly pass Server Components as children.
+
+```tsx
+// filename: components/interactive-shell.tsx
+'use client';
+
+// All imports here are bundled client-side
+export function InteractiveShell({ children }: { children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setOpen(!open)}>Toggle</button>
+      {open && children} {/* children can still be a Server Component */}
+    </div>
+  );
+}
+```
+
+## Common Pitfalls
+
+**Pitfall 1: Serialization errors.** You can't pass functions or class instances from Server to Client components as props — only serializable data crosses the boundary.
+
+**Pitfall 2: Waterfall fetches.** Avoid awaiting fetches sequentially inside RSCs. Use `Promise.all` or parallel fetch patterns.
+
+**Pitfall 3: Over-converting to client.** The temptation is to slap `'use client'` on everything. Resist — every boundary increases bundle size.
+
+## Verdict
+
+RSCs are genuinely good for data-heavy pages, dashboards, and content sites. They're not a replacement for client state — they're a complement to it. Think of them as the server's answer to the question: "why are we sending all this JS?"

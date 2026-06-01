@@ -11,169 +11,8 @@ import {
   StaggerItem,
 } from '@/components/ui/AnimateIn';
 import { siteConfig } from '@/config/site';
-
-// Dummy data fallback
-const DUMMY_PROJECTS: Record<string, any> = {
-  'horizon-saas': {
-    _id: '1',
-    title: 'Horizon SaaS',
-    slug: { current: 'horizon-saas' },
-    summary:
-      'A multi-tenant SaaS platform with real-time collaboration built on Next.js 14, tRPC, and Supabase.',
-    tags: ['SaaS', 'B2B', 'Open Source'],
-    techStack: [
-      'Next.js',
-      'TypeScript',
-      'tRPC',
-      'Supabase',
-      'Tailwind',
-      'Redis',
-      'Vercel',
-    ],
-    featured: true,
-    clientWork: false,
-    githubUrl: 'https://github.com',
-    liveUrl: 'https://example.com',
-    publishedAt: '2024-03-01',
-    timeline: '3 months',
-    metrics: [
-      { label: 'Monthly Active Users', value: '50,000+' },
-      { label: 'Performance Score', value: '98/100' },
-      { label: 'Bundle Size Reduction', value: '40%' },
-    ],
-    challengeText:
-      'Building a multi-tenant architecture that scales efficiently while keeping costs low was the primary engineering challenge. We needed real-time features without excessive infrastructure overhead.',
-    solutionText:
-      'Implemented a row-level security model in Supabase for tenant isolation. Used tRPC with optimistic updates for real-time feel without WebSockets. Deployed edge functions for low-latency global access.',
-  },
-  'pulse-analytics': {
-    _id: '2',
-    title: 'Pulse Analytics',
-    slug: { current: 'pulse-analytics' },
-    summary:
-      'Privacy-first web analytics dashboard built on ClickHouse. Replaces Google Analytics with a clean, fast, open-source alternative.',
-    tags: ['Analytics', 'Privacy', 'Open Source'],
-    techStack: [
-      'React',
-      'Node.js',
-      'ClickHouse',
-      'Redis',
-      'Docker',
-      'Tailwind',
-    ],
-    featured: true,
-    clientWork: false,
-    githubUrl: 'https://github.com',
-    liveUrl: 'https://example.com',
-    publishedAt: '2024-02-01',
-    timeline: '10 weeks',
-    metrics: [
-      { label: 'Query Latency', value: '<80ms' },
-      { label: 'Events Processed', value: '12M+' },
-      { label: 'Tracking Scripts', value: '3KB' },
-    ],
-    challengeText:
-      'Teams needed product analytics without invasive tracking, cookie-heavy scripts, or slow dashboard queries across high-volume event streams.',
-    solutionText:
-      'Built a lean event collector backed by ClickHouse rollups, async ingestion, and a focused dashboard optimized for fast filtering and retention analysis.',
-  },
-  'shipkit-cli': {
-    _id: '3',
-    title: 'ShipKit CLI',
-    slug: { current: 'shipkit-cli' },
-    summary:
-      'Developer CLI tool for scaffolding production-ready Next.js projects with auth, payments, email, and CI/CD pre-configured out of the box.',
-    tags: ['CLI', 'Open Source', 'Developer Tools'],
-    techStack: ['Node.js', 'TypeScript', 'Oclif', 'Ink', 'GitHub Actions'],
-    featured: true,
-    clientWork: false,
-    githubUrl: 'https://github.com',
-    liveUrl: null,
-    publishedAt: '2024-01-15',
-    timeline: '6 weeks',
-    metrics: [
-      { label: 'Starter Modules', value: '18' },
-      { label: 'Setup Time', value: '5 min' },
-      { label: 'Templates', value: '6' },
-    ],
-    challengeText:
-      'Every new product started with repetitive setup: auth, payments, linting, deployment, environment validation, and documentation.',
-    solutionText:
-      'Created a composable CLI that asks a few setup questions, writes the correct files, validates environment choices, and leaves a project ready to deploy.',
-  },
-  'medico-ehr': {
-    _id: '4',
-    title: 'Medico EHR',
-    slug: { current: 'medico-ehr' },
-    summary:
-      'Electronic health records system for a mid-sized healthcare provider. HIPAA compliant, with appointment scheduling, billing, and telehealth.',
-    tags: ['Healthcare', 'Enterprise'],
-    techStack: ['React', 'Node.js', 'PostgreSQL', 'AWS', 'Stripe'],
-    featured: false,
-    clientWork: true,
-    githubUrl: null,
-    liveUrl: 'https://example.com',
-    publishedAt: '2023-11-01',
-    timeline: '5 months',
-    metrics: [
-      { label: 'Clinics Onboarded', value: '12' },
-      { label: 'Appointments', value: '30K+' },
-      { label: 'Uptime', value: '99.9%' },
-    ],
-    challengeText:
-      'The provider needed a secure workflow for patient records, appointments, billing, and virtual visits without slowing clinical staff down.',
-    solutionText:
-      'Designed role-based workflows, audit-friendly record updates, encrypted storage, and focused dashboards for front desk, clinicians, and billing teams.',
-  },
-  'luminary-ecommerce': {
-    _id: '5',
-    title: 'Luminary E-Commerce',
-    slug: { current: 'luminary-ecommerce' },
-    summary:
-      'High-performance e-commerce storefront for a DTC luxury candle brand. Features 3D product previews, subscription box, and custom CMS.',
-    tags: ['E-Commerce', 'Client Work'],
-    techStack: ['Next.js', 'Shopify', 'Three.js', 'Sanity', 'Stripe'],
-    featured: false,
-    clientWork: true,
-    githubUrl: null,
-    liveUrl: 'https://example.com',
-    publishedAt: '2023-09-01',
-    timeline: '8 weeks',
-    metrics: [
-      { label: 'Conversion Lift', value: '22%' },
-      { label: 'Lighthouse', value: '96' },
-      { label: 'Checkout Steps', value: '2' },
-    ],
-    challengeText:
-      'The brand needed a storefront that felt premium while staying fast on mobile and easy for the team to merchandise.',
-    solutionText:
-      'Combined a headless Shopify checkout, Sanity-managed editorial content, optimized product imagery, and lightweight 3D previews for hero products.',
-  },
-  devnotes: {
-    _id: '6',
-    title: 'DevNotes',
-    slug: { current: 'devnotes' },
-    summary:
-      'A minimal Markdown-based note taking app for developers. Features syntax highlighting, vim keybindings, and local-first storage.',
-    tags: ['Open Source', 'Developer Tools', 'Productivity'],
-    techStack: ['React', 'Electron', 'SQLite', 'CodeMirror', 'TypeScript'],
-    featured: false,
-    clientWork: false,
-    githubUrl: 'https://github.com',
-    liveUrl: 'https://example.com',
-    publishedAt: '2023-07-01',
-    timeline: '4 weeks',
-    metrics: [
-      { label: 'Cold Start', value: '<1s' },
-      { label: 'Offline First', value: '100%' },
-      { label: 'Editor Modes', value: '3' },
-    ],
-    challengeText:
-      'Most note apps were either too heavy for quick developer notes or too limited for snippets, local search, and keyboard-first workflows.',
-    solutionText:
-      'Built a local-first markdown workspace with SQLite indexing, syntax highlighting, fast fuzzy search, and optional vim-style editing.',
-  },
-};
+import { urlFor } from '@/sanity/lib/client';
+import { FALLBACK_PROJECT_MAP } from '@/data/fallback-projects';
 
 interface Params {
   params: Promise<{ slug: string }>;
@@ -188,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     project = await getProjectBySlug(slug);
   } catch {}
 
-  if (!project) project = DUMMY_PROJECTS[slug];
+  if (!project) project = FALLBACK_PROJECT_MAP[slug];
   if (!project) return { title: 'Project Not Found' };
 
   return {
@@ -207,7 +46,7 @@ export default async function ProjectDetailPage({ params }: Params) {
     project = await getProjectBySlug(slug);
   } catch {}
 
-  if (!project) project = DUMMY_PROJECTS[slug] ?? null;
+  if (!project) project = FALLBACK_PROJECT_MAP[slug] ?? null;
 
   if (!project) notFound();
 
@@ -279,11 +118,22 @@ export default async function ProjectDetailPage({ params }: Params) {
           {/* Thumbnail */}
           <AnimateIn delay={0.1} className="mb-12">
             <div className="relative rounded-xl overflow-hidden border border-border bg-surface-subtle aspect-video">
-              <div className="absolute inset-0 flex items-center justify-center dot-grid">
-                <span className="font-display text-6xl text-ink-faint/30 select-none">
-                  {project.title.slice(0, 2).toUpperCase()}
-                </span>
-              </div>
+              {project.thumbnail ? (
+                <Image
+                  src={urlFor(project.thumbnail).width(896).height(504).url()}
+                  alt={project.thumbnail.alt ?? project.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 896px"
+                  priority
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center dot-grid">
+                  <span className="font-display text-6xl text-ink-faint/30 select-none">
+                    {project.title.slice(0, 2).toUpperCase()}
+                  </span>
+                </div>
+              )}
             </div>
           </AnimateIn>
 

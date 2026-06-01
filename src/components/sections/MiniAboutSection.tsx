@@ -3,14 +3,11 @@ import { ArrowRight, MapPin, Coffee, Code2 } from "lucide-react";
 import { AnimateIn } from "@/components/ui/AnimateIn";
 import { siteConfig } from "@/config/site";
 import { getAboutPage } from "@/sanity/lib/queries";
-
-const FALLBACK_BIO = [
-  `I'm a full-stack engineer with 5+ years of experience crafting web applications that are fast, accessible, and a joy to use. I believe great software comes from caring equally about the user experience and the code quality underneath it.`,
-  `When I'm not building, I'm writing about web development, contributing to open source, or exploring the latest in the JavaScript ecosystem.`,
-];
+import { FALLBACK_BIO, FALLBACK_STATS } from "@/data/fallback-about";
 
 export async function MiniAboutSection() {
   let bio: string[] = FALLBACK_BIO;
+  let stats: { num: string; label: string; sub: string }[] = FALLBACK_STATS;
 
   try {
     const about = await getAboutPage();
@@ -20,6 +17,7 @@ export async function MiniAboutSection() {
         .filter(Boolean);
       if (extracted.length) bio = extracted.slice(0, 2);
     }
+    if (about?.stats?.length) stats = about.stats;
   } catch {}
 
   return (
@@ -64,12 +62,7 @@ export async function MiniAboutSection() {
           {/* Right: stats grid */}
           <AnimateIn delay={0.15}>
             <div className="grid grid-cols-2 gap-4">
-              {[
-                { num: "5+", label: "Years of experience", sub: "Shipping production software" },
-                { num: "40+", label: "Projects delivered", sub: "From startups to enterprises" },
-                { num: "15+", label: "Happy clients", sub: "Across 8 countries" },
-                { num: "∞", label: "Curiosity", sub: "Always learning, always building" },
-              ].map((stat) => (
+              {stats.map((stat) => (
                 <div
                   key={stat.label}
                   className="glass rounded-xl p-5 border border-border hover:border-accent-500/30 transition-colors space-y-1"
