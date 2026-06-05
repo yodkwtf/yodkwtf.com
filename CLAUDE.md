@@ -50,8 +50,11 @@ When Sanity is unreachable, pages fall back to static data in `src/data/`:
 - `fallback-projects.ts` — `FALLBACK_PROJECTS` (array) + `FALLBACK_PROJECT_MAP` (slug-keyed, with metrics/challenge/solution)
 - `fallback-experience.ts` — `FALLBACK_EXPERIENCE` + `FALLBACK_EDUCATION`
 - `fallback-skills.ts` — `FALLBACK_SKILLS` (Record\<category, string[]\>) + `SKILL_CATEGORY_COLORS`
+- `fallback-about.ts` — `FALLBACK_BIO` (string[]) + `FALLBACK_STATS` (num/label/sub objects)
 
 Every section that fetches from Sanity wraps the call in `try/catch` and substitutes the matching fallback on failure. `SkillsSection` is async and groups the flat `Skill[]` from Sanity into the category-keyed shape automatically.
+
+The `about` Sanity document also stores `education[]` (institution/degree/period/note) and `stats[]` (num/label/sub) which the about page and `MiniAboutSection` use, falling back to their respective constants when absent.
 
 ### Sanity Image URLs
 
@@ -67,6 +70,17 @@ urlFor(image).width(800).url()
 - `AnimateIn` — fade-in with directional slide (`direction`: `up | down | left | right | none`)
 - `StaggerContainer` + `StaggerItem` — orchestrated stagger for lists
 
+### Theme Access in Client Components
+
+`ThemeProvider` in `src/components/ui/ThemeProvider.tsx` is a **custom implementation** — do not install or import `next-themes`. To read or change the theme inside any `'use client'` component:
+
+```ts
+import { useTheme } from "@/components/ui/ThemeProvider";
+const { resolvedTheme, toggleTheme, setTheme } = useTheme();
+// resolvedTheme: "light" | "dark"
+// theme: "light" | "dark" | "system"
+```
+
 ### Styling System
 
 Tailwind CSS v4 is used with a CSS-variable-based design system. Custom token names to know:
@@ -76,6 +90,18 @@ Tailwind CSS v4 is used with a CSS-variable-based design system. Custom token na
 - Dark mode uses the `.dark` class (toggled by `ThemeProvider`)
 - **To change the accent color**: update `--accent-*` CSS variables in `globals.css` and the `accent` field in `siteConfig`
 - Fonts: `font-display` (Instrument Serif), `font-mono` (DM Mono), `font-sans` (Outfit)
+
+### TypeScript Gotcha — `siteConfig as const`
+
+`src/config/site.ts` exports `siteConfig` with `as const`, so every string field is a **narrow literal type** (e.g. `"/resume.pdf"`, not `string`). When you initialise a `let` variable from one of those fields and later reassign it from a Sanity fetch, you must widen the declaration explicitly:
+
+```ts
+// ❌ infers as literal "/resume.pdf" — Sanity string won't fit
+let resumeUrl = siteConfig.links.resume;
+
+// ✅ widened to string
+let resumeUrl: string = siteConfig.links.resume;
+```
 
 ### Next.js 16 / React 19 Specifics
 
@@ -113,6 +139,15 @@ Code blocks are syntax-highlighted via `rehype-pretty-code` with the `github-dar
 ```
 // filename: path/to/file.ts
 ```
+
+### SEO Infrastructure
+
+These files are already in place — don't recreate them:
+- `src/app/sitemap.ts` — auto-generates XML sitemap (static pages + MDX blogs + Sanity projects)
+- `src/app/robots.ts` — generates `robots.txt`
+- `src/app/rss.xml/route.ts` — RSS feed served at `/rss.xml` (MDX posts only)
+- `src/components/ui/JsonLd.tsx` — renders JSON-LD `<script>` tags; used on blog/project detail pages
+- `src/app/not-found.tsx` — global 404 page
 
 ### Adding a Blog Post
 

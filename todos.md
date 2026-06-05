@@ -1,6 +1,9 @@
 ## ToDos:
 
 - [ ] Update all the fallback content first
+- [ ] Fix all the typescript errors across the entire codebase
+- [x] Fix the nav bottom outline on scroll
+- [ ] Fix the twitter feed not showing up on block page
 - [ ] Test the entire website with the fallback content
 - [ ] Test empty error states
 - [ ] Test pagination

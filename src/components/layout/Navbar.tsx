@@ -27,10 +27,10 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 px-6 transition-all duration-300',
+          'fixed top-0 left-0 right-0 z-50 px-6 transition-all duration-300 border-b',
           scrolled
-            ? 'py-3 glass-nav border-b border-border/60'
-            : 'py-5 bg-transparent',
+            ? 'py-3 glass-nav border-border/60'
+            : 'py-5 bg-transparent border-transparent',
         )}
       >
         <nav className="mx-auto max-w-7xl flex items-center justify-between">
@@ -123,7 +123,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[60px] z-40 glass border-b border-border md:hidden"
+            className="fixed inset-x-0 top-[60px] z-40 bg-surface/95 backdrop-blur-md border-b border-border md:hidden"
           >
             <nav className="flex flex-col gap-1 px-6 py-4">
               {siteConfig.nav.map((item, i) => {
@@ -151,16 +151,6 @@ export function Navbar() {
                   </motion.div>
                 );
               })}
-              <div className="pt-2 border-t border-border mt-2">
-                <Link
-                  href={siteConfig.links.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline w-full justify-center text-sm"
-                >
-                  Resume
-                </Link>
-              </div>
             </nav>
           </motion.div>
         )}
