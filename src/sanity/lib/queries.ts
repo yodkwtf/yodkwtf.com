@@ -37,6 +37,10 @@ export async function getSkills(): Promise<Skill[]> {
   );
 }
 
+export async function getHeroConfig(): Promise<{ stats: { num: string; label: string }[]; stack: string[] } | null> {
+  return sanityFetch(`*[_type == "heroConfig"][0] { stats[] { num, label }, stack }`);
+}
+
 // ─── Experience ──────────────────────────────────────────────────────────────
 export async function getExperience(): Promise<Experience[]> {
   return sanityFetch(

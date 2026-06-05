@@ -1,9 +1,35 @@
 ## ToDos:
 
 - [ ] Update all the fallback content first
+- [ ] Finish content review for all sections and all pages
+  - [ ] Navbar
+  - [ ] Footer
+  - [ ] Contact Section
+  - [ ] Home page
+    - [x] Hero section
+    - [ ] About section
+    - [ ] Projects section
+    - [ ] Blog section
+  - [ ] About page
+    - [ ] About Me section
+    - [ ] Skills section
+    - [ ] Experience section
+    - [ ] Education section
+  - [ ] Projects page
+    - [ ] Projects section
+    - [ ] Search and filter functionality
+    - [ ] Single project page
+  - [ ] Blog page
+    - [ ] Blog posts section
+    - [ ] Search and filter functionality
+    - [ ] Single blog post page
+    - [ ] Twitter feed section
+    - [ ] MDX components
+  - [ ] 404 page
 - [ ] Fix all the typescript errors across the entire codebase
 - [x] Fix the nav bottom outline on scroll
 - [ ] Fix the twitter feed not showing up on block page
+- [ ] Update siteCOnfig with all the correct information
 - [ ] Test the entire website with the fallback content
 - [ ] Test empty error states
 - [ ] Test pagination

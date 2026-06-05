@@ -75,6 +75,36 @@ export const aboutSchema = defineType({
   ],
 });
 
+export const heroConfigSchema = defineType({
+  name: "heroConfig",
+  title: "Hero Section",
+  type: "document",
+  fields: [
+    defineField({
+      name: "stats",
+      title: "Stats",
+      type: "array",
+      description: "Concise numbers shown beneath the social links (e.g. 5+ Years exp).",
+      of: [{
+        type: "object",
+        fields: [
+          defineField({ name: "num", type: "string", description: 'e.g. "5+" or "10+"' }),
+          defineField({ name: "label", type: "string", description: 'e.g. "Years exp"' }),
+        ],
+        preview: { select: { title: "label", subtitle: "num" } },
+      }],
+    }),
+    defineField({
+      name: "stack",
+      title: "Tech Stack",
+      type: "array",
+      description: "Skills shown in the code card. Update when targeting a specific role.",
+      of: [{ type: "string" }],
+    }),
+  ],
+  preview: { prepare: () => ({ title: "Hero Section" }) },
+});
+
 export const socialLinkSchema = defineType({
   name: "socialLink",
   title: "Social Link",

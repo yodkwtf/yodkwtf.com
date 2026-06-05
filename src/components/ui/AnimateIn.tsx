@@ -72,6 +72,16 @@ export function StaggerContainer({
   );
 }
 
+export function BounceBar({ className }: { className?: string }) {
+  return (
+    <motion.div
+      animate={{ y: [0, 6, 0] }}
+      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+      className={className}
+    />
+  );
+}
+
 export function StaggerItem({
   children,
   className,
