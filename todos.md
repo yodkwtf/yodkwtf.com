@@ -4,7 +4,7 @@
 - [ ] Finish content review for all sections and all pages
   - [x] Navbar
   - [x] Footer
-  - [ ] Contact Section
+  - [x] Contact Section
   - [ ] Home page
     - [x] Hero section
     - [x] About section
@@ -25,7 +25,7 @@
     - [ ] Single blog post page
     - [ ] Twitter feed section
     - [ ] MDX components
-  - [ ] 404 page
+  - [x] 404 page
 - [ ] Fix all the typescript errors across the entire codebase
 - [ ] Add error handling everywhere for all the API calls and all the components
 - [ ] Make `accent` work through the site config for the entire site
