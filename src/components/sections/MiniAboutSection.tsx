@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { ArrowRight, MapPin, Coffee, Code2 } from "lucide-react";
-import { AnimateIn } from "@/components/ui/AnimateIn";
-import { siteConfig } from "@/config/site";
-import { getAboutPage } from "@/sanity/lib/queries";
-import { FALLBACK_BIO, FALLBACK_STATS } from "@/data/fallback-about";
+import Link from 'next/link';
+import { ArrowRight, MapPin, Coffee, Code2 } from 'lucide-react';
+import { AnimateIn } from '@/components/ui/AnimateIn';
+import { siteConfig } from '@/config/site';
+import { getAboutPage } from '@/sanity/lib/queries';
+import { FALLBACK_BIO, FALLBACK_STATS } from '@/data/fallback-about';
 
 export async function MiniAboutSection() {
   let bio: string[] = FALLBACK_BIO;
@@ -13,7 +13,7 @@ export async function MiniAboutSection() {
     const about = await getAboutPage();
     if (about?.bio?.length) {
       const extracted = (about.bio as { children?: { text: string }[] }[])
-        .map((block) => block.children?.map((c) => c.text).join("") ?? "")
+        .map((block) => block.children?.map((c) => c.text).join('') ?? '')
         .filter(Boolean);
       if (extracted.length) bio = extracted.slice(0, 2);
     }
@@ -31,8 +31,10 @@ export async function MiniAboutSection() {
                 About Me
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight">
-                Building at the intersection of{" "}
-                <em className="not-italic text-gradient">engineering and design</em>.
+                Bringing ideas to life through{' '}
+                <em className="not-italic text-gradient">
+                  engineering and design.
+                </em>
               </h2>
               {bio.map((para, i) => (
                 <p key={i} className="text-ink-muted leading-relaxed">
@@ -46,7 +48,7 @@ export async function MiniAboutSection() {
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Coffee size={14} className="text-accent-500" />
-                  Fueled by espresso
+                  Fueled by Chai
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Code2 size={14} className="text-accent-500" />
@@ -67,8 +69,12 @@ export async function MiniAboutSection() {
                   key={stat.label}
                   className="glass rounded-xl p-5 border border-border hover:border-accent-500/30 transition-colors space-y-1"
                 >
-                  <div className="font-display text-3xl text-gradient">{stat.num}</div>
-                  <div className="text-sm font-medium text-ink">{stat.label}</div>
+                  <div className="font-display text-3xl text-gradient">
+                    {stat.num}
+                  </div>
+                  <div className="text-sm font-medium text-ink">
+                    {stat.label}
+                  </div>
                   <div className="text-xs text-ink-faint">{stat.sub}</div>
                 </div>
               ))}

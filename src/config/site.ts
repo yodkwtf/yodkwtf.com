@@ -7,7 +7,7 @@ export const siteConfig = {
   ogImage: '/og.png',
   author: 'Durgesh Chaudhary',
   email: '48durgesh.chaudhary@gmail.com',
-  location: 'San Francisco, CA',
+  location: 'Gurgaon, India',
   // Primary accent — change this ONE value to re-theme the entire site
   accent: 'emerald', // options: emerald | violet | sky | rose | amber
   links: {

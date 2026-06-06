@@ -7,7 +7,7 @@
   - [ ] Contact Section
   - [ ] Home page
     - [x] Hero section
-    - [ ] About section
+    - [x] About section
     - [ ] Projects section
     - [ ] Blog section
   - [ ] About page
@@ -27,6 +27,10 @@
     - [ ] MDX components
   - [ ] 404 page
 - [ ] Fix all the typescript errors across the entire codebase
+- [ ] Add error handling everywhere for all the API calls and all the components
+- [ ] Make `accent` work through the site config for the entire site
+- [ ] Check if a table of contents is needed for the blog posts and add it if necessary
+- [ ] Add a logging system to log all the errors and all the important events across the entire website
 - [x] Fix the nav bottom outline on scroll
 - [ ] Fix the twitter feed not showing up on block page
 - [ ] Update siteCOnfig with all the correct information
