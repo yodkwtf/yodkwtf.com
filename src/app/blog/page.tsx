@@ -28,8 +28,8 @@ export default function BlogPage() {
             Blog.
           </h1>
           <p className="text-ink-muted text-lg leading-relaxed">
-            Thoughts on web development, engineering craft, and building things
-            that matter.{' '}
+            Thoughts on web development, software engineering, and building
+            things that matter.{' '}
             <span className="text-accent-500 font-semibold">
               {posts.length} posts
             </span>{' '}

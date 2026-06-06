@@ -30,17 +30,19 @@ This is a personal portfolio site built with **Next.js 16** (App Router), **Reac
 
 ### Key Files
 
-- `src/config/site.ts` — single source of truth for all site metadata, nav links, social URLs, and the accent color theme
+- `src/config/site.ts` — single source of truth for all site metadata, nav links, social URLs, and the accent color theme. Notable fields: `username` (GitHub handle), `links.repo` (portfolio source repo URL)
 - `src/types/index.ts` — all shared TypeScript interfaces
 - `src/app/globals.css` — CSS custom properties that power the design system (colors, radii, transitions)
-- `src/sanity/schemas/` — Sanity document schemas (`project`, `skill`, `experience`, `about`, `socialLink`). The `about` schema's `resume` field is a **file upload** (not a URL); the GROQ query projects `resume.asset->url` into `resumeUrl` so consumers always get a plain string.
+- `src/sanity/schemas/` — Sanity document schemas (`project`, `skill`, `experience`, `about`, `socialLink`, `heroConfig`). The `about` schema's `resume` field is a **file upload** (not a URL); the GROQ query projects `resume.asset->url` into `resumeUrl` so consumers always get a plain string. The `heroConfig` schema is a singleton document controlling the hero section's stats and stack independently from the about page stats.
 - `src/lib/utils.ts` — `cn()` helper (clsx + tailwind-merge) for conditional class names
 
 ### RSC / Client Split
 
-Pages are React Server Components. Interactive UI is extracted into `*Client.tsx` files that are `'use client'` and receive data as props:
+Pages and home-page sections are React Server Components that own their own data fetching. Interactive UI that needs browser APIs is extracted into `*Client.tsx` files:
 - `src/app/projects/ProjectsClient.tsx` — client-side search and tag filtering for the projects grid
 - `src/app/blog/BlogListClient.tsx` — client-side search and tag filtering for the blog list
+
+Sections like `HeroSection`, `FeaturedProjectsSection`, and `MiniAboutSection` are **single-file async RSCs** — they fetch their own data and use `AnimateIn` for animations rather than calling `motion.*` directly. This avoids needing a `'use client'` split. Only add a `*Client.tsx` companion when a section needs direct Framer Motion calls, hooks, or browser events.
 
 `src/app/error.tsx` is the app-wide error boundary (must be `'use client'`). It receives `error` and `reset` props and renders a "Try again / Go home" UI.
 
@@ -50,7 +52,11 @@ When Sanity is unreachable, pages fall back to static data in `src/data/`:
 - `fallback-projects.ts` — `FALLBACK_PROJECTS` (array) + `FALLBACK_PROJECT_MAP` (slug-keyed, with metrics/challenge/solution)
 - `fallback-experience.ts` — `FALLBACK_EXPERIENCE` + `FALLBACK_EDUCATION`
 - `fallback-skills.ts` — `FALLBACK_SKILLS` (Record\<category, string[]\>) + `SKILL_CATEGORY_COLORS`
-- `fallback-about.ts` — `FALLBACK_BIO` (string[]) + `FALLBACK_STATS` (num/label/sub objects)
+- `fallback-about.ts` — `FALLBACK_BIO` (string[]) + `FALLBACK_STATS` (`{ num, label, sub }[]` — used by `MiniAboutSection` and the about page)
+- `fallback-hero.ts` — `FALLBACK_HERO_STATS` (`{ num, label }[]` — concise, no `sub`) + `FALLBACK_HERO_STACK` (`string[]`) — used only by `HeroSection`
+- `fallback-blogs.ts` — `FALLBACK_BLOGS` + `FALLBACK_BLOG_TAGS` — shown when no MDX files exist yet
+
+**Note:** Hero stats (`fallback-hero.ts`) and about stats (`fallback-about.ts`) are intentionally separate. Hero stats are concise `{ num, label }` pairs; about stats include a `sub` subtitle line.
 
 Every section that fetches from Sanity wraps the call in `try/catch` and substitutes the matching fallback on failure. `SkillsSection` is async and groups the flat `Skill[]` from Sanity into the category-keyed shape automatically.
 
@@ -66,9 +72,10 @@ urlFor(image).width(800).url()
 
 ### Animation Primitives
 
-`src/components/ui/AnimateIn.tsx` exports three Framer Motion wrappers:
+`src/components/ui/AnimateIn.tsx` exports four Framer Motion wrappers:
 - `AnimateIn` — fade-in with directional slide (`direction`: `up | down | left | right | none`)
 - `StaggerContainer` + `StaggerItem` — orchestrated stagger for lists
+- `BounceBar` — a `motion.div` that loops `y: [0, 6, 0]` indefinitely; used for the hero scroll indicator
 
 ### Theme Access in Client Components
 
@@ -139,6 +146,10 @@ Code blocks are syntax-highlighted via `rehype-pretty-code` with the `github-dar
 ```
 // filename: path/to/file.ts
 ```
+
+### Resume URL — Fetched Once in Layout
+
+`getResumeUrl()` is called **once** in `src/app/layout.tsx` and the result is passed as a `resumeUrl: string` prop to both `<Navbar>` and `<Footer>`. Neither component fetches it independently. The about page gets `resumeUrl` as part of its own `getAboutPage()` call (which returns the full about document anyway), so that is a separate fetch and is correct.
 
 ### SEO Infrastructure
 

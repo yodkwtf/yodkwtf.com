@@ -1,6 +1,7 @@
 export const siteConfig = {
   name: 'Durgesh',
   title: 'Durgesh Chaudhary — Full-Stack Engineer',
+  username: 'yodkwtf',
   description:
     'Full-stack engineer crafting performant, accessible, and beautiful digital experiences. Specializing in React, Next.js, and modern web architecture.',
   url: 'https://yodkwtf.com',

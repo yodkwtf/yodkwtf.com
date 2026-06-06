@@ -22,7 +22,13 @@ function gradientFor(slug: string) {
 }
 
 // ─── Featured variant: image on top, content below ────────────────────────────
-function FeaturedBlogCard({ post, className }: { post: BlogPostMeta; className?: string }) {
+function FeaturedBlogCard({
+  post,
+  className,
+}: {
+  post: BlogPostMeta;
+  className?: string;
+}) {
   const gradient = gradientFor(post.slug);
 
   return (
@@ -48,10 +54,15 @@ function FeaturedBlogCard({ post, className }: { post: BlogPostMeta; className?:
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           ) : (
-            <div className={cn('absolute inset-0 bg-linear-to-br dot-grid', gradient)}>
-              {post.tags?.[0] && (
+            <div
+              className={cn(
+                'absolute inset-0 bg-linear-to-br dot-grid',
+                gradient,
+              )}
+            >
+              {post.category && (
                 <span className="absolute bottom-2 right-2 font-mono text-[9px] text-white/20 uppercase tracking-widest">
-                  {post.tags[0]}
+                  {post.category}
                 </span>
               )}
             </div>
@@ -98,7 +109,13 @@ function FeaturedBlogCard({ post, className }: { post: BlogPostMeta; className?:
 }
 
 // ─── Compact variant: no image, full-width content ────────────────────────────
-function CompactBlogCard({ post, className }: { post: BlogPostMeta; className?: string }) {
+function CompactBlogCard({
+  post,
+  className,
+}: {
+  post: BlogPostMeta;
+  className?: string;
+}) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block h-full">
       <motion.article
@@ -157,8 +174,10 @@ export function BlogCard({
   className?: string;
   variant?: 'default' | 'featured' | 'compact';
 }) {
-  if (variant === 'featured') return <FeaturedBlogCard post={post} className={className} />;
-  if (variant === 'compact') return <CompactBlogCard post={post} className={className} />;
+  if (variant === 'featured')
+    return <FeaturedBlogCard post={post} className={className} />;
+  if (variant === 'compact')
+    return <CompactBlogCard post={post} className={className} />;
 
   const gradient = gradientFor(post.slug);
 
@@ -191,9 +210,9 @@ export function BlogCard({
                 gradient,
               )}
             >
-              {post.tags?.[0] && (
+              {post.category && (
                 <span className="absolute bottom-2 right-2 font-mono text-[9px] text-white/20 uppercase tracking-widest">
-                  {post.tags[0]}
+                  {post.category}
                 </span>
               )}
             </div>

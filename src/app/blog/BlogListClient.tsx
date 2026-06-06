@@ -15,9 +15,11 @@ import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { XFeed } from '@/components/ui/TwitterFeed';
 import type { BlogPostMeta } from '@/types';
+import { siteConfig } from '@/config/site';
+import { TwitterIcon } from '@/components/ui/SocialIcons';
 
 const ALL = 'All';
-const TWITTER_HANDLE = 'yodkwtf';
+const TWITTER_HANDLE = siteConfig.username;
 const PAGE_SIZE = 6; // posts to show initially and per load
 
 // Post row — text-only, very light divider at the bottom
@@ -323,19 +325,13 @@ export function BlogListClient({
           </div>
         </div>
 
-        <p className="text-xs font-mono text-ink-faint">
-          {filtered.length} post{filtered.length !== 1 ? 's' : ''}
-          {(activeCategory !== ALL || activeTag !== ALL || search) &&
-            ` matching filters`}
-        </p>
-
         <div>
           <div className="flex items-center gap-2 mb-3">
             <span className="text-sm font-bold text-ink-faint leading-none">
-              𝕏
+              <TwitterIcon size={12} />
             </span>
             <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">
-              @{TWITTER_HANDLE} on X
+              - @{TWITTER_HANDLE}
             </p>
           </div>
           <XFeed username={TWITTER_HANDLE} />
