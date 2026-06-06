@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/ui/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site";
+import { getResumeUrl } from "@/sanity/lib/queries";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
@@ -53,15 +54,21 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  let resumeUrl: string = siteConfig.links.resume;
+  try {
+    const sanityUrl = await getResumeUrl();
+    if (sanityUrl) resumeUrl = sanityUrl;
+  } catch {}
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
-            <Navbar />
+            <Navbar resumeUrl={resumeUrl} />
             <main className="flex-1">{children}</main>
-            <Footer />
+            <Footer resumeUrl={resumeUrl} />
           </div>
         </ThemeProvider>
       </body>

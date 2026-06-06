@@ -9,7 +9,7 @@ import { useTheme } from '@/components/ui/ThemeProvider';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 
-export function Navbar() {
+export function Navbar({ resumeUrl }: { resumeUrl: string }) {
   const pathname = usePathname();
   const { resolvedTheme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,7 +21,12 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  useEffect(() => setMobileOpen(false), [pathname]);
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const timeout = window.setTimeout(() => setMobileOpen(false), 0);
+    return () => window.clearTimeout(timeout);
+  }, [pathname, mobileOpen]);
 
   return (
     <>
@@ -44,7 +49,7 @@ export function Navbar() {
               <Code2 size={16} strokeWidth={2.5} />
             </span>
             <span className="font-display text-lg text-ink hidden sm:block">
-              @yodkwtf
+              Durgesh
             </span>
           </Link>
 
@@ -95,7 +100,7 @@ export function Navbar() {
             </button>
 
             <Link
-              href={siteConfig.links.resume}
+              href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex btn btn-outline text-sm py-1.5 px-4"
@@ -123,7 +128,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[60px] z-40 bg-surface/95 backdrop-blur-md border-b border-border md:hidden"
+            className="fixed inset-x-0 top-15 z-40 bg-surface/95 backdrop-blur-md border-b border-border md:hidden"
           >
             <nav className="flex flex-col gap-1 px-6 py-4">
               {siteConfig.nav.map((item, i) => {

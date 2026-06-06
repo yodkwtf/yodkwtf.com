@@ -2,8 +2,8 @@
 
 - [ ] Update all the fallback content first
 - [ ] Finish content review for all sections and all pages
-  - [ ] Navbar
-  - [ ] Footer
+  - [x] Navbar
+  - [x] Footer
   - [ ] Contact Section
   - [ ] Home page
     - [x] Hero section
@@ -31,6 +31,8 @@
 - [ ] Make `accent` work through the site config for the entire site
 - [ ] Check if a table of contents is needed for the blog posts and add it if necessary
 - [ ] Add a logging system to log all the errors and all the important events across the entire website
+- [ ] Get a professional logo for `yodkwtf` and add it to the navbar and the footer
+- [ ] Remove unnecessary console logs and comments from the entire codebase
 - [x] Fix the nav bottom outline on scroll
 - [ ] Fix the twitter feed not showing up on block page
 - [ ] Update siteCOnfig with all the correct information

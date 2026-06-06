@@ -1,23 +1,19 @@
-import Link from "next/link";
-import { ArrowUpRight, Mail } from "lucide-react";
-import { GithubIcon, TwitterIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
-import { siteConfig } from "@/config/site";
-import { getResumeUrl } from "@/sanity/lib/queries";
-
-export async function Footer() {
+import Link from 'next/link';
+import { ArrowUpRight, Mail } from 'lucide-react';
+import {
+  GithubIcon,
+  TwitterIcon,
+  LinkedinIcon,
+} from '@/components/ui/SocialIcons';
+import { siteConfig } from '@/config/site';
+export function Footer({ resumeUrl }: { resumeUrl: string }) {
   const year = new Date().getFullYear();
 
-  let resumeUrl = siteConfig.links.resume;
-  try {
-    const sanityUrl = await getResumeUrl();
-    if (sanityUrl) resumeUrl = sanityUrl;
-  } catch {}
-
   const footerLinks = [
-    { label: "About", href: "/about" },
-    { label: "Projects", href: "/projects" },
-    { label: "Blog", href: "/blog" },
-    { label: "Resume", href: resumeUrl, external: true },
+    { label: 'About', href: '/about' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Resume', href: resumeUrl, external: true },
   ];
 
   return (
@@ -27,15 +23,17 @@ export async function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8">
           <div className="space-y-2 text-center md:text-left">
             <p className="font-display text-xl text-ink">{siteConfig.name}</p>
-            <p className="text-sm text-ink-muted max-w-xs mx-auto md:mx-0">{siteConfig.description.slice(0, 80)}…</p>
+            <p className="text-sm text-ink-muted max-w-xs mx-auto md:mx-0">
+              {siteConfig.description.slice(0, 100)}…
+            </p>
           </div>
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {footerLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
                 className="flex items-center gap-1 text-sm text-ink-muted hover:text-ink transition-colors underline-anim"
               >
                 {link.label}
@@ -44,27 +42,56 @@ export async function Footer() {
             ))}
           </nav>
           <div className="flex items-center justify-center md:justify-end gap-3">
-            <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors">
+            <a
+              href={siteConfig.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+            >
               <GithubIcon size={17} />
             </a>
-            <a href={siteConfig.links.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors">
+            <a
+              href={siteConfig.links.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+            >
               <TwitterIcon size={17} />
             </a>
-            <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors">
+            <a
+              href={siteConfig.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+            >
               <LinkedinIcon size={17} />
             </a>
-            <a href={`mailto:${siteConfig.email}`} aria-label="Email"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors">
+            <a
+              href={`mailto:${siteConfig.email}`}
+              aria-label="Email"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+            >
               <Mail size={17} />
             </a>
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-ink-faint">© {year} {siteConfig.name}. All rights reserved.</p>
-          <p className="text-xs text-ink-faint font-mono">Built with Next.js · Sanity · Tailwind</p>
+          <p className="text-xs text-ink-faint">
+            © {year} {siteConfig.name}. All rights reserved.
+          </p>
+          <a
+            href={`${siteConfig.links.repo}/issues`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs text-ink-faint font-mono hover:text-accent-500 transition-colors group"
+          >
+            <GithubIcon size={13} />
+            <span>Found an issue? Report it on GitHub</span>
+            <ArrowUpRight size={11} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+          </a>
         </div>
       </div>
     </footer>
