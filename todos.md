@@ -55,7 +55,7 @@
 
 #### Blog Improvements
 
-- [ ] Check if a table of contents is needed for the blog posts and add it if necessary
+- [x] Check if a table of contents is needed for the blog posts and add it if necessary
 
 #### Testing & QA
 

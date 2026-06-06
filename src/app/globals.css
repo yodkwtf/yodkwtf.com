@@ -280,6 +280,7 @@ select:focus-visible {
 .prose h3 {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
+  scroll-margin-top: 6rem;
 }
 
 .prose a {
