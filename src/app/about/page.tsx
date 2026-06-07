@@ -28,23 +28,21 @@ type EducationItem = {
   note?: string;
 };
 
-// Portable Text block shape (Sanity) or plain string (fallback)
 type PortableTextChild = { text: string };
 type DescriptionItem = string | { children?: PortableTextChild[] };
 
-// Renderable experience — union of Sanity fields and fallback-only fields
 type ExperienceItem = {
   company: string;
   role: string;
   current: boolean;
   description: DescriptionItem[];
   techStack?: string[];
-  tech?: string[]; // fallback alias
+  tech?: string[];
   companyUrl?: string;
-  url?: string; // fallback alias
+  url?: string;
   startDate?: string;
   endDate?: string;
-  period?: string; // pre-formatted date range (fallback)
+  period?: string;
   order?: number;
 };
 
@@ -57,6 +55,8 @@ export default async function AboutPage() {
   let experience: ExperienceItem[] = FALLBACK_EXPERIENCE;
   let education: EducationItem[] = FALLBACK_EDUCATION;
   let avatarUrl: string | null = null;
+  let avatarWidth = 640;
+  let avatarHeight = 800;
   let resumeUrl: string = siteConfig.links.resume;
   let bio: string[] = FALLBACK_BIO;
 
@@ -66,8 +66,13 @@ export default async function AboutPage() {
       getAboutPage(),
     ]);
     if (fetchedExp?.length) experience = fetchedExp;
-    if (about?.avatar)
-      avatarUrl = urlFor(about.avatar).width(560).height(560).url();
+    if (about?.avatar) {
+      avatarUrl = urlFor(about.avatar).width(640).url();
+      if (about.avatar.dimensions?.width && about.avatar.dimensions?.height) {
+        avatarWidth = about.avatar.dimensions.width;
+        avatarHeight = about.avatar.dimensions.height;
+      }
+    }
     if (about?.resumeUrl) resumeUrl = about.resumeUrl;
     if (about?.education?.length) education = about.education;
     if (about?.bio?.length) {
@@ -76,16 +81,19 @@ export default async function AboutPage() {
         .filter(Boolean);
       if (extracted.length) bio = extracted;
     }
+    logger.info('AboutPage', 'Loaded about and experience data from Sanity');
   } catch (err) {
-    logger.warn('AboutPage', 'Failed to fetch about/experience data from Sanity, using fallback', err);
+    logger.warn(
+      'AboutPage',
+      'Failed to fetch about/experience data, using fallback',
+      err,
+    );
   }
 
   return (
     <>
-      {/* ── Page header ─────────────────────────────── */}
       <div className="pt-32 pb-8 px-6">
         <div className="mx-auto max-w-7xl">
-          {/* ── Header: two-column — text left, profile image right ── */}
           <AnimateIn>
             <div className="grid lg:grid-cols-[1fr_320px] gap-16 items-center">
               <div className="space-y-5">
@@ -97,7 +105,10 @@ export default async function AboutPage() {
                 </h1>
                 <div className="space-y-4 max-w-2xl">
                   {bio.map((para, i) => (
-                    <p key={i} className="text-ink-muted text-lg leading-relaxed">
+                    <p
+                      key={i}
+                      className="text-ink-muted text-lg leading-relaxed"
+                    >
                       {para}
                     </p>
                   ))}
@@ -120,31 +131,29 @@ export default async function AboutPage() {
                 </div>
               </div>
 
-              {/* Circular profile image */}
-              <div className="flex justify-center lg:justify-end">
-                <div className="relative">
-                  <div className="absolute -inset-1.5 rounded-full bg-linear-to-br from-accent-400 to-accent-700 opacity-25 blur-lg" />
-                  <div className="relative w-56 h-56 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-accent-500/30 bg-surface-subtle">
-                    {avatarUrl ? (
-                      <Image
-                        src={avatarUrl}
-                        alt={siteConfig.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 1024px) 208px, 256px"
-                        priority
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center dot-grid">
-                        <span className="font-display text-5xl text-gradient select-none">
-                          {siteConfig.name
-                            .split(' ')
-                            .map((n) => n[0])
-                            .join('')}
-                        </span>
-                      </div>
-                    )}
-                  </div>
+              <div className="flex justify-center lg:justify-end mt-4 lg:mt-0">
+                <div className="relative w-full max-w-[288px] lg:max-w-none">
+                  <div className="absolute -inset-1.5 rounded-2xl bg-linear-to-br from-accent-400 to-accent-700 opacity-25 blur-lg" />
+                  {avatarUrl ? (
+                    <Image
+                      src={avatarUrl}
+                      alt={siteConfig.name}
+                      width={avatarWidth}
+                      height={avatarHeight}
+                      className="relative w-full h-auto rounded-2xl border-2 border-accent-500/30 object-cover"
+                      sizes="(max-width: 1024px) 288px, 320px"
+                      priority
+                    />
+                  ) : (
+                    <div className="relative aspect-4/5 rounded-2xl border-2 border-accent-500/30 bg-surface-subtle flex items-center justify-center dot-grid">
+                      <span className="font-display text-5xl text-gradient select-none">
+                        {siteConfig.name
+                          .split(' ')
+                          .map((n) => n[0])
+                          .join('')}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -152,13 +161,10 @@ export default async function AboutPage() {
         </div>
       </div>
 
-      {/* ── Skills (full-width section) ─────────────── */}
       <SkillsSection />
 
-      {/* ── Experience + Education ──────────────────── */}
       <div className="py-16 px-6">
         <div className="mx-auto max-w-5xl">
-          {/* ── Experience ── */}
           <section className="mb-16">
             <div className="max-w-3xl mx-auto">
               <SectionHeader label="Career" heading="Where I've worked." />
@@ -208,7 +214,6 @@ export default async function AboutPage() {
                             </span>
                           </div>
 
-                          {/* Bullet-point description */}
                           {Array.isArray(exp.description) &&
                             exp.description.length > 0 && (
                               <ul className="mb-4 space-y-1.5">
@@ -252,7 +257,6 @@ export default async function AboutPage() {
             </div>
           </section>
 
-          {/* ── Education ── */}
           <section>
             <div className="max-w-3xl mx-auto">
               <SectionHeader label="Education" heading="Academic background." />

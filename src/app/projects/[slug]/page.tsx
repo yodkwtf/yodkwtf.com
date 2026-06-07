@@ -28,7 +28,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     const { getProjectBySlug } = await import('@/sanity/lib/queries');
     project = await getProjectBySlug(slug);
   } catch (err) {
-    logger.warn('ProjectDetailPage.generateMetadata', `Failed to fetch project "${slug}" from Sanity`, err);
+    logger.warn(
+      'ProjectDetailPage.generateMetadata',
+      `Failed to fetch project "${slug}" from Sanity`,
+      err,
+    );
   }
 
   if (!project) project = FALLBACK_PROJECT_MAP[slug];
@@ -49,7 +53,11 @@ export default async function ProjectDetailPage({ params }: Params) {
     const { getProjectBySlug } = await import('@/sanity/lib/queries');
     project = await getProjectBySlug(slug);
   } catch (err) {
-    logger.warn('ProjectDetailPage', `Failed to fetch project "${slug}" from Sanity, using fallback`, err);
+    logger.warn(
+      'ProjectDetailPage',
+      `Failed to fetch project "${slug}" from Sanity, using fallback`,
+      err,
+    );
   }
 
   if (!project) project = FALLBACK_PROJECT_MAP[slug] ?? null;
@@ -143,15 +151,18 @@ export default async function ProjectDetailPage({ params }: Params) {
             </div>
           </AnimateIn>
 
-          {/* Description — full width, below the image */}
-          {Array.isArray(project.description) && project.description.length > 0 && (
-            <AnimateIn delay={0.15} className="mb-12">
-              <h2 className="font-display text-2xl text-ink mb-4">About this project</h2>
-              <div className="prose prose-lg dark:prose-invert max-w-none text-ink-muted [&_p]:leading-relaxed [&_p]:mb-4 last:[&_p]:mb-0">
-                <PortableText value={project.description} />
-              </div>
-            </AnimateIn>
-          )}
+          {/* Description - full width, below the image */}
+          {Array.isArray(project.description) &&
+            project.description.length > 0 && (
+              <AnimateIn delay={0.15} className="mb-12">
+                <h2 className="font-display text-2xl text-ink mb-4">
+                  About this project
+                </h2>
+                <div className="prose prose-lg dark:prose-invert max-w-none text-ink-muted [&_p]:leading-relaxed [&_p]:mb-4 last:[&_p]:mb-0">
+                  <PortableText value={project.description} />
+                </div>
+              </AnimateIn>
+            )}
 
           {/* Metrics */}
           {project.metrics?.length > 0 && (

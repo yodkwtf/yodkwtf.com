@@ -57,8 +57,12 @@ export async function getExperience(): Promise<Experience[]> {
 export async function getAboutPage(): Promise<AboutPage | null> {
   return sanityFetch(
     `*[_type == "about"][0] {
-      _id, headline, subheadline, bio, journey, philosophy,
-      avatar { asset, alt },
+      _id, headline, subheadline, bio, shortBio, journey, philosophy,
+      avatar {
+        asset,
+        "dimensions": asset->metadata.dimensions,
+        alt
+      },
       "resumeUrl": resume.asset->url,
       education[] { institution, degree, period, note },
       stats[] { num, label, sub }

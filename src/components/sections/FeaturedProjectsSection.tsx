@@ -13,12 +13,15 @@ export async function FeaturedProjectsSection() {
     const fetched = await getFeaturedProjects();
     if (fetched?.length) projects = fetched;
   } catch (err) {
-    logger.warn('FeaturedProjectsSection', 'Failed to fetch projects from Sanity, using fallback', err);
+    logger.warn(
+      'FeaturedProjectsSection',
+      'Failed to fetch projects from Sanity, using fallback',
+      err,
+    );
   }
 
   return (
     <section className="py-20 bg-surface-subtle">
-      {/* Centered header with px-6 */}
       <div className="px-6 mb-12">
         <div className="max-w-7xl mx-auto flex items-end justify-between">
           <SectionHeader
@@ -36,7 +39,6 @@ export async function FeaturedProjectsSection() {
         </div>
       </div>
 
-      {/* Card list aligned with the section max width */}
       <div className="mx-auto flex w-full max-w-7xl flex-col px-6">
         {projects.map((project, i) => (
           <AnimateIn key={project._id}>

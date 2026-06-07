@@ -11,7 +11,6 @@ export async function SkillsSection() {
   try {
     const fetched = await getSkills();
     if (fetched?.length) {
-      // Group flat Sanity skill documents into Record<category, name[]>
       const grouped: Record<string, string[]> = {};
       for (const skill of fetched) {
         if (!grouped[skill.category]) grouped[skill.category] = [];

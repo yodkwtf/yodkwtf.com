@@ -1,6 +1,8 @@
-/**
- * Fallback about-page data used when Sanity is unreachable or not yet configured.
- */
+export const FALLBACK_SHORT_BIO = [
+  `I'm a full-stack engineer with 3+ years of experience building web applications that are fast, accessible, and a joy to use. I believe great software comes from caring equally about the user experience and the code quality underneath it.`,
+  `When I'm not coding, I'm writing about web development, bingeing movies or TV shows, or missing open goals in Rocket League (blame lag, obviously).`,
+  `If you ever want to talk tech, cricket stats, DCEU, or whether Trevor from GTA is misunderstood, I'm your guy!`,
+];
 
 export const FALLBACK_BIO = [
   `I'm a full-stack engineer with 3+ years of experience building web applications that are fast, accessible, and a joy to use. My work spans the full stack — from pixel-perfect UIs to scalable back-end systems — and I care deeply about the quality of both.`,

@@ -34,20 +34,17 @@
 
   - [x] 404 page
 
-#### Site Configuration & Branding
-
-- [ ] Update siteCOnfig with all the correct information
-- [ ] Add all branding information to the site config
-- [ ] Get a professional logo for `yodkwtf` and add it to the navbar and the footer
-- [ ] Implement a newsletter subscription system
-
-#### Code Quality & Maintenance
+#### Improvements and Maintenance
 
 - [ ] Fix all the typescript errors across the entire codebase
 - [x] Add error handling everywhere for all the API calls and all the components
 - [ ] Update fallback blogs with some real blog data instead of mock data
 - [x] Add a logging system to log all the errors and all the important events across the entire website
-- [ ] Remove unnecessary console logs and comments from the entire codebase
+- [x] Remove unnecessary comments from the entire codebase
+- [x] Add logging to more places for info level, warnings, etc. and make them colored accordingly as well. Also don't log the entire err in console as it clutters the logs, only log a dev friendly message.
+- [x] The about bio should be different on the mini-about-section on the home page as it'll be concise and it should be different long elaborated version on the about page. Both should come from sanity and both should have fallback versions as well. But both of them should be separate.
+- [x] The about page image won't necessarily be a circular image. It may be a landscape or a portrait image
+- [x] Create a signature style SVG logo from my name initials DC and add it to Navbar replace the "</>" logo. Also add it to Footer
 
 #### Bug Fixes
 
@@ -55,7 +52,7 @@
 - [x] Replace the X feed with a newsletter component and set up it's integration
 - [x] The nav button for small screens is not working, fix that
 - [x] Remove the right side padding for nav hamburger menu
-- [x] For the about page, first "A bit about me" section should match the width of the other sections. Maybe make the image a bit bigger in size to account up for the wider space. Also the info text and image should also come from Sanity first and if that;s not available only then use the fallback content.
+- [x] For the about page, first "A bit about me" section should match the width of the other sections. Maybe make the image a bit bigger in size to account up for the wider space. Also the info text and image should also come from Sanity first and if that's not available only then use the fallback content.
 - [x] For the projects page, the filters should be on tech stack and not the project tags
 - [x] For the projects page, the client work projects should have a tag displayed as well just like featured projects have
 - [x] For the projects detail page, we should show the description and not summary as it is a detailed page
@@ -75,9 +72,12 @@
 - [x] Test single project page
 - [x] Test all project pages with full search and filtering functionality
 
-#### SEO & Metadata
+#### Branding and SEO & Metadata
 
 - [ ] Update all the meta information for all pages, including Open Graph and Twitter cards
+- [x] Update siteConfig with all the correct information
+- [x] Add the ogImage from chatGPT to public dir
+- [ ] Implement a newsletter subscription system
 
 #### CMS Integration (Sanity)
 

@@ -193,7 +193,7 @@ export function BlogCard({
           className,
         )}
       >
-        {/* Left: thumbnail — fixed width, full card height */}
+        {/* Left: thumbnail - fixed width, full card height */}
         <div className="relative hidden w-48 shrink-0 self-stretch overflow-hidden bg-surface-subtle sm:block sm:w-64">
           {post.coverImage ? (
             <Image

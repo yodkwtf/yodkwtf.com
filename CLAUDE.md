@@ -168,6 +168,19 @@ Code blocks are syntax-highlighted via `rehype-pretty-code` with the `github-dar
 // filename: path/to/file.ts
 ```
 
+### Logging
+
+Use `src/lib/logger.ts` for all diagnostic output — never `console.log/warn/error` directly:
+
+```ts
+import { logger } from "@/lib/logger";
+logger.info("ComponentName", "message", optionalData);   // dev only
+logger.warn("ComponentName", "message", err);            // dev only
+logger.error("ComponentName", "message", err);           // dev + prod
+```
+
+`info` and `warn` are silenced in production. `error` always surfaces and is the right level for unexpected failures that aren't covered by a Sanity fallback.
+
 ### Resume URL — Fetched Once in Layout
 
 `getResumeUrl()` is called **once** in `src/app/layout.tsx` and the result is passed as a `resumeUrl: string` prop to both `<Navbar>` and `<Footer>`. Neither component fetches it independently. The about page gets `resumeUrl` as part of its own `getAboutPage()` call (which returns the full about document anyway), so that is a separate fetch and is correct.

@@ -1,118 +1,204 @@
-import { defineField, defineType } from "sanity";
+import { defineField, defineType } from 'sanity';
 
 export const skillSchema = defineType({
-  name: "skill",
-  title: "Skill",
-  type: "document",
+  name: 'skill',
+  title: 'Skill',
+  type: 'document',
   fields: [
-    defineField({ name: "name", type: "string", validation: (R) => R.required() }),
-    defineField({ name: "category", type: "string", options: { list: ["Languages", "Frontend", "Backend", "Database", "DevOps", "Tools", "Other"] } }),
-    defineField({ name: "icon", type: "string" }),
-    defineField({ name: "proficiency", type: "number", validation: (R) => R.min(1).max(5) }),
-    defineField({ name: "order", type: "number" }),
+    defineField({
+      name: 'name',
+      type: 'string',
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: 'category',
+      type: 'string',
+      options: {
+        list: [
+          'Languages',
+          'Frontend',
+          'Backend',
+          'Database',
+          'DevOps',
+          'Tools',
+          'Other',
+        ],
+      },
+    }),
+    defineField({ name: 'icon', type: 'string' }),
+    defineField({
+      name: 'proficiency',
+      type: 'number',
+      validation: (R) => R.min(1).max(5),
+    }),
+    defineField({ name: 'order', type: 'number' }),
   ],
 });
 
 export const experienceSchema = defineType({
-  name: "experience",
-  title: "Experience",
-  type: "document",
+  name: 'experience',
+  title: 'Experience',
+  type: 'document',
   fields: [
-    defineField({ name: "company", type: "string", validation: (R) => R.required() }),
-    defineField({ name: "role", type: "string", validation: (R) => R.required() }),
-    defineField({ name: "startDate", type: "date" }),
-    defineField({ name: "endDate", type: "date" }),
-    defineField({ name: "current", type: "boolean", initialValue: false }),
-    defineField({ name: "description", type: "array", of: [{ type: "block" }] }),
-    defineField({ name: "techStack", type: "array", of: [{ type: "string" }] }),
-    defineField({ name: "companyUrl", type: "url" }),
-    defineField({ name: "logo", type: "image", options: { hotspot: true }, fields: [{ name: "alt", type: "string" }] }),
-    defineField({ name: "order", type: "number" }),
+    defineField({
+      name: 'company',
+      type: 'string',
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: 'role',
+      type: 'string',
+      validation: (R) => R.required(),
+    }),
+    defineField({ name: 'startDate', type: 'date' }),
+    defineField({ name: 'endDate', type: 'date' }),
+    defineField({ name: 'current', type: 'boolean', initialValue: false }),
+    defineField({
+      name: 'description',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
+    defineField({ name: 'techStack', type: 'array', of: [{ type: 'string' }] }),
+    defineField({ name: 'companyUrl', type: 'url' }),
+    defineField({
+      name: 'logo',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', type: 'string' }],
+    }),
+    defineField({ name: 'order', type: 'number' }),
   ],
-  preview: { select: { title: "role", subtitle: "company" } },
+  preview: { select: { title: 'role', subtitle: 'company' } },
 });
 
 export const aboutSchema = defineType({
-  name: "about",
-  title: "About Page",
-  type: "document",
+  name: 'about',
+  title: 'About Page',
+  type: 'document',
   fields: [
-    defineField({ name: "headline", type: "string" }),
-    defineField({ name: "subheadline", type: "string" }),
-    defineField({ name: "bio", type: "array", of: [{ type: "block" }] }),
-    defineField({ name: "journey", type: "array", of: [{ type: "block" }] }),
-    defineField({ name: "philosophy", type: "array", of: [{ type: "block" }] }),
-    defineField({ name: "avatar", type: "image", options: { hotspot: true }, fields: [{ name: "alt", type: "string" }] }),
-    defineField({ name: "resume", type: "file", options: { accept: "application/pdf,.pdf" }, description: "Upload the resume PDF — the download link on the site will point to this file." }),
+    defineField({ name: 'headline', type: 'string' }),
+    defineField({ name: 'subheadline', type: 'string' }),
     defineField({
-      name: "education",
-      type: "array",
-      of: [{
-        type: "object",
-        fields: [
-          defineField({ name: "institution", type: "string" }),
-          defineField({ name: "degree", type: "string" }),
-          defineField({ name: "period", type: "string", description: 'e.g. "2015 — 2019"' }),
-          defineField({ name: "note", type: "string" }),
-        ],
-        preview: { select: { title: "degree", subtitle: "institution" } },
-      }],
+      name: 'bio',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Full bio shown on the About page.',
     }),
     defineField({
-      name: "stats",
-      type: "array",
-      description: "Numbers shown in the home page mini-about section.",
-      of: [{
-        type: "object",
-        fields: [
-          defineField({ name: "num", type: "string", description: 'e.g. "5+" or "∞"' }),
-          defineField({ name: "label", type: "string" }),
-          defineField({ name: "sub", type: "string" }),
-        ],
-        preview: { select: { title: "label", subtitle: "num" } },
-      }],
+      name: 'shortBio',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description:
+        'Concise 1-2 paragraph version shown in the home page About section.',
+    }),
+    defineField({ name: 'journey', type: 'array', of: [{ type: 'block' }] }),
+    defineField({ name: 'philosophy', type: 'array', of: [{ type: 'block' }] }),
+    defineField({
+      name: 'avatar',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', type: 'string' }],
+    }),
+    defineField({
+      name: 'resume',
+      type: 'file',
+      options: { accept: 'application/pdf,.pdf' },
+      description:
+        'Upload the resume PDF — the download link on the site will point to this file.',
+    }),
+    defineField({
+      name: 'education',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'institution', type: 'string' }),
+            defineField({ name: 'degree', type: 'string' }),
+            defineField({
+              name: 'period',
+              type: 'string',
+              description: 'e.g. "2015 — 2019"',
+            }),
+            defineField({ name: 'note', type: 'string' }),
+          ],
+          preview: { select: { title: 'degree', subtitle: 'institution' } },
+        },
+      ],
+    }),
+    defineField({
+      name: 'stats',
+      type: 'array',
+      description: 'Numbers shown in the home page mini-about section.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'num',
+              type: 'string',
+              description: 'e.g. "5+" or "∞"',
+            }),
+            defineField({ name: 'label', type: 'string' }),
+            defineField({ name: 'sub', type: 'string' }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'num' } },
+        },
+      ],
     }),
   ],
 });
 
 export const heroConfigSchema = defineType({
-  name: "heroConfig",
-  title: "Hero Section",
-  type: "document",
+  name: 'heroConfig',
+  title: 'Hero Section',
+  type: 'document',
   fields: [
     defineField({
-      name: "stats",
-      title: "Stats",
-      type: "array",
-      description: "Concise numbers shown beneath the social links (e.g. 5+ Years exp).",
-      of: [{
-        type: "object",
-        fields: [
-          defineField({ name: "num", type: "string", description: 'e.g. "5+" or "10+"' }),
-          defineField({ name: "label", type: "string", description: 'e.g. "Years exp"' }),
-        ],
-        preview: { select: { title: "label", subtitle: "num" } },
-      }],
+      name: 'stats',
+      title: 'Stats',
+      type: 'array',
+      description:
+        'Concise numbers shown beneath the social links (e.g. 5+ Years exp).',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'num',
+              type: 'string',
+              description: 'e.g. "5+" or "10+"',
+            }),
+            defineField({
+              name: 'label',
+              type: 'string',
+              description: 'e.g. "Years exp"',
+            }),
+          ],
+          preview: { select: { title: 'label', subtitle: 'num' } },
+        },
+      ],
     }),
     defineField({
-      name: "stack",
-      title: "Tech Stack",
-      type: "array",
-      description: "Skills shown in the code card. Update when targeting a specific role.",
-      of: [{ type: "string" }],
+      name: 'stack',
+      title: 'Tech Stack',
+      type: 'array',
+      description:
+        'Skills shown in the code card. Update when targeting a specific role.',
+      of: [{ type: 'string' }],
     }),
   ],
-  preview: { prepare: () => ({ title: "Hero Section" }) },
+  preview: { prepare: () => ({ title: 'Hero Section' }) },
 });
 
 export const socialLinkSchema = defineType({
-  name: "socialLink",
-  title: "Social Link",
-  type: "document",
+  name: 'socialLink',
+  title: 'Social Link',
+  type: 'document',
   fields: [
-    defineField({ name: "platform", type: "string" }),
-    defineField({ name: "url", type: "url" }),
-    defineField({ name: "icon", type: "string" }),
-    defineField({ name: "order", type: "number" }),
+    defineField({ name: 'platform', type: 'string' }),
+    defineField({ name: 'url', type: 'url' }),
+    defineField({ name: 'icon', type: 'string' }),
+    defineField({ name: 'order', type: 'number' }),
   ],
 });

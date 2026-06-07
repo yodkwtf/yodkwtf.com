@@ -34,7 +34,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
 
   return (
     <div className="space-y-6">
-      {/* Search — full width */}
+      {/* Search - full width */}
       <div className="relative">
         <Search
           size={15}
@@ -57,7 +57,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
         )}
       </div>
 
-      {/* Tag filters — separate row, wrap freely */}
+      {/* Tag filters - separate row, wrap freely */}
       <div className="flex flex-wrap gap-2">
         {allTags.map((tag) => (
           <TagPill

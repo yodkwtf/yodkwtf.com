@@ -27,7 +27,6 @@ export async function HeroSection() {
 
       <div className="relative mx-auto max-w-7xl w-full">
         <div className="grid lg:grid-cols-[1fr_420px] gap-12 xl:gap-20 items-center">
-          {/* Left: text content */}
           <div className="space-y-8">
             <AnimateIn duration={0.5}>
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent-500/25 bg-accent-500/8 text-accent-500 text-xs font-mono font-medium tracking-wide">
@@ -110,7 +109,6 @@ export async function HeroSection() {
             </AnimateIn>
           </div>
 
-          {/* Right: floating code card */}
           <AnimateIn direction="right" delay={0.5} duration={0.8} className="hidden lg:block">
             <div className="glass rounded-xl p-5 font-mono text-xs leading-6 shadow-xl glow-accent-sm">
               <div className="flex items-center gap-1.5 mb-4 pb-3 border-b border-border">

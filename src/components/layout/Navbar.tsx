@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Code2 } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/components/ui/ThemeProvider';
+import { DCLogo } from '@/components/ui/DCLogo';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 
@@ -32,21 +33,19 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
         )}
       >
         <nav className="mx-auto max-w-7xl flex items-center justify-between">
-          {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2 group"
             aria-label="Durgesh Chaudhary — home"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-500 text-white transition-transform group-hover:scale-105">
-              <Code2 size={16} strokeWidth={2.5} />
+              <DCLogo size={16} />
             </span>
             <span className="font-display text-lg text-ink hidden sm:block">
               Durgesh
             </span>
           </Link>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {siteConfig.nav.map((item) => {
               const active =
@@ -68,7 +67,6 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
             })}
           </div>
 
-          {/* Right actions */}
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
@@ -113,7 +111,6 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
         </nav>
       </header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div

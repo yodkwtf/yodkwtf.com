@@ -1,9 +1,9 @@
 export const siteConfig = {
   name: 'Durgesh',
-  title: 'Durgesh Chaudhary — Full-Stack Engineer',
+  title: 'Durgesh Chaudhary - SDE 2 @ Konrad Group | Full Stack Developer',
   username: 'yodkwtf',
   description:
-    'Full-stack engineer crafting performant, accessible, and beautiful digital experiences. Specializing in React, Next.js, and modern web architecture.',
+    'Full-Stack Software Engineer passionate about turning ideas into products through code and design. Building scalable, high-performance applications with React, Next.js, Node.js, TypeScript, and modern cloud technologies.',
   url: 'https://yodkwtf.com',
   ogImage: '/og.png',
   author: 'Durgesh Chaudhary',

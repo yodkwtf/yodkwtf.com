@@ -5,6 +5,7 @@ import {
   TwitterIcon,
   LinkedinIcon,
 } from '@/components/ui/SocialIcons';
+import { DCLogo } from '@/components/ui/DCLogo';
 import { siteConfig } from '@/config/site';
 export function Footer({ resumeUrl }: { resumeUrl: string }) {
   const year = new Date().getFullYear();
@@ -19,10 +20,14 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
   return (
     <footer className="border-t border-border mt-24">
       <div className="mx-auto max-w-7xl px-6 py-12">
-        {/* Grid keeps the nav column truly centered regardless of side-column widths */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8">
           <div className="space-y-2 text-center md:text-left">
-            <p className="font-display text-xl text-ink">{siteConfig.name}</p>
+            <div className="flex items-center gap-2 justify-center md:justify-start">
+              <span className="flex h-7 w-7 items-center justify-center rounded-md bg-accent-500 text-white shrink-0">
+                <DCLogo size={14} />
+              </span>
+              <p className="font-display text-xl text-ink">{siteConfig.name}</p>
+            </div>
             <p className="text-sm text-ink-muted max-w-xs mx-auto md:mx-0">
               {siteConfig.description.slice(0, 100)}…
             </p>

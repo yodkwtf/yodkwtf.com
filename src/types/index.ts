@@ -69,9 +69,13 @@ export interface AboutPage {
   headline: string;
   subheadline: string;
   bio: any[];
+  shortBio?: any[];
   journey: any[];
   philosophy: any[];
-  avatar: SanityImage;
+  avatar?: SanityImage & {
+    /** Projected from asset->metadata.dimensions */
+    dimensions?: { width: number; height: number };
+  };
   resumeUrl?: string;
   education?: { institution: string; degree: string; period: string; note?: string }[];
   stats?: { num: string; label: string; sub: string }[];

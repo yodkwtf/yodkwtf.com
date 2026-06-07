@@ -19,7 +19,6 @@ import type { BlogPostMeta } from '@/types';
 const ALL = 'All';
 const PAGE_SIZE = 6; // posts to show initially and per load
 
-// Post row — text-only, very light divider at the bottom
 function PostRow({ post, isLast }: { post: BlogPostMeta; isLast: boolean }) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
@@ -182,7 +181,7 @@ export function BlogListClient({
   return (
     // Mobile puts filters after the finite page of posts; desktop keeps them as a sidebar.
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-12 lg:gap-16 xl:gap-24 items-start">
-      {/* ── Post list ── */}
+      {/*  Post list  */}
       <div className="min-w-0 lg:max-w-3xl">
         <AnimatePresence mode="popLayout">
           {visible.length > 0 ? (
@@ -250,7 +249,7 @@ export function BlogListClient({
         </AnimatePresence>
       </div>
 
-      {/* ── Sidebar — sticky, does not scroll with the page ── */}
+      {/*  Sidebar - sticky, does not scroll with the page  */}
       <aside className="self-start space-y-8 lg:sticky lg:top-28">
         <div className="relative">
           <Search
