@@ -38,7 +38,7 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
             className="flex items-center gap-2 group"
             aria-label="Durgesh Chaudhary — home"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent-500 text-white transition-transform group-hover:scale-105">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#20201f] text-white transition-transform group-hover:scale-105">
               <DCLogo size={16} />
             </span>
             <span className="font-display text-lg text-ink hidden sm:block">
