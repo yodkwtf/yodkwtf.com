@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site";
 import { getResumeUrl } from "@/sanity/lib/queries";
+import { logger } from "@/lib/logger";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
@@ -59,11 +60,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   try {
     const sanityUrl = await getResumeUrl();
     if (sanityUrl) resumeUrl = sanityUrl;
-  } catch {}
+  } catch (err) {
+    logger.warn('RootLayout', 'Failed to fetch resume URL from Sanity', err);
+  }
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider>
           <div className="flex min-h-screen flex-col">
             <Navbar resumeUrl={resumeUrl} />

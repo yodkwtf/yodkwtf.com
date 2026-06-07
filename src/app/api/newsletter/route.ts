@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: Request) {
   try {
@@ -29,11 +30,11 @@ export async function POST(req: Request) {
     //   });
     // ─────────────────────────────────────────────────────────────────────────
 
-    // Temporary: log to console until a service is connected
-    console.log('[newsletter] new subscriber:', email);
+    logger.info('newsletter', 'New subscriber (integration pending)', email);
 
     return NextResponse.json({ message: 'Subscribed!' }, { status: 200 });
-  } catch {
+  } catch (err) {
+    logger.error('newsletter', 'Unhandled error in newsletter route', err);
     return NextResponse.json({ message: 'Server error.' }, { status: 500 });
   }
 }

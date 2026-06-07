@@ -5,6 +5,7 @@ import { GithubIcon, TwitterIcon, LinkedinIcon } from '@/components/ui/SocialIco
 import { siteConfig } from '@/config/site';
 import { getHeroConfig } from '@/sanity/lib/queries';
 import { FALLBACK_HERO_STATS, FALLBACK_HERO_STACK } from '@/data/fallback-hero';
+import { logger } from '@/lib/logger';
 
 export async function HeroSection() {
   let stats = FALLBACK_HERO_STATS;
@@ -14,7 +15,9 @@ export async function HeroSection() {
     const hero = await getHeroConfig();
     if (hero?.stats?.length) stats = hero.stats;
     if (hero?.stack?.length) stack = hero.stack;
-  } catch {}
+  } catch (err) {
+    logger.warn('HeroSection', 'Failed to fetch hero config from Sanity, using fallback', err);
+  }
 
   return (
     <section className="relative min-h-screen flex items-center pt-28 pb-20 px-6 overflow-hidden">

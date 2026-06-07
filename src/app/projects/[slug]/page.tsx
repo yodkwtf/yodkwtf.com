@@ -14,6 +14,7 @@ import {
 import { siteConfig } from '@/config/site';
 import { urlFor } from '@/sanity/lib/client';
 import { FALLBACK_PROJECT_MAP } from '@/data/fallback-projects';
+import { logger } from '@/lib/logger';
 
 interface Params {
   params: Promise<{ slug: string }>;
@@ -26,7 +27,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   try {
     const { getProjectBySlug } = await import('@/sanity/lib/queries');
     project = await getProjectBySlug(slug);
-  } catch {}
+  } catch (err) {
+    logger.warn('ProjectDetailPage.generateMetadata', `Failed to fetch project "${slug}" from Sanity`, err);
+  }
 
   if (!project) project = FALLBACK_PROJECT_MAP[slug];
   if (!project) return { title: 'Project Not Found' };
@@ -45,7 +48,9 @@ export default async function ProjectDetailPage({ params }: Params) {
   try {
     const { getProjectBySlug } = await import('@/sanity/lib/queries');
     project = await getProjectBySlug(slug);
-  } catch {}
+  } catch (err) {
+    logger.warn('ProjectDetailPage', `Failed to fetch project "${slug}" from Sanity, using fallback`, err);
+  }
 
   if (!project) project = FALLBACK_PROJECT_MAP[slug] ?? null;
 

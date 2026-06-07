@@ -38,16 +38,15 @@
 
 - [ ] Update siteCOnfig with all the correct information
 - [ ] Add all branding information to the site config
-- [ ] Make `accent` work through the site config for the entire site
 - [ ] Get a professional logo for `yodkwtf` and add it to the navbar and the footer
 - [ ] Implement a newsletter subscription system
 
 #### Code Quality & Maintenance
 
 - [ ] Fix all the typescript errors across the entire codebase
-- [ ] Add error handling everywhere for all the API calls and all the components
+- [x] Add error handling everywhere for all the API calls and all the components
 - [ ] Update fallback blogs with some real blog data instead of mock data
-- [ ] Add a logging system to log all the errors and all the important events across the entire website
+- [x] Add a logging system to log all the errors and all the important events across the entire website
 - [ ] Remove unnecessary console logs and comments from the entire codebase
 
 #### Bug Fixes
@@ -73,8 +72,8 @@
 - [ ] Test empty error states
 - [x] Test pagination
 - [x] Test blog and all MDX components
-- [ ] Test single project page
-- [ ] Test all project pages with full search and filtering functionality
+- [x] Test single project page
+- [x] Test all project pages with full search and filtering functionality
 
 #### SEO & Metadata
 

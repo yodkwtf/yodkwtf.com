@@ -3,6 +3,7 @@ import { ProjectsClient } from './ProjectsClient';
 import { siteConfig } from '@/config/site';
 import { AnimateIn } from '@/components/ui/AnimateIn';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
+import { logger } from '@/lib/logger';
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -15,7 +16,9 @@ export default async function ProjectsPage() {
     const { getAllProjects } = await import('@/sanity/lib/queries');
     const fetched = await getAllProjects();
     if (fetched?.length) projects = fetched;
-  } catch {}
+  } catch (err) {
+    logger.warn('ProjectsPage', 'Failed to fetch projects from Sanity, using fallback', err);
+  }
 
   return (
     <div className="pt-28 pb-24 px-6">

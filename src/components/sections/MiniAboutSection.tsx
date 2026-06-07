@@ -4,6 +4,7 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 import { siteConfig } from '@/config/site';
 import { getAboutPage } from '@/sanity/lib/queries';
 import { FALLBACK_BIO, FALLBACK_STATS } from '@/data/fallback-about';
+import { logger } from '@/lib/logger';
 
 export async function MiniAboutSection() {
   let bio: string[] = FALLBACK_BIO;
@@ -18,7 +19,9 @@ export async function MiniAboutSection() {
       if (extracted.length) bio = extracted.slice(0, 2);
     }
     if (about?.stats?.length) stats = about.stats;
-  } catch {}
+  } catch (err) {
+    logger.warn('MiniAboutSection', 'Failed to fetch about data from Sanity, using fallback', err);
+  }
 
   return (
     <section className="py-20 px-6 border-t border-border">

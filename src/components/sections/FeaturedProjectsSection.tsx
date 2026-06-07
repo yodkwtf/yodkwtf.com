@@ -5,13 +5,16 @@ import { FeaturedProjectCard } from '@/components/ui/FeaturedProjectCard';
 import { AnimateIn } from '@/components/ui/AnimateIn';
 import { getFeaturedProjects } from '@/sanity/lib/queries';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
+import { logger } from '@/lib/logger';
 
 export async function FeaturedProjectsSection() {
   let projects = FALLBACK_PROJECTS.filter((p) => p.featured).slice(0, 4);
   try {
     const fetched = await getFeaturedProjects();
     if (fetched?.length) projects = fetched;
-  } catch {}
+  } catch (err) {
+    logger.warn('FeaturedProjectsSection', 'Failed to fetch projects from Sanity, using fallback', err);
+  }
 
   return (
     <section className="py-20 bg-surface-subtle">

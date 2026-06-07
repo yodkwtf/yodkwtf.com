@@ -21,6 +21,7 @@ import { siteConfig } from '@/config/site';
 import { getAboutPage } from '@/sanity/lib/queries';
 import { urlFor } from '@/sanity/lib/client';
 import { extractHeadings } from '@/lib/toc';
+import { logger } from '@/lib/logger';
 import { TableOfContents } from '@/components/ui/TableOfContents';
 
 interface Params {
@@ -66,7 +67,9 @@ export default async function BlogDetailPage({ params }: Params) {
     const about = await getAboutPage();
     if (about?.avatar)
       avatarUrl = urlFor(about.avatar).width(56).height(56).url();
-  } catch {}
+  } catch (err) {
+    logger.warn('BlogDetailPage', 'Failed to fetch avatar from Sanity', err);
+  }
 
   const headings = extractHeadings(post.content);
 

@@ -12,6 +12,7 @@ import { SkillsSection } from '@/components/sections/SkillsSection';
 import { siteConfig } from '@/config/site';
 import { GraduationCap, ExternalLink, Download } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { logger } from '@/lib/logger';
 import { getAboutPage, getExperience } from '@/sanity/lib/queries';
 import { urlFor } from '@/sanity/lib/client';
 import {
@@ -75,7 +76,9 @@ export default async function AboutPage() {
         .filter(Boolean);
       if (extracted.length) bio = extracted;
     }
-  } catch {}
+  } catch (err) {
+    logger.warn('AboutPage', 'Failed to fetch about/experience data from Sanity, using fallback', err);
+  }
 
   return (
     <>

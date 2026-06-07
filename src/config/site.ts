@@ -9,8 +9,6 @@ export const siteConfig = {
   author: 'Durgesh Chaudhary',
   email: '48durgesh.chaudhary@gmail.com',
   location: 'Gurgaon, India',
-  // Primary accent — change this ONE value to re-theme the entire site
-  accent: 'emerald', // options: emerald | violet | sky | rose | amber
   links: {
     github: 'https://github.com/yodkwtf',
     twitter: 'https://twitter.com/yodkwtf',

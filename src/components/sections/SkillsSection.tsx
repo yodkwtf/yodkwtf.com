@@ -3,6 +3,7 @@ import { StaggerContainer, StaggerItem } from '@/components/ui/AnimateIn';
 import { cn } from '@/lib/utils';
 import { FALLBACK_SKILLS, SKILL_CATEGORY_COLORS } from '@/data/fallback-skills';
 import { getSkills } from '@/sanity/lib/queries';
+import { logger } from '@/lib/logger';
 
 export async function SkillsSection() {
   let skills = FALLBACK_SKILLS;
@@ -18,7 +19,9 @@ export async function SkillsSection() {
       }
       skills = grouped;
     }
-  } catch {}
+  } catch (err) {
+    logger.warn('SkillsSection', 'Failed to fetch skills from Sanity, using fallback', err);
+  }
 
   return (
     <section className="py-24 px-6">

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { getAllBlogsMeta } from "@/lib/blogs";
+import { logger } from "@/lib/logger";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
@@ -23,7 +24,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }));
-  } catch {}
+  } catch (err) {
+    logger.warn('sitemap', 'Failed to generate blog pages for sitemap', err);
+  }
 
   // Projects (from Sanity — best effort)
   let projectPages: MetadataRoute.Sitemap = [];
@@ -36,7 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }));
-  } catch {}
+  } catch (err) {
+    logger.warn('sitemap', 'Failed to generate project pages for sitemap', err);
+  }
 
   return [...staticPages, ...blogPages, ...projectPages];
 }
