@@ -141,18 +141,20 @@ export default async function ProjectDetailPage({ params }: Params) {
           {project.metrics?.length > 0 && (
             <AnimateIn delay={0.15} className="mb-12">
               <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {project.metrics.map((m: any, i: number) => (
-                  <StaggerItem key={i}>
-                    <div className="glass rounded-xl p-5 border border-border text-center">
-                      <div className="font-display text-3xl text-gradient mb-1">
-                        {m.value}
+                {project.metrics.map(
+                  (m: { value: string; label: string }, i: number) => (
+                    <StaggerItem key={i}>
+                      <div className="glass rounded-xl p-5 border border-border text-center">
+                        <div className="font-display text-3xl text-gradient mb-1">
+                          {m.value}
+                        </div>
+                        <div className="text-xs text-ink-muted font-mono uppercase tracking-wide">
+                          {m.label}
+                        </div>
                       </div>
-                      <div className="text-xs text-ink-muted font-mono uppercase tracking-wide">
-                        {m.label}
-                      </div>
-                    </div>
-                  </StaggerItem>
-                ))}
+                    </StaggerItem>
+                  ),
+                )}
               </StaggerContainer>
             </AnimateIn>
           )}

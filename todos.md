@@ -3,32 +3,33 @@
 #### Content Review & Fallback Content
 
 - [ ] Update all the fallback content first
-- [ ] Finish content review for all sections and all pages
+- [ ] Update fallback content for projects and about
+- [x] Finish content and code review for all sections and all pages
   - [x] Navbar
   - [x] Footer
   - [x] Contact Section
-  - [ ] Home page
+  - [x] Home page
     - [x] Hero section
     - [x] About section
-    - [ ] Projects section
+    - [x] Projects section
     - [x] Blog section
 
-  - [ ] About page
-    - [ ] About Me section
-    - [ ] Skills section
-    - [ ] Experience section
-    - [ ] Education section
+  - [x] About page
+    - [x] About Me section
+    - [x] Skills section
+    - [x] Experience section
+    - [x] Education section
 
-  - [ ] Projects page
-    - [ ] Projects section
-    - [ ] Search and filter functionality
-    - [ ] Single project page
+  - [x] Projects page
+    - [x] Projects section
+    - [x] Search and filter functionality
+    - [x] Single project page
 
-  - [ ] Blog page
+  - [x] Blog page
     - [x] Blog posts section
     - [x] Search and filter functionality
     - [x] Single blog post page
-    - [ ] Twitter feed section
+    - [x] Twitter feed section
     - [x] MDX components
 
   - [x] 404 page
@@ -51,7 +52,14 @@
 #### Bug Fixes
 
 - [x] Fix the nav bottom outline on scroll
-- [ ] Fix the twitter feed not showing up on block page
+- [ ] Replace the X feed with a newsletter component and set up it's integration
+- [ ] The nav button for small screens is not working, fix that
+- [ ] Remove the right side padding for nav hamburger menu
+- [ ] For the about page, first "A bit about me" section should match the width of the other sections. Maybe make the image a bit bigger in size to account up for the wider space. Also the info text and image should also come from Sanity first and if that;s not available only then use the fallback content.
+- [ ] For the projects page, the filters should be on tech stack and not the project tags
+- [ ] For the projects page, the client work projects should have a tag displayed as well just like featured projects have
+- [ ] Foe the projects detail page, we should show the description and not summary as it is a detailed page
+- [ ] For the about page, experience section, show the start/end dates in this format "Aug 2020 - Sep 2021"
 
 #### Blog Improvements
 

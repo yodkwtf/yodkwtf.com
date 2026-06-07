@@ -21,7 +21,7 @@ export async function FeaturedProjectsSection() {
           <SectionHeader
             label="Selected Work"
             heading="Projects I'm proud of."
-            subheading="A selection of projects that showcase my range — from scalable SaaS to open-source tools."
+            subheading="A mix of client work, personal projects, and open-source contributions."
             className="mb-0"
           />
           <Link
