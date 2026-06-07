@@ -18,7 +18,7 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
 
   return (
     <footer className="border-t border-border mt-24">
-      <div className="mx-auto max-w-6xl px-6 py-12">
+      <div className="mx-auto max-w-7xl px-6 py-12">
         {/* Grid keeps the nav column truly centered regardless of side-column widths */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8">
           <div className="space-y-2 text-center md:text-left">

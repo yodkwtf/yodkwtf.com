@@ -77,6 +77,27 @@ urlFor(image).width(800).url()
 - `StaggerContainer` + `StaggerItem` — orchestrated stagger for lists
 - `BounceBar` — a `motion.div` that loops `y: [0, 6, 0]` indefinitely; used for the hero scroll indicator
 
+### Blog Detail Page — TOC and Layout
+
+The blog detail page (`src/app/blog/[slug]/page.tsx`) uses a two-column grid at the `xl` breakpoint: all content (back link, header, cover image, prose, tags, related posts) lives in the left `1fr` column; a sticky `TableOfContents` occupies the right `220px` column. The TOC is only rendered when the post has 2+ headings.
+
+**Heading extraction** — `src/lib/toc.ts` parses raw MDX content server-side with a regex, skipping code fences and stripping inline Markdown from heading text. It mirrors `github-slugger` deduplication (first occurrence → `slug`, second → `slug-1`) to match the IDs `rehype-slug` writes into the DOM.
+
+**`TableOfContents`** (`src/components/ui/TableOfContents.tsx`) is `'use client'` and uses `IntersectionObserver` with `rootMargin: "-10% 0% -80% 0%"` to track the active heading. The active item gets an `accent-500` left-border indicator. Sticky positioning lives on the `<aside>` grid item (`xl:sticky xl:top-28 xl:self-start`) — `self-start` is required; without it the grid stretches the aside to full column height and sticky has no room to scroll.
+
+**Anchor scroll offset** — `globals.css` sets `scroll-margin-top: 6rem` on `.prose h1/h2/h3` so that clicking a TOC link doesn't hide the heading behind the fixed navbar.
+
+### Portable Text Typing (About Page)
+
+`src/app/about/page.tsx` renders `description` fields that can be either plain `string[]` (fallback) or Sanity Portable Text blocks. The file-level types handle both:
+
+```ts
+type PortableTextChild = { text: string };
+type DescriptionItem = string | { children?: PortableTextChild[] };
+```
+
+When consuming, discriminate on `typeof item === 'string'`; otherwise join `.children.map(c => c.text)`.
+
 ### Theme Access in Client Components
 
 `ThemeProvider` in `src/components/ui/ThemeProvider.tsx` is a **custom implementation** — do not install or import `next-themes`. To read or change the theme inside any `'use client'` component:

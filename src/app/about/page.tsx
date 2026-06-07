@@ -11,12 +11,14 @@ import { CTASection } from '@/components/sections/CTASection';
 import { SkillsSection } from '@/components/sections/SkillsSection';
 import { siteConfig } from '@/config/site';
 import { GraduationCap, ExternalLink, Download } from 'lucide-react';
+import { formatDate } from '@/lib/utils';
 import { getAboutPage, getExperience } from '@/sanity/lib/queries';
 import { urlFor } from '@/sanity/lib/client';
 import {
   FALLBACK_EXPERIENCE,
   FALLBACK_EDUCATION,
 } from '@/data/fallback-experience';
+import { FALLBACK_BIO } from '@/data/fallback-about';
 
 type EducationItem = {
   institution: string;
@@ -55,6 +57,7 @@ export default async function AboutPage() {
   let education: EducationItem[] = FALLBACK_EDUCATION;
   let avatarUrl: string | null = null;
   let resumeUrl: string = siteConfig.links.resume;
+  let bio: string[] = FALLBACK_BIO;
 
   try {
     const [fetchedExp, about] = await Promise.all([
@@ -63,32 +66,39 @@ export default async function AboutPage() {
     ]);
     if (fetchedExp?.length) experience = fetchedExp;
     if (about?.avatar)
-      avatarUrl = urlFor(about.avatar).width(480).height(480).url();
+      avatarUrl = urlFor(about.avatar).width(560).height(560).url();
     if (about?.resumeUrl) resumeUrl = about.resumeUrl;
     if (about?.education?.length) education = about.education;
+    if (about?.bio?.length) {
+      const extracted = (about.bio as { children?: { text: string }[] }[])
+        .map((block) => block.children?.map((c) => c.text).join('') ?? '')
+        .filter(Boolean);
+      if (extracted.length) bio = extracted;
+    }
   } catch {}
 
   return (
     <>
       {/* ── Page header ─────────────────────────────── */}
       <div className="pt-32 pb-8 px-6">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
           {/* ── Header: two-column — text left, profile image right ── */}
           <AnimateIn>
-            <div className="grid lg:grid-cols-[1fr_280px] gap-12 items-center">
-              <div className="space-y-5 max-w-xl">
+            <div className="grid lg:grid-cols-[1fr_320px] gap-16 items-center">
+              <div className="space-y-5">
                 <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">
                   About
                 </span>
                 <h1 className="font-display text-5xl md:text-6xl text-ink leading-tight">
                   A bit about me.
                 </h1>
-                <p className="text-ink-muted text-lg leading-relaxed">
-                  I&apos;m a full-stack engineer based in {siteConfig.location}.
-                  I build web applications that are fast, accessible, and
-                  thoughtfully designed — and care equally about the people
-                  using them and the developers maintaining them.
-                </p>
+                <div className="space-y-4 max-w-2xl">
+                  {bio.map((para, i) => (
+                    <p key={i} className="text-ink-muted text-lg leading-relaxed">
+                      {para}
+                    </p>
+                  ))}
+                </div>
                 <div className="flex flex-wrap gap-3 pt-1">
                   <a
                     href={`mailto:${siteConfig.email}`}
@@ -111,7 +121,7 @@ export default async function AboutPage() {
               <div className="flex justify-center lg:justify-end">
                 <div className="relative">
                   <div className="absolute -inset-1.5 rounded-full bg-linear-to-br from-accent-400 to-accent-700 opacity-25 blur-lg" />
-                  <div className="relative w-52 h-52 lg:w-64 lg:h-64 rounded-full overflow-hidden border-2 border-accent-500/30 bg-surface-subtle">
+                  <div className="relative w-56 h-56 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-accent-500/30 bg-surface-subtle">
                     {avatarUrl ? (
                       <Image
                         src={avatarUrl}
@@ -191,7 +201,7 @@ export default async function AboutPage() {
                             </div>
                             <span className="w-full font-mono text-xs text-ink-faint sm:w-auto sm:shrink-0">
                               {exp.period ??
-                                `${exp.startDate?.slice(0, 4)} — ${exp.current ? 'Present' : (exp.endDate?.slice(0, 4) ?? '')}`}
+                                `${exp.startDate ? formatDate(exp.startDate, 'MMM yyyy') : ''} – ${exp.current ? 'Present' : exp.endDate ? formatDate(exp.endDate, 'MMM yyyy') : ''}`}
                             </span>
                           </div>
 

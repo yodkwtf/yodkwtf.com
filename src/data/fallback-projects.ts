@@ -60,9 +60,18 @@ export const FALLBACK_PROJECTS = [
 ] as any[];
 
 // Slug-keyed map with extended detail fields for the project detail page
+function ptBlock(key: string, text: string) {
+  return { _key: key, _type: 'block', style: 'normal', children: [{ _key: `${key}s`, _type: 'span', text }] };
+}
+
 export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   "horizon-saas": {
     ...FALLBACK_PROJECTS[0],
+    description: [
+      ptBlock('h1', 'Horizon is a multi-tenant SaaS platform built for teams that need real-time collaboration without sacrificing performance. It handles 50,000+ monthly active users across hundreds of isolated workspaces.'),
+      ptBlock('h2', 'The architecture uses row-level security in Supabase for tenant isolation, tRPC for end-to-end type-safe APIs, and edge functions for low-latency access globally. The frontend is built with Next.js App Router and optimistic UI updates to keep the experience snappy even on slow connections.'),
+      ptBlock('h3', 'This project pushed me to think deeply about multi-tenancy trade-offs, cost-efficient real-time patterns, and building a product that scales without the infrastructure bill spiralling out of control.'),
+    ],
     timeline: "3 months",
     metrics: [
       { label: "Monthly Active Users", value: "50,000+" },
@@ -74,6 +83,11 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   },
   "pulse-analytics": {
     ...FALLBACK_PROJECTS[1],
+    description: [
+      ptBlock('p1', 'Pulse is a privacy-first web analytics platform built as a lightweight, open-source alternative to Google Analytics. It was designed from the ground up to be cookieless, GDPR-compliant, and genuinely fast to query.'),
+      ptBlock('p2', 'The event pipeline ingests millions of events per day asynchronously, stores them in ClickHouse with pre-aggregated rollups, and serves sub-80ms dashboard queries even across long date ranges. The tracking script is under 3KB and does not require user consent banners.'),
+      ptBlock('p3', 'Building on ClickHouse for the first time was a steep but rewarding learning curve — the columnar storage model and materialized views turned out to be a perfect fit for time-series analytics workloads.'),
+    ],
     timeline: "10 weeks",
     metrics: [
       { label: "Query Latency", value: "<80ms" },
@@ -85,6 +99,11 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   },
   "shipkit-cli": {
     ...FALLBACK_PROJECTS[2],
+    description: [
+      ptBlock('s1', 'ShipKit is a developer CLI that scaffolds production-ready Next.js projects in under five minutes. Instead of copy-pasting boilerplate across every new project, you run one command and answer a handful of questions.'),
+      ptBlock('s2', 'It supports 18 composable modules — auth (NextAuth, Clerk, or Supabase), payments (Stripe), email (Resend), observability (Sentry), and more. Each module drops in clean, wired-up code rather than bare templates you still have to integrate yourself.'),
+      ptBlock('s3', 'The CLI is built with Oclif and Ink for a polished terminal UI. The real engineering challenge was making the module system composable — modules need to know about each other and generate correct cross-wiring code without conflicts.'),
+    ],
     timeline: "6 weeks",
     metrics: [
       { label: "Starter Modules", value: "18" },

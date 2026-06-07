@@ -40,6 +40,7 @@
 - [ ] Add all branding information to the site config
 - [ ] Make `accent` work through the site config for the entire site
 - [ ] Get a professional logo for `yodkwtf` and add it to the navbar and the footer
+- [ ] Implement a newsletter subscription system
 
 #### Code Quality & Maintenance
 
@@ -52,14 +53,15 @@
 #### Bug Fixes
 
 - [x] Fix the nav bottom outline on scroll
-- [ ] Replace the X feed with a newsletter component and set up it's integration
-- [ ] The nav button for small screens is not working, fix that
-- [ ] Remove the right side padding for nav hamburger menu
-- [ ] For the about page, first "A bit about me" section should match the width of the other sections. Maybe make the image a bit bigger in size to account up for the wider space. Also the info text and image should also come from Sanity first and if that;s not available only then use the fallback content.
-- [ ] For the projects page, the filters should be on tech stack and not the project tags
-- [ ] For the projects page, the client work projects should have a tag displayed as well just like featured projects have
-- [ ] Foe the projects detail page, we should show the description and not summary as it is a detailed page
-- [ ] For the about page, experience section, show the start/end dates in this format "Aug 2020 - Sep 2021"
+- [x] Replace the X feed with a newsletter component and set up it's integration
+- [x] The nav button for small screens is not working, fix that
+- [x] Remove the right side padding for nav hamburger menu
+- [x] For the about page, first "A bit about me" section should match the width of the other sections. Maybe make the image a bit bigger in size to account up for the wider space. Also the info text and image should also come from Sanity first and if that;s not available only then use the fallback content.
+- [x] For the projects page, the filters should be on tech stack and not the project tags
+- [x] For the projects page, the client work projects should have a tag displayed as well just like featured projects have
+- [x] For the projects detail page, we should show the description and not summary as it is a detailed page
+- [x] For the about page, experience section, show the start/end dates in this format "Aug 2020 - Sep 2021"
+- [x] Can we also match the width of the footer with the rest of the sections as it is a bit less wide right now.
 
 #### Blog Improvements
 

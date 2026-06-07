@@ -21,13 +21,6 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  useEffect(() => {
-    if (!mobileOpen) return;
-
-    const timeout = window.setTimeout(() => setMobileOpen(false), 0);
-    return () => window.clearTimeout(timeout);
-  }, [pathname, mobileOpen]);
-
   return (
     <>
       <header
@@ -109,7 +102,7 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
             </Link>
 
             <button
-              className="md:hidden btn-ghost p-2 rounded-lg"
+              className="md:hidden btn-ghost p-2 -mr-2 rounded-lg"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
@@ -144,6 +137,7 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
                   >
                     <Link
                       href={item.href}
+                      onClick={() => setMobileOpen(false)}
                       className={cn(
                         'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
                         active

@@ -3,9 +3,9 @@
  */
 
 export const FALLBACK_BIO = [
-  `I'm a full-stack engineer with 3+ years of experience crafting web applications that are fast, accessible, and a joy to use. I believe great software comes from caring equally about the user experience and the code quality underneath it.`,
-  `When I'm not building, I'm writing about web development, bingeing movies or TV shows, or missing open goals in Rocket League (blame lag, obviously).`,
-  `If you ever want to talk tech, cricket stats, DCEU, or whether Trevor from GTA is misunderstood, I'm your guy!`,
+  `I'm a full-stack engineer with 3+ years of experience building web applications that are fast, accessible, and a joy to use. My work spans the full stack — from pixel-perfect UIs to scalable back-end systems — and I care deeply about the quality of both.`,
+  `I've worked with startups, agencies, and enterprise clients across healthcare, e-commerce, analytics, and developer tooling. Whether it's greenfield architecture or rescuing a legacy codebase, I bring the same level of craft and ownership to every project.`,
+  `Outside of work you'll find me writing about the web, watching way too much cricket, or blaming lag for missed Rocket League goals. Always happy to talk tech, swap ideas, or explore potential collaborations.`,
 ];
 
 export const FALLBACK_STATS = [

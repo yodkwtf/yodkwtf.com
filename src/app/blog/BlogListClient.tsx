@@ -13,13 +13,10 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
-import { XFeed } from '@/components/ui/TwitterFeed';
+import { NewsletterSignup } from '@/components/ui/NewsletterSignup';
 import type { BlogPostMeta } from '@/types';
-import { siteConfig } from '@/config/site';
-import { TwitterIcon } from '@/components/ui/SocialIcons';
 
 const ALL = 'All';
-const TWITTER_HANDLE = siteConfig.username;
 const PAGE_SIZE = 6; // posts to show initially and per load
 
 // Post row — text-only, very light divider at the bottom
@@ -325,17 +322,7 @@ export function BlogListClient({
           </div>
         </div>
 
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-sm font-bold text-ink-faint leading-none">
-              <TwitterIcon size={12} />
-            </span>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint">
-              - @{TWITTER_HANDLE}
-            </p>
-          </div>
-          <XFeed username={TWITTER_HANDLE} />
-        </div>
+        <NewsletterSignup />
       </aside>
     </div>
   );

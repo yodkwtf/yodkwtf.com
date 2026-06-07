@@ -59,6 +59,11 @@ export function ProjectCard({
             Featured
           </span>
         )}
+        {project.clientWork && (
+          <span className="absolute top-3 right-3 tag-pill bg-surface-card/90 text-ink-muted border-border text-[10px] tracking-wider uppercase backdrop-blur-sm">
+            Client
+          </span>
+        )}
       </div>
 
       <div

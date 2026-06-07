@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ExternalLink, Calendar, Clock } from 'lucide-react';
+import { PortableText } from '@portabletext/react';
 import { GithubIcon } from '@/components/ui/SocialIcons';
 import { TagPill } from '@/components/ui/TagPill';
 import {
@@ -137,9 +138,19 @@ export default async function ProjectDetailPage({ params }: Params) {
             </div>
           </AnimateIn>
 
+          {/* Description — full width, below the image */}
+          {Array.isArray(project.description) && project.description.length > 0 && (
+            <AnimateIn delay={0.15} className="mb-12">
+              <h2 className="font-display text-2xl text-ink mb-4">About this project</h2>
+              <div className="prose prose-lg dark:prose-invert max-w-none text-ink-muted [&_p]:leading-relaxed [&_p]:mb-4 last:[&_p]:mb-0">
+                <PortableText value={project.description} />
+              </div>
+            </AnimateIn>
+          )}
+
           {/* Metrics */}
           {project.metrics?.length > 0 && (
-            <AnimateIn delay={0.15} className="mb-12">
+            <AnimateIn delay={0.2} className="mb-12">
               <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {project.metrics.map(
                   (m: { value: string; label: string }, i: number) => (

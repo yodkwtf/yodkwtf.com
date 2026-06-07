@@ -14,13 +14,13 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
   const [activeTag, setActiveTag] = useState(ALL);
 
   const allTags = useMemo(() => {
-    const tags = projects.flatMap((p) => p.tags ?? []);
-    return [ALL, ...Array.from(new Set(tags)).sort()];
+    const techs = projects.flatMap((p) => p.techStack ?? []);
+    return [ALL, ...Array.from(new Set(techs)).sort()];
   }, [projects]);
 
   const filtered = useMemo(() => {
     return projects.filter((p) => {
-      const matchTag = activeTag === ALL || p.tags?.includes(activeTag);
+      const matchTag = activeTag === ALL || p.techStack?.includes(activeTag);
       const q = search.toLowerCase();
       const matchSearch =
         !q ||
@@ -72,7 +72,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
       {/* Count */}
       <p className="text-xs font-mono text-ink-faint">
         {filtered.length} project{filtered.length !== 1 ? 's' : ''}
-        {activeTag !== ALL && ` tagged "${activeTag}"`}
+        {activeTag !== ALL && ` using "${activeTag}"`}
         {search && ` matching "${search}"`}
       </p>
 
