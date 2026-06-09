@@ -52,7 +52,7 @@ When Sanity is unreachable, pages fall back to static data in `src/data/`:
 - `fallback-projects.ts` — `FALLBACK_PROJECTS` (array) + `FALLBACK_PROJECT_MAP` (slug-keyed, with metrics/challenge/solution)
 - `fallback-experience.ts` — `FALLBACK_EXPERIENCE` + `FALLBACK_EDUCATION`
 - `fallback-skills.ts` — `FALLBACK_SKILLS` (Record\<category, string[]\>) + `SKILL_CATEGORY_COLORS`
-- `fallback-about.ts` — `FALLBACK_BIO` (string[]) + `FALLBACK_STATS` (`{ num, label, sub }[]` — used by `MiniAboutSection` and the about page)
+- `fallback-about.ts` — `FALLBACK_SHORT_BIO` (string[], 1–2 sentences for the home page mini-about) + `FALLBACK_BIO` (string[], full multi-paragraph version for the about page) + `FALLBACK_STATS` (`{ num, label, sub }[]`)
 - `fallback-hero.ts` — `FALLBACK_HERO_STATS` (`{ num, label }[]` — concise, no `sub`) + `FALLBACK_HERO_STACK` (`string[]`) — used only by `HeroSection`
 - `fallback-blogs.ts` — `FALLBACK_BLOGS` + `FALLBACK_BLOG_TAGS` — shown when no MDX files exist yet
 
@@ -60,7 +60,19 @@ When Sanity is unreachable, pages fall back to static data in `src/data/`:
 
 Every section that fetches from Sanity wraps the call in `try/catch` and substitutes the matching fallback on failure. `SkillsSection` is async and groups the flat `Skill[]` from Sanity into the category-keyed shape automatically.
 
-The `about` Sanity document also stores `education[]` (institution/degree/period/note) and `stats[]` (num/label/sub) which the about page and `MiniAboutSection` use, falling back to their respective constants when absent.
+The `about` Sanity document stores two separate bio fields: `bio` (full, shown on the about page) and `shortBio` (concise 1–2 paragraphs, shown in `MiniAboutSection` on the home page). Both are Portable Text arrays; both have fallback constants. Never use `bio` in `MiniAboutSection` or vice-versa.
+
+It also stores `education[]` (institution/degree/period/note) and `stats[]` (num/label/sub) which the about page and `MiniAboutSection` use, falling back to their respective constants when absent.
+
+The `getAboutPage()` GROQ query projects avatar image dimensions alongside the asset ref:
+```groq
+avatar {
+  asset,
+  "dimensions": asset->metadata.dimensions,
+  alt
+}
+```
+The about page reads `about.avatar.dimensions.width/height` and passes them to `<Image>` so the natural aspect ratio is preserved without forcing a square crop. The `AboutPage` type reflects this: `avatar?: SanityImage & { dimensions?: { width: number; height: number } }`.
 
 ### Sanity Image URLs
 
@@ -180,6 +192,18 @@ logger.error("ComponentName", "message", err);           // dev + prod
 ```
 
 `info` and `warn` are silenced in production. `error` always surfaces and is the right level for unexpected failures that aren't covered by a Sanity fallback.
+
+### Brand Assets & Icons
+
+`src/components/ui/DCLogo.tsx` — the "DC" signature monogram used in `Navbar` and `Footer`. It renders as a non-square SVG (`width = size * 1.65, height = size`). The D letterform uses `currentColor` so it inherits the parent's text color; the C letterform is hardcoded `#34d399` (accent-300). Both components wrap it in a small dark (`bg-[#20201f]`) rounded square.
+
+Static icon files follow Next.js App Router conventions:
+- `src/app/icon.svg` — SVG favicon; Next.js auto-generates `<link rel="icon" type="image/svg+xml">` from this
+- `src/app/favicon.ico` — ICO fallback for old browsers
+- `public/og.png` — Open Graph / Twitter card image (1200×630); manually referenced in `layout.tsx` via `siteConfig.ogImage`
+- `public/logo.png` — standalone PNG for future branding use
+
+Do not move `icon.svg` / `favicon.ico` to `public/` — they must stay in `src/app/` for Next.js to wire them automatically.
 
 ### Resume URL — Fetched Once in Layout
 

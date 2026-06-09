@@ -2,8 +2,6 @@
 
 #### Content Review & Fallback Content
 
-- [ ] Update all the fallback content first
-- [ ] Update fallback content for projects and about
 - [x] Finish content and code review for all sections and all pages
   - [x] Navbar
   - [x] Footer
@@ -39,6 +37,7 @@
 - [ ] Fix all the typescript errors across the entire codebase
 - [x] Add error handling everywhere for all the API calls and all the components
 - [ ] Update fallback blogs with some real blog data instead of mock data
+- [ ] Update fallback content for projects
 - [x] Add a logging system to log all the errors and all the important events across the entire website
 - [x] Remove unnecessary comments from the entire codebase
 - [x] Add logging to more places for info level, warnings, etc. and make them colored accordingly as well. Also don't log the entire err in console as it clutters the logs, only log a dev friendly message.

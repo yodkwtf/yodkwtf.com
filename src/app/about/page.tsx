@@ -19,7 +19,7 @@ import {
   FALLBACK_EXPERIENCE,
   FALLBACK_EDUCATION,
 } from '@/data/fallback-experience';
-import { FALLBACK_BIO } from '@/data/fallback-about';
+import { FALLBACK_BIO, FALLBACK_AVATAR_URL } from '@/data/fallback-about';
 
 type EducationItem = {
   institution: string;
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 export default async function AboutPage() {
   let experience: ExperienceItem[] = FALLBACK_EXPERIENCE;
   let education: EducationItem[] = FALLBACK_EDUCATION;
-  let avatarUrl: string | null = null;
+  let avatarUrl: string | null = FALLBACK_AVATAR_URL || null;
   let avatarWidth = 640;
   let avatarHeight = 800;
   let resumeUrl: string = siteConfig.links.resume;
@@ -93,9 +93,9 @@ export default async function AboutPage() {
   return (
     <>
       <div className="pt-32 pb-8 px-6">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-5xl">
           <AnimateIn>
-            <div className="grid lg:grid-cols-[1fr_320px] gap-16 items-center">
+            <div className="grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-16 items-center">
               <div className="space-y-5">
                 <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">
                   About
@@ -107,7 +107,7 @@ export default async function AboutPage() {
                   {bio.map((para, i) => (
                     <p
                       key={i}
-                      className="text-ink-muted text-lg leading-relaxed"
+                      className="text-ink-muted leading-relaxed"
                     >
                       {para}
                     </p>
@@ -131,7 +131,7 @@ export default async function AboutPage() {
                 </div>
               </div>
 
-              <div className="flex justify-center lg:justify-end mt-4 lg:mt-0">
+              <div className="flex justify-center mt-4 lg:mt-0">
                 <div className="relative w-full max-w-[288px] lg:max-w-none">
                   <div className="absolute -inset-1.5 rounded-2xl bg-linear-to-br from-accent-400 to-accent-700 opacity-25 blur-lg" />
                   {avatarUrl ? (
