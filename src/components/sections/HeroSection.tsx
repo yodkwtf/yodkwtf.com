@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { AnimateIn, BounceBar } from '@/components/ui/AnimateIn';
-import { GithubIcon, TwitterIcon, LinkedinIcon } from '@/components/ui/SocialIcons';
+import {
+  GithubIcon,
+  TwitterIcon,
+  LinkedinIcon,
+} from '@/components/ui/SocialIcons';
 import { siteConfig } from '@/config/site';
 import { getHeroConfig } from '@/sanity/lib/queries';
 import { FALLBACK_HERO_STATS, FALLBACK_HERO_STACK } from '@/data/fallback-hero';
@@ -16,7 +20,11 @@ export async function HeroSection() {
     if (hero?.stats?.length) stats = hero.stats;
     if (hero?.stack?.length) stack = hero.stack;
   } catch (err) {
-    logger.warn('HeroSection', 'Failed to fetch hero config from Sanity, using fallback', err);
+    logger.warn(
+      'HeroSection',
+      'Failed to fetch hero config from Sanity, using fallback',
+      err,
+    );
   }
 
   return (
@@ -49,8 +57,11 @@ export async function HeroSection() {
             <AnimateIn delay={0.2}>
               <p className="text-ink-muted text-lg leading-relaxed max-w-lg">
                 Full-stack engineer specializing in{' '}
-                <span className="text-ink font-medium">React, Next.js, and Node.js</span>. I care
-                deeply about performance, accessibility, and shipping products people love.
+                <span className="text-ink font-medium">
+                  React.js, Next.js, and Node.js
+                </span>
+                . I care deeply about performance, accessibility, and shipping
+                products people love.
               </p>
             </AnimateIn>
 
@@ -100,7 +111,9 @@ export async function HeroSection() {
                 <div className="flex items-center gap-5 text-sm text-ink-muted font-mono">
                   {stats.map(({ num, label }) => (
                     <div key={label} className="flex items-baseline gap-1.5">
-                      <span className="text-ink font-semibold text-base">{num}</span>
+                      <span className="text-ink font-semibold text-base">
+                        {num}
+                      </span>
                       <span className="text-xs text-ink-faint">{label}</span>
                     </div>
                   ))}
@@ -109,13 +122,20 @@ export async function HeroSection() {
             </AnimateIn>
           </div>
 
-          <AnimateIn direction="right" delay={0.5} duration={0.8} className="hidden lg:block">
+          <AnimateIn
+            direction="right"
+            delay={0.5}
+            duration={0.8}
+            className="hidden lg:block"
+          >
             <div className="glass rounded-xl p-5 font-mono text-xs leading-6 shadow-xl glow-accent-sm">
               <div className="flex items-center gap-1.5 mb-4 pb-3 border-b border-border">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
                 <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/90 dark:bg-yellow-400/80" />
                 <span className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                <span className="ml-2 text-ink-faint text-[11px]">developer.ts</span>
+                <span className="ml-2 text-ink-faint text-[11px]">
+                  developer.ts
+                </span>
               </div>
               <div className="space-y-0.5">
                 <div>

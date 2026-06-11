@@ -134,8 +134,8 @@ export default async function ProjectDetailPage({ params }: Params) {
             <div className="relative rounded-xl overflow-hidden border border-border bg-surface-subtle aspect-video">
               {project.thumbnail ? (
                 <Image
-                  src={urlFor(project.thumbnail).width(896).height(504).url()}
-                  alt={project.thumbnail.alt ?? project.title}
+                  src={typeof project.thumbnail === 'string' ? project.thumbnail : urlFor(project.thumbnail).width(896).height(504).url()}
+                  alt={typeof project.thumbnail === 'string' ? project.title : (project.thumbnail.alt ?? project.title)}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 896px"

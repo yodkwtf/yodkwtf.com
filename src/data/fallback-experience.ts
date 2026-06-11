@@ -19,7 +19,7 @@ export const FALLBACK_EXPERIENCE = [
     ],
     techStack: [
       'Next.js',
-      'React',
+      'React.js',
       'TypeScript',
       'OpenAI',
       'OAuth 2.0',
@@ -69,7 +69,7 @@ export const FALLBACK_EXPERIENCE = [
     ],
     techStack: [
       'Node.js',
-      'React',
+      'React.js',
       'PostgreSQL',
       'Docker',
       'GCP',
@@ -86,10 +86,10 @@ export const FALLBACK_EDUCATION = [
     institution: 'The NorthCap University',
     degree: 'B.Tech in Computer Science',
     period: '2019 — 2023',
-    note: 'CGPA: 8.46 · Gained hands-on experience through internships, freelance work, and building 100+ personal projects throughout college.',
+    note: 'CGPA: 8.46 · Hands-on experience from internships, freelance work, and  100+ personal projects.',
   },
   {
-    institution: 'Delhi Public School Ghaziabad Society',
+    institution: 'Delhi Public School Ghaziabad Society (DPSG)',
     degree: 'Higher Secondary Education (PCM)',
     period: '2013 — 2019',
     note: 'Grade: 9.4 · Mathematics Topper for two consecutive years (11th & 12th)',

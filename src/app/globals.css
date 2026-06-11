@@ -482,6 +482,9 @@ pre[data-language] span[data-highlighted-line] {
   border: none;
   outline: none;
 }
+.btn:disabled {
+  cursor: not-allowed;
+}
 .btn-primary {
   background: var(--accent-600);
   color: #fff;

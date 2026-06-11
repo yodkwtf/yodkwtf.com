@@ -3,10 +3,10 @@ import { ArrowRight } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { BlogCard } from '@/components/ui/BlogCard';
 import { AnimateIn } from '@/components/ui/AnimateIn';
-import { getLatestBlogs } from '@/lib/blogs';
+import { getFeaturedBlogs } from '@/lib/blogs';
 
 export function LatestBlogsSection() {
-  const posts = getLatestBlogs(3);
+  const posts = getFeaturedBlogs(3);
 
   if (!posts.length) return null;
 

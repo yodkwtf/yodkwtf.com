@@ -1,21 +1,21 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import readingTime from "reading-time";
-import type { BlogPost, BlogPostMeta } from "@/types";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import readingTime from 'reading-time';
+import type { BlogPost, BlogPostMeta } from '@/types';
 
-const BLOGS_DIR = path.join(process.cwd(), "content/blogs");
+const BLOGS_DIR = path.join(process.cwd(), 'content/blogs');
 
 export function getBlogSlugs(): string[] {
   if (!fs.existsSync(BLOGS_DIR)) return [];
   return fs
     .readdirSync(BLOGS_DIR)
-    .filter((f) => f.endsWith(".mdx") || f.endsWith(".md"))
-    .map((f) => f.replace(/\.mdx?$/, ""));
+    .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'))
+    .map((f) => f.replace(/\.mdx?$/, ''));
 }
 
 export function getBlogBySlug(slug: string): BlogPost | null {
-  const extensions = [".mdx", ".md"];
+  const extensions = ['.mdx', '.md'];
   let filePath: string | null = null;
 
   for (const ext of extensions) {
@@ -28,9 +28,10 @@ export function getBlogBySlug(slug: string): BlogPost | null {
 
   if (!filePath) return null;
 
-  const raw = fs.readFileSync(filePath, "utf-8");
+  const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
-  const rt = readingTime(content);
+  const contentWithoutCode = content.replace(/```[\s\S]*?```/g, '');
+  const rt = readingTime(contentWithoutCode, { wordsPerMinute: 265 });
 
   return {
     ...(data as any),

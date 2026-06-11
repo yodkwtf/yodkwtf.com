@@ -76,7 +76,7 @@ export function NewsletterSignup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={COMING_SOON || status === 'loading'}
-              className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent-500/60 transition-colors disabled:opacity-50"
+              className="w-full px-3 py-2 rounded-lg border border-border bg-surface text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent-500/60 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <button
               type="submit"

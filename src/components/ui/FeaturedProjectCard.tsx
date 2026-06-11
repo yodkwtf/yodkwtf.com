@@ -30,7 +30,7 @@ export function FeaturedProjectCard({
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        'group flex flex-col md:flex-row min-h-105 border-b border-border last:border-0',
+        'group flex flex-col md:flex-row min-h-105 overflow-hidden rounded-2xl border border-border md:border-0 md:rounded-none md:overflow-visible',
         className,
       )}
     >
@@ -43,8 +43,8 @@ export function FeaturedProjectCard({
       >
         {project.thumbnail ? (
           <Image
-            src={urlFor(project.thumbnail).width(1200).height(675).url()}
-            alt={project.thumbnail.alt ?? project.title}
+            src={typeof project.thumbnail === 'string' ? project.thumbnail : urlFor(project.thumbnail).width(1200).height(675).url()}
+            alt={typeof project.thumbnail === 'string' ? project.title : (project.thumbnail.alt ?? project.title)}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 60vw"

@@ -180,6 +180,8 @@ Code blocks are syntax-highlighted via `rehype-pretty-code` with the `github-dar
 // filename: path/to/file.ts
 ```
 
+`src/components/mdx/BlogCodeEnhancer.tsx` is a `'use client'` null-render component mounted in the blog detail page. On mount it scans `.prose pre` elements, reads `pre.dataset.filename` (set by `rehype-pretty-code` from the `// filename:` comment), wraps each `<pre>` in a dark toolbar container, and injects a copy-to-clipboard button. It marks processed blocks with `data-code-enhanced` to be idempotent.
+
 ### Logging
 
 Use `src/lib/logger.ts` for all diagnostic output — never `console.log/warn/error` directly:
@@ -208,6 +210,15 @@ Do not move `icon.svg` / `favicon.ico` to `public/` — they must stay in `src/a
 ### Resume URL — Fetched Once in Layout
 
 `getResumeUrl()` is called **once** in `src/app/layout.tsx` and the result is passed as a `resumeUrl: string` prop to both `<Navbar>` and `<Footer>`. Neither component fetches it independently. The about page gets `resumeUrl` as part of its own `getAboutPage()` call (which returns the full about document anyway), so that is a separate fetch and is correct.
+
+### Newsletter Integration
+
+`src/components/ui/NewsletterSignup.tsx` has a `const COMING_SOON = true` flag at the top of the file that disables the form. When integrating with an email service, flip it to `false` and fill in `src/app/api/newsletter/route.ts` — the route already validates the email and has commented-out examples for Resend, Mailchimp, and ConvertKit.
+
+### `next.config.ts` Notes
+
+- `/resume` redirects to `/resume.pdf` (permanent: false) so short links work.
+- `images.remotePatterns` allows `cdn.sanity.io`, `images.unsplash.com`, `res.cloudinary.com`, `i.imgur.com`, and two GitHub image hosts. Add new domains here if `<Image>` throws a hostname error.
 
 ### SEO Infrastructure
 

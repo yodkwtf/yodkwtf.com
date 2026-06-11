@@ -19,13 +19,19 @@ export async function MiniAboutSection() {
   try {
     const about = await getAboutPage();
     if (about?.shortBio?.length) {
-      const extracted = extractBlocks(about.shortBio as { children?: { text: string }[] }[]);
+      const extracted = extractBlocks(
+        about.shortBio as { children?: { text: string }[] }[],
+      );
       if (extracted.length) bio = extracted;
     }
     if (about?.stats?.length) stats = about.stats;
     logger.info('MiniAboutSection', 'Loaded about data from Sanity');
   } catch (err) {
-    logger.warn('MiniAboutSection', 'Failed to fetch about data, using fallback', err);
+    logger.warn(
+      'MiniAboutSection',
+      'Failed to fetch about data, using fallback',
+      err,
+    );
   }
 
   return (
@@ -39,7 +45,9 @@ export async function MiniAboutSection() {
               </span>
               <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight">
                 Bringing ideas to life through <br />
-                <em className="not-italic text-gradient">code and design.</em>
+                <em className="not-italic text-gradient">
+                  code and creativity.
+                </em>
               </h2>
               {bio.map((para, i) => (
                 <p key={i} className="text-ink-muted leading-relaxed">

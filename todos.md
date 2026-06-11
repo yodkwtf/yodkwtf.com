@@ -36,14 +36,17 @@
 
 - [ ] Fix all the typescript errors across the entire codebase
 - [x] Add error handling everywhere for all the API calls and all the components
-- [ ] Update fallback blogs with some real blog data instead of mock data
-- [ ] Update fallback content for projects
+- [x] Update fallback blogs with some real blog data instead of mock data
+- [x] Update fallback content for projects
 - [x] Add a logging system to log all the errors and all the important events across the entire website
 - [x] Remove unnecessary comments from the entire codebase
 - [x] Add logging to more places for info level, warnings, etc. and make them colored accordingly as well. Also don't log the entire err in console as it clutters the logs, only log a dev friendly message.
 - [x] The about bio should be different on the mini-about-section on the home page as it'll be concise and it should be different long elaborated version on the about page. Both should come from sanity and both should have fallback versions as well. But both of them should be separate.
 - [x] The about page image won't necessarily be a circular image. It may be a landscape or a portrait image
 - [x] Create a signature style SVG logo from my name initials DC and add it to Navbar replace the "</>" logo. Also add it to Footer
+- [x] Less rounded corners for code blocks on blog posts
+- [x] Cursor "not-allowed" for newsletter search box and button
+- [x] Pagination does not move back to the top of the page when we click on it, fix that
 
 #### Bug Fixes
 

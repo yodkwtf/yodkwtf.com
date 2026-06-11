@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import {
   Search,
   X,
@@ -110,6 +110,15 @@ export function BlogListClient({
   const [activeCategory, setActiveCategory] = useState(ALL);
   const [activeTag, setActiveTag] = useState(ALL);
   const [page, setPage] = useState(1);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
 
   const allCategories = useMemo(() => {
     const cats = posts
@@ -298,29 +307,30 @@ export function BlogListClient({
           </div>
         )}
 
-        <div>
-          <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint mb-3">
-            Topic
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <FilterPill
-              label="All"
-              count={posts.length}
-              active={activeTag === ALL}
-              onClick={() => updateTag(ALL)}
-            />
-            {allTags.map((tag) => (
+        {allTags.length > 0 && (
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-ink-faint mb-3">
+              Topic
+            </p>
+            <div className="flex flex-wrap gap-2">
               <FilterPill
-                key={tag}
-                label={tag}
-                count={tagCounts[tag] ?? 0}
-                active={activeTag === tag}
-                onClick={() => updateTag(tag)}
+                label="All"
+                count={posts.length}
+                active={activeTag === ALL}
+                onClick={() => updateTag(ALL)}
               />
-            ))}
+              {allTags.map((tag) => (
+                <FilterPill
+                  key={tag}
+                  label={tag}
+                  count={tagCounts[tag] ?? 0}
+                  active={activeTag === tag}
+                  onClick={() => updateTag(tag)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-
+        )}
         <NewsletterSignup />
       </aside>
     </div>

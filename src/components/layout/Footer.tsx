@@ -23,13 +23,14 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8">
           <div className="space-y-2 text-center md:text-left">
             <div className="flex items-center gap-2 justify-center md:justify-start">
+              z{' '}
               <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#20201f] text-white shrink-0">
                 <DCLogo size={14} />
               </span>
               <p className="font-display text-xl text-ink">{siteConfig.name}</p>
             </div>
             <p className="text-sm text-ink-muted max-w-xs mx-auto md:mx-0">
-              {siteConfig.description.slice(0, 100)}…
+              {siteConfig.description.split('.')[0]}.
             </p>
           </div>
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">

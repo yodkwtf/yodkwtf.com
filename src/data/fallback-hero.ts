@@ -5,7 +5,7 @@ export const FALLBACK_HERO_STATS = [
 ];
 
 export const FALLBACK_HERO_STACK = [
-  'React & Next.js',
+  'React.js & Next.js',
   'TypeScript',
   'Node.js',
   'SQL',

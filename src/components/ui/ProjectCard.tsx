@@ -41,8 +41,8 @@ export function ProjectCard({
       >
         {project.thumbnail ? (
           <Image
-            src={urlFor(project.thumbnail).width(640).height(360).url()}
-            alt={project.thumbnail.alt ?? project.title}
+            src={typeof project.thumbnail === 'string' ? project.thumbnail : urlFor(project.thumbnail).width(640).height(360).url()}
+            alt={typeof project.thumbnail === 'string' ? project.title : (project.thumbnail.alt ?? project.title)}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 40vw"

@@ -12,7 +12,7 @@ export const FALLBACK_SHORT_BIO = [
 
 export const FALLBACK_BIO = [
   `Hey, I'm Durgesh, a full-stack software engineer currently at Konrad Group. Over the past 3+ years I've worked on everything from enterprise dashboards and real-time monitoring systems to e-commerce platforms and AI-powered tools, alongside 140+ personal projects built mostly out of curiosity and a refusal to be bored.`,
-  `JavaScript has been my home for most of my career. React, Next.js, Node.js, TypeScript are my daily drivers, though I've also spent real time on Python, Docker, SQL, GCP, and Workday Extend (long story). I've worked across backend infrastructure, cloud systems, and enterprise workflow automation at different companies, and I'm currently at Konrad Group building software that real people depend on.`,
+  `JavaScript has been my home for most of my career. React.js, Next.js, Node.js, TypeScript are my daily drivers, though I've also spent real time on Python, Docker, SQL, GCP, and Workday Extend (long story). I've worked across backend infrastructure, cloud systems, and enterprise workflow automation at different companies, and I'm currently at Konrad Group building software that real people depend on.`,
   `When I'm not at the keyboard, I'm deep into films. From prestige dramas to action movies I will defend with my entire chest. I play Rocket League at a skill level best described as enthusiastic, and I have strong opinions about the DCEU that I'll share whether you ask or not.`,
 ];
 

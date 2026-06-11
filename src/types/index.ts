@@ -19,7 +19,7 @@ export interface Project {
   clientWork: boolean;
   githubUrl?: string;
   liveUrl?: string;
-  thumbnail: SanityImage;
+  thumbnail: SanityImage | string | null;
   gallery?: SanityImage[];
   metrics?: { label: string; value: string }[];
   timeline?: string;

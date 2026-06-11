@@ -4,146 +4,376 @@
 
 export const FALLBACK_PROJECTS = [
   {
-    _id: "1", title: "Horizon SaaS", slug: { current: "horizon-saas" },
-    summary: "A multi-tenant SaaS platform with real-time collaboration, built with Next.js 14, tRPC, and Supabase. Handles 50k+ MAU.",
-    description: [], tags: ["SaaS", "B2B", "Open Source"],
-    techStack: ["Next.js", "TypeScript", "tRPC", "Supabase", "Tailwind"],
-    featured: true, clientWork: false,
-    githubUrl: "https://github.com", liveUrl: "https://example.com",
-    thumbnail: null as any, publishedAt: "2024-03-01",
+    _id: 'cinematica',
+    title: 'Cinematica',
+    slug: { current: 'cinematica' },
+    summary:
+      'A full-stack movie and TV tracking platform built with the MERN stack, featuring authentication, watchlists, reviews, and personalized content management.',
+    description: [],
+    tags: ['Full Stack', 'MERN', 'Open Source'],
+    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Swagger'],
+    featured: true,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/cinematica-mern',
+    liveUrl: 'https://cinematica-mern.vercel.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800483/yodkwtf.com/projects/cinematica_o1lctj.png',
+    gallery: [],
+    metrics: [
+      { label: 'Architecture', value: 'MERN' },
+      { label: 'Authentication', value: 'JWT' },
+    ],
+    timeline: '',
+    challenges: [],
+    solutions: [],
+    architectureDetails: [],
+    publishedAt: '2024-01-01',
   },
+
   {
-    _id: "2", title: "Pulse Analytics", slug: { current: "pulse-analytics" },
-    summary: "Privacy-first web analytics dashboard built on ClickHouse. Replaces Google Analytics with a clean, fast, open-source alternative.",
-    description: [], tags: ["Analytics", "Privacy", "Open Source"],
-    techStack: ["React", "Node.js", "ClickHouse", "Redis", "Docker"],
-    featured: true, clientWork: false,
-    githubUrl: "https://github.com", liveUrl: "https://example.com",
-    thumbnail: null as any, publishedAt: "2024-02-01",
+    _id: 'nexus-chat',
+    title: 'Nexus',
+    slug: { current: 'nexus' },
+    summary:
+      'A modern real-time chat application featuring direct messaging, group conversations, social authentication, online presence indicators, and profile customization.',
+    description: [],
+    tags: ['Realtime', 'Next.js', 'Full Stack'],
+    techStack: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'MongoDB',
+      'Prisma',
+      'NextAuth',
+    ],
+    featured: true,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/nexus-chat-application',
+    liveUrl: 'https://nexus-dk.vercel.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800522/yodkwtf.com/projects/Screenshot_2023-09-23_223421-min_zkvto4.png',
+    gallery: [],
+    metrics: [
+      { label: 'Realtime Messaging', value: 'Yes' },
+      { label: 'Authentication', value: 'Multiple Providers' },
+    ],
+    timeline: '',
+    challenges: [],
+    solutions: [],
+    architectureDetails: [],
+    publishedAt: '2024-01-01',
   },
+
   {
-    _id: "3", title: "ShipKit CLI", slug: { current: "shipkit-cli" },
-    summary: "Developer CLI tool for scaffolding production-ready Next.js projects with auth, payments, email, and CI/CD pre-configured out of the box.",
-    description: [], tags: ["CLI", "Open Source", "Developer Tools"],
-    techStack: ["Node.js", "TypeScript", "Oclif", "Ink"],
-    featured: true, clientWork: false,
-    githubUrl: "https://github.com", liveUrl: null as any,
-    thumbnail: null as any, publishedAt: "2024-01-15",
+    _id: 'devbysid',
+    title: 'DevBySid',
+    slug: { current: 'devbysid' },
+    summary:
+      'A freelance portfolio website for a game developer built with Gatsby, Contentful CMS, GraphQL, and Framer Motion, featuring custom content modeling and advanced SEO.',
+    description: [],
+    tags: ['Freelance', 'Portfolio', 'CMS'],
+    techStack: [
+      'Gatsby',
+      'GraphQL',
+      'Contentful',
+      'Framer Motion',
+      'Styled Components',
+    ],
+    featured: true,
+    clientWork: true,
+    githubUrl: '',
+    liveUrl: 'https://devbysid.com/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800496/yodkwtf.com/projects/Screenshot_584_-min_x3qimm.jpg',
+    gallery: [],
+    metrics: [
+      { label: 'Project Type', value: 'Client Work' },
+      { label: 'CMS', value: 'Contentful' },
+    ],
+    timeline: '',
+    challenges: [],
+    solutions: [],
+    architectureDetails: [],
+    publishedAt: '2024-01-01',
   },
+
   {
-    _id: "4", title: "Medico EHR", slug: { current: "medico-ehr" },
-    summary: "Electronic health records system for a mid-sized healthcare provider. HIPAA compliant, with appointment scheduling, billing, and telehealth.",
-    description: [], tags: ["Healthcare", "Enterprise"],
-    techStack: ["React", "Node.js", "PostgreSQL", "AWS", "Stripe"],
-    featured: false, clientWork: true,
-    githubUrl: null as any, liveUrl: "https://example.com",
-    thumbnail: null as any, publishedAt: "2023-11-01",
+    _id: 'edvault',
+    title: 'EdVault',
+    slug: { current: 'edvault' },
+    summary:
+      'An online marketplace platform built with Next.js, allowing users to browse, manage, and access educational resources through a modern web experience.',
+    description: [],
+    tags: ['Marketplace', 'Next.js', 'Full Stack'],
+    techStack: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB'],
+    featured: true,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/ed-vault-nextjs',
+    liveUrl: 'https://ed-vault.up.railway.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175463/yodkwtf.com/projects/thumbnail-min_hazyzb.jpg',
+    gallery: [],
+    metrics: [{ label: 'Platform', value: 'Marketplace' }],
+    timeline: '',
+    challenges: [],
+    solutions: [],
+    architectureDetails: [],
+    publishedAt: '2025-01-01',
   },
+
   {
-    _id: "5", title: "Luminary E-Commerce", slug: { current: "luminary-ecommerce" },
-    summary: "High-performance e-commerce storefront for a DTC luxury candle brand. Features 3D product previews, subscription box, and custom CMS.",
-    description: [], tags: ["E-Commerce", "Client Work"],
-    techStack: ["Next.js", "Shopify", "Three.js", "Sanity"],
-    featured: false, clientWork: true,
-    githubUrl: null as any, liveUrl: "https://example.com",
-    thumbnail: null as any, publishedAt: "2023-09-01",
+    _id: 'codepencil',
+    title: 'CodePencil',
+    slug: { current: 'codepencil' },
+    summary:
+      'An online code editor inspired by CodePen that enables users to write, preview, and experiment with HTML, CSS, and JavaScript directly in the browser.',
+    description: [],
+    tags: ['Developer Tools', 'React'],
+    techStack: ['React', 'JavaScript', 'HTML', 'CSS'],
+    featured: false,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/codepencil-with-react',
+    liveUrl: 'https://www.codepencil.me/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800527/yodkwtf.com/projects/Screenshot_620_-min_hxpdxq.png',
+    gallery: [],
+    metrics: [{ label: 'Category', value: 'Developer Tool' }],
+    timeline: '',
+    challenges: [],
+    solutions: [],
+    architectureDetails: [],
+    publishedAt: '2024-01-01',
   },
+
   {
-    _id: "6", title: "DevNotes", slug: { current: "devnotes" },
-    summary: "A minimal Markdown-based note taking app for developers. Features syntax highlighting, vim keybindings, and local-first storage.",
-    description: [], tags: ["Open Source", "Developer Tools", "Productivity"],
-    techStack: ["React", "Electron", "SQLite", "CodeMirror"],
-    featured: false, clientWork: false,
-    githubUrl: "https://github.com", liveUrl: "https://example.com",
-    thumbnail: null as any, publishedAt: "2023-07-01",
+    _id: 'astro-tech-blog',
+    title: 'The Astro Tech Blog',
+    slug: { current: 'the-astro-tech-blog' },
+    summary:
+      'A markdown-powered technical blog built with Astro for sharing development notes, tutorials, cheatsheets, and learnings from different technologies.',
+    description: [],
+    tags: ['Astro', 'Blog', 'Content'],
+    techStack: ['Astro', 'TypeScript', 'Markdown', 'CSS'],
+    featured: false,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/the-astro-tech-blog',
+    liveUrl: 'https://thetechblog-dk.netlify.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175462/yodkwtf.com/projects/og-image-min_kmmsni.png',
+    gallery: [],
+    metrics: [{ label: 'Content Source', value: 'Markdown' }],
+    timeline: '',
+    challenges: [],
+    solutions: [],
+    architectureDetails: [],
+    publishedAt: '2025-01-01',
   },
 ] as any[];
 
 // Slug-keyed map with extended detail fields for the project detail page
 function ptBlock(key: string, text: string) {
-  return { _key: key, _type: 'block', style: 'normal', children: [{ _key: `${key}s`, _type: 'span', text }] };
+  return {
+    _key: key,
+    _type: 'block',
+    style: 'normal',
+    children: [{ _key: `${key}s`, _type: 'span', text }],
+  };
 }
 
 export const FALLBACK_PROJECT_MAP: Record<string, any> = {
-  "horizon-saas": {
-    ...FALLBACK_PROJECTS[0],
+  cinematica: {
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'cinematica'),
+
     description: [
-      ptBlock('h1', 'Horizon is a multi-tenant SaaS platform built for teams that need real-time collaboration without sacrificing performance. It handles 50,000+ monthly active users across hundreds of isolated workspaces.'),
-      ptBlock('h2', 'The architecture uses row-level security in Supabase for tenant isolation, tRPC for end-to-end type-safe APIs, and edge functions for low-latency access globally. The frontend is built with Next.js App Router and optimistic UI updates to keep the experience snappy even on slow connections.'),
-      ptBlock('h3', 'This project pushed me to think deeply about multi-tenancy trade-offs, cost-efficient real-time patterns, and building a product that scales without the infrastructure bill spiralling out of control.'),
+      ptBlock(
+        'c1',
+        "Cinematica is a full-stack movie and TV tracking application built with the MERN stack. It allows users to maintain personalized watchlists, track what they've watched, discover new content, and manage their entertainment preferences through a clean and intuitive interface.",
+      ),
+      ptBlock(
+        'c2',
+        'The application features authentication, protected routes, CRUD operations, API documentation through Swagger, and a scalable backend architecture built with Express and MongoDB. It was one of the first large-scale projects where I brought together frontend, backend, database design, and deployment into a single product.',
+      ),
+      ptBlock(
+        'c3',
+        'Building Cinematica taught me a lot about structuring full-stack applications, designing APIs, managing application state, and creating products that solve real user problems rather than just serving as coding exercises.',
+      ),
     ],
-    timeline: "3 months",
+
+    timeline: '6 weeks',
+
     metrics: [
-      { label: "Monthly Active Users", value: "50,000+" },
-      { label: "Performance Score", value: "98/100" },
-      { label: "Bundle Size Reduction", value: "40%" },
+      { label: 'Architecture', value: 'MERN' },
+      { label: 'Authentication', value: 'JWT' },
+      { label: 'API Docs', value: 'Swagger' },
     ],
-    challengeText: "Building a multi-tenant architecture that scales efficiently while keeping costs low was the primary engineering challenge. We needed real-time features without excessive infrastructure overhead.",
-    solutionText: "Implemented a row-level security model in Supabase for tenant isolation. Used tRPC with optimistic updates for real-time feel without WebSockets. Deployed edge functions for low-latency global access.",
+
+    challengeText:
+      'Creating a scalable full-stack architecture while keeping the user experience simple and responsive across different workflows.',
+
+    solutionText:
+      'Designed a modular Express backend, implemented JWT-based authentication, and structured the frontend around reusable React components and predictable state management.',
   },
-  "pulse-analytics": {
-    ...FALLBACK_PROJECTS[1],
+
+  nexus: {
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'nexus'),
+
     description: [
-      ptBlock('p1', 'Pulse is a privacy-first web analytics platform built as a lightweight, open-source alternative to Google Analytics. It was designed from the ground up to be cookieless, GDPR-compliant, and genuinely fast to query.'),
-      ptBlock('p2', 'The event pipeline ingests millions of events per day asynchronously, stores them in ClickHouse with pre-aggregated rollups, and serves sub-80ms dashboard queries even across long date ranges. The tracking script is under 3KB and does not require user consent banners.'),
-      ptBlock('p3', 'Building on ClickHouse for the first time was a steep but rewarding learning curve — the columnar storage model and materialized views turned out to be a perfect fit for time-series analytics workloads.'),
+      ptBlock(
+        'n1',
+        'Nexus is a modern real-time chat application built with Next.js, TypeScript, Prisma, MongoDB, and NextAuth. The goal was to explore modern full-stack development patterns while creating a polished messaging experience.',
+      ),
+      ptBlock(
+        'n2',
+        'The platform supports direct messaging, group conversations, profile customization, online presence indicators, and multiple authentication providers including Google and GitHub.',
+      ),
+      ptBlock(
+        'n3',
+        'This project helped me gain deeper experience with the Next.js ecosystem, authentication flows, database modeling with Prisma, and building production-ready user experiences.',
+      ),
     ],
-    timeline: "10 weeks",
+
+    timeline: '4 weeks',
+
     metrics: [
-      { label: "Query Latency", value: "<80ms" },
-      { label: "Events Processed", value: "12M+" },
-      { label: "Tracking Scripts", value: "3KB" },
+      { label: 'Framework', value: 'Next.js' },
+      { label: 'Database', value: 'MongoDB' },
+      { label: 'Authentication', value: 'NextAuth' },
     ],
-    challengeText: "Teams needed product analytics without invasive tracking, cookie-heavy scripts, or slow dashboard queries across high-volume event streams.",
-    solutionText: "Built a lean event collector backed by ClickHouse rollups, async ingestion, and a focused dashboard optimized for fast filtering and retention analysis.",
+
+    challengeText:
+      'Managing complex authentication flows and real-time user interactions while maintaining a clean and intuitive UI.',
+
+    solutionText:
+      'Leveraged NextAuth for authentication, Prisma for data modeling, and modern React patterns to keep state and user interactions predictable.',
   },
-  "shipkit-cli": {
-    ...FALLBACK_PROJECTS[2],
+
+  devbysid: {
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'devbysid'),
+
     description: [
-      ptBlock('s1', 'ShipKit is a developer CLI that scaffolds production-ready Next.js projects in under five minutes. Instead of copy-pasting boilerplate across every new project, you run one command and answer a handful of questions.'),
-      ptBlock('s2', 'It supports 18 composable modules — auth (NextAuth, Clerk, or Supabase), payments (Stripe), email (Resend), observability (Sentry), and more. Each module drops in clean, wired-up code rather than bare templates you still have to integrate yourself.'),
-      ptBlock('s3', 'The CLI is built with Oclif and Ink for a polished terminal UI. The real engineering challenge was making the module system composable — modules need to know about each other and generate correct cross-wiring code without conflicts.'),
+      ptBlock(
+        'd1',
+        'A freelance portfolio website built for a game developer. The project focused heavily on performance, content management, SEO, and creating a polished visual experience.',
+      ),
+      ptBlock(
+        'd2',
+        'Built using Gatsby, Contentful CMS, GraphQL, and Framer Motion, the website allows content to be managed without touching code while maintaining excellent performance and accessibility.',
+      ),
+      ptBlock(
+        'd3',
+        'This project gave me valuable experience working directly with a client, translating requirements into technical solutions, and balancing design expectations with engineering constraints.',
+      ),
     ],
-    timeline: "6 weeks",
+
+    timeline: 'Client Project',
+
     metrics: [
-      { label: "Starter Modules", value: "18" },
-      { label: "Setup Time", value: "5 min" },
-      { label: "Templates", value: "6" },
+      { label: 'Project Type', value: 'Freelance' },
+      { label: 'CMS', value: 'Contentful' },
+      { label: 'Animations', value: 'Framer Motion' },
     ],
-    challengeText: "Every new product started with repetitive setup: auth, payments, linting, deployment, environment validation, and documentation.",
-    solutionText: "Created a composable CLI that asks a few setup questions, writes the correct files, validates environment choices, and leaves a project ready to deploy.",
+
+    challengeText:
+      'Creating a highly customized portfolio experience while ensuring content remained easy for the client to manage independently.',
+
+    solutionText:
+      'Used Contentful for content management, GraphQL for data retrieval, and Framer Motion for performant animations without sacrificing SEO.',
   },
-  "medico-ehr": {
-    ...FALLBACK_PROJECTS[3],
-    timeline: "5 months",
-    metrics: [
-      { label: "Clinics Onboarded", value: "12" },
-      { label: "Appointments", value: "30K+" },
-      { label: "Uptime", value: "99.9%" },
+
+  edvault: {
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'edvault'),
+
+    description: [
+      ptBlock(
+        'e1',
+        'EdVault is an online marketplace platform built with Next.js. The project was designed to explore marketplace workflows, modern React patterns, and full-stack application architecture.',
+      ),
+      ptBlock(
+        'e2',
+        'The platform provides an organized experience for browsing, discovering, and managing educational resources through a responsive and user-friendly interface.',
+      ),
+      ptBlock(
+        'e3',
+        'Building EdVault helped strengthen my understanding of larger application structures, route management, reusable component systems, and deployment workflows.',
+      ),
     ],
-    challengeText: "The provider needed a secure workflow for patient records, appointments, billing, and virtual visits without slowing clinical staff down.",
-    solutionText: "Designed role-based workflows, audit-friendly record updates, encrypted storage, and focused dashboards for front desk, clinicians, and billing teams.",
+
+    timeline: '3 weeks',
+
+    metrics: [
+      { label: 'Framework', value: 'Next.js' },
+      { label: 'Category', value: 'Marketplace' },
+    ],
+
+    challengeText:
+      'Designing a marketplace experience that remained simple and easy to navigate while supporting future scalability.',
+
+    solutionText:
+      'Focused on component reusability, clean route structures, and a scalable application architecture from the beginning.',
   },
-  "luminary-ecommerce": {
-    ...FALLBACK_PROJECTS[4],
-    timeline: "8 weeks",
-    metrics: [
-      { label: "Conversion Lift", value: "22%" },
-      { label: "Lighthouse", value: "96" },
-      { label: "Checkout Steps", value: "2" },
+
+  codepencil: {
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'codepencil'),
+
+    description: [
+      ptBlock(
+        'cp1',
+        'CodePencil is an online code editor inspired by platforms like CodePen. It allows developers to experiment with HTML, CSS, and JavaScript directly in the browser.',
+      ),
+      ptBlock(
+        'cp2',
+        'The application provides a live preview environment, enabling instant feedback while writing code and making frontend experimentation significantly faster.',
+      ),
+      ptBlock(
+        'cp3',
+        'This project was a fun challenge in state management, editor synchronization, and building interactive developer tooling.',
+      ),
     ],
-    challengeText: "The brand needed a storefront that felt premium while staying fast on mobile and easy for the team to merchandise.",
-    solutionText: "Combined a headless Shopify checkout, Sanity-managed editorial content, optimized product imagery, and lightweight 3D previews for hero products.",
+
+    timeline: '2 weeks',
+
+    metrics: [
+      { label: 'Category', value: 'Developer Tool' },
+      { label: 'Preview', value: 'Live' },
+    ],
+
+    challengeText:
+      'Keeping editor inputs and rendered output synchronized while maintaining a smooth user experience.',
+
+    solutionText:
+      'Implemented efficient state updates and isolated rendering logic to ensure responsive live previews.',
   },
-  devnotes: {
-    ...FALLBACK_PROJECTS[5],
-    timeline: "4 weeks",
-    metrics: [
-      { label: "Cold Start", value: "<1s" },
-      { label: "Offline First", value: "100%" },
-      { label: "Editor Modes", value: "3" },
+
+  'the-astro-tech-blog': {
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'the-astro-tech-blog'),
+
+    description: [
+      ptBlock(
+        'a1',
+        'The Astro Tech Blog is a content-focused platform built with Astro and Markdown. It serves as a place to share notes, tutorials, cheatsheets, and lessons learned while exploring different technologies.',
+      ),
+      ptBlock(
+        'a2',
+        "The blog uses a content collection approach, allowing articles to be written entirely in Markdown while benefiting from Astro's performance-focused architecture.",
+      ),
+      ptBlock(
+        'a3',
+        'This project introduced me to Astro and reinforced my appreciation for content-first workflows, static generation, and developer experience.',
+      ),
     ],
-    challengeText: "Most note apps were either too heavy for quick developer notes or too limited for snippets, local search, and keyboard-first workflows.",
-    solutionText: "Built a local-first markdown workspace with SQLite indexing, syntax highlighting, fast fuzzy search, and optional vim-style editing.",
+
+    timeline: '2 weeks',
+
+    metrics: [
+      { label: 'Framework', value: 'Astro' },
+      { label: 'Content', value: 'Markdown' },
+      { label: 'Type', value: 'Technical Blog' },
+    ],
+
+    challengeText:
+      'Creating a maintainable blogging workflow that made publishing content simple without sacrificing performance.',
+
+    solutionText:
+      'Used Astro content collections and Markdown-driven content management to create a fast and scalable publishing experience.',
   },
 };

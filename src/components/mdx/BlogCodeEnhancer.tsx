@@ -24,7 +24,7 @@ export function BlogCodeEnhancer() {
       const filename = pre.dataset.filename;
       const wrapper = document.createElement('div');
       wrapper.className =
-        'not-prose my-7 overflow-hidden rounded-xl border border-[#30363d]';
+        'not-prose my-7 overflow-hidden rounded-lg border border-[#30363d]';
       wrapper.style.background = '#0d1117';
 
       const toolbar = document.createElement('div');

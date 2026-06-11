@@ -1,20 +1,27 @@
-import { siteConfig } from "@/config/site";
+import { siteConfig } from '@/config/site';
 
 export function PersonJsonLd() {
   const data = {
-    "@context": "https://schema.org",
-    "@type": "Person",
+    '@context': 'https://schema.org',
+    '@type': 'Person',
     name: siteConfig.name,
     url: siteConfig.url,
     email: siteConfig.email,
-    jobTitle: "Full-Stack Software Engineer",
+    jobTitle: 'Full-Stack Software Engineer',
     description: siteConfig.description,
     sameAs: [
       siteConfig.links.github,
       siteConfig.links.twitter,
       siteConfig.links.linkedin,
     ],
-    knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "Web Development"],
+    knowsAbout: [
+      'React.js',
+      'Next.js',
+      'TypeScript',
+      'Node.js',
+      'PostgreSQL',
+      'Web Development',
+    ],
   };
 
   return (
@@ -41,8 +48,8 @@ export function BlogPostJsonLd({
   coverImage?: string;
 }) {
   const data = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
     headline: title,
     description,
     datePublished: publishedAt,
@@ -50,12 +57,12 @@ export function BlogPostJsonLd({
     url: `${siteConfig.url}/blog/${slug}`,
     image: coverImage ?? siteConfig.ogImage,
     author: {
-      "@type": "Person",
+      '@type': 'Person',
       name: siteConfig.name,
       url: siteConfig.url,
     },
     publisher: {
-      "@type": "Person",
+      '@type': 'Person',
       name: siteConfig.name,
       url: siteConfig.url,
     },
@@ -71,16 +78,19 @@ export function BlogPostJsonLd({
 
 export function WebsiteJsonLd() {
   const data = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
-    author: { "@type": "Person", name: siteConfig.name },
+    author: { '@type': 'Person', name: siteConfig.name },
     potentialAction: {
-      "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: `${siteConfig.url}/blog?q={search_term_string}` },
-      "query-input": "required name=search_term_string",
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteConfig.url}/blog?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
     },
   };
 

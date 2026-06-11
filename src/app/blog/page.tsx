@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { AnimateIn } from '@/components/ui/AnimateIn';
 import { BlogListClient } from './BlogListClient';
 import { getAllBlogsMeta, getAllBlogTags } from '@/lib/blogs';
-import { FALLBACK_BLOGS, FALLBACK_BLOG_TAGS } from '@/data/fallback-blogs';
 import { siteConfig } from '@/config/site';
 
 export const metadata: Metadata = {
@@ -11,11 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  let posts = getAllBlogsMeta();
-  if (!posts.length) posts = FALLBACK_BLOGS;
-
-  const allTags = getAllBlogTags();
-  const tags = allTags.length ? allTags : FALLBACK_BLOG_TAGS;
+  const posts = getAllBlogsMeta();
+  const tags = getAllBlogTags();
 
   return (
     <div className="pt-28 pb-24 px-6">
