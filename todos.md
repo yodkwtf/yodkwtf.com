@@ -32,9 +32,8 @@
 
   - [x] 404 page
 
-#### Improvements and Maintenance
+#### Fixes and Improvements
 
-- [ ] Fix all the typescript errors across the entire codebase
 - [x] Add error handling everywhere for all the API calls and all the components
 - [x] Update fallback blogs with some real blog data instead of mock data
 - [x] Update fallback content for projects
@@ -47,9 +46,6 @@
 - [x] Less rounded corners for code blocks on blog posts
 - [x] Cursor "not-allowed" for newsletter search box and button
 - [x] Pagination does not move back to the top of the page when we click on it, fix that
-
-#### Bug Fixes
-
 - [x] Fix the nav bottom outline on scroll
 - [x] Replace the X feed with a newsletter component and set up it's integration
 - [x] The nav button for small screens is not working, fix that
@@ -60,10 +56,17 @@
 - [x] For the projects detail page, we should show the description and not summary as it is a detailed page
 - [x] For the about page, experience section, show the start/end dates in this format "Aug 2020 - Sep 2021"
 - [x] Can we also match the width of the footer with the rest of the sections as it is a bit less wide right now.
-
-#### Blog Improvements
-
 - [x] Check if a table of contents is needed for the blog posts and add it if necessary
+- [x] Change the wording for the last para of about me section on the about page. The defend with my chest line reads weird
+- [x] Fix the no. of all the filters button with an upper limit where only the ones with high count show up but don't put them in fixed asc/desc order of count (projects page and blog page sidebar)
+- [x] Fix the table of contents not showing issue
+- [ ] Proof read blog articles
+- [ ] Proof read fallback projects
+- [x] Change "daily" to "almost daily" in the subheading of the skills section on about page
+- [x] Fix point #2 on makse experience on about page
+- [x] Fix the urls on the 404 page
+- [x] Add a fallback resume
+- [ ] Fix all the typescript errors across the entire codebase
 
 #### Testing & QA
 

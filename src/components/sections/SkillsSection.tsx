@@ -19,7 +19,11 @@ export async function SkillsSection() {
       skills = grouped;
     }
   } catch (err) {
-    logger.warn('SkillsSection', 'Failed to fetch skills from Sanity, using fallback', err);
+    logger.warn(
+      'SkillsSection',
+      'Failed to fetch skills from Sanity, using fallback',
+      err,
+    );
   }
 
   return (
@@ -28,7 +32,7 @@ export async function SkillsSection() {
         <SectionHeader
           label="Technical Skills"
           heading="Tools of the trade."
-          subheading="Technologies I work with daily to build reliable, scalable, and performant web applications."
+          subheading="A curated list of technologies I work with on a daily basis, both professionally and personally."
         />
 
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

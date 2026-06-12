@@ -84,16 +84,18 @@ export default async function BlogDetailPage({ params }: Params) {
 
   return (
     <div className="pt-28 pb-24 px-6">
-      <div className="mx-auto max-w-3xl xl:max-w-5xl">
-        <div className="xl:grid xl:grid-cols-[1fr_220px] xl:gap-16 xl:items-start">
-
+      <div className="mx-auto max-w-3xl lg:max-w-5xl">
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-16 lg:items-start">
           {/* Left column: everything */}
           <article className="min-w-0">
             <Link
               href="/blog"
               className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-ink transition-colors group mb-8"
             >
-              <ArrowLeft size={15} className="transition-transform group-hover:-translate-x-1" />
+              <ArrowLeft
+                size={15}
+                className="transition-transform group-hover:-translate-x-1"
+              />
               Back to blog
             </Link>
 
@@ -131,7 +133,9 @@ export default async function BlogDetailPage({ params }: Params) {
                       </div>
                     )}
                   </div>
-                  <span className="text-sm text-ink font-medium">{siteConfig.name}</span>
+                  <span className="text-sm text-ink font-medium">
+                    {siteConfig.name}
+                  </span>
                 </div>
                 <span className="text-ink-faint text-sm font-mono flex items-center gap-1">
                   <Calendar size={12} /> {formatDate(post.publishedAt)}
@@ -177,6 +181,13 @@ export default async function BlogDetailPage({ params }: Params) {
               </AnimateIn>
             )}
 
+            {/* Inline TOC for tablet and below */}
+            {headings.length > 1 && (
+              <div className="lg:hidden mb-10">
+                <TableOfContents headings={headings} variant="inline" />
+              </div>
+            )}
+
             <div className="prose prose-lg dark:prose-invert max-w-none">
               <MDXRemote
                 source={post.content}
@@ -186,7 +197,10 @@ export default async function BlogDetailPage({ params }: Params) {
                     rehypePlugins: [
                       rehypeExtractFilename,
                       rehypeSlug,
-                      [rehypePrettyCode, { theme: 'github-dark-default', keepBackground: true }],
+                      [
+                        rehypePrettyCode,
+                        { theme: 'github-dark-default', keepBackground: true },
+                      ],
                       rehypeFlattenCodeFigure,
                     ],
                   },
@@ -198,7 +212,9 @@ export default async function BlogDetailPage({ params }: Params) {
 
             <div className="mt-16">
               <div className="flex flex-wrap items-center gap-2 pb-6 border-b border-border mb-8">
-                <span className="text-xs font-mono text-ink-faint uppercase tracking-wide">Tags:</span>
+                <span className="text-xs font-mono text-ink-faint uppercase tracking-wide">
+                  Tags:
+                </span>
                 {post.tags?.map((tag) => (
                   <TagPill key={tag} label={tag} />
                 ))}
@@ -208,7 +224,9 @@ export default async function BlogDetailPage({ params }: Params) {
               </div>
               {related.length > 0 && (
                 <div>
-                  <h2 className="font-display text-2xl text-ink mb-6">Related posts</h2>
+                  <h2 className="font-display text-2xl text-ink mb-6">
+                    Related posts
+                  </h2>
                   <div className="grid gap-5">
                     {related.map((p) => (
                       <BlogCard key={p.slug} post={p} />
@@ -219,13 +237,12 @@ export default async function BlogDetailPage({ params }: Params) {
             </div>
           </article>
 
-          {/* Right column: TOC */}
+          {/* Right column: TOC (desktop / above tablet) */}
           {headings.length > 1 && (
-            <aside className="hidden xl:block xl:sticky xl:top-28 xl:self-start">
+            <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
               <TableOfContents headings={headings} />
             </aside>
           )}
-
         </div>
       </div>
     </div>

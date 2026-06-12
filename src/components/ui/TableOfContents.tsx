@@ -1,13 +1,26 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { TocHeading } from '@/lib/toc';
 
-export function TableOfContents({ headings }: { headings: TocHeading[] }) {
+export function TableOfContents({
+  headings,
+  variant = 'sidebar',
+}: {
+  headings: TocHeading[];
+  variant?: 'sidebar' | 'inline';
+}) {
+  const isSidebar = variant === 'sidebar';
   const [activeSlug, setActiveSlug] = useState('');
 
+  // Scroll-spy only makes sense for the sticky sidebar, which is always in
+  // view. The inline (collapsed) variant can't show an active state usefully,
+  // so we skip the observer there entirely.
   useEffect(() => {
+    if (!isSidebar) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -25,9 +38,39 @@ export function TableOfContents({ headings }: { headings: TocHeading[] }) {
     });
 
     return () => observer.disconnect();
-  }, [headings]);
+  }, [headings, isSidebar]);
 
   if (!headings.length) return null;
+
+  // Inline variant — a collapsible index shown above the article on tablet/
+  // mobile. Links are simply styled as links (no active tracking).
+  if (variant === 'inline') {
+    return (
+      <details className="group rounded-xl border border-border bg-surface-subtle/50 px-4 py-3">
+        <summary className="flex cursor-pointer items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-faint list-none [&::-webkit-details-marker]:hidden">
+          On this page
+          <ChevronDown
+            size={14}
+            className="text-ink-faint transition-transform duration-200 group-open:rotate-180"
+          />
+        </summary>
+        <nav className="mt-3 space-y-0.5">
+          {headings.map(({ slug, text, level }) => (
+            <a
+              key={slug}
+              href={`#${slug}`}
+              className={cn(
+                'block py-1 leading-snug text-accent-600 hover:text-accent-500 transition-colors',
+                level === 2 ? 'text-[13px]' : 'pl-3 text-[12px]',
+              )}
+            >
+              {text}
+            </a>
+          ))}
+        </nav>
+      </details>
+    );
+  }
 
   return (
     <div>

@@ -36,7 +36,7 @@ export const FALLBACK_EXPERIENCE = [
     current: false,
     description: [
       'Received an Award for delivering a near-flawless app build, recognized and appreciated by Workday during the official Build Review.',
-      'Built and deployed enterprise 3 HCM applications using Workday Extend, integrating Workday REST APIs, SOAP APIs, WQL, and third-party services.',
+      'Built and deployed 3 HCM applications using Workday Extend, integrating Workday REST APIs, SOAP APIs, WQL, and third-party services.',
       'Designed synchronous, asynchronous, and business-process-triggered orchestrations to automate complex business workflows.',
       'Reduced manual effort by 99% through IBAN validation automation and task generation workflows.',
       'Built a real-time Twilio Segment connector using BP-triggered orchestration, reducing data sync latency to near-zero.',

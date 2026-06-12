@@ -17,7 +17,18 @@ import { NewsletterSignup } from '@/components/ui/NewsletterSignup';
 import type { BlogPostMeta } from '@/types';
 
 const ALL = 'All';
-const PAGE_SIZE = 6; // posts to show initially and per load
+const PAGE_SIZE = 6;
+const MAX_VISIBLE_TAGS = 25;
+const MAX_VISIBLE_CATS = 20;
+
+function shuffle<T>(arr: T[]): T[] {
+  const out = [...arr];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
 
 function PostRow({ post, isLast }: { post: BlogPostMeta; isLast: boolean }) {
   return (
@@ -144,6 +155,22 @@ export function BlogListClient({
     );
     return c;
   }, [posts]);
+
+  const visibleTags = useMemo(() => {
+    if (allTags.length <= MAX_VISIBLE_TAGS) return allTags;
+    const top = [...allTags]
+      .sort((a, b) => (tagCounts[b] ?? 0) - (tagCounts[a] ?? 0))
+      .slice(0, MAX_VISIBLE_TAGS);
+    return shuffle(top);
+  }, [allTags, tagCounts]);
+
+  const visibleCategories = useMemo(() => {
+    if (allCategories.length <= MAX_VISIBLE_CATS) return allCategories;
+    const top = [...allCategories]
+      .sort((a, b) => (categoryCounts[b] ?? 0) - (categoryCounts[a] ?? 0))
+      .slice(0, MAX_VISIBLE_CATS);
+    return shuffle(top);
+  }, [allCategories, categoryCounts]);
 
   const filtered = useMemo(
     () =>
@@ -294,7 +321,7 @@ export function BlogListClient({
                 active={activeCategory === ALL}
                 onClick={() => updateCategory(ALL)}
               />
-              {allCategories.map((cat) => (
+              {visibleCategories.map((cat) => (
                 <FilterPill
                   key={cat}
                   label={cat}
@@ -319,7 +346,7 @@ export function BlogListClient({
                 active={activeTag === ALL}
                 onClick={() => updateTag(ALL)}
               />
-              {allTags.map((tag) => (
+              {visibleTags.map((tag) => (
                 <FilterPill
                   key={tag}
                   label={tag}

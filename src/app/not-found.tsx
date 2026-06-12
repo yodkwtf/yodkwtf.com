@@ -5,9 +5,9 @@ import { ArrowLeft, Home, Search } from 'lucide-react';
 import Link from 'next/link';
 
 const LINKS = [
-  { label: 'Home', href: '/', icon: <Home size={14} /> },
-  { label: 'Projects', href: '/projects', icon: <Search size={14} /> },
-  { label: 'Blog', href: '/blog', icon: <Search size={14} /> },
+  { label: '/', href: '/', icon: <Home size={14} /> },
+  { label: '/projects', href: '/projects', icon: <Search size={14} /> },
+  { label: '/blog', href: '/blog', icon: <Search size={14} /> },
 ];
 
 export default function NotFound() {

@@ -16,7 +16,7 @@ function slugify(text: string): string {
 function stripMarkdown(text: string): string {
   return text
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // links → label
-    .replace(/`([^`]+)`/g, '$1')             // inline code
+    .replace(/`([^`]+)`/g, '$1') // inline code
     .replace(/\*{1,3}([^*]+)\*{1,3}/g, '$1') // bold / italic
     .trim();
 }
@@ -26,7 +26,7 @@ export function extractHeadings(content: string): TocHeading[] {
   const slugCounts: Record<string, number> = {};
   let inCodeBlock = false;
 
-  for (const line of content.split('\n')) {
+  for (const line of content.split(/\r?\n/)) {
     if (line.trimStart().startsWith('```')) {
       inCodeBlock = !inCodeBlock;
       continue;
