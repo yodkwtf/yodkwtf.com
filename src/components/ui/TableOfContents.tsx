@@ -15,9 +15,6 @@ export function TableOfContents({
   const isSidebar = variant === 'sidebar';
   const [activeSlug, setActiveSlug] = useState('');
 
-  // Scroll-spy only makes sense for the sticky sidebar, which is always in
-  // view. The inline (collapsed) variant can't show an active state usefully,
-  // so we skip the observer there entirely.
   useEffect(() => {
     if (!isSidebar) return;
 
