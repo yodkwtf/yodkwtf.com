@@ -46,8 +46,6 @@ type ExperienceItem = {
   order?: number;
 };
 
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
   title: 'About',
   description: `Learn more about ${siteConfig.name} — full-stack engineer, background, experience, and skills.`,

@@ -5,8 +5,6 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
 import { logger } from '@/lib/logger';
 
-export const revalidate = 3600;
-
 export const metadata: Metadata = {
   title: 'Projects',
   description: `Explore projects built by ${siteConfig.name} — full-stack web applications, open-source tools, and client work.`,

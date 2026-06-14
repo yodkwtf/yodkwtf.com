@@ -3,9 +3,6 @@ import { MiniAboutSection } from "@/components/sections/MiniAboutSection";
 import { FeaturedProjectsSection } from "@/components/sections/FeaturedProjectsSection";
 import { LatestBlogsSection } from "@/components/sections/LatestBlogsSection";
 import { CTASection } from "@/components/sections/CTASection";
-
-export const revalidate = 3600;
-
 export default function HomePage() {
   return (
     <>
