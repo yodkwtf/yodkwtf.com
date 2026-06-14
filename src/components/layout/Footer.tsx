@@ -23,7 +23,6 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8">
           <div className="space-y-2 text-center md:text-left">
             <div className="flex items-center gap-2 justify-center md:justify-start">
-              z{' '}
               <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#20201f] text-white shrink-0">
                 <DCLogo size={14} />
               </span>

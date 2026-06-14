@@ -10,7 +10,6 @@ export const FALLBACK_PROJECTS = [
     summary:
       'A full-stack movie and TV tracking platform built with the MERN stack, featuring authentication, watchlists, reviews, and personalized content management.',
     description: [],
-    tags: ['Full Stack', 'MERN', 'Open Source'],
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Swagger'],
     featured: true,
     clientWork: false,
@@ -37,7 +36,6 @@ export const FALLBACK_PROJECTS = [
     summary:
       'A modern real-time chat application featuring direct messaging, group conversations, social authentication, online presence indicators, and profile customization.',
     description: [],
-    tags: ['Realtime', 'Next.js', 'Full Stack'],
     techStack: [
       'Next.js',
       'TypeScript',
@@ -71,7 +69,6 @@ export const FALLBACK_PROJECTS = [
     summary:
       'A freelance portfolio website for a game developer built with Gatsby, Contentful CMS, GraphQL, and Framer Motion, featuring custom content modeling and advanced SEO.',
     description: [],
-    tags: ['Freelance', 'Portfolio', 'CMS'],
     techStack: [
       'Gatsby',
       'GraphQL',
@@ -104,7 +101,6 @@ export const FALLBACK_PROJECTS = [
     summary:
       'An online marketplace platform built with Next.js, allowing users to browse, manage, and access educational resources through a modern web experience.',
     description: [],
-    tags: ['Marketplace', 'Next.js', 'Full Stack'],
     techStack: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB'],
     featured: true,
     clientWork: false,
@@ -128,7 +124,6 @@ export const FALLBACK_PROJECTS = [
     summary:
       'An online code editor inspired by CodePen that enables users to write, preview, and experiment with HTML, CSS, and JavaScript directly in the browser.',
     description: [],
-    tags: ['Developer Tools', 'React'],
     techStack: ['React', 'JavaScript', 'HTML', 'CSS'],
     featured: false,
     clientWork: false,
@@ -152,7 +147,6 @@ export const FALLBACK_PROJECTS = [
     summary:
       'A markdown-powered technical blog built with Astro for sharing development notes, tutorials, cheatsheets, and learnings from different technologies.',
     description: [],
-    tags: ['Astro', 'Blog', 'Content'],
     techStack: ['Astro', 'TypeScript', 'Markdown', 'CSS'],
     featured: false,
     clientWork: false,

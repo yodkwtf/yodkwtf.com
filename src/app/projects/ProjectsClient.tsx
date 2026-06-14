@@ -26,8 +26,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
         !q ||
         p.title.toLowerCase().includes(q) ||
         p.summary.toLowerCase().includes(q) ||
-        p.techStack?.some((t) => t.toLowerCase().includes(q)) ||
-        p.tags?.some((t) => t.toLowerCase().includes(q));
+        p.techStack?.some((t) => t.toLowerCase().includes(q));
       return matchTag && matchSearch;
     });
   }, [projects, activeTag, search]);
@@ -42,7 +41,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
         />
         <input
           type="text"
-          placeholder="Search by name, tech, or tag…"
+          placeholder="Search by name or tech…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full pl-9 pr-9 py-3 rounded-xl border border-border bg-surface-card text-sm text-ink placeholder:text-ink-faint focus:outline-none focus:border-accent-500/60 focus:bg-accent-500/4 transition-colors"

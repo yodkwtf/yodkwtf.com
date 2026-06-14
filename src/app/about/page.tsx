@@ -263,12 +263,19 @@ export default async function AboutPage() {
               <StaggerContainer className="space-y-4">
                 {education.map((edu, i) => (
                   <StaggerItem key={i}>
-                    <div className="glass rounded-xl p-5 border border-border flex flex-wrap items-center gap-4">
+                    <div className="glass rounded-xl p-5 border border-border flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg bg-surface-subtle border border-border flex items-center justify-center shrink-0">
                         <GraduationCap size={18} className="text-accent-500" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-ink">{edu.degree}</h3>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                          <h3 className="font-semibold text-ink">
+                            {edu.degree}
+                          </h3>
+                          <span className="font-mono text-xs text-ink-faint shrink-0">
+                            {edu.period}
+                          </span>
+                        </div>
                         <p className="text-sm text-ink-muted">
                           {edu.institution}
                         </p>
@@ -278,9 +285,6 @@ export default async function AboutPage() {
                           </p>
                         )}
                       </div>
-                      <span className="font-mono text-xs text-ink-faint">
-                        {edu.period}
-                      </span>
                     </div>
                   </StaggerItem>
                 ))}

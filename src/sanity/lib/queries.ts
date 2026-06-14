@@ -3,7 +3,7 @@ import type { Project, Skill, Experience, AboutPage, SocialLink } from "@/types"
 
 // ─── Projects ────────────────────────────────────────────────────────────────
 const projectFields = `
-  _id, title, slug, summary, description, tags, techStack,
+  _id, title, slug, summary, description, techStack,
   featured, clientWork, githubUrl, liveUrl,
   thumbnail { asset, alt, caption },
   gallery[] { asset, alt, caption },

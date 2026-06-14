@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ExternalLink, Calendar, Clock } from 'lucide-react';
 import { PortableText } from '@portabletext/react';
 import { GithubIcon } from '@/components/ui/SocialIcons';
-import { TagPill } from '@/components/ui/TagPill';
 import {
   AnimateIn,
   StaggerContainer,
@@ -86,11 +85,6 @@ export default async function ProjectDetailPage({ params }: Params) {
         <div className="mx-auto max-w-4xl">
           {/* Header */}
           <AnimateIn className="mb-10">
-            <div className="flex flex-wrap gap-2 mb-4">
-              {project.tags?.map((tag: string) => (
-                <TagPill key={tag} label={tag} />
-              ))}
-            </div>
             <h1 className="font-display text-4xl md:text-5xl text-ink mb-4 leading-tight">
               {project.title}
             </h1>

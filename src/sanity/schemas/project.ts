@@ -9,7 +9,6 @@ export const projectSchema = defineType({
     defineField({ name: "slug", type: "slug", options: { source: "title" }, validation: (R) => R.required() }),
     defineField({ name: "summary", type: "text", rows: 3, validation: (R) => R.required() }),
     defineField({ name: "description", type: "array", of: [{ type: "block" }, { type: "image" }] }),
-    defineField({ name: "tags", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "techStack", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "featured", type: "boolean", initialValue: false }),
     defineField({ name: "clientWork", type: "boolean", initialValue: false }),

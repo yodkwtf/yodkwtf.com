@@ -30,7 +30,7 @@ export function FeaturedProjectCard({
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        'group flex flex-col md:flex-row min-h-105 overflow-hidden rounded-2xl border border-border md:border-0 md:rounded-none md:overflow-visible',
+        'group flex flex-col md:flex-row md:min-h-85 overflow-hidden rounded-2xl border border-border md:border-0 md:rounded-none md:overflow-visible',
         className,
       )}
     >
@@ -68,23 +68,11 @@ export function FeaturedProjectCard({
       {/*  Content panel (40%)  */}
       <div
         className={cn(
-          'flex flex-col justify-center md:w-[40%] px-8 py-10 md:py-12 bg-surface-subtle',
+          'flex flex-col justify-center md:w-[40%] px-6 py-6 md:px-8 md:py-8 bg-surface-subtle',
           'text-center md:text-left',
           imageLeft ? 'md:order-2' : 'md:order-1',
         )}
       >
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 justify-center md:justify-start mb-4">
-          {project.tags?.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="text-[10px] font-mono font-medium px-2.5 py-0.5 rounded-full border border-border text-ink-faint bg-surface"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
         {/* Title */}
         <h3 className="font-display text-2xl md:text-3xl leading-tight mb-3">
           {project.liveUrl ? (

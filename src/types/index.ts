@@ -13,7 +13,6 @@ export interface Project {
   slug: { current: string };
   summary: string;
   description: any[]; // Portable Text
-  tags: string[];
   techStack: string[];
   featured: boolean;
   clientWork: boolean;
