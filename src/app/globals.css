@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap');
-
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 @config "../../tailwind.config.ts";
@@ -76,7 +74,7 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.65;
   transition:
@@ -122,13 +120,13 @@ select:focus-visible {
 
 /* ─── Typography ────────────────────────────────────────────────────────── */
 .font-display {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: var(--font-display), Georgia, serif;
 }
 .font-mono {
-  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-family: var(--font-mono), 'Fira Code', monospace;
 }
 .font-sans {
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 /* ─── Noise texture ─────────────────────────────────────────────────────── */
@@ -221,6 +219,89 @@ select:focus-visible {
   animation: fadeUp 0.6s var(--ease) both;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-animate] {
+    opacity: 0;
+    transition:
+      opacity 0.6s var(--ease),
+      transform 0.6s var(--ease);
+    will-change: opacity, transform;
+  }
+  .js [data-animate='up'] {
+    transform: translateY(24px);
+  }
+  .js [data-animate='down'] {
+    transform: translateY(-24px);
+  }
+  .js [data-animate='left'] {
+    transform: translateX(-24px);
+  }
+  .js [data-animate='right'] {
+    transform: translateX(24px);
+  }
+  .js [data-animate='none'] {
+    transform: none;
+  }
+  .js [data-animate].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js [data-stagger] > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.55s var(--ease),
+      transform 0.55s var(--ease);
+    will-change: opacity, transform;
+  }
+  .js [data-stagger].is-visible > * {
+    opacity: 1;
+    transform: none;
+  }
+  .js [data-stagger].is-visible > *:nth-child(1) {
+    transition-delay: 0s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(2) {
+    transition-delay: 0.08s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(3) {
+    transition-delay: 0.16s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(4) {
+    transition-delay: 0.24s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(5) {
+    transition-delay: 0.32s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(6) {
+    transition-delay: 0.4s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(7) {
+    transition-delay: 0.48s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(8) {
+    transition-delay: 0.56s;
+  }
+  .js [data-stagger].is-visible > *:nth-child(n + 9) {
+    transition-delay: 0.64s;
+  }
+
+  [data-bounce] {
+    animation: bounceBar 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes bounceBar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
 /* ─── Blink cursor ──────────────────────────────────────────────────────── */
 @keyframes blink {
   0%,
@@ -278,7 +359,7 @@ select:focus-visible {
 .prose h1,
 .prose h2,
 .prose h3 {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: var(--font-display), Georgia, serif;
   font-weight: 400;
   scroll-margin-top: 6rem;
 }
@@ -299,7 +380,7 @@ select:focus-visible {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono), monospace;
 }
 
 /* Remove Tailwind typography's default backtick decoration around inline code */
@@ -315,7 +396,7 @@ select:focus-visible {
 }
 
 .prose blockquote {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: var(--font-display), Georgia, serif;
   font-style: italic;
   font-size: 1.15em;
   border-left-width: 3px;
@@ -420,7 +501,7 @@ pre[data-language] {
   padding: 1.25rem 1.5rem;
   font-size: 0.875rem;
   line-height: 1.7;
-  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-family: var(--font-mono), 'Fira Code', monospace;
   overflow-x: auto;
   margin: 0;
 }
@@ -449,7 +530,7 @@ pre[data-language] span[data-highlighted-line] {
   align-items: center;
   padding: 0.25em 0.85em;
   font-size: 0.75rem;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono), monospace;
   font-weight: 400;
   letter-spacing: 0.02em;
   border-radius: 100px;
@@ -474,7 +555,7 @@ pre[data-language] span[data-highlighted-line] {
   border-radius: var(--radius);
   font-size: 0.9rem;
   font-weight: 500;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-sans), sans-serif;
   letter-spacing: 0.01em;
   cursor: pointer;
   transition: all 0.2s var(--ease);
