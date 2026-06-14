@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { Outfit, Instrument_Serif, DM_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/ui/ThemeProvider';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -7,29 +6,6 @@ import { siteConfig } from '@/config/site';
 import { getResumeUrl } from '@/sanity/lib/queries';
 import { logger } from '@/lib/logger';
 import '@/app/globals.css';
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-sans',
-  display: 'swap',
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const dmMono = DM_Mono({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  style: ['normal', 'italic'],
-  variable: '--font-mono',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -115,20 +91,11 @@ export default async function RootLayout({
   }
 
   return (
-    <html
-      lang="en"
-      className={`${outfit.variable} ${instrumentSerif.variable} ${dmMono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||((!t||t==='system')&&window.matchMedia('(prefers-color-scheme: dark)').matches);if(d)document.documentElement.classList.add('dark');}catch(e){}})();`,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){if(!('IntersectionObserver' in window))return;document.documentElement.classList.add('js');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});function obs(el){if(el.nodeType===1&&el.matches('[data-animate],[data-stagger]'))io.observe(el);}function scan(r){if(!r||!r.querySelectorAll)return;r.querySelectorAll('[data-animate]:not(.is-visible),[data-stagger]:not(.is-visible)').forEach(function(el){io.observe(el);});}function init(){scan(document);new MutationObserver(function(ms){ms.forEach(function(m){m.addedNodes.forEach(function(n){obs(n);scan(n);});});}).observe(document.body,{childList:true,subtree:true});}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();`,
           }}
         />
       </head>

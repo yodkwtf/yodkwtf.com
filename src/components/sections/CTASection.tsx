@@ -38,12 +38,8 @@ export function CTASection() {
               <GithubIcon size={17} /> GitHub <ArrowUpRight size={14} />
             </a>
           </div>
-          <p className="text-xs text-ink-faint font-mono pt-2 relative flex flex-col sm:flex-row items-center justify-center gap-x-2 gap-y-1">
-            <span className="break-all">{siteConfig.email}</span>
-            <span className="hidden sm:inline" aria-hidden="true">
-              ·
-            </span>
-            <span>Usually responds within 24h</span>
+          <p className="text-xs text-ink-faint font-mono pt-2 relative">
+            {siteConfig.email} · Usually responds within 24h
           </p>
         </div>
       </AnimateIn>
