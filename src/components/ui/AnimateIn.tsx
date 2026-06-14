@@ -1,7 +1,24 @@
 "use client";
 
 import { motion, useInView, type TargetAndTransition } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useSyncExternalStore } from "react";
+
+const emptySubscribe = () => () => {};
+
+/**
+ * False on the server and during the first client render, true thereafter.
+ * Before mount we render content in its *visible* state so the HTML that ships
+ * is never blank — entrance animations are a progressive enhancement that kick
+ * in once JS has hydrated. Uses `useSyncExternalStore` (instead of an effect +
+ * setState) so React knows the server/client snapshots differ by design.
+ */
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+}
 
 interface AnimateInProps {
   children: React.ReactNode;
@@ -21,6 +38,7 @@ export function AnimateIn({
   once = true,
 }: AnimateInProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const mounted = useMounted();
   const inView = useInView(ref, { once, margin: "-80px" });
 
   const offsets: Record<string, TargetAndTransition> = {
@@ -30,13 +48,14 @@ export function AnimateIn({
     right: { opacity: 0, x: 24 },
     none:  { opacity: 0 },
   };
+  const visible = { opacity: 1, y: 0, x: 0 };
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      initial={offsets[direction]}
-      animate={inView ? { opacity: 1, y: 0, x: 0 } : offsets[direction]}
+      initial={false}
+      animate={!mounted || inView ? visible : offsets[direction]}
       transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
@@ -54,14 +73,15 @@ export function StaggerContainer({
   stagger?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const mounted = useMounted();
   const inView = useInView(ref, { once: true, margin: "-60px" });
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
+      initial={false}
+      animate={!mounted || inView ? "visible" : "hidden"}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: stagger } },

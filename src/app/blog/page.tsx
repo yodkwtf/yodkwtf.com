@@ -4,6 +4,8 @@ import { BlogListClient } from './BlogListClient';
 import { getAllBlogsMeta, getAllBlogTags } from '@/lib/blogs';
 import { siteConfig } from '@/config/site';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Blog',
   description: `Writing by ${siteConfig.name} on web development, engineering culture, and modern software architecture.`,
