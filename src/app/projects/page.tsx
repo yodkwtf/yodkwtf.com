@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
 import { ProjectsClient } from './ProjectsClient';
 import { siteConfig } from '@/config/site';
+import { pageMetadata } from '@/lib/metadata';
 import { AnimateIn } from '@/components/ui/AnimateIn';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
 import { logger } from '@/lib/logger';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Projects',
-  description: `Explore projects built by ${siteConfig.name} — full-stack web applications, open-source tools, and client work.`,
-};
+  description: `Explore projects built by ${siteConfig.name} - full-stack web applications, open-source tools, and client work.`,
+  path: '/projects',
+});
 
 export default async function ProjectsPage() {
   let projects = FALLBACK_PROJECTS;
@@ -17,7 +19,11 @@ export default async function ProjectsPage() {
     const fetched = await getAllProjects();
     if (fetched?.length) projects = fetched;
   } catch (err) {
-    logger.warn('ProjectsPage', 'Failed to fetch projects from Sanity, using fallback', err);
+    logger.warn(
+      'ProjectsPage',
+      'Failed to fetch projects from Sanity, using fallback',
+      err,
+    );
   }
 
   return (

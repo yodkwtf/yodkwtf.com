@@ -40,10 +40,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: post.title,
     description: post.description,
+    alternates: { canonical: `${siteConfig.url}/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
+      url: `${siteConfig.url}/blog/${slug}`,
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [siteConfig.author],

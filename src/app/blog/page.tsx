@@ -3,11 +3,13 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 import { BlogListClient } from './BlogListClient';
 import { getAllBlogsMeta, getAllBlogTags } from '@/lib/blogs';
 import { siteConfig } from '@/config/site';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Blog',
-  description: `Writing by ${siteConfig.name} on web development, engineering culture, and modern software architecture.`,
-};
+  description: `Writing by ${siteConfig.name} on web development, engineering, and modern software architecture.`,
+  path: '/blog',
+});
 
 export default function BlogPage() {
   const posts = getAllBlogsMeta();

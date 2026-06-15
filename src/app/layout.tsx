@@ -11,9 +11,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.title,
-    template: `%s — ${siteConfig.name}`,
+    template: `%s • ${siteConfig.author}`,
   },
   description: siteConfig.description,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   keywords: [
     'full-stack developer',
     'software engineer',

@@ -37,10 +37,32 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!project) project = FALLBACK_PROJECT_MAP[slug];
   if (!project) return { title: 'Project Not Found' };
 
+  const thumb = project.thumbnail;
+  const image =
+    typeof thumb === 'string'
+      ? thumb
+      : thumb
+        ? urlFor(thumb).width(1200).height(630).url()
+        : siteConfig.ogImage;
+  const url = `${siteConfig.url}/projects/${slug}`;
+
   return {
     title: project.title,
     description: project.summary,
-    openGraph: { title: project.title, description: project.summary },
+    alternates: { canonical: url },
+    openGraph: {
+      title: project.title,
+      description: project.summary,
+      type: 'article',
+      url,
+      images: [image],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description: project.summary,
+      images: [image],
+    },
   };
 }
 

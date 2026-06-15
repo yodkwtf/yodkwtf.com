@@ -10,6 +10,7 @@ import { TagPill } from '@/components/ui/TagPill';
 import { CTASection } from '@/components/sections/CTASection';
 import { SkillsSection } from '@/components/sections/SkillsSection';
 import { siteConfig } from '@/config/site';
+import { pageMetadata } from '@/lib/metadata';
 import { GraduationCap, ExternalLink, Download } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
@@ -46,10 +47,11 @@ type ExperienceItem = {
   order?: number;
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'About',
-  description: `Learn more about ${siteConfig.name} — full-stack engineer, background, experience, and skills.`,
-};
+  description: `Learn more about ${siteConfig.name} - full-stack engineer. Background, work experience, education, and the skills and tools behind the work.`,
+  path: '/about',
+});
 
 export default async function AboutPage() {
   let experience: ExperienceItem[] = FALLBACK_EXPERIENCE;
@@ -105,10 +107,7 @@ export default async function AboutPage() {
                 </h1>
                 <div className="space-y-4 max-w-2xl">
                   {bio.map((para, i) => (
-                    <p
-                      key={i}
-                      className="text-ink-muted leading-relaxed"
-                    >
+                    <p key={i} className="text-ink-muted leading-relaxed">
                       {para}
                     </p>
                   ))}
