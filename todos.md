@@ -70,8 +70,8 @@
 
 #### Testing & QA
 
-- [ ] Test the entire website with the fallback content
-- [ ] Test empty error states
+- [x] Test the entire website with the fallback content
+- [x] Test empty error states
 - [x] Test pagination
 - [x] Test blog and all MDX components
 - [x] Test single project page
@@ -79,7 +79,7 @@
 
 #### Branding and SEO & Metadata
 
-- [ ] Update all the meta information for all pages, including Open Graph and Twitter cards
+- [x] Update all the meta information for all pages, including Open Graph and Twitter cards
 - [x] Update siteConfig with all the correct information
 - [x] Add the ogImage from chatGPT to public dir
 - [ ] Implement a newsletter subscription system
