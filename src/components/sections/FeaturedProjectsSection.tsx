@@ -39,12 +39,14 @@ export async function FeaturedProjectsSection() {
         </div>
       </div>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-y-10 md:gap-y-16 px-6">
-        {projects.map((project, i) => (
-          <AnimateIn key={project._id}>
-            <FeaturedProjectCard project={project} index={i} />
-          </AnimateIn>
-        ))}
+      <div className="px-6">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-y-10 md:gap-y-16">
+          {projects.map((project, i) => (
+            <AnimateIn key={project._id}>
+              <FeaturedProjectCard project={project} index={i} />
+            </AnimateIn>
+          ))}
+        </div>
       </div>
 
       <div className="mt-10 px-6 flex justify-center md:hidden">

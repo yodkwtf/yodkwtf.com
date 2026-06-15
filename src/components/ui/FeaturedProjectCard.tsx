@@ -30,24 +30,34 @@ export function FeaturedProjectCard({
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        'group flex flex-col md:flex-row md:min-h-85 overflow-hidden rounded-2xl border border-border md:border-0 md:rounded-none md:overflow-visible',
+        'group flex flex-col overflow-hidden rounded-2xl border border-border',
+        'md:relative md:block md:min-h-112 md:overflow-visible md:rounded-none md:border-0',
         className,
       )}
     >
-      {/*  Image panel (60%)  */}
+      {/*  Image panel  */}
       <div
         className={cn(
-          'relative md:w-[60%] min-h-70 md:min-h-0 overflow-hidden bg-surface-subtle',
-          imageLeft ? 'md:order-1' : 'md:order-2',
+          'relative h-64 sm:h-80 overflow-hidden bg-surface-subtle',
+          'md:absolute md:inset-y-0 md:h-auto md:w-[62%] md:rounded-2xl md:border md:border-border',
+          imageLeft ? 'md:left-0' : 'md:right-0',
         )}
       >
         {project.thumbnail ? (
           <Image
-            src={typeof project.thumbnail === 'string' ? project.thumbnail : urlFor(project.thumbnail).width(1200).height(675).url()}
-            alt={typeof project.thumbnail === 'string' ? project.title : (project.thumbnail.alt ?? project.title)}
+            src={
+              typeof project.thumbnail === 'string'
+                ? project.thumbnail
+                : urlFor(project.thumbnail).width(1200).height(800).url()
+            }
+            alt={
+              typeof project.thumbnail === 'string'
+                ? project.title
+                : (project.thumbnail.alt ?? project.title)
+            }
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 60vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            sizes="(max-width: 768px) 100vw, 62vw"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center dot-grid">
@@ -56,21 +66,22 @@ export function FeaturedProjectCard({
             </span>
           </div>
         )}
-        {/* Subtle gradient edge toward content */}
+
+        {/* Subtle brand veil */}
         <div
-          className={cn(
-            'absolute inset-y-0 w-20 from-surface-subtle/0 to-transparent hidden md:block',
-            imageLeft ? 'right-0 bg-linear-to-l' : 'left-0 bg-linear-to-r',
-          )}
+          className="absolute inset-0 hidden bg-linear-to-br from-accent-900/35 via-accent-900/10 to-transparent transition-opacity duration-500 group-hover:opacity-0 md:block"
+          aria-hidden
         />
       </div>
 
-      {/*  Content panel (40%)  */}
+      {/*  Content */}
       <div
         className={cn(
-          'flex flex-col justify-center md:w-[40%] px-6 py-6 md:px-8 md:py-8 bg-surface-subtle',
-          'text-center md:text-left',
-          imageLeft ? 'md:order-2' : 'md:order-1',
+          'relative z-10 px-6 py-6 bg-surface-subtle text-center',
+          'md:absolute md:top-1/2 md:w-[46%] md:-translate-y-1/2 md:p-8 md:text-left',
+          'md:rounded-2xl md:border md:border-border md:bg-surface-card',
+          'md:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)]',
+          imageLeft ? 'md:right-0' : 'md:left-0',
         )}
       >
         {/* Title */}
@@ -92,13 +103,13 @@ export function FeaturedProjectCard({
         </h3>
 
         {/* Description */}
-        <p className="text-sm md:text-base text-ink-muted leading-relaxed mb-5">
+        <p className="text-sm md:text-base text-ink-muted leading-relaxed mb-5 line-clamp-3">
           {project.summary}
         </p>
 
         {/* Tech stack */}
         <div className="flex flex-wrap gap-1.5 justify-center md:justify-start mb-6">
-          {project.techStack?.slice(0, 4).map((tech) => (
+          {project.techStack?.slice(0, 5).map((tech) => (
             <span
               key={tech}
               className="text-xs font-mono text-ink-muted bg-surface border border-border px-2 py-0.5 rounded"
@@ -132,7 +143,7 @@ export function FeaturedProjectCard({
           )}
           <Link
             href={`/projects/${project.slug.current}`}
-            className="flex items-center gap-1 text-sm font-medium text-accent-500 hover:text-accent-400 transition-colors ml-auto md:ml-0"
+            className="flex items-center gap-1 text-sm font-medium text-accent-500 hover:text-accent-400 transition-colors ml-auto"
           >
             Case study{' '}
             <ArrowUpRight
