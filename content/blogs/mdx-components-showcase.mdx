@@ -1,13 +1,13 @@
 ---
-title: 'MDX Components Showcase'
-description: 'A sample post that exercises headings, prose, media, callouts, code blocks, tables, lists, and custom MDX components.'
-publishedAt: '2026-06-01'
-category: 'Reference'
-tags: ['MDX', 'Design', 'Reference']
+title: "MDX Components Showcase"
+description: "A sample post that exercises headings, prose, media, callouts, code blocks, tables, lists, and custom MDX components."
+publishedAt: "2026-06-01"
+category: "Reference"
+tags: ["MDX", "Design", "Reference"]
 featured: false
-coverImage: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80'
-youtubeId: 'dQw4w9WgXcQ'
-draft: false
+coverImage: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80"
+youtubeId: "dQw4w9WgXcQ"
+draft: true
 ---
 
 This page is a kitchen-sink sample for checking blog typography and MDX component styling. It includes inline code like `const enabled = true`, highlighted code fences, tables, lists, images, callouts, and embedded media.
@@ -89,8 +89,8 @@ Code with a filename should show the filename in the code block header:
 // filename: app/components/StatusBadge.tsx
 export function StatusBadge({ active }: { active: boolean }) {
   return (
-    <span className={active ? 'text-accent-500' : 'text-ink-muted'}>
-      {active ? 'Active' : 'Paused'}
+    <span className={active ? "text-accent-500" : "text-ink-muted"}>
+      {active ? "Active" : "Paused"}
     </span>
   );
 }
@@ -99,7 +99,7 @@ export function StatusBadge({ active }: { active: boolean }) {
 Code without a filename should still get the copy button:
 
 ```ts
-const posts = ['design-notes', 'release-log', 'mdx-showcase'];
+const posts = ["design-notes", "release-log", "mdx-showcase"];
 
 const slugs = posts.map((post) => `/blog/${post}`);
 ```
