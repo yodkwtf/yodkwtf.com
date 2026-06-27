@@ -16,6 +16,7 @@ import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { getAboutPage, getExperience } from '@/sanity/lib/queries';
 import { urlFor } from '@/sanity/lib/client';
+import { toPlainText, type PortableTextBlock } from '@portabletext/react';
 import {
   FALLBACK_EXPERIENCE,
   FALLBACK_EDUCATION,
@@ -29,8 +30,7 @@ type EducationItem = {
   note?: string;
 };
 
-type PortableTextChild = { text: string };
-type DescriptionItem = string | { children?: PortableTextChild[] };
+type DescriptionItem = string | PortableTextBlock;
 
 type ExperienceItem = {
   company: string;
@@ -221,11 +221,7 @@ export default async function AboutPage() {
                                     const text =
                                       typeof item === 'string'
                                         ? item
-                                        : (item?.children
-                                            ?.map(
-                                              (c: PortableTextChild) => c.text,
-                                            )
-                                            .join('') ?? '');
+                                        : toPlainText(item);
                                     return text ? (
                                       <li
                                         key={j}

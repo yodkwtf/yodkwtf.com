@@ -6,14 +6,16 @@
 // data-filename back onto <pre>, and removes the now-empty <figure> wrapper.
 // After this runs, the tree has plain <pre data-filename? data-language ...> elements
 // which our React Pre override handles directly — no React context needed.
+import type { Element, Nodes } from "hast";
+
 export function rehypeFlattenCodeFigure() {
-  return (tree: any) => {
+  return (tree: Nodes) => {
     walkParent(tree);
   };
 }
 
-function walkParent(node: any) {
-  if (!Array.isArray(node.children)) return;
+function walkParent(node: Nodes) {
+  if (!("children" in node)) return;
 
   for (let i = 0; i < node.children.length; i++) {
     const child = node.children[i];
@@ -28,8 +30,8 @@ function walkParent(node: any) {
       const filename = child.properties["data-filename"] as string | undefined;
 
       // Find the <pre> inside the figure (ignore figcaption title elements)
-      const preEl = child.children?.find(
-        (c: any) => c.type === "element" && c.tagName === "pre",
+      const preEl = child.children.find(
+        (c): c is Element => c.type === "element" && c.tagName === "pre",
       );
 
       if (preEl) {

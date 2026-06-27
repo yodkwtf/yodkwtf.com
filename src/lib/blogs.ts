@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
-import type { BlogPost, BlogPostMeta } from '@/types';
+import type { BlogFrontmatter, BlogPost, BlogPostMeta } from '@/types';
 
 const BLOGS_DIR = path.join(process.cwd(), 'content/blogs');
 
@@ -34,7 +34,7 @@ export function getBlogBySlug(slug: string): BlogPost | null {
   const rt = readingTime(contentWithoutCode, { wordsPerMinute: 265 });
 
   return {
-    ...(data as any),
+    ...(data as BlogFrontmatter),
     slug,
     content,
     readingTime: rt.text,
@@ -47,7 +47,7 @@ export function getAllBlogsMeta(): BlogPostMeta[] {
     .map((slug) => {
       const post = getBlogBySlug(slug);
       if (!post || post.draft) return null;
-      const { content: _, ...meta } = post;
+      const { content, ...meta } = post;
       return meta as BlogPostMeta;
     })
     .filter(Boolean)

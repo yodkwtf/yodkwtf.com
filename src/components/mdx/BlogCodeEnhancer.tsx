@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { getFileIconSvg } from '@/lib/codeFileIcons';
 
 export function BlogCodeEnhancer() {
   useEffect(() => {
@@ -35,9 +36,18 @@ export function BlogCodeEnhancer() {
 
       const label = document.createElement('div');
       label.className =
-        'max-w-[calc(100%-3rem)] truncate px-1 font-mono text-[11px]';
-      label.style.color = '#8b949e';
-      label.textContent = filename || 'Code';
+        'flex min-w-0 max-w-[calc(100%-3rem)] items-center gap-2 px-1';
+
+      const icon = document.createElement('span');
+      icon.className = 'inline-flex shrink-0 items-center';
+      icon.innerHTML = getFileIconSvg(filename);
+
+      const name = document.createElement('span');
+      name.className = 'truncate font-mono text-[11px] font-medium';
+      name.style.color = '#e6edf3';
+      name.textContent = filename || 'Code';
+
+      label.append(icon, name);
 
       const button = document.createElement('button');
       button.type = 'button';

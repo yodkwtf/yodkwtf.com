@@ -2,7 +2,9 @@
  * Fallback project data used when Sanity is unreachable or not yet configured.
  */
 
-export const FALLBACK_PROJECTS = [
+import type { Project } from '@/types';
+
+export const FALLBACK_PROJECTS: Project[] = [
   {
     _id: 'cinematica',
     title: 'Cinematica',
@@ -10,7 +12,7 @@ export const FALLBACK_PROJECTS = [
     summary:
       'A full-stack movie and TV tracking platform built with the MERN stack, featuring authentication, watchlists, reviews, and personalized content management.',
     description: [],
-    techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Swagger'],
+    techStack: ['React.js', 'Node.js', 'MongoDB'],
     featured: true,
     clientWork: false,
     githubUrl: 'https://github.com/yodkwtf/cinematica-mern',
@@ -18,32 +20,21 @@ export const FALLBACK_PROJECTS = [
     thumbnail:
       'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800483/yodkwtf.com/projects/cinematica_o1lctj.png',
     gallery: [],
-    metrics: [
-      { label: 'Architecture', value: 'MERN' },
-      { label: 'Authentication', value: 'JWT' },
-    ],
     timeline: '',
     challenges: [],
     solutions: [],
     architectureDetails: [],
-    publishedAt: '2024-01-01',
+    publishedAt: '2023',
   },
 
   {
     _id: 'nexus-chat',
-    title: 'Nexus',
+    title: 'Nexus - Chat Application',
     slug: { current: 'nexus' },
     summary:
       'A modern real-time chat application featuring direct messaging, group conversations, social authentication, online presence indicators, and profile customization.',
     description: [],
-    techStack: [
-      'Next.js',
-      'TypeScript',
-      'Tailwind CSS',
-      'MongoDB',
-      'Prisma',
-      'NextAuth',
-    ],
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
     featured: true,
     clientWork: false,
     githubUrl: 'https://github.com/yodkwtf/nexus-chat-application',
@@ -51,15 +42,11 @@ export const FALLBACK_PROJECTS = [
     thumbnail:
       'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800522/yodkwtf.com/projects/Screenshot_2023-09-23_223421-min_zkvto4.png',
     gallery: [],
-    metrics: [
-      { label: 'Realtime Messaging', value: 'Yes' },
-      { label: 'Authentication', value: 'Multiple Providers' },
-    ],
     timeline: '',
     challenges: [],
     solutions: [],
     architectureDetails: [],
-    publishedAt: '2024-01-01',
+    publishedAt: '2023',
   },
 
   {
@@ -83,15 +70,11 @@ export const FALLBACK_PROJECTS = [
     thumbnail:
       'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800496/yodkwtf.com/projects/Screenshot_584_-min_x3qimm.jpg',
     gallery: [],
-    metrics: [
-      { label: 'Project Type', value: 'Client Work' },
-      { label: 'CMS', value: 'Contentful' },
-    ],
     timeline: '',
     challenges: [],
     solutions: [],
     architectureDetails: [],
-    publishedAt: '2024-01-01',
+    publishedAt: '2022',
   },
 
   {
@@ -101,20 +84,19 @@ export const FALLBACK_PROJECTS = [
     summary:
       'An online marketplace platform built with Next.js, allowing users to browse, manage, and access educational resources through a modern web experience.',
     description: [],
-    techStack: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB'],
-    featured: true,
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    featured: false,
     clientWork: false,
     githubUrl: 'https://github.com/yodkwtf/ed-vault-nextjs',
     liveUrl: 'https://ed-vault.up.railway.app/',
     thumbnail:
       'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175463/yodkwtf.com/projects/thumbnail-min_hazyzb.jpg',
     gallery: [],
-    metrics: [{ label: 'Platform', value: 'Marketplace' }],
     timeline: '',
     challenges: [],
     solutions: [],
     architectureDetails: [],
-    publishedAt: '2025-01-01',
+    publishedAt: '2024',
   },
 
   {
@@ -124,7 +106,7 @@ export const FALLBACK_PROJECTS = [
     summary:
       'An online code editor inspired by CodePen that enables users to write, preview, and experiment with HTML, CSS, and JavaScript directly in the browser.',
     description: [],
-    techStack: ['React', 'JavaScript', 'HTML', 'CSS'],
+    techStack: ['React.js', 'JavaScript', 'HTML', 'CSS'],
     featured: false,
     clientWork: false,
     githubUrl: 'https://github.com/yodkwtf/codepencil-with-react',
@@ -132,12 +114,11 @@ export const FALLBACK_PROJECTS = [
     thumbnail:
       'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800527/yodkwtf.com/projects/Screenshot_620_-min_hxpdxq.png',
     gallery: [],
-    metrics: [{ label: 'Category', value: 'Developer Tool' }],
     timeline: '',
     challenges: [],
     solutions: [],
     architectureDetails: [],
-    publishedAt: '2024-01-01',
+    publishedAt: '2023',
   },
 
   {
@@ -155,14 +136,13 @@ export const FALLBACK_PROJECTS = [
     thumbnail:
       'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175462/yodkwtf.com/projects/og-image-min_kmmsni.png',
     gallery: [],
-    metrics: [{ label: 'Content Source', value: 'Markdown' }],
     timeline: '',
     challenges: [],
     solutions: [],
     architectureDetails: [],
-    publishedAt: '2025-01-01',
+    publishedAt: '2024',
   },
-] as any[];
+];
 
 // Slug-keyed map with extended detail fields for the project detail page
 function ptBlock(key: string, text: string) {
@@ -174,14 +154,14 @@ function ptBlock(key: string, text: string) {
   };
 }
 
-export const FALLBACK_PROJECT_MAP: Record<string, any> = {
+export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
   cinematica: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'cinematica'),
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'cinematica')!,
 
     description: [
       ptBlock(
         'c1',
-        "Cinematica is a full-stack movie and TV tracking application built with the MERN stack. It allows users to maintain personalized watchlists, track what they've watched, discover new content, and manage their entertainment preferences through a clean and intuitive interface.",
+        "Cinematica is a full-stack movie and TV tracking application built with the MERN stack. It allows users to maintain personalized watchlists, track what they've watched, rediscover their favorite content, and manage their entertainment preferences through a clean and intuitive interface.",
       ),
       ptBlock(
         'c2',
@@ -193,7 +173,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
       ),
     ],
 
-    timeline: '6 weeks',
+    timeline: '5 weeks',
 
     metrics: [
       { label: 'Architecture', value: 'MERN' },
@@ -209,7 +189,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   },
 
   nexus: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'nexus'),
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'nexus')!,
 
     description: [
       ptBlock(
@@ -242,7 +222,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   },
 
   devbysid: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'devbysid'),
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'devbysid')!,
 
     description: [
       ptBlock(
@@ -275,7 +255,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   },
 
   edvault: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'edvault'),
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'edvault')!,
 
     description: [
       ptBlock(
@@ -292,7 +272,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
       ),
     ],
 
-    timeline: '3 weeks',
+    timeline: '7 weeks',
 
     metrics: [
       { label: 'Framework', value: 'Next.js' },
@@ -307,7 +287,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   },
 
   codepencil: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'codepencil'),
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'codepencil')!,
 
     description: [
       ptBlock(
@@ -324,7 +304,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
       ),
     ],
 
-    timeline: '2 weeks',
+    timeline: '2 Days',
 
     metrics: [
       { label: 'Category', value: 'Developer Tool' },
@@ -339,7 +319,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
   },
 
   'the-astro-tech-blog': {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'the-astro-tech-blog'),
+    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'the-astro-tech-blog')!,
 
     description: [
       ptBlock(
@@ -356,7 +336,7 @@ export const FALLBACK_PROJECT_MAP: Record<string, any> = {
       ),
     ],
 
-    timeline: '2 weeks',
+    timeline: '5 Days',
 
     metrics: [
       { label: 'Framework', value: 'Astro' },

@@ -51,8 +51,7 @@ export async function SkillsSection() {
                   {skillList.map((skill) => (
                     <span
                       key={skill}
-                      className="text-sm text-ink-muted bg-surface-subtle border border-border px-2.5 py-1 rounded-lg font-mono
-                                 group-hover:border-border transition-colors"
+                      className="text-sm text-ink-muted bg-surface-subtle border border-border px-2.5 py-1 rounded-lg font-mono group-hover:border-border transition-colors"
                     >
                       {skill}
                     </span>

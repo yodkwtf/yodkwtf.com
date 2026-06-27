@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "icons": "node scripts/generate-file-icons.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",
@@ -34,6 +35,8 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
+    "@iconify-json/vscode-icons": "^1.2.62",
+    "@iconify/utils": "^3.1.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

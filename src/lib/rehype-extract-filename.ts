@@ -1,35 +1,51 @@
-// Rehype plugin: detects `// filename: path/to/file.ext` as the first line of a
-// code block, strips it from the rendered code, and sets data-filename on <pre>.
+import type { Element, Nodes, Text } from "hast";
+
+// Rehype plugin: detects a `filename: path/to/file.ext` directive as the first
+// line of a code block, strips it from the rendered code, and sets data-filename
+// on <pre>. The directive may use any common comment syntax so it works across
+// languages, e.g.:
+//   // filename: app/page.tsx      (JS/TS, C, Go, Rust, …)
+//   # filename: script.py          (Python, Ruby, Bash, YAML, …)
+//   -- filename: schema.sql        (SQL, Lua, Haskell)
+//   <!-- filename: index.html -->  (HTML, XML, Markdown)
+//   /* filename: styles.css */     (CSS, C)
+//   ; filename: config.ini         (INI, Lisp, asm)
+//   % filename: main.tex           (LaTeX, Erlang)
 // Must run BEFORE rehype-pretty-code so the filename line is removed from the
 // raw text before shiki tokenises it.
+
+// Leading comment token (line or block opener) + `filename:` + path, with an
+// optional block-comment closer (`*/` or `-->`). Case-insensitive on `filename`.
+const FILENAME_DIRECTIVE =
+  /^\s*(?:\/\/|\/\*|#|--|;|%|<!--)\s*filename:\s*(.+?)\s*(?:\*\/|-->)?\s*$/i;
+
 export function rehypeExtractFilename() {
-  return (tree: any) => {
+  return (tree: Nodes) => {
     walk(tree);
   };
 }
 
-function walk(node: any) {
+function walk(node: Nodes) {
   if (node.type === "element" && node.tagName === "pre") {
     processPre(node);
     return;
   }
-  if (Array.isArray(node.children)) {
+  if ("children" in node) {
     node.children.forEach(walk);
   }
 }
 
-function processPre(pre: any) {
-  const code = pre.children?.find(
-    (c: any) => c.type === "element" && c.tagName === "code",
+function processPre(pre: Element) {
+  const code = pre.children.find(
+    (c): c is Element => c.type === "element" && c.tagName === "code",
   );
   if (!code) return;
 
-  const textNode = code.children?.find((c: any) => c.type === "text");
+  const textNode = code.children.find((c): c is Text => c.type === "text");
   if (!textNode) return;
 
   const firstLine = textNode.value.split("\n")[0];
-  // Matches:  // filename: app/blog/[slug]/page.tsx
-  const match = firstLine.match(/^\/\/\s*filename:\s*(.+?)\s*$/);
+  const match = firstLine.match(FILENAME_DIRECTIVE);
   if (!match) return;
 
   pre.properties = pre.properties ?? {};

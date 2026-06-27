@@ -175,12 +175,15 @@ Available in all blog posts via `src/components/mdx/MDXComponents.tsx`:
 - `<ImageGrid images={[{src, alt, caption}]} />` — 2-column image grid
 - `<Details summary="">` — collapsible `<details>` element
 
-Code blocks are syntax-highlighted via `rehype-pretty-code` with the `github-dark-default` theme. The background is always dark even in light mode (forced via `globals.css`). Add a filename comment at the top of a fenced code block to show a filename tab in the toolbar:
+Code blocks are syntax-highlighted via `rehype-pretty-code` with the `github-dark-default` theme. The background is always dark even in light mode (forced via `globals.css`). Add a filename directive as the first line of a fenced code block to show a filename tab in the toolbar:
 ```
 // filename: path/to/file.ts
 ```
+The directive accepts any common comment syntax, so it works in non-JS languages too — `# filename: …` (Python/Bash/YAML), `-- filename: …` (SQL), `<!-- filename: … -->` (HTML), `/* filename: … */` (CSS), `; filename: …`, `% filename: …`. The matching/stripping lives in `src/lib/rehype-extract-filename.ts` (regex `FILENAME_DIRECTIVE`), which runs **before** `rehype-pretty-code` and writes `data-filename` onto the `<pre>`.
 
-`src/components/mdx/BlogCodeEnhancer.tsx` is a `'use client'` null-render component mounted in the blog detail page. On mount it scans `.prose pre` elements, reads `pre.dataset.filename` (set by `rehype-pretty-code` from the `// filename:` comment), wraps each `<pre>` in a dark toolbar container, and injects a copy-to-clipboard button. It marks processed blocks with `data-code-enhanced` to be idempotent.
+`src/components/mdx/BlogCodeEnhancer.tsx` is a `'use client'` null-render component mounted in the blog detail page. On mount it scans `.prose pre` elements, reads `pre.dataset.filename`, wraps each `<pre>` in a dark toolbar container, and injects (left→right) a **file-type icon**, the filename, and a copy-to-clipboard button. It marks processed blocks with `data-code-enhanced` to be idempotent.
+
+The file-type icon comes from `getFileIconSvg(filename)` in `src/lib/codeFileIcons.ts`. Recognised extensions render the real **vscode-icons** SVG (the same set VS Code's "vscode-icons" extension uses — e.g. `.jsx`/`.tsx` show the React logo). Those SVG strings live in `src/lib/codeFileIcons.generated.ts`, produced offline by `scripts/generate-file-icons.mjs` (`npm run icons`) from `@iconify-json/vscode-icons`. The Iconify packages are **devDependencies only** — the app ships the pre-generated strings, so there's no runtime/network dependency. To add or change a mapping, edit the `EXT_TO_ICON` table in the script and rerun `npm run icons`. Unmapped extensions fall back to a neutral grey badge with the raw extension; files with no extension fall back to a generic `</>` glyph.
 
 ### Logging
 

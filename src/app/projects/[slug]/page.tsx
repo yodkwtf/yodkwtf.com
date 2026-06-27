@@ -134,9 +134,11 @@ export default async function ProjectDetailPage({ params }: Params) {
                   <ExternalLink size={15} /> Live site
                 </a>
               )}
-              <span className="font-mono text-xs text-ink-faint flex items-center gap-1">
-                <Calendar size={12} /> {project.publishedAt?.slice(0, 7)}
-              </span>
+              {project.publishedAt && (
+                <span className="font-mono text-xs text-ink-faint flex items-center gap-1">
+                  <Calendar size={12} /> {project.publishedAt.slice(0, 7)}
+                </span>
+              )}
               {project.timeline && (
                 <span className="font-mono text-xs text-ink-faint flex items-center gap-1">
                   <Clock size={12} /> {project.timeline}
@@ -181,7 +183,7 @@ export default async function ProjectDetailPage({ params }: Params) {
             )}
 
           {/* Metrics */}
-          {project.metrics?.length > 0 && (
+          {project.metrics && project.metrics.length > 0 && (
             <AnimateIn delay={0.2} className="mb-12">
               <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {project.metrics.map(

@@ -1,7 +1,9 @@
+import type { PortableTextBlock } from '@portabletext/react';
+
 // ─── Sanity Image ────────────────────────────────────────────────────────────
 export interface SanityImage {
-  _type: "image";
-  asset: { _ref: string; _type: "reference" };
+  _type: 'image';
+  asset: { _ref: string; _type: 'reference' };
   alt?: string;
   caption?: string;
 }
@@ -12,7 +14,7 @@ export interface Project {
   title: string;
   slug: { current: string };
   summary: string;
-  description: any[]; // Portable Text
+  description: PortableTextBlock[]; // Portable Text
   techStack: string[];
   featured: boolean;
   clientWork: boolean;
@@ -22,9 +24,11 @@ export interface Project {
   gallery?: SanityImage[];
   metrics?: { label: string; value: string }[];
   timeline?: string;
-  challenges?: any[];
-  solutions?: any[];
-  architectureDetails?: any[];
+  challenges?: PortableTextBlock[];
+  solutions?: PortableTextBlock[];
+  challengeText?: string;
+  solutionText?: string;
+  architectureDetails?: PortableTextBlock[];
   publishedAt: string;
 }
 
@@ -46,7 +50,7 @@ export interface Experience {
   startDate: string;
   endDate?: string;
   current: boolean;
-  description: any[];
+  description: PortableTextBlock[];
   techStack: string[];
   companyUrl?: string;
   logo?: SanityImage;
@@ -67,16 +71,21 @@ export interface AboutPage {
   _id: string;
   headline: string;
   subheadline: string;
-  bio: any[];
-  shortBio?: any[];
-  journey: any[];
-  philosophy: any[];
+  bio: PortableTextBlock[];
+  shortBio?: PortableTextBlock[];
+  journey: PortableTextBlock[];
+  philosophy: PortableTextBlock[];
   avatar?: SanityImage & {
     /** Projected from asset->metadata.dimensions */
     dimensions?: { width: number; height: number };
   };
   resumeUrl?: string;
-  education?: { institution: string; degree: string; period: string; note?: string }[];
+  education?: {
+    institution: string;
+    degree: string;
+    period: string;
+    note?: string;
+  }[];
   stats?: { num: string; label: string; sub: string }[];
 }
 
