@@ -67,6 +67,8 @@
 - [x] Fix the urls on the 404 page
 - [x] Add a fallback resume
 - [ ] Fix all the typescript errors across the entire codebase
+- [ ] Filename inside the code blocks only works with `//` comment right now but it should support language specific comments as well like `#` for python or bash, etc.
+- [ ] There should be icons for each extension in the code block right before the filename on it's left
 
 #### Testing & QA
 
