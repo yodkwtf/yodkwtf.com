@@ -62,6 +62,7 @@ export default async function AboutPage() {
   let avatarUrl: string | null = FALLBACK_AVATAR_URL || null;
   let avatarWidth = 640;
   let avatarHeight = 800;
+  let avatarBlur: string | undefined;
   let resumeUrl: string = siteConfig.links.resume;
   let bio: string[] = FALLBACK_BIO;
 
@@ -77,6 +78,7 @@ export default async function AboutPage() {
         avatarWidth = about.avatar.dimensions.width;
         avatarHeight = about.avatar.dimensions.height;
       }
+      if (about.avatar.lqip) avatarBlur = about.avatar.lqip;
     }
     if (about?.resumeUrl) resumeUrl = about.resumeUrl;
     if (about?.education?.length) education = about.education;
@@ -145,6 +147,8 @@ export default async function AboutPage() {
                       className="relative w-full h-auto rounded-2xl border-2 border-accent-500/30 object-cover"
                       sizes="(max-width: 1024px) 288px, 320px"
                       priority
+                      placeholder={avatarBlur ? 'blur' : undefined}
+                      blurDataURL={avatarBlur}
                     />
                   ) : (
                     <div className="relative aspect-4/5 rounded-2xl border-2 border-accent-500/30 bg-surface-subtle flex items-center justify-center dot-grid">

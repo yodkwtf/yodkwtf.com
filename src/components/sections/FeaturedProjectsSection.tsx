@@ -5,10 +5,11 @@ import { FeaturedProjectCard } from '@/components/ui/FeaturedProjectCard';
 import { AnimateIn } from '@/components/ui/AnimateIn';
 import { getFeaturedProjects } from '@/sanity/lib/queries';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
+import { byPublishedDesc } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 
 export async function FeaturedProjectsSection() {
-  let projects = FALLBACK_PROJECTS.filter((p) => p.featured).slice(0, 4);
+  let projects = FALLBACK_PROJECTS.filter((p) => p.featured);
   try {
     const fetched = await getFeaturedProjects();
     if (fetched?.length) projects = fetched;
@@ -19,6 +20,8 @@ export async function FeaturedProjectsSection() {
       err,
     );
   }
+
+  projects = [...projects].sort(byPublishedDesc).slice(0, 4);
 
   return (
     <section className="py-20 bg-surface-subtle">

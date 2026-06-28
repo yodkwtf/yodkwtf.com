@@ -4,6 +4,7 @@ import { siteConfig } from '@/config/site';
 import { pageMetadata } from '@/lib/metadata';
 import { AnimateIn } from '@/components/ui/AnimateIn';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
+import { byPublishedDesc } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 
 export const revalidate = 300;
@@ -27,6 +28,8 @@ export default async function ProjectsPage() {
       err,
     );
   }
+
+  projects = [...projects].sort(byPublishedDesc);
 
   return (
     <div className="pt-28 pb-24 px-6">

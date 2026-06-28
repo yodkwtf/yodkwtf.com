@@ -59,6 +59,7 @@ export interface AboutPage {
   avatar?: SanityImage & {
     /** Projected from asset->metadata.dimensions */
     dimensions?: { width: number; height: number };
+    lqip?: string;
   };
   resumeUrl?: string;
   education?: {

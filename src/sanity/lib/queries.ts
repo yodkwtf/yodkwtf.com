@@ -64,6 +64,7 @@ export async function getAboutPage(): Promise<AboutPage | null> {
       avatar {
         asset,
         "dimensions": asset->metadata.dimensions,
+        "lqip": asset->metadata.lqip,
         alt
       },
       "resumeUrl": resume.asset->url,

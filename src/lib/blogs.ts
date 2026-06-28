@@ -41,12 +41,21 @@ export function getBlogBySlug(slug: string): BlogPost | null {
   };
 }
 
+export function isPublishable(post: {
+  draft?: boolean;
+  publishedAt: string;
+}): boolean {
+  if (post.draft) return false;
+  const published = new Date(post.publishedAt).getTime();
+  return Number.isNaN(published) || published <= Date.now();
+}
+
 export function getAllBlogsMeta(): BlogPostMeta[] {
   const slugs = getBlogSlugs();
   return slugs
     .map((slug) => {
       const post = getBlogBySlug(slug);
-      if (!post || post.draft) return null;
+      if (!post || !isPublishable(post)) return null;
       const { content, ...meta } = post;
       return meta as BlogPostMeta;
     })

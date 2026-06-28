@@ -7,7 +7,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypePrettyCode from 'rehype-pretty-code';
-import { getBlogBySlug, getAllBlogsMeta } from '@/lib/blogs';
+import { getBlogBySlug, getAllBlogsMeta, isPublishable } from '@/lib/blogs';
 import { rehypeExtractFilename } from '@/lib/rehype-extract-filename';
 import { rehypeFlattenCodeFigure } from '@/lib/rehype-flatten-code-figure';
 import { formatDate } from '@/lib/utils';
@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const post = getBlogBySlug(slug);
-  if (!post || post.draft) return { title: 'Post Not Found' };
+  if (!post || !isPublishable(post)) return { title: 'Post Not Found' };
   return {
     title: post.title,
     description: post.description,
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function BlogDetailPage({ params }: Params) {
   const { slug } = await params;
   const post = getBlogBySlug(slug);
-  if (!post || post.draft) notFound();
+  if (!post || !isPublishable(post)) notFound();
 
   let avatarUrl: string | null = null;
   try {

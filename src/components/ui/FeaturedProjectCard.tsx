@@ -80,7 +80,7 @@ export function FeaturedProjectCard({
           'relative z-10 px-6 py-6 bg-surface-subtle text-center',
           'md:absolute md:top-1/2 md:w-[46%] md:-translate-y-1/2 md:p-8 md:text-left',
           'md:rounded-2xl md:border md:border-border md:bg-surface-card',
-          'md:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)]',
+          'md:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18),0_0_40px_-16px_var(--glow)]',
           imageLeft ? 'md:right-0' : 'md:left-0',
         )}
       >

@@ -7,7 +7,7 @@ export const siteConfig = {
   url: 'https://yodkwtf.com',
   ogImage: '/og.png',
   author: 'Durgesh Chaudhary',
-  email: '48durgesh.chaudhary@gmail.com',
+  email: 'hello@yodkwtf.com',
   location: 'Gurgaon, India',
   links: {
     github: 'https://github.com/yodkwtf',

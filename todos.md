@@ -101,7 +101,7 @@
 
 - [x] Connect to sanity with the main account and the correct project id
 - [x] Add all the content to sanity
-- [ ] Test the entire website with the sanity content
+- [x] Test the entire website with the sanity content
 
 #### Deployment & Launch
 

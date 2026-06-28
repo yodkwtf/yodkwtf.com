@@ -1,12 +1,12 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { format, formatDistanceToNow, parseISO } from "date-fns";
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import { format, formatDistanceToNow, parseISO } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(date: string, fmt = "MMMM d, yyyy") {
+export function formatDate(date: string, fmt = 'MMMM d, yyyy') {
   return format(parseISO(date), fmt);
 }
 
@@ -14,17 +14,26 @@ export function formatDateRelative(date: string) {
   return formatDistanceToNow(parseISO(date), { addSuffix: true });
 }
 
+export function byPublishedDesc<T extends { publishedAt?: string }>(
+  a: T,
+  b: T,
+): number {
+  const ta = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+  const tb = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+  return (Number.isNaN(tb) ? 0 : tb) - (Number.isNaN(ta) ? 0 : ta);
+}
+
 export function slugify(str: string) {
   return str
     .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/[\s_-]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 export function truncate(str: string, length = 120) {
   if (str.length <= length) return str;
-  return str.slice(0, length).trimEnd() + "…";
+  return str.slice(0, length).trimEnd() + '…';
 }
 
 export function groupBy<T>(arr: T[], key: keyof T): Record<string, T[]> {

@@ -165,7 +165,7 @@ export default async function ProjectDetailPage({ params }: Params) {
               )}
               {project.publishedAt && (
                 <span className="font-mono text-xs text-ink-faint flex items-center gap-1">
-                  <Calendar size={12} /> {project.publishedAt.slice(0, 7)}
+                  <Calendar size={12} /> {project.publishedAt.slice(0, 4)}
                 </span>
               )}
               {project.timeline && (
