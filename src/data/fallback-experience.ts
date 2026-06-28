@@ -1,5 +1,5 @@
 /**
- * Fallback experience and education data used when Sanity is unreachable.
+ * Fallback experience data used when Sanity is unreachable.
  */
 
 export const FALLBACK_EXPERIENCE = [
@@ -78,20 +78,5 @@ export const FALLBACK_EXPERIENCE = [
     ],
     companyUrl: 'https://www.hsc.com',
     order: 3,
-  },
-];
-
-export const FALLBACK_EDUCATION = [
-  {
-    institution: 'The NorthCap University',
-    degree: 'B.Tech in Computer Science',
-    period: '2019 — 2023',
-    note: 'CGPA: 8.46 · Hands-on experience from internships, freelance work, and  100+ personal projects.',
-  },
-  {
-    institution: 'Delhi Public School Ghaziabad Society (DPSG)',
-    degree: 'Higher Secondary Education (PCM)',
-    period: '2013 — 2019',
-    note: 'Grade: 9.4 · Mathematics Topper for two consecutive years (11th & 12th)',
   },
 ];

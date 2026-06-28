@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ExternalLink, Calendar, Clock } from 'lucide-react';
-import { PortableText } from '@portabletext/react';
+import { PortableText, type PortableTextBlock } from '@portabletext/react';
 import { GithubIcon } from '@/components/ui/SocialIcons';
 import {
   AnimateIn,
@@ -15,8 +15,32 @@ import { urlFor } from '@/sanity/lib/client';
 import { FALLBACK_PROJECT_MAP } from '@/data/fallback-projects';
 import { logger } from '@/lib/logger';
 
+// ISR: re-render at most every 5 min so Sanity content edits appear without a
+// manual redeploy.
+export const revalidate = 300;
+
 interface Params {
   params: Promise<{ slug: string }>;
+}
+
+function ChallengeSolutionBody({
+  blocks,
+  text,
+}: {
+  blocks?: PortableTextBlock[];
+  text?: string;
+}) {
+  if (Array.isArray(blocks) && blocks.length > 0) {
+    return (
+      <div className="prose prose-sm dark:prose-invert max-w-none text-ink-muted [&_p]:text-sm [&_p]:leading-relaxed [&_p]:mb-3 last:[&_p]:mb-0">
+        <PortableText value={blocks} />
+      </div>
+    );
+  }
+  if (text) {
+    return <p className="text-sm text-ink-muted leading-relaxed">{text}</p>;
+  }
+  return null;
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -85,6 +109,13 @@ export default async function ProjectDetailPage({ params }: Params) {
 
   if (!project) notFound();
 
+  const hasChallenge =
+    (Array.isArray(project.challenges) && project.challenges.length > 0) ||
+    Boolean(project.challengeText);
+  const hasSolution =
+    (Array.isArray(project.solutions) && project.solutions.length > 0) ||
+    Boolean(project.solutionText);
+
   return (
     <div className="pt-28 pb-24">
       {/* Back */}
@@ -152,8 +183,16 @@ export default async function ProjectDetailPage({ params }: Params) {
             <div className="relative rounded-xl overflow-hidden border border-border bg-surface-subtle aspect-video">
               {project.thumbnail ? (
                 <Image
-                  src={typeof project.thumbnail === 'string' ? project.thumbnail : urlFor(project.thumbnail).width(896).height(504).url()}
-                  alt={typeof project.thumbnail === 'string' ? project.title : (project.thumbnail.alt ?? project.title)}
+                  src={
+                    typeof project.thumbnail === 'string'
+                      ? project.thumbnail
+                      : urlFor(project.thumbnail).width(896).height(504).url()
+                  }
+                  alt={
+                    typeof project.thumbnail === 'string'
+                      ? project.title
+                      : (project.thumbnail.alt ?? project.title)
+                  }
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 896px"
@@ -217,29 +256,31 @@ export default async function ProjectDetailPage({ params }: Params) {
           </AnimateIn>
 
           {/* Challenge / Solution */}
-          {(project.challengeText || project.solutionText) && (
+          {(hasChallenge || hasSolution) && (
             <div className="grid md:grid-cols-2 gap-6 mb-12">
-              {project.challengeText && (
+              {hasChallenge && (
                 <AnimateIn delay={0.25}>
                   <div className="glass rounded-xl p-6 border border-border h-full">
                     <h2 className="font-display text-xl text-ink mb-3">
                       The Challenge
                     </h2>
-                    <p className="text-sm text-ink-muted leading-relaxed">
-                      {project.challengeText}
-                    </p>
+                    <ChallengeSolutionBody
+                      blocks={project.challenges}
+                      text={project.challengeText}
+                    />
                   </div>
                 </AnimateIn>
               )}
-              {project.solutionText && (
+              {hasSolution && (
                 <AnimateIn delay={0.3}>
                   <div className="glass rounded-xl p-6 border border-accent-500/20 bg-accent-500/3 h-full">
                     <h2 className="font-display text-xl text-ink mb-3">
                       The Solution
                     </h2>
-                    <p className="text-sm text-ink-muted leading-relaxed">
-                      {project.solutionText}
-                    </p>
+                    <ChallengeSolutionBody
+                      blocks={project.solutions}
+                      text={project.solutionText}
+                    />
                   </div>
                 </AnimateIn>
               )}

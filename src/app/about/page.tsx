@@ -17,11 +17,12 @@ import { logger } from '@/lib/logger';
 import { getAboutPage, getExperience } from '@/sanity/lib/queries';
 import { urlFor } from '@/sanity/lib/client';
 import { toPlainText, type PortableTextBlock } from '@portabletext/react';
+import { FALLBACK_EXPERIENCE } from '@/data/fallback-experience';
 import {
-  FALLBACK_EXPERIENCE,
+  FALLBACK_BIO,
+  FALLBACK_AVATAR_URL,
   FALLBACK_EDUCATION,
-} from '@/data/fallback-experience';
-import { FALLBACK_BIO, FALLBACK_AVATAR_URL } from '@/data/fallback-about';
+} from '@/data/fallback-about';
 
 type EducationItem = {
   institution: string;
@@ -46,6 +47,10 @@ type ExperienceItem = {
   period?: string;
   order?: number;
 };
+
+// ISR: re-render at most every 5 min so Sanity content edits appear without a
+// manual redeploy.
+export const revalidate = 300;
 
 export const metadata: Metadata = pageMetadata({
   title: 'About',

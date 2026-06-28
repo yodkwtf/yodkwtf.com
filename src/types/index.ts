@@ -1,6 +1,6 @@
 import type { PortableTextBlock } from '@portabletext/react';
 
-// ─── Sanity Image ────────────────────────────────────────────────────────────
+// Sanity Image
 export interface SanityImage {
   _type: 'image';
   asset: { _ref: string; _type: 'reference' };
@@ -8,7 +8,7 @@ export interface SanityImage {
   caption?: string;
 }
 
-// ─── Project ─────────────────────────────────────────────────────────────────
+// Project
 export interface Project {
   _id: string;
   title: string;
@@ -21,28 +21,23 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   thumbnail: SanityImage | string | null;
-  gallery?: SanityImage[];
   metrics?: { label: string; value: string }[];
   timeline?: string;
   challenges?: PortableTextBlock[];
   solutions?: PortableTextBlock[];
   challengeText?: string;
   solutionText?: string;
-  architectureDetails?: PortableTextBlock[];
   publishedAt: string;
 }
 
-// ─── Skill ───────────────────────────────────────────────────────────────────
+// Skill
 export interface Skill {
   _id: string;
   name: string;
   category: string;
-  icon?: string;
-  proficiency: number; // 1-5
-  order: number;
 }
 
-// ─── Experience ──────────────────────────────────────────────────────────────
+// Experience
 export interface Experience {
   _id: string;
   company: string;
@@ -53,28 +48,14 @@ export interface Experience {
   description: PortableTextBlock[];
   techStack: string[];
   companyUrl?: string;
-  logo?: SanityImage;
   order: number;
 }
 
-// ─── Social Link ─────────────────────────────────────────────────────────────
-export interface SocialLink {
-  _id: string;
-  platform: string;
-  url: string;
-  icon: string;
-  order: number;
-}
-
-// ─── About Page ──────────────────────────────────────────────────────────────
+// About Page
 export interface AboutPage {
   _id: string;
-  headline: string;
-  subheadline: string;
   bio: PortableTextBlock[];
   shortBio?: PortableTextBlock[];
-  journey: PortableTextBlock[];
-  philosophy: PortableTextBlock[];
   avatar?: SanityImage & {
     /** Projected from asset->metadata.dimensions */
     dimensions?: { width: number; height: number };
@@ -89,7 +70,7 @@ export interface AboutPage {
   stats?: { num: string; label: string; sub: string }[];
 }
 
-// ─── Blog (MDX) ──────────────────────────────────────────────────────────────
+// Blog (MDX)
 export interface BlogFrontmatter {
   title: string;
   description: string;

@@ -70,16 +70,16 @@
 - [x] Filename inside the code blocks only works with `//` comment right now but it should support language specific comments as well like `#` for python or bash, etc.
 - [x] On the projects detail page, when the date is not provided, the icon still shows. Check for all such issues.
 - [x] There should be icons for each extension in the code block right before the filename on it's left. We should icons for all major file type extensions, including stuff like ejs, etc.
-- [ ] Check the irrelevant fields in Sanity Schema everywhere and remove them if they're not being used. Check the ones I am specifying my doubts about and then the other ones as well. So for these, check the code and if these fields are rendered then let them be but if they aren't then remove them from schema
-  - [ ] For about section - headline, subheadline, journey, philosophy
-  - [ ] For experience section - company logo
-  - [ ] For skills - icon, Proficiency, order
-  - [ ] For projects - Architecture Details, Gallery
-  - [ ] Remove the complete social link schema as that is not at all required
-- [ ] Move fallback education from experience file to fallback about file
-- [ ] Update the fixed set of skill categories based on the categories defined in the fallback-skills file and also add a others category for misc items
-- [ ] Make these the primary section in schema which will be used as the identifier for the field item
-  - [ ] For experience - company name
+- [x] Check the irrelevant fields in Sanity Schema everywhere and remove them if they're not being used. Check the ones I am specifying my doubts about and then the other ones as well. So for these, check the code and if these fields are rendered then let them be but if they aren't then remove them from schema
+  - [x] For about section - headline, subheadline, journey, philosophy
+  - [x] For experience section - company logo
+  - [x] For skills - icon, Proficiency, order
+  - [x] For projects - Architecture Details, Gallery
+  - [x] Remove the complete social link schema as that is not at all required
+- [x] Move fallback education from experience file to fallback about file
+- [x] Update the fixed set of skill categories based on the categories defined in the fallback-skills file and also add a others category for misc items
+- [x] Make these the primary section in schema which will be used as the identifier for the field item
+  - [x] For experience - company name
 
 #### Testing & QA
 
@@ -100,7 +100,7 @@
 #### CMS Integration (Sanity)
 
 - [x] Connect to sanity with the main account and the correct project id
-- [ ] Add all the content to sanity
+- [x] Add all the content to sanity
 - [ ] Test the entire website with the sanity content
 
 #### Deployment & Launch

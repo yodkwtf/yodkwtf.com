@@ -1,13 +1,12 @@
-import { sanityFetch } from "./client";
-import type { Project, Skill, Experience, AboutPage, SocialLink } from "@/types";
+import { sanityFetch } from './client';
+import type { Project, Skill, Experience, AboutPage } from '@/types';
 
-// ─── Projects ────────────────────────────────────────────────────────────────
+// Projects
 const projectFields = `
   _id, title, slug, summary, description, techStack,
   featured, clientWork, githubUrl, liveUrl,
   thumbnail { asset, alt, caption },
-  gallery[] { asset, alt, caption },
-  metrics, timeline, challenges, solutions, architectureDetails,
+  metrics, timeline, challenges, solutions,
   publishedAt
 `;
 
@@ -30,34 +29,38 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   );
 }
 
-// ─── Skills ──────────────────────────────────────────────────────────────────
+// Skills
 export async function getSkills(): Promise<Skill[]> {
   return sanityFetch(
-    `*[_type == "skill"] | order(order asc) { _id, name, category, icon, proficiency, order }`,
+    `*[_type == "skill"] | order(name asc) { _id, name, category }`,
   );
 }
 
-export async function getHeroConfig(): Promise<{ stats: { num: string; label: string }[]; stack: string[] } | null> {
-  return sanityFetch(`*[_type == "heroConfig"][0] { stats[] { num, label }, stack }`);
+export async function getHeroConfig(): Promise<{
+  stats: { num: string; label: string }[];
+  stack: string[];
+} | null> {
+  return sanityFetch(
+    `*[_type == "heroConfig"][0] { stats[] { num, label }, stack }`,
+  );
 }
 
-// ─── Experience ──────────────────────────────────────────────────────────────
+// Experience
 export async function getExperience(): Promise<Experience[]> {
   return sanityFetch(
     `*[_type == "experience"] | order(order asc) {
       _id, company, role, startDate, endDate, current,
       description, techStack, companyUrl,
-      logo { asset, alt },
       order
     }`,
   );
 }
 
-// ─── About ───────────────────────────────────────────────────────────────────
+// About
 export async function getAboutPage(): Promise<AboutPage | null> {
   return sanityFetch(
     `*[_type == "about"][0] {
-      _id, headline, subheadline, bio, shortBio, journey, philosophy,
+      _id, bio, shortBio,
       avatar {
         asset,
         "dimensions": asset->metadata.dimensions,
@@ -70,14 +73,7 @@ export async function getAboutPage(): Promise<AboutPage | null> {
   );
 }
 
-// ─── Social Links ─────────────────────────────────────────────────────────────
-export async function getSocialLinks(): Promise<SocialLink[]> {
-  return sanityFetch(
-    `*[_type == "socialLink"] | order(order asc) { _id, platform, url, icon, order }`,
-  );
-}
-
-// ─── Resume URL (from About doc) ──────────────────────────────────────────────
+// Resume URL
 export async function getResumeUrl(): Promise<string | null> {
   const result = await sanityFetch<{ resumeUrl?: string } | null>(
     `*[_type == "about"][0] { "resumeUrl": resume.asset->url }`,

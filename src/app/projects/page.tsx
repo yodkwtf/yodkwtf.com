@@ -6,6 +6,10 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
 import { logger } from '@/lib/logger';
 
+// ISR: re-render at most every 5 min so Sanity content edits appear without a
+// manual redeploy.
+export const revalidate = 300;
+
 export const metadata: Metadata = pageMetadata({
   title: 'Projects',
   description: `Explore projects built by ${siteConfig.name} - full-stack web applications, open-source tools, and client work.`,

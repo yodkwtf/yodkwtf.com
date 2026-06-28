@@ -19,7 +19,7 @@ No test suite is configured.
 
 This is a personal portfolio site built with **Next.js 16** (App Router), **React 19**, **TypeScript**, and **Tailwind CSS v4**. Content comes from two separate sources managed independently:
 
-- **Sanity CMS** — projects, skills, experience, about page, social links
+- **Sanity CMS** — projects, skills, experience, about page (social links come from `siteConfig`, not Sanity)
 - **Local MDX files** in `content/blogs/` — blog posts
 
 ### Data Flow
@@ -28,12 +28,14 @@ This is a personal portfolio site built with **Next.js 16** (App Router), **Reac
 
 **Blog posts** are read from the filesystem at build/request time via `src/lib/blogs.ts` using `gray-matter` for frontmatter and `next-mdx-remote` for rendering. Blog MDX files live in `content/blogs/*.mdx`.
 
+**Content freshness (ISR).** The Sanity-backed routes — `src/app/page.tsx`, `src/app/about/page.tsx`, `src/app/projects/page.tsx`, `src/app/projects/[slug]/page.tsx` — each export `revalidate = 300`, so the host (Netlify) re-renders them at most every 5 minutes and CMS edits appear without a manual redeploy. Without this they'd be static-at-build-time and would only update on a fresh deploy. Code/schema changes (including the embedded Studio) still require a deploy. Blog routes are MDX-from-repo, so their content only changes via a deploy anyway and don't need ISR.
+
 ### Key Files
 
 - `src/config/site.ts` — single source of truth for all site metadata, nav links, social URLs, and the accent color theme. Notable fields: `username` (GitHub handle), `links.repo` (portfolio source repo URL)
 - `src/types/index.ts` — all shared TypeScript interfaces
 - `src/app/globals.css` — CSS custom properties that power the design system (colors, radii, transitions)
-- `src/sanity/schemas/` — Sanity document schemas (`project`, `skill`, `experience`, `about`, `socialLink`, `heroConfig`). The `about` schema's `resume` field is a **file upload** (not a URL); the GROQ query projects `resume.asset->url` into `resumeUrl` so consumers always get a plain string. The `heroConfig` schema is a singleton document controlling the hero section's stats and stack independently from the about page stats.
+- `src/sanity/schemas/` — Sanity document schemas (`project`, `skill`, `experience`, `about`, `heroConfig`). The `about` schema's `resume` field is a **file upload** (not a URL); the GROQ query projects `resume.asset->url` into `resumeUrl` so consumers always get a plain string. The `heroConfig` schema is a singleton document controlling the hero section's stats and stack independently from the about page stats. Social links are sourced from `siteConfig`, not Sanity — there is no `socialLink` schema.
 - `src/lib/utils.ts` — `cn()` helper (clsx + tailwind-merge) for conditional class names
 
 ### RSC / Client Split
@@ -49,10 +51,10 @@ Sections like `HeroSection`, `FeaturedProjectsSection`, and `MiniAboutSection` a
 ### Fallback Data
 
 When Sanity is unreachable, pages fall back to static data in `src/data/`:
-- `fallback-projects.ts` — `FALLBACK_PROJECTS` (array) + `FALLBACK_PROJECT_MAP` (slug-keyed, with metrics/challenge/solution)
-- `fallback-experience.ts` — `FALLBACK_EXPERIENCE` + `FALLBACK_EDUCATION`
-- `fallback-skills.ts` — `FALLBACK_SKILLS` (Record\<category, string[]\>) + `SKILL_CATEGORY_COLORS`
-- `fallback-about.ts` — `FALLBACK_SHORT_BIO` (string[], 1–2 sentences for the home page mini-about) + `FALLBACK_BIO` (string[], full multi-paragraph version for the about page) + `FALLBACK_STATS` (`{ num, label, sub }[]`)
+- `fallback-projects.ts` — `FALLBACK_PROJECTS` is the single source of truth (array; each project carries all fields inline, including the detail-page fields: description/metrics/timeline/challengeText/solutionText). `FALLBACK_PROJECT_MAP` is **derived** from it via `Object.fromEntries` for slug-keyed lookups — don't hand-maintain it.
+- `fallback-experience.ts` — `FALLBACK_EXPERIENCE`
+- `fallback-skills.ts` — `FALLBACK_SKILLS` (Record\<category, string[]\>) + `SKILL_CATEGORY_COLORS`. The category keys here (`Frontend`, `Backend`, `Database`, `Cloud & DevOps`, `Tools & Libraries`, plus `Others`) are the canonical skill categories — the Sanity `skill` schema's `category` option list mirrors them.
+- `fallback-about.ts` — `FALLBACK_SHORT_BIO` (string[], 1–2 sentences for the home page mini-about) + `FALLBACK_BIO` (string[], full multi-paragraph version for the about page) + `FALLBACK_EDUCATION` (institution/degree/period/note) + `FALLBACK_STATS` (`{ num, label, sub }[]`)
 - `fallback-hero.ts` — `FALLBACK_HERO_STATS` (`{ num, label }[]` — concise, no `sub`) + `FALLBACK_HERO_STACK` (`string[]`) — used only by `HeroSection`
 - `fallback-blogs.ts` — `FALLBACK_BLOGS` + `FALLBACK_BLOG_TAGS` — shown when no MDX files exist yet
 

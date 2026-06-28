@@ -15,24 +15,17 @@ export const skillSchema = defineType({
       type: 'string',
       options: {
         list: [
-          'Languages',
           'Frontend',
           'Backend',
           'Database',
-          'DevOps',
-          'Tools',
-          'Other',
+          'Cloud & DevOps',
+          'Tools & Libraries',
+          'Others',
         ],
       },
     }),
-    defineField({ name: 'icon', type: 'string' }),
-    defineField({
-      name: 'proficiency',
-      type: 'number',
-      validation: (R) => R.min(1).max(5),
-    }),
-    defineField({ name: 'order', type: 'number' }),
   ],
+  preview: { select: { title: 'name', subtitle: 'category' } },
 });
 
 export const experienceSchema = defineType({
@@ -60,15 +53,9 @@ export const experienceSchema = defineType({
     }),
     defineField({ name: 'techStack', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'companyUrl', type: 'url' }),
-    defineField({
-      name: 'logo',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [{ name: 'alt', type: 'string' }],
-    }),
     defineField({ name: 'order', type: 'number' }),
   ],
-  preview: { select: { title: 'role', subtitle: 'company' } },
+  preview: { select: { title: 'company', subtitle: 'role' } },
 });
 
 export const aboutSchema = defineType({
@@ -76,8 +63,6 @@ export const aboutSchema = defineType({
   title: 'About Page',
   type: 'document',
   fields: [
-    defineField({ name: 'headline', type: 'string' }),
-    defineField({ name: 'subheadline', type: 'string' }),
     defineField({
       name: 'bio',
       type: 'array',
@@ -91,8 +76,6 @@ export const aboutSchema = defineType({
       description:
         'Concise 1-2 paragraph version shown in the home page About section.',
     }),
-    defineField({ name: 'journey', type: 'array', of: [{ type: 'block' }] }),
-    defineField({ name: 'philosophy', type: 'array', of: [{ type: 'block' }] }),
     defineField({
       name: 'avatar',
       type: 'image',
@@ -147,6 +130,7 @@ export const aboutSchema = defineType({
       ],
     }),
   ],
+  preview: { prepare: () => ({ title: 'About Page' }) },
 });
 
 export const heroConfigSchema = defineType({
@@ -189,16 +173,4 @@ export const heroConfigSchema = defineType({
     }),
   ],
   preview: { prepare: () => ({ title: 'Hero Section' }) },
-});
-
-export const socialLinkSchema = defineType({
-  name: 'socialLink',
-  title: 'Social Link',
-  type: 'document',
-  fields: [
-    defineField({ name: 'platform', type: 'string' }),
-    defineField({ name: 'url', type: 'url' }),
-    defineField({ name: 'icon', type: 'string' }),
-    defineField({ name: 'order', type: 'number' }),
-  ],
 });

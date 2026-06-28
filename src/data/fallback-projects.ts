@@ -4,147 +4,6 @@
 
 import type { Project } from '@/types';
 
-export const FALLBACK_PROJECTS: Project[] = [
-  {
-    _id: 'cinematica',
-    title: 'Cinematica',
-    slug: { current: 'cinematica' },
-    summary:
-      'A full-stack movie and TV tracking platform built with the MERN stack, featuring authentication, watchlists, reviews, and personalized content management.',
-    description: [],
-    techStack: ['React.js', 'Node.js', 'MongoDB'],
-    featured: true,
-    clientWork: false,
-    githubUrl: 'https://github.com/yodkwtf/cinematica-mern',
-    liveUrl: 'https://cinematica-mern.vercel.app/',
-    thumbnail:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800483/yodkwtf.com/projects/cinematica_o1lctj.png',
-    gallery: [],
-    timeline: '',
-    challenges: [],
-    solutions: [],
-    architectureDetails: [],
-    publishedAt: '2023',
-  },
-
-  {
-    _id: 'nexus-chat',
-    title: 'Nexus - Chat Application',
-    slug: { current: 'nexus' },
-    summary:
-      'A modern real-time chat application featuring direct messaging, group conversations, social authentication, online presence indicators, and profile customization.',
-    description: [],
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
-    featured: true,
-    clientWork: false,
-    githubUrl: 'https://github.com/yodkwtf/nexus-chat-application',
-    liveUrl: 'https://nexus-dk.vercel.app/',
-    thumbnail:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800522/yodkwtf.com/projects/Screenshot_2023-09-23_223421-min_zkvto4.png',
-    gallery: [],
-    timeline: '',
-    challenges: [],
-    solutions: [],
-    architectureDetails: [],
-    publishedAt: '2023',
-  },
-
-  {
-    _id: 'devbysid',
-    title: 'DevBySid',
-    slug: { current: 'devbysid' },
-    summary:
-      'A freelance portfolio website for a game developer built with Gatsby, Contentful CMS, GraphQL, and Framer Motion, featuring custom content modeling and advanced SEO.',
-    description: [],
-    techStack: [
-      'Gatsby',
-      'GraphQL',
-      'Contentful',
-      'Framer Motion',
-      'Styled Components',
-    ],
-    featured: true,
-    clientWork: true,
-    githubUrl: '',
-    liveUrl: 'https://devbysid.com/',
-    thumbnail:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800496/yodkwtf.com/projects/Screenshot_584_-min_x3qimm.jpg',
-    gallery: [],
-    timeline: '',
-    challenges: [],
-    solutions: [],
-    architectureDetails: [],
-    publishedAt: '2022',
-  },
-
-  {
-    _id: 'edvault',
-    title: 'EdVault',
-    slug: { current: 'edvault' },
-    summary:
-      'An online marketplace platform built with Next.js, allowing users to browse, manage, and access educational resources through a modern web experience.',
-    description: [],
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    featured: false,
-    clientWork: false,
-    githubUrl: 'https://github.com/yodkwtf/ed-vault-nextjs',
-    liveUrl: 'https://ed-vault.up.railway.app/',
-    thumbnail:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175463/yodkwtf.com/projects/thumbnail-min_hazyzb.jpg',
-    gallery: [],
-    timeline: '',
-    challenges: [],
-    solutions: [],
-    architectureDetails: [],
-    publishedAt: '2024',
-  },
-
-  {
-    _id: 'codepencil',
-    title: 'CodePencil',
-    slug: { current: 'codepencil' },
-    summary:
-      'An online code editor inspired by CodePen that enables users to write, preview, and experiment with HTML, CSS, and JavaScript directly in the browser.',
-    description: [],
-    techStack: ['React.js', 'JavaScript', 'HTML', 'CSS'],
-    featured: false,
-    clientWork: false,
-    githubUrl: 'https://github.com/yodkwtf/codepencil-with-react',
-    liveUrl: 'https://www.codepencil.me/',
-    thumbnail:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800527/yodkwtf.com/projects/Screenshot_620_-min_hxpdxq.png',
-    gallery: [],
-    timeline: '',
-    challenges: [],
-    solutions: [],
-    architectureDetails: [],
-    publishedAt: '2023',
-  },
-
-  {
-    _id: 'astro-tech-blog',
-    title: 'The Astro Tech Blog',
-    slug: { current: 'the-astro-tech-blog' },
-    summary:
-      'A markdown-powered technical blog built with Astro for sharing development notes, tutorials, cheatsheets, and learnings from different technologies.',
-    description: [],
-    techStack: ['Astro', 'TypeScript', 'Markdown', 'CSS'],
-    featured: false,
-    clientWork: false,
-    githubUrl: 'https://github.com/yodkwtf/the-astro-tech-blog',
-    liveUrl: 'https://thetechblog-dk.netlify.app/',
-    thumbnail:
-      'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175462/yodkwtf.com/projects/og-image-min_kmmsni.png',
-    gallery: [],
-    timeline: '',
-    challenges: [],
-    solutions: [],
-    architectureDetails: [],
-    publishedAt: '2024',
-  },
-];
-
-// Slug-keyed map with extended detail fields for the project detail page
 function ptBlock(key: string, text: string) {
   return {
     _key: key,
@@ -154,10 +13,13 @@ function ptBlock(key: string, text: string) {
   };
 }
 
-export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
-  cinematica: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'cinematica')!,
-
+export const FALLBACK_PROJECTS: Project[] = [
+  {
+    _id: 'cinematica',
+    title: 'Cinematica',
+    slug: { current: 'cinematica' },
+    summary:
+      'A full-stack movie and TV tracking platform built with the MERN stack, featuring authentication, watchlists, reviews, and personalized content management.',
     description: [
       ptBlock(
         'c1',
@@ -172,25 +34,32 @@ export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
         'Building Cinematica taught me a lot about structuring full-stack applications, designing APIs, managing application state, and creating products that solve real user problems rather than just serving as coding exercises.',
       ),
     ],
-
-    timeline: '5 weeks',
-
+    techStack: ['React.js', 'Node.js', 'MongoDB'],
+    featured: true,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/cinematica-mern',
+    liveUrl: 'https://cinematica-mern.vercel.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800483/yodkwtf.com/projects/cinematica_o1lctj.png',
     metrics: [
       { label: 'Architecture', value: 'MERN' },
       { label: 'Authentication', value: 'JWT' },
       { label: 'API Docs', value: 'Swagger' },
     ],
-
+    timeline: '5 weeks',
     challengeText:
       'Creating a scalable full-stack architecture while keeping the user experience simple and responsive across different workflows.',
-
     solutionText:
       'Designed a modular Express backend, implemented JWT-based authentication, and structured the frontend around reusable React components and predictable state management.',
+    publishedAt: '2023',
   },
 
-  nexus: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'nexus')!,
-
+  {
+    _id: 'nexus-chat',
+    title: 'Nexus - Chat Application',
+    slug: { current: 'nexus' },
+    summary:
+      'A modern real-time chat application featuring direct messaging, group conversations, social authentication, online presence indicators, and profile customization.',
     description: [
       ptBlock(
         'n1',
@@ -205,25 +74,32 @@ export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
         'This project helped me gain deeper experience with the Next.js ecosystem, authentication flows, database modeling with Prisma, and building production-ready user experiences.',
       ),
     ],
-
-    timeline: '4 weeks',
-
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB'],
+    featured: true,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/nexus-chat-application',
+    liveUrl: 'https://nexus-dk.vercel.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800522/yodkwtf.com/projects/Screenshot_2023-09-23_223421-min_zkvto4.png',
     metrics: [
       { label: 'Framework', value: 'Next.js' },
       { label: 'Database', value: 'MongoDB' },
       { label: 'Authentication', value: 'NextAuth' },
     ],
-
+    timeline: '4 weeks',
     challengeText:
       'Managing complex authentication flows and real-time user interactions while maintaining a clean and intuitive UI.',
-
     solutionText:
       'Leveraged NextAuth for authentication, Prisma for data modeling, and modern React patterns to keep state and user interactions predictable.',
+    publishedAt: '2023',
   },
 
-  devbysid: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'devbysid')!,
-
+  {
+    _id: 'devbysid',
+    title: 'DevBySid',
+    slug: { current: 'devbysid' },
+    summary:
+      'A freelance portfolio website for a game developer built with Gatsby, Contentful CMS, GraphQL, and Framer Motion, featuring custom content modeling and advanced SEO.',
     description: [
       ptBlock(
         'd1',
@@ -238,25 +114,38 @@ export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
         'This project gave me valuable experience working directly with a client, translating requirements into technical solutions, and balancing design expectations with engineering constraints.',
       ),
     ],
-
-    timeline: 'Client Project',
-
+    techStack: [
+      'Gatsby',
+      'GraphQL',
+      'Contentful',
+      'Framer Motion',
+      'Styled Components',
+    ],
+    featured: true,
+    clientWork: true,
+    githubUrl: '',
+    liveUrl: 'https://devbysid.com/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800496/yodkwtf.com/projects/Screenshot_584_-min_x3qimm.jpg',
     metrics: [
       { label: 'Project Type', value: 'Freelance' },
       { label: 'CMS', value: 'Contentful' },
       { label: 'Animations', value: 'Framer Motion' },
     ],
-
+    timeline: 'Client Project',
     challengeText:
       'Creating a highly customized portfolio experience while ensuring content remained easy for the client to manage independently.',
-
     solutionText:
       'Used Contentful for content management, GraphQL for data retrieval, and Framer Motion for performant animations without sacrificing SEO.',
+    publishedAt: '2022',
   },
 
-  edvault: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'edvault')!,
-
+  {
+    _id: 'edvault',
+    title: 'EdVault',
+    slug: { current: 'edvault' },
+    summary:
+      'An online marketplace platform built with Next.js, allowing users to browse, manage, and access educational resources through a modern web experience.',
     description: [
       ptBlock(
         'e1',
@@ -271,24 +160,31 @@ export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
         'Building EdVault helped strengthen my understanding of larger application structures, route management, reusable component systems, and deployment workflows.',
       ),
     ],
-
-    timeline: '7 weeks',
-
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    featured: false,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/ed-vault-nextjs',
+    liveUrl: 'https://ed-vault.up.railway.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175463/yodkwtf.com/projects/thumbnail-min_hazyzb.jpg',
     metrics: [
       { label: 'Framework', value: 'Next.js' },
       { label: 'Category', value: 'Marketplace' },
     ],
-
+    timeline: '7 weeks',
     challengeText:
       'Designing a marketplace experience that remained simple and easy to navigate while supporting future scalability.',
-
     solutionText:
       'Focused on component reusability, clean route structures, and a scalable application architecture from the beginning.',
+    publishedAt: '2024',
   },
 
-  codepencil: {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'codepencil')!,
-
+  {
+    _id: 'codepencil',
+    title: 'CodePencil',
+    slug: { current: 'codepencil' },
+    summary:
+      'An online code editor inspired by CodePen that enables users to write, preview, and experiment with HTML, CSS, and JavaScript directly in the browser.',
     description: [
       ptBlock(
         'cp1',
@@ -303,24 +199,31 @@ export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
         'This project was a fun challenge in state management, editor synchronization, and building interactive developer tooling.',
       ),
     ],
-
-    timeline: '2 Days',
-
+    techStack: ['React.js', 'JavaScript', 'HTML', 'CSS'],
+    featured: false,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/codepencil-with-react',
+    liveUrl: 'https://www.codepencil.me/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1711800527/yodkwtf.com/projects/Screenshot_620_-min_hxpdxq.png',
     metrics: [
       { label: 'Category', value: 'Developer Tool' },
       { label: 'Preview', value: 'Live' },
     ],
-
+    timeline: '2 Days',
     challengeText:
       'Keeping editor inputs and rendered output synchronized while maintaining a smooth user experience.',
-
     solutionText:
       'Implemented efficient state updates and isolated rendering logic to ensure responsive live previews.',
+    publishedAt: '2023',
   },
 
-  'the-astro-tech-blog': {
-    ...FALLBACK_PROJECTS.find((p) => p.slug.current === 'the-astro-tech-blog')!,
-
+  {
+    _id: 'astro-tech-blog',
+    title: 'The Astro Tech Blog',
+    slug: { current: 'the-astro-tech-blog' },
+    summary:
+      'A markdown-powered technical blog built with Astro for sharing development notes, tutorials, cheatsheets, and learnings from different technologies.',
     description: [
       ptBlock(
         'a1',
@@ -335,19 +238,28 @@ export const FALLBACK_PROJECT_MAP: Record<string, Project> = {
         'This project introduced me to Astro and reinforced my appreciation for content-first workflows, static generation, and developer experience.',
       ),
     ],
-
-    timeline: '5 Days',
-
+    techStack: ['Astro', 'TypeScript', 'Markdown', 'CSS'],
+    featured: false,
+    clientWork: false,
+    githubUrl: 'https://github.com/yodkwtf/the-astro-tech-blog',
+    liveUrl: 'https://thetechblog-dk.netlify.app/',
+    thumbnail:
+      'https://res.cloudinary.com/dds18bzdy/image/upload/v1754175462/yodkwtf.com/projects/og-image-min_kmmsni.png',
     metrics: [
       { label: 'Framework', value: 'Astro' },
       { label: 'Content', value: 'Markdown' },
       { label: 'Type', value: 'Technical Blog' },
     ],
-
+    timeline: '5 Days',
     challengeText:
       'Creating a maintainable blogging workflow that made publishing content simple without sacrificing performance.',
-
     solutionText:
       'Used Astro content collections and Markdown-driven content management to create a fast and scalable publishing experience.',
+    publishedAt: '2024',
   },
-};
+];
+
+// Slug-keyed lookup derived from the single source of truth above.
+export const FALLBACK_PROJECT_MAP: Record<string, Project> = Object.fromEntries(
+  FALLBACK_PROJECTS.map((project) => [project.slug.current, project]),
+);
