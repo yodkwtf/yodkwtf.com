@@ -48,8 +48,6 @@ type ExperienceItem = {
   order?: number;
 };
 
-// ISR: re-render at most every 5 min so Sanity content edits appear without a
-// manual redeploy.
 export const revalidate = 300;
 
 export const metadata: Metadata = pageMetadata({

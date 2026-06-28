@@ -15,8 +15,6 @@ import { urlFor } from '@/sanity/lib/client';
 import { FALLBACK_PROJECT_MAP } from '@/data/fallback-projects';
 import { logger } from '@/lib/logger';
 
-// ISR: re-render at most every 5 min so Sanity content edits appear without a
-// manual redeploy.
 export const revalidate = 300;
 
 interface Params {
