@@ -24,6 +24,8 @@ import { extractHeadings } from '@/lib/toc';
 import { logger } from '@/lib/logger';
 import { TableOfContents } from '@/components/ui/TableOfContents';
 
+export const revalidate = 3600;
+
 interface Params {
   params: Promise<{ slug: string }>;
 }

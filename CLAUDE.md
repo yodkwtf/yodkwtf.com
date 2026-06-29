@@ -26,9 +26,9 @@ This is a personal portfolio site built with **Next.js 16** (App Router), **Reac
 
 **Sanity data** is fetched server-side via `src/sanity/lib/client.ts` (`sanityFetch` wrapper) using GROQ queries defined in `src/sanity/lib/queries.ts`. Sanity Studio is embedded at `/admin` (route: `src/app/admin/[[...tool]]/page.tsx`).
 
-**Blog posts** are read from the filesystem at build/request time via `src/lib/blogs.ts` using `gray-matter` for frontmatter and `next-mdx-remote` for rendering. Blog MDX files live in `content/blogs/*.mdx`.
+**Blog posts** are read from the filesystem at build/request time via `src/lib/blogs.ts` using `gray-matter` for frontmatter and `next-mdx-remote` for rendering. Blog MDX files live in `content/blogs/*.mdx`. The **URL slug is derived from the post `title`** via `slugify()` — *not* the filename — so files can keep ordering prefixes (`01-…`, `02-…`) without leaking them into `/blog/<slug>` URLs, and renaming a file never breaks its URL. `getBlogBySlug(slug)` finds the matching file by slugifying each post's title; lookups by raw filename no longer work.
 
-**Content freshness (ISR).** The Sanity-backed routes — `src/app/page.tsx`, `src/app/about/page.tsx`, `src/app/projects/page.tsx`, `src/app/projects/[slug]/page.tsx` — each export `revalidate = 300`, so the host (Netlify) re-renders them at most every 5 minutes and CMS edits appear without a manual redeploy. Without this they'd be static-at-build-time and would only update on a fresh deploy. Code/schema changes (including the embedded Studio) still require a deploy. Blog routes are MDX-from-repo, so their content only changes via a deploy anyway and don't need ISR.
+**Content freshness (ISR).** The Sanity-backed routes — `src/app/page.tsx`, `src/app/about/page.tsx`, `src/app/projects/page.tsx`, `src/app/projects/[slug]/page.tsx` — each export `revalidate = 300`, so the host (Netlify) re-renders them at most every 5 minutes and CMS edits appear without a manual redeploy. Without this they'd be static-at-build-time and would only update on a fresh deploy. Code/schema changes (including the embedded Studio) still require a deploy. The blog routes (`src/app/blog/page.tsx`, `src/app/blog/[slug]/page.tsx`) export `revalidate = 3600` (hourly) — not for editing (MDX content only changes via deploy) but so a **future-dated post auto-publishes** on its `publishedAt` without a redeploy: `isPublishable()` filters out future posts, and hourly revalidation re-evaluates that check against the current time. The detail route relies on default `dynamicParams` so a future slug (absent from `generateStaticParams`) renders on-demand once its date passes.
 
 ### Key Files
 
@@ -236,7 +236,7 @@ These files are already in place — don't recreate them:
 
 ### Adding a Blog Post
 
-Create `content/blogs/<slug>.mdx` with this frontmatter:
+Create `content/blogs/<name>.mdx` with this frontmatter. The filename is for your own ordering/organization only — the **URL slug comes from `title`** (see Data Flow), so a file named `06-my-post.mdx` titled `"My Post"` serves at `/blog/my-post`.
 ```mdx
 ---
 title: ""
@@ -250,4 +250,4 @@ draft: false
 ---
 ```
 
-Draft posts (`draft: true`) are excluded from all listings. The `readingTime` field is computed automatically.
+Draft posts (`draft: true`) are excluded from all listings. The `readingTime` field is computed automatically. A `publishedAt` in the future hides the post until that date — and thanks to hourly ISR on the blog routes it then appears on its own, no redeploy required (see the ISR note above).

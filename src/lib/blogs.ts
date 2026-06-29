@@ -6,7 +6,16 @@ import type { BlogFrontmatter, BlogPost, BlogPostMeta } from '@/types';
 
 const BLOGS_DIR = path.join(process.cwd(), 'content/blogs');
 
-export function getBlogSlugs(): string[] {
+export function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/['’]/g, '') // drop apostrophes: "don't" -> "dont"
+    .replace(/[^a-z0-9]+/g, '-') // any run of non-alphanumerics -> single hyphen
+    .replace(/^-+|-+$/g, ''); // trim leading/trailing hyphens
+}
+
+function getBlogFilenames(): string[] {
   if (!fs.existsSync(BLOGS_DIR)) return [];
   return fs
     .readdirSync(BLOGS_DIR)
@@ -14,12 +23,12 @@ export function getBlogSlugs(): string[] {
     .map((f) => f.replace(/\.mdx?$/, ''));
 }
 
-export function getBlogBySlug(slug: string): BlogPost | null {
+function readBlogFile(filename: string): BlogPost | null {
   const extensions = ['.mdx', '.md'];
   let filePath: string | null = null;
 
   for (const ext of extensions) {
-    const p = path.join(BLOGS_DIR, `${slug}${ext}`);
+    const p = path.join(BLOGS_DIR, `${filename}${ext}`);
     if (fs.existsSync(p)) {
       filePath = p;
       break;
@@ -30,15 +39,24 @@ export function getBlogBySlug(slug: string): BlogPost | null {
 
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);
+  const frontmatter = data as BlogFrontmatter;
   const contentWithoutCode = content.replace(/```[\s\S]*?```/g, '');
   const rt = readingTime(contentWithoutCode, { wordsPerMinute: 265 });
 
   return {
-    ...(data as BlogFrontmatter),
-    slug,
+    ...frontmatter,
+    slug: slugify(frontmatter.title),
     content,
     readingTime: rt.text,
   };
+}
+
+export function getBlogBySlug(slug: string): BlogPost | null {
+  for (const filename of getBlogFilenames()) {
+    const post = readBlogFile(filename);
+    if (post?.slug === slug) return post;
+  }
+  return null;
 }
 
 export function isPublishable(post: {
@@ -51,19 +69,14 @@ export function isPublishable(post: {
 }
 
 export function getAllBlogsMeta(): BlogPostMeta[] {
-  const slugs = getBlogSlugs();
-  return slugs
-    .map((slug) => {
-      const post = getBlogBySlug(slug);
-      if (!post || !isPublishable(post)) return null;
-      const { content, ...meta } = post;
-      return meta as BlogPostMeta;
-    })
-    .filter(Boolean)
+  return getBlogFilenames()
+    .map((filename) => readBlogFile(filename))
+    .filter((post): post is BlogPost => post !== null && isPublishable(post))
+    .map(({ content, ...meta }) => meta as BlogPostMeta)
     .sort(
       (a, b) =>
-        new Date(b!.publishedAt).getTime() - new Date(a!.publishedAt).getTime(),
-    ) as BlogPostMeta[];
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
 }
 
 export function getFeaturedBlogs(limit = 3): BlogPostMeta[] {

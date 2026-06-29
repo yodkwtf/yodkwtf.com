@@ -11,6 +11,8 @@ export const metadata: Metadata = pageMetadata({
   path: '/blog',
 });
 
+export const revalidate = 3600;
+
 export default function BlogPage() {
   const posts = getAllBlogsMeta();
   const tags = getAllBlogTags();
