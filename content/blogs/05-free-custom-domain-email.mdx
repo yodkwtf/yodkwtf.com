@@ -1,0 +1,137 @@
+---
+title: "How to Get a Free Custom Domain Email (Without Paying a Penny)"
+description: "A step-by-step guide to setting up a free custom domain email like hello@yourdomain.com using Cloudflare Email Routing — no separate inbox required."
+publishedAt: "2026-07-04"
+category: "DevOps"
+tags: ["Cloudflare", "DNS", "Branding"]
+featured: true
+coverImage: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?auto=format&fit=crop&w=1600&q=80"
+youtubeId: ""
+draft: false
+---
+
+You bought a domain, built a portfolio, and now you want a professional email like `hello@yourdomain.com` instead of handing out your personal Gmail to everyone. You can do this completely free in under 30 minutes using **Cloudflare Email Routing** — no new inbox to manage, no monthly subscription.
+
+The one limitation worth knowing upfront: this setup lets you **receive** emails at your custom address, but replies go out from your Gmail. For a portfolio contact email, that's perfectly fine.
+
+## Prerequisites
+
+- A domain you own (from any registrar — Hostinger, Namecheap, GoDaddy, etc.)
+- A Gmail account to forward emails to
+
+## Step 1 — Create a Cloudflare account
+
+Go to [cloudflare.com](https://www.cloudflare.com) and sign up for free. No credit card required.
+
+## Step 2 — Add your domain to Cloudflare
+
+1. From the dashboard click **Add a site**
+2. On the next screen click **Connect a domain** (not Transfer or Buy)
+3. Enter your domain name and continue
+4. Cloudflare scans your existing DNS records automatically — review what it found and click **Continue to activation**
+
+## Step 3 — Get your Cloudflare nameservers
+
+After adding your domain, Cloudflare gives you two nameservers. They'll look something like this:
+
+```txt
+ada.ns.cloudflare.com
+kurt.ns.cloudflare.com
+```
+
+Yours will have different names — copy them exactly from your Cloudflare dashboard.
+
+## Step 4 — Update nameservers at your registrar
+
+This is the step that actually connects your domain to Cloudflare. Log in to your registrar, navigate to your domain's DNS or nameservers settings, delete all existing nameserver entries, and replace them with the two Cloudflare nameservers you copied.
+
+The exact location varies by registrar:
+
+- **Hostinger** — Domains → your domain → DNS / Nameservers → Change nameservers
+- **Namecheap** — Domain List → Manage → Nameservers → Custom DNS
+- **GoDaddy** — My Products → DNS → Nameservers → Change
+
+Save, then go back to Cloudflare and click **I updated my nameservers**.
+
+<Callout type="info" title="Wait for propagation">
+  DNS changes take anywhere from 30 minutes to 2 hours. Cloudflare sends a
+  confirmation email once your domain is active — wait for that before
+  continuing to Step 5.
+</Callout>
+
+## Step 5 — Enable Email Routing
+
+Once you receive the Cloudflare confirmation email:
+
+1. Open your Cloudflare dashboard and click on your domain
+2. In the left sidebar go to **Email → Email Routing**
+3. Click **Get started**
+
+Cloudflare automatically adds the required MX and SPF records to your DNS — no manual record editing needed.
+
+<Callout type="info" title="Dashboard path may vary">
+  Depending on when you're reading this, the path may be listed as **Compute →
+  Email Service → Email Routing** in newer Cloudflare dashboard versions. Either
+  way, searching "Email Routing" in the sidebar search gets you there instantly.
+</Callout>
+
+## Step 6 — Add a destination address
+
+Before creating your forwarding rule, Cloudflare needs to verify the Gmail address you're forwarding to.
+
+1. Go to **Email Routing → Destination Addresses**
+2. Enter your Gmail address and submit
+3. Open your Gmail and click the verification link Cloudflare sends
+
+Once verified, the address appears as active and can be used in routing rules. Note that in some cases — particularly if you've used this Gmail with Cloudflare before — verification may already be complete and you won't receive a new email.
+
+## Step 7 — Create your forwarding rule
+
+1. Go to **Email Routing → Routing Rules**
+2. Click **Create routing rule**
+3. In **Email pattern**, type the prefix you want — `hello`, `contact`, `hi`, anything
+4. Set the action to **Send to an email** and select your verified Gmail address
+5. Click **Save**
+
+## Step 8 — Enable catch-all (optional)
+
+Instead of creating individual aliases one by one, a catch-all rule forwards _any_ address at your domain to Gmail automatically — `hello@`, `contact@`, `jobs@`, anything.
+
+1. On the **Routing Rules** tab, find the **Catch-all address** section at the top
+2. Click **Edit**, change the action from "Drop" to **Send to an email**
+3. Select your verified Gmail, toggle it on, and save
+
+## Step 9 — Test it
+
+Send an email to your new address from any other account. It should land in Gmail within seconds. If it doesn't show up after a few minutes, check your spam folder.
+
+## What you end up with
+
+| Feature                         | Status |
+| ------------------------------- | ------ |
+| Receive emails at custom domain | ✅     |
+| Emails land in existing Gmail   | ✅     |
+| Multiple aliases via catch-all  | ✅     |
+| Cost                            | Free   |
+| Send from custom domain         | ❌     |
+| Profile picture on emails       | ❌     |
+
+## Want to also send from your custom domain?
+
+If you want replies to go out from `hello@yourdomain.com` instead of your Gmail address, you have two options:
+
+**Zoho Mail (free)** — Zoho's free plan supports 1 user with a custom domain. You get a real mailbox, can send and receive, and can set a profile picture. The trade-off is a separate inbox to check.
+
+**Gmail "Send mail as"** — You can configure Gmail to send from your custom address using Zoho's SMTP as a relay. This keeps everything inside Gmail with no separate app needed.
+
+For most portfolios and freelancers, the forwarding setup above is all you need.
+
+## Troubleshooting
+
+**Emails not arriving** — Check spam first. Then verify the destination address shows as confirmed under **Email Routing → Destination Addresses**. In rare cases DNS changes can take up to 24 hours.
+
+**Routing status shows "Syncing"** — Normal. It switches to "Enabled" once DNS fully propagates, just wait.
+
+**Catch-all not working** — Make sure the toggle is set to On after saving, and that the destination email address is verified.
+
+**Didn't receive a verification email** — Cloudflare skips sending one if the destination address was already verified on your account from a previous setup. Check **Destination Addresses** — if it shows as verified there, you're good to proceed.
