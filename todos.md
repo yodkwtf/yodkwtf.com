@@ -80,6 +80,8 @@
 - [x] Update the fixed set of skill categories based on the categories defined in the fallback-skills file and also add a others category for misc items
 - [x] Make these the primary section in schema which will be used as the identifier for the field item
   - [x] For experience - company name
+- [ ] Make the blog page use the blog title for the url and not blog file name
+- [ ] Confirm if the future blogs will be published automatically when the date comes or would that require a deploy trigger manually
 
 #### Testing & QA
 
