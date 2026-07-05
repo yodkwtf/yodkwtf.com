@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap");
 
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @config "../../tailwind.config.ts";
 
@@ -19,16 +19,16 @@
   --accent-900: #064e3b;
 
   /* Surface — light mode */
-  --bg: #f8f8f5;
-  --bg-subtle: #f0efe9;
+  --bg: #f4f4f0;
+  --bg-subtle: #e8e8e2;
   --bg-card: #ffffff;
-  --border: #e5e4de;
-  --border-subtle: #eeede8;
+  --border: #c8c8c0;
+  --border-subtle: #d8d8d0;
 
   /* Text */
-  --text: #1a1917;
-  --text-muted: #6b6b62;
-  --text-faint: #a8a89e;
+  --text: #111110;
+  --text-muted: #4a4a44;
+  --text-faint: #888880;
 
   /* Glow */
   --glow: rgba(16, 185, 129, 0.15);
@@ -76,7 +76,7 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.65;
   transition:
@@ -122,18 +122,18 @@ select:focus-visible {
 
 /* ─── Typography ────────────────────────────────────────────────────────── */
 .font-display {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: "Instrument Serif", Georgia, serif;
 }
 .font-mono {
-  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-family: "DM Mono", "Fira Code", monospace;
 }
 .font-sans {
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: "Outfit", system-ui, sans-serif;
 }
 
 /* ─── Noise texture ─────────────────────────────────────────────────────── */
 .noise::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
@@ -193,7 +193,7 @@ select:focus-visible {
   position: relative;
 }
 .underline-anim::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -278,7 +278,7 @@ select:focus-visible {
 .prose h1,
 .prose h2,
 .prose h3 {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: "Instrument Serif", Georgia, serif;
   font-weight: 400;
   scroll-margin-top: 6rem;
 }
@@ -299,7 +299,7 @@ select:focus-visible {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
 }
 
 /* Remove Tailwind typography's default backtick decoration around inline code */
@@ -315,7 +315,7 @@ select:focus-visible {
 }
 
 .prose blockquote {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: "Instrument Serif", Georgia, serif;
   font-style: italic;
   font-size: 1.15em;
   border-left-width: 3px;
@@ -385,11 +385,11 @@ select:focus-visible {
 
 /* ::marker only supports content/color/font — use content:"" to erase it */
 .prose li.task-list-item::marker {
-  content: '' !important;
+  content: "" !important;
 }
 
 /* custom checkbox */
-.prose li.task-list-item input[type='checkbox'] {
+.prose li.task-list-item input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   width: 1em;
@@ -406,7 +406,7 @@ select:focus-visible {
     border-color 0.15s;
 }
 
-.prose li.task-list-item input[type='checkbox']:checked {
+.prose li.task-list-item input[type="checkbox"]:checked {
   background-color: var(--accent-900);
   border-color: var(--accent-500);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5.5l2.2 2.2L8 3' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
@@ -420,7 +420,7 @@ pre[data-language] {
   padding: 1.25rem 1.5rem;
   font-size: 0.875rem;
   line-height: 1.7;
-  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-family: "DM Mono", "Fira Code", monospace;
   overflow-x: auto;
   margin: 0;
 }
@@ -449,7 +449,7 @@ pre[data-language] span[data-highlighted-line] {
   align-items: center;
   padding: 0.25em 0.85em;
   font-size: 0.75rem;
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-weight: 400;
   letter-spacing: 0.02em;
   border-radius: 100px;
@@ -474,7 +474,7 @@ pre[data-language] span[data-highlighted-line] {
   border-radius: var(--radius);
   font-size: 0.9rem;
   font-weight: 500;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   letter-spacing: 0.01em;
   cursor: pointer;
   transition: all 0.2s var(--ease);
