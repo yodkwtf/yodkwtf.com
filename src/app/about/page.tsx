@@ -11,7 +11,7 @@ import { CTASection } from '@/components/sections/CTASection';
 import { SkillsSection } from '@/components/sections/SkillsSection';
 import { siteConfig } from '@/config/site';
 import { pageMetadata } from '@/lib/metadata';
-import { GraduationCap, ExternalLink, Download } from 'lucide-react';
+import { GraduationCap, ExternalLink, Download, Briefcase } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 import { getAboutPage, getExperience } from '@/sanity/lib/queries';
@@ -99,60 +99,60 @@ export default async function AboutPage() {
 
   return (
     <>
-      <div className="pt-32 pb-8 px-6">
-        <div className="mx-auto max-w-5xl">
+      <div className='pt-32 pb-8 px-6'>
+        <div className='mx-auto max-w-5xl'>
           <AnimateIn>
-            <div className="grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-16 items-center">
-              <div className="space-y-5">
-                <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">
+            <div className='grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-16 items-center'>
+              <div className='space-y-5'>
+                <span className='font-mono text-xs uppercase tracking-widest text-accent-500 font-medium'>
                   About
                 </span>
-                <h1 className="font-display text-5xl md:text-6xl text-ink leading-tight">
+                <h1 className='font-display text-5xl md:text-6xl text-ink leading-tight'>
                   A bit about me.
                 </h1>
-                <div className="space-y-4 max-w-2xl">
+                <div className='space-y-4 max-w-2xl'>
                   {bio.map((para, i) => (
-                    <p key={i} className="text-ink-muted leading-relaxed">
+                    <p key={i} className='text-ink-muted leading-relaxed'>
                       {para}
                     </p>
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-3 pt-1">
+                <div className='flex flex-wrap gap-3 pt-1'>
                   <a
                     href={`mailto:${siteConfig.email}`}
-                    className="btn btn-primary"
+                    className='btn btn-primary'
                   >
                     Say hello
                   </a>
                   <a
                     href={resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline gap-2"
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='btn btn-outline gap-2'
                   >
                     <Download size={15} /> Resume
                   </a>
                 </div>
               </div>
 
-              <div className="flex justify-center mt-4 lg:mt-0">
-                <div className="relative w-full max-w-[288px] lg:max-w-none">
-                  <div className="absolute -inset-1.5 rounded-2xl bg-linear-to-br from-accent-400 to-accent-700 opacity-25 blur-lg" />
+              <div className='flex justify-center mt-4 lg:mt-0'>
+                <div className='relative w-full max-w-[288px] lg:max-w-none'>
+                  <div className='absolute -inset-1.5 rounded-2xl bg-linear-to-br from-accent-400 to-accent-700 opacity-25 blur-lg' />
                   {avatarUrl ? (
                     <Image
                       src={avatarUrl}
                       alt={siteConfig.name}
                       width={avatarWidth}
                       height={avatarHeight}
-                      className="relative w-full h-auto rounded-2xl border-2 border-accent-500/30 object-cover"
-                      sizes="(max-width: 1024px) 288px, 320px"
+                      className='relative w-full h-auto rounded-2xl border-2 border-accent-500/30 object-cover'
+                      sizes='(max-width: 1024px) 288px, 320px'
                       priority
                       placeholder={avatarBlur ? 'blur' : undefined}
                       blurDataURL={avatarBlur}
                     />
                   ) : (
-                    <div className="relative aspect-4/5 rounded-2xl border-2 border-accent-500/30 bg-surface-subtle flex items-center justify-center dot-grid">
-                      <span className="font-display text-5xl text-gradient select-none">
+                    <div className='relative aspect-4/5 rounded-2xl border-2 border-accent-500/30 bg-surface-subtle flex items-center justify-center dot-grid'>
+                      <span className='font-display text-5xl text-gradient select-none'>
                         {siteConfig.name
                           .split(' ')
                           .map((n) => n[0])
@@ -169,52 +169,55 @@ export default async function AboutPage() {
 
       <SkillsSection />
 
-      <div className="py-16 px-6">
-        <div className="mx-auto max-w-5xl">
-          <section className="mb-16">
-            <div className="max-w-3xl mx-auto">
-              <SectionHeader label="Career" heading="Where I've worked." />
-              <div className="relative">
-                <div className="absolute left-0 top-0 bottom-0 w-px bg-border ml-2 sm:ml-5" />
-                <StaggerContainer className="space-y-6 pl-8 sm:pl-14">
+      <div className='py-16 px-6'>
+        <div className='mx-auto max-w-5xl'>
+          <section className='mb-16'>
+            <div className='max-w-3xl mx-auto'>
+              <SectionHeader label='Career' heading="Where I've worked." />
+              <div className='relative'>
+                <div className='absolute left-4.5 top-0 bottom-0 w-px bg-border' />
+                <StaggerContainer className='space-y-6'>
                   {experience.map((exp: ExperienceItem, i: number) => (
-                    <StaggerItem key={i} direction="left">
-                      <div className="relative">
-                        <div className="absolute left-[-1.9rem] top-1 w-3.5 h-3.5 rounded-full border-2 border-accent-500 bg-surface sm:left-[-2.95rem]" />
-                        {exp.current && (
-                          <div className="absolute left-[-2.05rem] top-0.5 w-4 h-4 rounded-full bg-accent-500/20 animate-ping sm:left-[-3.1rem]" />
-                        )}
-                        <div className="glass rounded-xl p-4 border border-border hover:border-accent-500/30 transition-colors sm:p-5">
-                          <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
-                            <div className="min-w-0">
-                              <div className="flex items-center gap-2 flex-wrap">
-                                <h3 className="font-semibold text-ink">
+                    <StaggerItem key={i} direction='left'>
+                      <div className='relative flex gap-5'>
+                        <div className='relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-surface'>
+                          <Briefcase size={16} className='text-accent-500' />
+                          {exp.current && (
+                            <span className='absolute inset-0 rounded-full border border-accent-500 animate-ping opacity-40' />
+                          )}
+                        </div>
+
+                        <div className='glass flex-1 rounded-xl border border-border p-4 transition-colors hover:border-accent-500/30 sm:p-5'>
+                          <div className='mb-3 flex flex-wrap items-start justify-between gap-3'>
+                            <div className='min-w-0'>
+                              <div className='flex flex-wrap items-center gap-2'>
+                                <h3 className='font-semibold text-ink'>
                                   {exp.role}
                                 </h3>
                                 {exp.current && (
-                                  <span className="tag-pill bg-accent-500/10 text-accent-500 border-accent-500/20 text-[10px]">
+                                  <span className='tag-pill border-accent-500/20 bg-accent-500/10 text-[10px] text-accent-500'>
                                     Current
                                   </span>
                                 )}
                               </div>
-                              <div className="flex items-center gap-2 mt-0.5">
+                              <div className='mt-0.5'>
                                 {exp.companyUrl || exp.url ? (
                                   <a
                                     href={exp.companyUrl ?? exp.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-sm text-ink-muted hover:text-accent-500 transition-colors flex items-center gap-1"
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    className='text-sm text-ink-muted hover:text-accent-500 transition-colors flex items-center gap-1'
                                   >
                                     {exp.company} <ExternalLink size={11} />
                                   </a>
                                 ) : (
-                                  <span className="text-sm text-ink-muted">
+                                  <span className='text-sm text-ink-muted'>
                                     {exp.company}
                                   </span>
                                 )}
                               </div>
                             </div>
-                            <span className="w-full font-mono text-xs text-ink-faint sm:w-auto sm:shrink-0">
+                            <span className='w-full font-mono text-xs text-ink-faint sm:w-auto sm:shrink-0'>
                               {exp.period ??
                                 `${exp.startDate ? formatDate(exp.startDate, 'MMM yyyy') : ''} – ${exp.current ? 'Present' : exp.endDate ? formatDate(exp.endDate, 'MMM yyyy') : ''}`}
                             </span>
@@ -222,19 +225,20 @@ export default async function AboutPage() {
 
                           {Array.isArray(exp.description) &&
                             exp.description.length > 0 && (
-                              <ul className="mb-4 space-y-1.5">
+                              <ul className='mb-4 space-y-1.5'>
                                 {exp.description.map(
                                   (item: DescriptionItem, j: number) => {
                                     const text =
                                       typeof item === 'string'
                                         ? item
                                         : toPlainText(item);
+
                                     return text ? (
                                       <li
                                         key={j}
-                                        className="flex items-start gap-2 text-sm text-ink-muted leading-relaxed"
+                                        className='flex items-start gap-2 text-sm leading-relaxed text-ink-muted'
                                       >
-                                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent-500/60 shrink-0" />
+                                        <span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500/60' />
                                         {text}
                                       </li>
                                     ) : null;
@@ -243,7 +247,7 @@ export default async function AboutPage() {
                               </ul>
                             )}
 
-                          <div className="flex flex-wrap gap-1.5">
+                          <div className='flex flex-wrap gap-1.5'>
                             {(exp.techStack ?? exp.tech ?? []).map(
                               (t: string) => (
                                 <TagPill key={t} label={t} />
@@ -260,37 +264,45 @@ export default async function AboutPage() {
           </section>
 
           <section>
-            <div className="max-w-3xl mx-auto">
-              <SectionHeader label="Education" heading="Academic background." />
-              <StaggerContainer className="space-y-4">
-                {education.map((edu, i) => (
-                  <StaggerItem key={i}>
-                    <div className="glass rounded-xl p-5 border border-border flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-surface-subtle border border-border flex items-center justify-center shrink-0">
-                        <GraduationCap size={18} className="text-accent-500" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                          <h3 className="font-semibold text-ink">
-                            {edu.degree}
-                          </h3>
-                          <span className="font-mono text-xs text-ink-faint shrink-0">
-                            {edu.period}
-                          </span>
+            <div className='max-w-3xl mx-auto'>
+              <SectionHeader label='Education' heading='Academic background.' />
+              <div className='relative'>
+                <div className='absolute left-4.5 top-0 bottom-0 w-px bg-border' />
+
+                <StaggerContainer className='space-y-8'>
+                  {education.map((edu, i) => (
+                    <StaggerItem key={i}>
+                      <div className='relative flex gap-5'>
+                        <div className='relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-surface'>
+                          <GraduationCap
+                            size={16}
+                            className='text-accent-500'
+                          />
                         </div>
-                        <p className="text-sm text-ink-muted">
-                          {edu.institution}
-                        </p>
-                        {edu.note && (
-                          <p className="text-xs text-ink-faint mt-0.5">
-                            {edu.note}
+
+                        <div className='glass flex-1 rounded-2xl border border-border p-4 sm:p-5'>
+                          <div className='flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between'>
+                            <h3 className='font-semibold text-base sm:text-lg text-ink'>
+                              {edu.degree}
+                            </h3>
+                            <span className='font-mono text-xs text-ink-faint'>
+                              {edu.period}
+                            </span>
+                          </div>
+                          <p className='mt-1 text-sm text-ink-muted'>
+                            {edu.institution}
                           </p>
-                        )}
+                          {edu.note && (
+                            <p className='mt-3 text-sm leading-relaxed text-ink-faint'>
+                              {edu.note}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </StaggerItem>
-                ))}
-              </StaggerContainer>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
             </div>
           </section>
         </div>

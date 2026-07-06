@@ -35,59 +35,62 @@ export async function MiniAboutSection() {
   }
 
   return (
-    <section className="py-20 px-6 border-t border-border">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className='py-20 px-6 border-t border-border'>
+      <div className='mx-auto max-w-7xl'>
+        <div className='grid lg:grid-cols-2 gap-12 items-center'>
           <AnimateIn>
-            <div className="space-y-5">
-              <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">
+            <div className='space-y-5'>
+              <span className='font-mono text-xs uppercase tracking-widest text-accent-500 font-medium'>
                 About Me
               </span>
-              <h2 className="font-display text-3xl md:text-4xl text-ink leading-tight">
-                Bringing ideas to life through <br />
-                <em className="not-italic text-gradient">
+              <h2 className='font-display text-3xl md:text-4xl text-ink leading-tight'>
+                Bringing ideas to life through{' '}
+                <span className='hidden lg:inline'>
+                  <br />
+                </span>
+                <em className='not-italic text-gradient'>
                   code and creativity.
                 </em>
               </h2>
               {bio.map((para, i) => (
-                <p key={i} className="text-ink-muted leading-relaxed">
+                <p key={i} className='text-ink-muted leading-relaxed'>
                   {para}
                 </p>
               ))}
-              <div className="flex flex-wrap items-center gap-4 text-sm text-ink-muted pt-2">
-                <span className="flex items-center gap-1.5">
-                  <MapPin size={14} className="text-accent-500" />
+              <div className='flex flex-wrap items-center gap-4 text-sm text-ink-muted pt-2'>
+                <span className='flex items-center gap-1.5'>
+                  <MapPin size={14} className='text-accent-500' />
                   {siteConfig.location}
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <Coffee size={14} className="text-accent-500" />
+                <span className='flex items-center gap-1.5'>
+                  <Coffee size={14} className='text-accent-500' />
                   Fueled by Chai
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <Code2 size={14} className="text-accent-500" />
+                <span className='flex items-center gap-1.5'>
+                  <Code2 size={14} className='text-accent-500' />
                   Open to work
                 </span>
               </div>
-              <Link href="/about" className="btn btn-outline w-fit gap-2">
+              <Link href='/about' className='btn btn-outline w-fit gap-2'>
                 More about me <ArrowRight size={15} />
               </Link>
             </div>
           </AnimateIn>
 
           <AnimateIn delay={0.15}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className='grid grid-cols-2 gap-4'>
               {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="glass rounded-xl p-5 border border-border hover:border-accent-500/30 transition-colors space-y-1"
+                  className='glass rounded-xl p-5 border border-border hover:border-accent-500/30 transition-colors space-y-1'
                 >
-                  <div className="font-display text-3xl text-gradient">
+                  <div className='font-display text-3xl text-gradient'>
                     {stat.num}
                   </div>
-                  <div className="text-sm font-medium text-ink">
+                  <div className='text-sm font-medium text-ink'>
                     {stat.label}
                   </div>
-                  <div className="text-xs text-ink-faint">{stat.sub}</div>
+                  <div className='text-xs text-ink-faint'>{stat.sub}</div>
                 </div>
               ))}
             </div>
