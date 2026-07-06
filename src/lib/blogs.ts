@@ -1,62 +1,52 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import readingTime from 'reading-time';
-import type { BlogFrontmatter, BlogPost, BlogPostMeta } from '@/types';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import readingTime from "reading-time";
+import type { BlogFrontmatter, BlogPost, BlogPostMeta } from "@/types";
 
-const BLOGS_DIR = path.join(process.cwd(), 'content/blogs');
+const BLOGS_DIR = path.join(process.cwd(), "content/blogs");
 
-export function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/['’]/g, '') // drop apostrophes: "don't" -> "dont"
-    .replace(/[^a-z0-9]+/g, '-') // any run of non-alphanumerics -> single hyphen
-    .replace(/^-+|-+$/g, ''); // trim leading/trailing hyphens
-}
-
-function getBlogFilenames(): string[] {
+export function getBlogSlugs(): string[] {
   if (!fs.existsSync(BLOGS_DIR)) return [];
   return fs
     .readdirSync(BLOGS_DIR)
-    .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'))
-    .map((f) => f.replace(/\.mdx?$/, ''));
+    .filter((f) => f.endsWith(".mdx") || f.endsWith(".md"))
+    .map((f) => f.replace(/\.mdx?$/, "").replace(/^\d+-/, ""));
 }
 
-function readBlogFile(filename: string): BlogPost | null {
-  const extensions = ['.mdx', '.md'];
+export function getBlogBySlug(slug: string): BlogPost | null {
+  const extensions = [".mdx", ".md"];
   let filePath: string | null = null;
 
-  for (const ext of extensions) {
-    const p = path.join(BLOGS_DIR, `${filename}${ext}`);
-    if (fs.existsSync(p)) {
-      filePath = p;
-      break;
+  if (!fs.existsSync(BLOGS_DIR)) return null;
+
+  const files = fs.readdirSync(BLOGS_DIR);
+
+  for (const file of files) {
+    for (const ext of extensions) {
+      if (!file.endsWith(ext)) continue;
+      const fileSlug = file.replace(/\.mdx?$/, "").replace(/^\d+-/, ""); // ← strip here too
+      if (fileSlug === slug) {
+        filePath = path.join(BLOGS_DIR, file);
+        break;
+      }
     }
+    if (filePath) break;
   }
 
   if (!filePath) return null;
 
-  const raw = fs.readFileSync(filePath, 'utf-8');
+  const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
-  const frontmatter = data as BlogFrontmatter;
-  const contentWithoutCode = content.replace(/```[\s\S]*?```/g, '');
+  const contentWithoutCode = content.replace(/```[\s\S]*?```/g, "");
   const rt = readingTime(contentWithoutCode, { wordsPerMinute: 265 });
 
   return {
-    ...frontmatter,
-    slug: slugify(frontmatter.title),
+    ...(data as BlogFrontmatter),
+    slug,
     content,
     readingTime: rt.text,
   };
-}
-
-export function getBlogBySlug(slug: string): BlogPost | null {
-  for (const filename of getBlogFilenames()) {
-    const post = readBlogFile(filename);
-    if (post?.slug === slug) return post;
-  }
-  return null;
 }
 
 export function isPublishable(post: {
@@ -69,14 +59,19 @@ export function isPublishable(post: {
 }
 
 export function getAllBlogsMeta(): BlogPostMeta[] {
-  return getBlogFilenames()
-    .map((filename) => readBlogFile(filename))
-    .filter((post): post is BlogPost => post !== null && isPublishable(post))
-    .map(({ content, ...meta }) => meta as BlogPostMeta)
+  const slugs = getBlogSlugs();
+  return slugs
+    .map((slug) => {
+      const post = getBlogBySlug(slug);
+      if (!post || !isPublishable(post)) return null;
+      const { content, ...meta } = post;
+      return meta as BlogPostMeta;
+    })
+    .filter(Boolean)
     .sort(
       (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-    );
+        new Date(b!.publishedAt).getTime() - new Date(a!.publishedAt).getTime(),
+    ) as BlogPostMeta[];
 }
 
 export function getFeaturedBlogs(limit = 3): BlogPostMeta[] {
