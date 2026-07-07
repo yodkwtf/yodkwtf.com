@@ -179,7 +179,7 @@ export default async function AboutPage() {
                 <StaggerContainer className='space-y-6'>
                   {experience.map((exp: ExperienceItem, i: number) => (
                     <StaggerItem key={i} direction='left'>
-                      <div className='relative flex gap-5'>
+                      <div className='relative flex gap-3 sm:gap-5'>
                         <div className='relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-surface'>
                           <Briefcase size={16} className='text-accent-500' />
                           {exp.current && (
@@ -272,7 +272,7 @@ export default async function AboutPage() {
                 <StaggerContainer className='space-y-8'>
                   {education.map((edu, i) => (
                     <StaggerItem key={i}>
-                      <div className='relative flex gap-5'>
+                      <div className='relative flex gap-3 sm:gap-5'>
                         <div className='relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-surface'>
                           <GraduationCap
                             size={16}
