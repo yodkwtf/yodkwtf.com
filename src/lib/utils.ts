@@ -14,13 +14,8 @@ export function formatDateRelative(date: string) {
   return formatDistanceToNow(parseISO(date), { addSuffix: true });
 }
 
-export function byPublishedDesc<T extends { publishedAt?: string }>(
-  a: T,
-  b: T,
-): number {
-  const ta = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-  const tb = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-  return (Number.isNaN(tb) ? 0 : tb) - (Number.isNaN(ta) ? 0 : ta);
+export function byTitleAsc<T extends { title: string }>(a: T, b: T): number {
+  return a.title.localeCompare(b.title);
 }
 
 export function slugify(str: string) {

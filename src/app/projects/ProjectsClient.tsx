@@ -25,7 +25,7 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
       const matchSearch =
         !q ||
         p.title.toLowerCase().includes(q) ||
-        p.summary.toLowerCase().includes(q) ||
+        p.summary?.toLowerCase().includes(q) ||
         p.techStack?.some((t) => t.toLowerCase().includes(q));
       return matchTag && matchSearch;
     });

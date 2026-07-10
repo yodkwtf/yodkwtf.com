@@ -3,22 +3,20 @@ import type { Project, Skill, Experience, AboutPage } from '@/types';
 
 // Projects
 const projectFields = `
-  _id, title, slug, summary, description, techStack,
+  _id, title, slug, summary, techStack,
   featured, clientWork, githubUrl, liveUrl,
-  thumbnail { asset, alt, caption },
-  metrics, timeline, challenges, solutions,
-  publishedAt
+  thumbnail { asset, alt, caption }
 `;
 
 export async function getAllProjects(): Promise<Project[]> {
   return sanityFetch(
-    `*[_type == "project"] | order(publishedAt desc) { ${projectFields} }`,
+    `*[_type == "project"] | order(title asc) { ${projectFields} }`,
   );
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
   return sanityFetch(
-    `*[_type == "project" && featured == true] | order(publishedAt desc)[0...3] { ${projectFields} }`,
+    `*[_type == "project" && featured == true] | order(title asc)[0...3] { ${projectFields} }`,
   );
 }
 

@@ -1,18 +1,22 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ExternalLink, Calendar, Clock } from 'lucide-react';
-import { PortableText, type PortableTextBlock } from '@portabletext/react';
+import { ArrowLeft, ExternalLink, Lock } from 'lucide-react';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import rehypeSlug from 'rehype-slug';
+import rehypePrettyCode from 'rehype-pretty-code';
 import { GithubIcon } from '@/components/ui/SocialIcons';
-import {
-  AnimateIn,
-  StaggerContainer,
-  StaggerItem,
-} from '@/components/ui/AnimateIn';
+import { AnimateIn } from '@/components/ui/AnimateIn';
+import { mdxComponents } from '@/components/mdx/MDXComponents';
+import { BlogCodeEnhancer } from '@/components/mdx/BlogCodeEnhancer';
 import { siteConfig } from '@/config/site';
 import { urlFor } from '@/sanity/lib/client';
 import { FALLBACK_PROJECT_MAP } from '@/data/fallback-projects';
+import { parseGitHubRepo, fetchReadme } from '@/lib/github';
+import { rehypeGithubUrls } from '@/lib/rehype-github-urls';
+import { rehypeFlattenCodeFigure } from '@/lib/rehype-flatten-code-figure';
 import { logger } from '@/lib/logger';
 
 export const revalidate = 300;
@@ -21,24 +25,69 @@ interface Params {
   params: Promise<{ slug: string }>;
 }
 
-function ChallengeSolutionBody({
-  blocks,
-  text,
-}: {
-  blocks?: PortableTextBlock[];
-  text?: string;
-}) {
-  if (Array.isArray(blocks) && blocks.length > 0) {
+const MDX_NODE_TYPES = [
+  'mdxFlowExpression',
+  'mdxJsxFlowElement',
+  'mdxJsxTextElement',
+  'mdxTextExpression',
+  'mdxjsEsm',
+];
+
+const readmeComponents = {
+  ...mdxComponents,
+  img: ({ src, alt }: { src?: string; alt?: string }) =>
+    src ? (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img src={src} alt={alt ?? ''} loading="lazy" className="max-w-full" />
+    ) : null,
+  a: ({ href, children, ...rest }: React.ComponentPropsWithoutRef<'a'>) => {
+    const external = href ? /^https?:/i.test(href) : false;
     return (
-      <div className="prose prose-sm dark:prose-invert max-w-none text-ink-muted [&_p]:text-sm [&_p]:leading-relaxed [&_p]:mb-3 last:[&_p]:mb-0">
-        <PortableText value={blocks} />
-      </div>
+      <a
+        href={href}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        {...rest}
+      >
+        {children}
+      </a>
     );
-  }
-  if (text) {
-    return <p className="text-sm text-ink-muted leading-relaxed">{text}</p>;
-  }
-  return null;
+  },
+};
+
+function Readme({
+  source,
+  owner,
+  repo,
+}: {
+  source: string;
+  owner: string;
+  repo: string;
+}) {
+  return (
+    <div className="prose prose-lg dark:prose-invert max-w-none">
+      <MDXRemote
+        source={source}
+        options={{
+          mdxOptions: {
+            format: 'md',
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [
+              [rehypeRaw, { passThrough: MDX_NODE_TYPES }],
+              [rehypeGithubUrls, { owner, repo }],
+              rehypeSlug,
+              [
+                rehypePrettyCode,
+                { theme: 'github-dark-default', keepBackground: true },
+              ],
+              rehypeFlattenCodeFigure,
+            ],
+          },
+        }}
+        components={readmeComponents}
+      />
+      <BlogCodeEnhancer />
+    </div>
+  );
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -107,204 +156,132 @@ export default async function ProjectDetailPage({ params }: Params) {
 
   if (!project) notFound();
 
-  const hasChallenge =
-    (Array.isArray(project.challenges) && project.challenges.length > 0) ||
-    Boolean(project.challengeText);
-  const hasSolution =
-    (Array.isArray(project.solutions) && project.solutions.length > 0) ||
-    Boolean(project.solutionText);
+  const repo = parseGitHubRepo(project.githubUrl);
+  const readme = repo ? await fetchReadme(repo) : null;
 
   return (
-    <div className="pt-28 pb-24">
-      {/* Back */}
-      <div className="px-6 mb-10">
-        <div className="mx-auto max-w-4xl">
+    <div className="pt-28 pb-24 px-6">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/projects"
             className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-ink transition-colors group"
           >
             <ArrowLeft
               size={15}
-              className="transition-transform group-hover:-translate-x-1"
+              className="shrink-0 transition-transform group-hover:-translate-x-1"
             />
-            Back to projects
+            <span className="hidden sm:inline">Back to projects</span>
+            <span className="sm:hidden">Back</span>
           </Link>
+          <div className="flex items-center gap-2 shrink-0">
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline gap-2 text-xs py-2 px-3"
+                aria-label="View source on GitHub"
+              >
+                <GithubIcon size={14} />
+                <span className="hidden sm:inline">View source</span>
+              </a>
+            )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary gap-2 text-xs py-2 px-3"
+                aria-label="Open live site"
+              >
+                <ExternalLink size={14} />
+                <span className="hidden sm:inline">Live site</span>
+              </a>
+            )}
+          </div>
         </div>
-      </div>
 
-      <div className="px-6">
-        <div className="mx-auto max-w-4xl">
-          {/* Header */}
-          <AnimateIn className="mb-10">
-            <h1 className="font-display text-4xl md:text-5xl text-ink mb-4 leading-tight">
-              {project.title}
-            </h1>
-            <p className="text-ink-muted text-lg leading-relaxed max-w-2xl mb-6">
-              {project.summary}
-            </p>
-            <div className="flex flex-wrap items-center gap-4">
-              {!project.clientWork && project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline gap-2 text-sm"
-                >
-                  <GithubIcon size={15} /> View source
-                </a>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary gap-2 text-sm"
-                >
-                  <ExternalLink size={15} /> Live site
-                </a>
-              )}
-              {project.publishedAt && (
-                <span className="font-mono text-xs text-ink-faint flex items-center gap-1">
-                  <Calendar size={12} /> {project.publishedAt.slice(0, 4)}
-                </span>
-              )}
-              {project.timeline && (
-                <span className="font-mono text-xs text-ink-faint flex items-center gap-1">
-                  <Clock size={12} /> {project.timeline}
-                </span>
-              )}
-            </div>
+        {/* README (carries its own title); title/summary only as fallback */}
+        {readme && repo ? (
+          <AnimateIn className="mb-16">
+            <Readme source={readme} owner={repo.owner} repo={repo.repo} />
           </AnimateIn>
-
-          {/* Thumbnail */}
-          <AnimateIn delay={0.1} className="mb-12">
-            <div className="relative rounded-xl overflow-hidden border border-border bg-surface-subtle aspect-video">
-              {project.thumbnail ? (
-                <Image
-                  src={
-                    typeof project.thumbnail === 'string'
-                      ? project.thumbnail
-                      : urlFor(project.thumbnail).width(896).height(504).url()
-                  }
-                  alt={
-                    typeof project.thumbnail === 'string'
-                      ? project.title
-                      : (project.thumbnail.alt ?? project.title)
-                  }
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 896px"
-                  priority
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center dot-grid">
-                  <span className="font-display text-6xl text-ink-faint/30 select-none">
-                    {project.title.slice(0, 2).toUpperCase()}
-                  </span>
-                </div>
+        ) : (
+          <>
+            <AnimateIn className="mb-12">
+              <h1 className="font-display text-4xl md:text-5xl text-ink mb-4 leading-tight">
+                {project.title}
+              </h1>
+              {project.summary && (
+                <p className="text-ink-muted text-lg leading-relaxed max-w-2xl">
+                  {project.summary}
+                </p>
               )}
-            </div>
-          </AnimateIn>
-
-          {/* Description - full width, below the image */}
-          {Array.isArray(project.description) &&
-            project.description.length > 0 && (
-              <AnimateIn delay={0.15} className="mb-12">
-                <h2 className="font-display text-2xl text-ink mb-4">
-                  About this project
-                </h2>
-                <div className="prose prose-lg dark:prose-invert max-w-none text-ink-muted [&_p]:leading-relaxed [&_p]:mb-4 last:[&_p]:mb-0">
-                  <PortableText value={project.description} />
+            </AnimateIn>
+            {project.clientWork ? (
+              <AnimateIn delay={0.1} className="mb-16">
+                <div className="glass rounded-xl p-6 border border-border text-sm text-ink-muted flex items-start gap-3">
+                  <Lock size={16} className="shrink-0 mt-0.5 text-ink-faint" />
+                  <p className="leading-relaxed">
+                    This project was built as client work, so the source
+                    repository is private and there&apos;s no public README to
+                    show.
+                    {project.liveUrl && (
+                      <>
+                        {' '}
+                        You can still explore the{' '}
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-accent-500 hover:underline"
+                        >
+                          live site
+                        </a>
+                        .
+                      </>
+                    )}
+                  </p>
                 </div>
               </AnimateIn>
+            ) : (
+              repo && (
+                <AnimateIn delay={0.1} className="mb-16">
+                  <div className="glass rounded-xl p-6 border border-border text-sm text-ink-muted">
+                    Couldn&apos;t load the README for this project.{' '}
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent-500 hover:underline"
+                    >
+                      View it on GitHub
+                    </a>
+                    .
+                  </div>
+                </AnimateIn>
+              )
             )}
+          </>
+        )}
 
-          {/* Metrics */}
-          {project.metrics && project.metrics.length > 0 && (
-            <AnimateIn delay={0.2} className="mb-12">
-              <StaggerContainer className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {project.metrics.map(
-                  (m: { value: string; label: string }, i: number) => (
-                    <StaggerItem key={i}>
-                      <div className="glass rounded-xl p-5 border border-border text-center">
-                        <div className="font-display text-3xl text-gradient mb-1">
-                          {m.value}
-                        </div>
-                        <div className="text-xs text-ink-muted font-mono uppercase tracking-wide">
-                          {m.label}
-                        </div>
-                      </div>
-                    </StaggerItem>
-                  ),
-                )}
-              </StaggerContainer>
-            </AnimateIn>
-          )}
-
-          {/* Tech stack */}
-          <AnimateIn delay={0.2} className="mb-12">
-            <h2 className="font-display text-2xl text-ink mb-4">Tech Stack</h2>
-            <div className="flex flex-wrap gap-2">
-              {project.techStack?.map((tech: string) => (
-                <span key={tech} className="tag-pill text-sm px-3 py-1.5">
-                  {tech}
-                </span>
-              ))}
+        {/* CTA */}
+        <AnimateIn delay={0.15}>
+          <div className="border-t border-border pt-8 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium text-ink mb-1">
+                Interested in working together?
+              </p>
+              <p className="text-sm text-ink-muted">
+                I&apos;m always open to new projects and collaborations.
+              </p>
             </div>
-          </AnimateIn>
-
-          {/* Challenge / Solution */}
-          {(hasChallenge || hasSolution) && (
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
-              {hasChallenge && (
-                <AnimateIn delay={0.25}>
-                  <div className="glass rounded-xl p-6 border border-border h-full">
-                    <h2 className="font-display text-xl text-ink mb-3">
-                      The Challenge
-                    </h2>
-                    <ChallengeSolutionBody
-                      blocks={project.challenges}
-                      text={project.challengeText}
-                    />
-                  </div>
-                </AnimateIn>
-              )}
-              {hasSolution && (
-                <AnimateIn delay={0.3}>
-                  <div className="glass rounded-xl p-6 border border-accent-500/20 bg-accent-500/3 h-full">
-                    <h2 className="font-display text-xl text-ink mb-3">
-                      The Solution
-                    </h2>
-                    <ChallengeSolutionBody
-                      blocks={project.solutions}
-                      text={project.solutionText}
-                    />
-                  </div>
-                </AnimateIn>
-              )}
-            </div>
-          )}
-
-          {/* CTA */}
-          <AnimateIn delay={0.35}>
-            <div className="border-t border-border pt-8 flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-medium text-ink mb-1">
-                  Interested in working together?
-                </p>
-                <p className="text-sm text-ink-muted">
-                  I&apos;m always open to new projects and collaborations.
-                </p>
-              </div>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="btn btn-primary"
-              >
-                Get in touch
-              </a>
-            </div>
-          </AnimateIn>
-        </div>
+            <a href={`mailto:${siteConfig.email}`} className="btn btn-primary">
+              Get in touch
+            </a>
+          </div>
+        </AnimateIn>
       </div>
     </div>
   );

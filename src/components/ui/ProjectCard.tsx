@@ -120,9 +120,11 @@ export function ProjectCard({
           </div>
         </div>
 
-        <p className="text-sm text-ink-muted line-clamp-2 leading-relaxed flex-1">
-          {project.summary}
-        </p>
+        {project.summary && (
+          <p className="text-sm text-ink-muted line-clamp-2 leading-relaxed flex-1">
+            {project.summary}
+          </p>
+        )}
 
         <div className="flex flex-wrap gap-1.5 mt-auto">
           {project.techStack?.slice(0, 4).map((tech) => (

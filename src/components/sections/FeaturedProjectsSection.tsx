@@ -5,7 +5,7 @@ import { FeaturedProjectCard } from '@/components/ui/FeaturedProjectCard';
 import { AnimateIn } from '@/components/ui/AnimateIn';
 import { getFeaturedProjects } from '@/sanity/lib/queries';
 import { FALLBACK_PROJECTS } from '@/data/fallback-projects';
-import { byPublishedDesc } from '@/lib/utils';
+import { byTitleAsc } from '@/lib/utils';
 import { logger } from '@/lib/logger';
 
 export async function FeaturedProjectsSection() {
@@ -21,7 +21,7 @@ export async function FeaturedProjectsSection() {
     );
   }
 
-  projects = [...projects].sort(byPublishedDesc).slice(0, 4);
+  projects = [...projects].sort(byTitleAsc).slice(0, 4);
 
   return (
     <section className="py-20 bg-surface-subtle">

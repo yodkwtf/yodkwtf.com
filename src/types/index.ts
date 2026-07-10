@@ -13,21 +13,14 @@ export interface Project {
   _id: string;
   title: string;
   slug: { current: string };
-  summary: string;
-  description: PortableTextBlock[]; // Portable Text
+  /** Short summary — required for featured projects, optional otherwise */
+  summary?: string;
   techStack: string[];
   featured: boolean;
   clientWork: boolean;
   githubUrl?: string;
   liveUrl?: string;
   thumbnail: SanityImage | string | null;
-  metrics?: { label: string; value: string }[];
-  timeline?: string;
-  challenges?: PortableTextBlock[];
-  solutions?: PortableTextBlock[];
-  challengeText?: string;
-  solutionText?: string;
-  publishedAt: string;
 }
 
 // Skill
