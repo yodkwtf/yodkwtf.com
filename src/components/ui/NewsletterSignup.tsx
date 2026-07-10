@@ -5,7 +5,7 @@ import { Mail, ArrowRight, Check } from 'lucide-react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-const COMING_SOON = true;
+const COMING_SOON = false;
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState('');

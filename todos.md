@@ -97,7 +97,7 @@
 - [x] Update all the meta information for all pages, including Open Graph and Twitter cards
 - [x] Update siteConfig with all the correct information
 - [x] Add the ogImage from chatGPT to public dir
-- [ ] Implement a newsletter subscription system
+- [x] Implement a newsletter subscription system
 
 #### CMS Integration (Sanity)
 

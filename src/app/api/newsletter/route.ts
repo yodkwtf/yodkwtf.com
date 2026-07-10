@@ -6,31 +6,50 @@ export async function POST(req: Request) {
     const { email } = await req.json();
 
     if (!email || typeof email !== 'string' || !email.includes('@')) {
-      return NextResponse.json({ message: 'Invalid email address.' }, { status: 400 });
+      return NextResponse.json(
+        { message: 'Invalid email address.' },
+        { status: 400 },
+      );
     }
 
-    // ── Wire up your email service here ──────────────────────────────────────
-    // Examples:
-    //
-    // Resend audience:
-    //   const resend = new Resend(process.env.RESEND_API_KEY);
-    //   await resend.contacts.create({ email, audienceId: process.env.RESEND_AUDIENCE_ID! });
-    //
-    // Mailchimp:
-    //   await fetch(`https://<dc>.api.mailchimp.com/3.0/lists/<list_id>/members`, {
-    //     method: 'POST',
-    //     headers: { Authorization: `Bearer ${process.env.MAILCHIMP_API_KEY}` },
-    //     body: JSON.stringify({ email_address: email, status: 'subscribed' }),
-    //   });
-    //
-    // ConvertKit:
-    //   await fetch(`https://api.convertkit.com/v3/forms/<form_id>/subscribe`, {
-    //     method: 'POST',
-    //     body: JSON.stringify({ api_key: process.env.CONVERTKIT_API_KEY, email }),
-    //   });
-    // ─────────────────────────────────────────────────────────────────────────
+    const apiKey = process.env.RESEND_API_KEY;
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
 
-    logger.info('newsletter', 'New subscriber (integration pending)', email);
+    if (!apiKey || !audienceId) {
+      logger.error('newsletter', 'Resend env vars are not configured');
+      return NextResponse.json(
+        { message: 'Newsletter is not available right now.' },
+        { status: 503 },
+      );
+    }
+
+    const res = await fetch(
+      `https://api.resend.com/audiences/${audienceId}/contacts`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, unsubscribed: false }),
+      },
+    );
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      // Re-subscribing an existing contact shouldn't read as a failure
+      if (res.status === 409 || /exists/i.test(data?.message ?? '')) {
+        return NextResponse.json(
+          { message: "You're already subscribed!" },
+          { status: 200 },
+        );
+      }
+      logger.error('newsletter', 'Resend contact creation failed', data);
+      return NextResponse.json(
+        { message: 'Could not subscribe. Please try again later.' },
+        { status: 502 },
+      );
+    }
 
     return NextResponse.json({ message: 'Subscribed!' }, { status: 200 });
   } catch (err) {

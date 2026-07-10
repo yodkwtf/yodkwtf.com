@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "icons": "node scripts/generate-file-icons.mjs"
+    "icons": "node scripts/generate-file-icons.mjs",
+    "newsletter": "tsx scripts/send-newsletter.ts",
+    "newsletter:icons": "node scripts/generate-newsletter-icons.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",
@@ -45,6 +47,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4",
+    "tsx": "^4.23.0",
     "typescript": "^5"
   }
 }
