@@ -1,12 +1,12 @@
 ---
-title: "Azure B2C Authentication with OAuth 2.0 and PKCE"
-description: "A practical walkthrough of moving from frontend-owned authentication to backend session orchestration with Azure B2C, calling the OAuth 2.0 endpoints directly with PKCE and JWT cookies."
-publishedAt: "2026-06-30"
-category: "Authentication"
-tags: ["Azure", "OAuth2", "Security"]
+title: 'Azure B2C Authentication with OAuth 2.0 and PKCE'
+description: 'A practical walkthrough of moving from frontend-owned authentication to backend session orchestration with Azure B2C, calling the OAuth 2.0 endpoints directly with PKCE and JWT cookies.'
+publishedAt: '2026-06-30'
+category: 'Authentication'
+tags: ['Azure', 'OAuth2', 'Security']
 featured: true
-coverImage: ""
-youtubeId: ""
+coverImage: ''
+youtubeId: ''
 draft: false
 ---
 
@@ -58,6 +58,7 @@ We'll use Node's built-in `crypto` for PKCE generation and built-in `fetch` for 
 ## Step 2: Configure environment variables
 
 ```env
+# filename: .env
 B2C_CLIENT_ID=YOUR_CLIENT_ID
 B2C_CLIENT_SECRET=YOUR_CLIENT_SECRET
 B2C_TENANT=YOUR_TENANT
@@ -82,7 +83,7 @@ Token:         https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/{policy}/o
 
 ```ts
 // filename: index.ts
-import "dotenv/config"; // must be the very first import
+import 'dotenv/config'; // must be the very first import
 ```
 
 Other modules read `process.env` at import time — if `dotenv` hasn't run yet, those values will be `undefined`.
@@ -91,7 +92,7 @@ Other modules read `process.env` at import time — if `dotenv` hasn't run yet, 
 
 ```ts
 // filename: index.ts
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 
 app.use(cookieParser());
 ```
@@ -112,7 +113,7 @@ src/auth/
 
 ```ts
 // filename: src/auth/azure-config.ts
-import crypto from "crypto";
+import crypto from 'crypto';
 
 const TENANT = process.env.B2C_TENANT!;
 const POLICY = process.env.B2C_POLICY!;
@@ -123,12 +124,12 @@ export const TOKEN_ENDPOINT = `https://${TENANT}.b2clogin.com/${TENANT}.onmicros
 
 // 32 random bytes, base64url-encoded (URL-safe, no +/= characters)
 export function generateCodeVerifier(): string {
-  return crypto.randomBytes(32).toString("base64url");
+  return crypto.randomBytes(32).toString('base64url');
 }
 
 // SHA-256 hash of the verifier — this is what gets sent to Azure
 export function generateCodeChallenge(verifier: string): string {
-  return crypto.createHash("sha256").update(verifier).digest("base64url");
+  return crypto.createHash('sha256').update(verifier).digest('base64url');
 }
 ```
 
@@ -136,9 +137,9 @@ export function generateCodeChallenge(verifier: string): string {
 
 ```ts
 // filename: src/auth/auth.service.ts
-import jwt from "jsonwebtoken";
-import { Response } from "express";
-import { TOKEN_ENDPOINT } from "./azure-config";
+import jwt from 'jsonwebtoken';
+import { Response } from 'express';
+import { TOKEN_ENDPOINT } from './azure-config';
 
 interface TokenResponse {
   access_token: string;
@@ -158,8 +159,8 @@ export function isExpired(token: string): boolean {
 }
 
 export function clearAuthCookies(res: Response) {
-  res.clearCookie("access_jwt");
-  res.clearCookie("refresh_jwt");
+  res.clearCookie('access_jwt');
+  res.clearCookie('refresh_jwt');
 }
 
 export async function exchangeCodeForTokens(
@@ -169,16 +170,16 @@ export async function exchangeCodeForTokens(
   const params = new URLSearchParams({
     client_id: process.env.B2C_CLIENT_ID!,
     client_secret: process.env.B2C_CLIENT_SECRET!,
-    grant_type: "authorization_code",
+    grant_type: 'authorization_code',
     code,
     redirect_uri: process.env.B2C_REDIRECT_URI!,
-    scope: process.env.B2C_SCOPES ?? "",
+    scope: process.env.B2C_SCOPES ?? '',
     code_verifier: codeVerifier,
   });
 
   const response = await fetch(TOKEN_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params.toString(),
   });
 
@@ -193,14 +194,14 @@ export async function refreshAccessToken(
   const params = new URLSearchParams({
     client_id: process.env.B2C_CLIENT_ID!,
     client_secret: process.env.B2C_CLIENT_SECRET!,
-    grant_type: "refresh_token",
+    grant_type: 'refresh_token',
     refresh_token: refreshToken,
-    scope: process.env.B2C_SCOPES ?? "",
+    scope: process.env.B2C_SCOPES ?? '',
   });
 
   const response = await fetch(TOKEN_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: params.toString(),
   });
 
@@ -216,73 +217,73 @@ A couple of things worth noting. `isExpired` uses `jwt.decode` rather than `jwt.
 
 ```ts
 // filename: src/auth/auth.routes.ts
-import { Router, Request, Response } from "express";
+import { Router, Request, Response } from 'express';
 import {
   AUTHORIZE_ENDPOINT,
   generateCodeVerifier,
   generateCodeChallenge,
-} from "./azure-config";
-import { exchangeCodeForTokens } from "./auth.service";
+} from './azure-config';
+import { exchangeCodeForTokens } from './auth.service';
 
 export const authRouter = Router();
 
-const COOKIE_OPTIONS = { httpOnly: true, sameSite: "lax" as const };
+const COOKIE_OPTIONS = { httpOnly: true, sameSite: 'lax' as const };
 
 // Login page
-authRouter.get("/login", (req: Request, res: Response) => {
-  res.render("login", { title: "Login" });
+authRouter.get('/login', (req: Request, res: Response) => {
+  res.render('login', { title: 'Login' });
 });
 
 // Kick off the Azure B2C login
-authRouter.get("/auth/start", (req: Request, res: Response) => {
+authRouter.get('/auth/start', (req: Request, res: Response) => {
   const codeVerifier = generateCodeVerifier();
   const codeChallenge = generateCodeChallenge(codeVerifier);
 
   // Store the verifier in a short-lived cookie so /auth/callback can retrieve it
-  res.cookie("pkce_verifier", codeVerifier, {
+  res.cookie('pkce_verifier', codeVerifier, {
     ...COOKIE_OPTIONS,
     maxAge: 5 * 60 * 1000,
   });
 
   const params = new URLSearchParams({
     client_id: process.env.B2C_CLIENT_ID!,
-    response_type: "code",
+    response_type: 'code',
     redirect_uri: process.env.B2C_REDIRECT_URI!,
-    scope: process.env.B2C_SCOPES ?? "",
+    scope: process.env.B2C_SCOPES ?? '',
     code_challenge: codeChallenge,
-    code_challenge_method: "S256",
+    code_challenge_method: 'S256',
   });
 
   res.redirect(`${AUTHORIZE_ENDPOINT}?${params.toString()}`);
 });
 
 // Azure redirects here after the user authenticates
-authRouter.get("/auth/callback", async (req: Request, res: Response) => {
+authRouter.get('/auth/callback', async (req: Request, res: Response) => {
   const code = req.query.code as string;
   const codeVerifier = req.cookies?.pkce_verifier;
 
-  if (!code || !codeVerifier) return res.redirect("/login");
+  if (!code || !codeVerifier) return res.redirect('/login');
 
   try {
     const tokens = await exchangeCodeForTokens(code, codeVerifier);
 
-    res.cookie("access_jwt", tokens.access_token, COOKIE_OPTIONS);
+    res.cookie('access_jwt', tokens.access_token, COOKIE_OPTIONS);
     if (tokens.refresh_token) {
-      res.cookie("refresh_jwt", tokens.refresh_token, COOKIE_OPTIONS);
+      res.cookie('refresh_jwt', tokens.refresh_token, COOKIE_OPTIONS);
     }
-    res.clearCookie("pkce_verifier");
-    res.redirect("/");
+    res.clearCookie('pkce_verifier');
+    res.redirect('/');
   } catch (err) {
     console.error(err);
-    res.redirect("/login");
+    res.redirect('/login');
   }
 });
 
 // Clear cookies and end the local session
-authRouter.get("/logout", (req: Request, res: Response) => {
-  res.clearCookie("access_jwt");
-  res.clearCookie("refresh_jwt");
-  res.redirect("/login");
+authRouter.get('/logout', (req: Request, res: Response) => {
+  res.clearCookie('access_jwt');
+  res.clearCookie('refresh_jwt');
+  res.redirect('/login');
 });
 ```
 
@@ -294,14 +295,14 @@ Note that `/logout` only clears the local session cookies. If you need full sing
 
 ```ts
 // filename: src/auth/auth.middleware.ts
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 import {
   isExpired,
   clearAuthCookies,
   refreshAccessToken,
-} from "./auth.service";
+} from './auth.service';
 
-const COOKIE_OPTIONS = { httpOnly: true, sameSite: "lax" as const };
+const COOKIE_OPTIONS = { httpOnly: true, sameSite: 'lax' as const };
 
 export async function authMiddleware(
   req: Request,
@@ -310,9 +311,9 @@ export async function authMiddleware(
 ) {
   // Let auth and static routes through without checking
   if (
-    req.path.startsWith("/login") ||
-    req.path.startsWith("/auth") ||
-    req.path.startsWith("/static")
+    req.path.startsWith('/login') ||
+    req.path.startsWith('/auth') ||
+    req.path.startsWith('/static')
   ) {
     return next();
   }
@@ -320,24 +321,24 @@ export async function authMiddleware(
   const accessToken = req.cookies?.access_jwt;
   const refreshToken = req.cookies?.refresh_jwt;
 
-  if (!accessToken) return res.redirect("/login");
+  if (!accessToken) return res.redirect('/login');
   if (!isExpired(accessToken)) return next();
 
   // Access token is expired — try refreshing
   if (!refreshToken || isExpired(refreshToken)) {
     clearAuthCookies(res);
-    return res.redirect("/login");
+    return res.redirect('/login');
   }
 
   try {
     const tokens = await refreshAccessToken(refreshToken);
-    res.cookie("access_jwt", tokens.access_token, COOKIE_OPTIONS);
+    res.cookie('access_jwt', tokens.access_token, COOKIE_OPTIONS);
     if (tokens.refresh_token)
-      res.cookie("refresh_jwt", tokens.refresh_token, COOKIE_OPTIONS);
+      res.cookie('refresh_jwt', tokens.refresh_token, COOKIE_OPTIONS);
     return next();
   } catch {
     clearAuthCookies(res);
-    return res.redirect("/login");
+    return res.redirect('/login');
   }
 }
 ```
@@ -348,10 +349,10 @@ The middleware runs on every request. If the access token is valid, the request 
 
 ```ts
 // filename: index.ts
-import express from "express";
-import cookieParser from "cookie-parser";
-import { authRouter } from "./auth/auth.routes";
-import { authMiddleware } from "./auth/auth.middleware";
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import { authRouter } from './auth/auth.routes';
+import { authMiddleware } from './auth/auth.middleware';
 
 const app = express();
 

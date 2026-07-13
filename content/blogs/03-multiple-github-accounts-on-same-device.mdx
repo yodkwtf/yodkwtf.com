@@ -1,12 +1,12 @@
 ---
-title: "Set Up Multiple Git Profile on the Same Machine"
-description: "A one-time SSH and Git configuration that lets your work and personal GitHub accounts coexist on the same machine without ever switching between them."
-publishedAt: "2026-06-27"
-category: "Productivity"
-tags: ["Git", "GitHub"]
+title: 'Set Up Multiple Git Profile on the Same Machine'
+description: 'A one-time SSH and Git configuration that lets your work and personal GitHub accounts coexist on the same machine without ever switching between them.'
+publishedAt: '2026-06-27'
+category: 'Productivity'
+tags: ['Git', 'GitHub']
 featured: true
-coverImage: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1600&q=80"
-youtubeId: ""
+coverImage: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1600&q=80'
+youtubeId: ''
 draft: false
 ---
 
@@ -61,7 +61,7 @@ cat ~/.ssh/github_work.pub | clip
 
 Paste the copied key into the corresponding GitHub account under **Settings → SSH and GPG Keys**, choosing **Authentication** as the key type. Repeat for the personal key on your personal account.
 
-<Callout type="info" title="Why ed25519?">
+<Callout type='info' title='Why ed25519?'>
   You might notice the generated key starts with `ssh-ed25519` rather than the
   older `ssh-rsa`. That's expected — `ed25519` is the recommended modern
   algorithm, and GitHub supports it fully.
@@ -72,6 +72,7 @@ Paste the copied key into the corresponding GitHub account under **Settings → 
 Create (or append to) `~/.ssh/config` with two host entries — one per account:
 
 ```ssh
+# filename: ~/.ssh/config
 Host github-work
     HostName github.com
     User git
