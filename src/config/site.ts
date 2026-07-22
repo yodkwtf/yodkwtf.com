@@ -14,7 +14,7 @@ export const siteConfig = {
     twitter: 'https://twitter.com/yodkwtf',
     linkedin: 'https://linkedin.com/in/durgesh-chaudhary',
     resume: '/resume.pdf',
-    repo: 'https://github.com/yodkwtf/yodkwtf.com',
+    repo: 'https://github.com/yodkwtf/my-portfolio-website',
   },
   nav: [
     { label: 'About', href: '/about' },
