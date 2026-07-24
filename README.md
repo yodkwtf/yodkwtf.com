@@ -1,6 +1,6 @@
 # My Portfolio Website
 
-[![Live](https://img.shields.io/badge/live-yodkwtf.com-34d399?style=flat-square)](https://yodkwtf.com)
+[![Live](https://img.shields.io/badge/live-yodkwtf.com-059669?style=flat-square)](https://yodkwtf.com)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)
 [![License](https://img.shields.io/badge/license-source--available-lightgrey?style=flat-square)](./LICENSE)
 
