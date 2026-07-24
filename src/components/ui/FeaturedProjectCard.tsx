@@ -31,16 +31,16 @@ export function FeaturedProjectCard({
       transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         'group flex flex-col overflow-hidden rounded-2xl border border-border',
-        'md:relative md:block md:min-h-112 md:overflow-visible md:rounded-none md:border-0',
+        'md:relative md:block md:overflow-visible md:rounded-none md:border-0',
         className,
       )}
     >
       {/*  Image panel  */}
       <div
         className={cn(
-          'relative h-64 sm:h-80 overflow-hidden bg-surface-subtle',
-          'md:absolute md:inset-y-0 md:h-auto md:w-[62%] md:rounded-2xl md:border md:border-border',
-          imageLeft ? 'md:left-0' : 'md:right-0',
+          'relative aspect-37/20 overflow-hidden bg-surface-subtle',
+          'md:w-[62%] md:rounded-2xl md:border md:border-border',
+          imageLeft ? '' : 'md:ml-auto',
         )}
       >
         {project.thumbnail ? (
@@ -48,7 +48,7 @@ export function FeaturedProjectCard({
             src={
               typeof project.thumbnail === 'string'
                 ? project.thumbnail
-                : urlFor(project.thumbnail).width(1200).height(800).url()
+                : urlFor(project.thumbnail).width(1200).url()
             }
             alt={
               typeof project.thumbnail === 'string'
