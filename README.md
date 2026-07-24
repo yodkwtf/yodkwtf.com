@@ -4,11 +4,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)
 [![License](https://img.shields.io/badge/license-source--available-lightgrey?style=flat-square)](./LICENSE)
 
-A content-driven personal portfolio built with the Next.js App Router, TypeScript, and Tailwind CSS. Structured
-content (projects, skills, experience, about) is served from a headless CMS,
-long-form writing is authored as local MDX, and project case studies are
-rendered live from each repo's GitHub README, all with static fallbacks so
-the site stays fully functional even when the CMS or GitHub is unreachable.
+A personal portfolio built with **Next.js 16 (App Router, React Server Components, ISR)**, **React 19**, **TypeScript**, and **Tailwind CSS v4**. Powered by a headless **Sanity CMS** with static fallback data, it features an MDX-powered blog with syntax-highlighted code blocks, search, and scheduled publishing. Project pages render each repository's live **GitHub README**, while a **Resend-powered newsletter** automatically emails subscribers via **GitHub Actions** whenever new posts go live. The site also includes RSS, sitemap, JSON-LD, and Open Graph support, and is deployed on Netlify.
 
 This repo is public for reference and learning. Feel free to explore the code,
 open issues, or borrow patterns for your own site.
