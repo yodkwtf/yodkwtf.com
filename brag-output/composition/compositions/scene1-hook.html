@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
+      />
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          background: #0e0e0c;
+          overflow: hidden;
+          font-family: "Outfit", sans-serif;
+        }
+        .s1-dotgrid {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(circle, #2a2a26 1.5px, transparent 1.5px);
+          background-size: 34px 34px;
+          opacity: 0.45;
+        }
+        .s1-glow-a {
+          position: absolute;
+          top: -320px;
+          right: -320px;
+          width: 1150px;
+          height: 1150px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(52, 211, 153, 0.24) 0%, rgba(52, 211, 153, 0) 70%);
+        }
+        .s1-glow-b {
+          position: absolute;
+          bottom: -380px;
+          left: -320px;
+          width: 900px;
+          height: 900px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0) 70%);
+        }
+        .s1-ghost {
+          position: absolute;
+          left: 50%;
+          top: 54%;
+          transform: translate(-50%, -50%);
+          font-family: "DM Mono", monospace;
+          font-size: 780px;
+          font-weight: 300;
+          color: rgba(240, 239, 233, 0.035);
+          white-space: nowrap;
+          user-select: none;
+        }
+
+        /* Chrome: story-style progress bar + brand mark */
+        .s1-chrome-mark {
+          position: absolute;
+          left: 64px;
+          top: 52px;
+          width: 34px;
+          height: 26px;
+          border-radius: 7px;
+          background: #20201f;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .s1-progress {
+          position: absolute;
+          left: 116px;
+          top: 63px;
+          right: 64px;
+          height: 4px;
+          display: flex;
+          gap: 10px;
+        }
+        .s1-seg {
+          position: relative;
+          flex: 1;
+          height: 4px;
+          border-radius: 2px;
+          background: rgba(240, 239, 233, 0.14);
+          overflow: hidden;
+        }
+        .s1-seg i {
+          position: absolute;
+          inset: 0;
+          background: #34d399;
+          border-radius: 2px;
+          transform-origin: left center;
+          transform: scaleX(0);
+        }
+
+        .s1-left {
+          position: absolute;
+          left: 140px;
+          top: 258px;
+          width: 800px;
+        }
+        .s1-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 26px;
+          border-radius: 999px;
+          border: 1.5px solid rgba(52, 211, 153, 0.3);
+          background: rgba(52, 211, 153, 0.08);
+          color: #34d399;
+          font-family: "DM Mono", monospace;
+          font-size: 21px;
+          letter-spacing: 0.04em;
+        }
+        .s1-badge-dot {
+          width: 9px;
+          height: 9px;
+          border-radius: 50%;
+          background: #34d399;
+        }
+        .s1-h1 {
+          margin: 36px 0 8px;
+          font-family: "Outfit", sans-serif;
+          font-weight: 600;
+          font-size: 86px;
+          line-height: 1.15;
+          color: #f0efe9;
+          letter-spacing: -0.02em;
+        }
+        .s1-h1 .accent {
+          background: linear-gradient(135deg, #34d399, #059669);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .s1-h2 {
+          margin: 0 0 34px;
+          font-family: "Outfit", sans-serif;
+          font-weight: 500;
+          font-size: 50px;
+          line-height: 1.2;
+          letter-spacing: -0.01em;
+          color: #a3a39a;
+        }
+        .s1-body {
+          font-size: 33px;
+          line-height: 1.55;
+          color: #a3a39a;
+          max-width: 700px;
+          font-weight: 350;
+        }
+        .s1-body b {
+          color: #f0efe9;
+          font-weight: 500;
+        }
+        .s1-stats {
+          display: flex;
+          align-items: center;
+          gap: 40px;
+          margin-top: 56px;
+          padding-top: 40px;
+          padding-bottom: 16px;
+          border-top: 1px solid rgba(240, 239, 233, 0.1);
+        }
+        .s1-stat-num {
+          font-family: "Outfit", sans-serif;
+          font-weight: 600;
+          font-size: 38px;
+          color: #f0efe9;
+          line-height: 1;
+        }
+        .s1-stat-label {
+          font-family: "DM Mono", monospace;
+          font-size: 17px;
+          color: #8a8a80;
+          margin-top: 6px;
+        }
+
+        .s1-card {
+          position: absolute;
+          left: 1000px;
+          top: 190px;
+          width: 820px;
+          height: 748px;
+          border-radius: 26px;
+          background: rgba(26, 26, 23, 0.85);
+          border: 1.5px solid rgba(240, 239, 233, 0.1);
+          box-shadow: 0 50px 110px -30px rgba(0, 0, 0, 0.6), 0 0 110px -20px rgba(52, 211, 153, 0.16);
+          padding: 0;
+          font-family: "DM Mono", monospace;
+          display: flex;
+          flex-direction: column;
+        }
+        .s1-card-head {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 30px 46px;
+          border-bottom: 1px solid rgba(240, 239, 233, 0.09);
+        }
+        .s1-dot {
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+        }
+        .s1-card-file {
+          margin-left: 12px;
+          font-size: 23px;
+          color: #9a9a90;
+        }
+        .s1-card-body {
+          flex: 1;
+          padding: 40px 46px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 4px;
+        }
+        .s1-line {
+          font-size: 33px;
+          line-height: 1.9;
+          white-space: pre;
+          opacity: 0;
+          color: #c9c9c0;
+        }
+        .s1-line.indent {
+          padding-left: 46px;
+        }
+        .s1-key { color: #a3a39a; }
+        .s1-str { color: rgba(251, 191, 36, 0.88); }
+        .s1-punc { color: #9a9a90; }
+        .s1-brace { color: #6ee7b7; }
+        .s1-bool { color: #34d399; font-weight: 500; }
+        .s1-cursor {
+          display: inline-block;
+          width: 4px;
+          height: 34px;
+          background: #34d399;
+          margin-left: 4px;
+          vertical-align: middle;
+          opacity: 0;
+        }
+        .s1-card-foot {
+          display: flex;
+          align-items: center;
+          gap: 22px;
+          padding: 22px 46px;
+          border-top: 1px solid rgba(240, 239, 233, 0.09);
+          font-size: 18px;
+          color: #9a9a90;
+        }
+        .s1-card-foot .live {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: #34d399;
+        }
+        .s1-card-foot .live::before {
+          content: "";
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #34d399;
+        }
+      </style>
+
+      <div id="root" data-composition-id="scene1-hook" data-width="1920" data-height="1080" data-duration="4.3" data-layout-allow-overlap="true">
+        <div class="s1-dotgrid"></div>
+        <div class="s1-glow-a" id="s1-glow-a" data-layout-allow-overflow="true"></div>
+        <div class="s1-glow-b" id="s1-glow-b" data-layout-allow-overflow="true"></div>
+        <div class="s1-ghost" data-layout-ignore="true">&lt;/&gt;</div>
+
+        <div class="s1-chrome-mark">
+          <svg width="20" height="13" viewBox="0 0 100 64" fill="none">
+            <path d="M15 10H63L54 19H30V45H54L63 54H15V10Z" fill="#f0efe9" />
+            <path d="M88 10H68.5C59.5 10 53 14 47 22L31 43.5C27 49 31 54 39 54H59L68 45H46.5C43.5 45 42.5 43.5 44.5 41L58.5 22C60.5 19.5 63.5 19 67 19H79L88 10Z" fill="#34d399" />
+          </svg>
+        </div>
+        <div class="s1-progress" data-layout-ignore="true">
+          <div class="s1-seg"><i id="seg1" style="transform:scaleX(0)"></i></div>
+          <div class="s1-seg"><i style="transform:scaleX(0)"></i></div>
+          <div class="s1-seg"><i style="transform:scaleX(0)"></i></div>
+          <div class="s1-seg"><i style="transform:scaleX(0)"></i></div>
+        </div>
+
+        <div class="s1-left" id="s1-left">
+          <span class="s1-badge"><span class="s1-badge-dot"></span>Available for new opportunities</span>
+          <h1 class="s1-h1">Hi, I&rsquo;m <span class="accent">Durgesh</span><span style="color:#10b981">.</span></h1>
+          <h2 class="s1-h2">I build the web.</h2>
+          <p class="s1-body">Full-stack engineer specializing in <b>React.js, Next.js, and Node.js</b>.</p>
+          <div class="s1-stats" id="s1-stats">
+            <div><div class="s1-stat-num">3+</div><div class="s1-stat-label">YEARS EXP</div></div>
+            <div><div class="s1-stat-num">140+</div><div class="s1-stat-label">PROJECTS</div></div>
+            <div><div class="s1-stat-num">10+</div><div class="s1-stat-label">CLIENTS</div></div>
+          </div>
+        </div>
+
+        <div class="s1-card">
+          <div class="s1-card-head">
+            <span class="s1-dot" style="background:#f28b82"></span>
+            <span class="s1-dot" style="background:#fbbc04"></span>
+            <span class="s1-dot" style="background:#81c995"></span>
+            <span class="s1-card-file">developer.ts</span>
+          </div>
+          <div class="s1-card-body">
+            <div id="s1-l1" class="s1-line"><span class="s1-key">const</span> dev <span class="s1-punc">=</span> <span class="s1-brace">&#123;</span></div>
+            <div id="s1-l2" class="s1-line indent"><span class="s1-key">name:</span> <span class="s1-str">&quot;Durgesh Chaudhary&quot;</span><span class="s1-punc">,</span></div>
+            <div id="s1-l3" class="s1-line indent"><span class="s1-key">role:</span> <span class="s1-str">&quot;Software Engineer&quot;</span><span class="s1-punc">,</span></div>
+            <div id="s1-l4" class="s1-line indent"><span class="s1-key">stack:</span> <span class="s1-punc">[</span><span class="s1-str">&quot;React&quot;</span><span class="s1-punc">,</span> <span class="s1-str">&quot;Next.js&quot;</span><span class="s1-punc">],</span></div>
+            <div id="s1-l5" class="s1-line indent"><span class="s1-key">available:</span> <span class="s1-bool">true</span><span class="s1-cursor" id="s1-cursor"></span></div>
+            <div id="s1-l6" class="s1-line"><span class="s1-brace">&#125;</span></div>
+          </div>
+          <div class="s1-card-foot">
+            <span class="live">TypeScript</span>
+            <span>UTF-8</span>
+            <span>Prettier</span>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        // ambient background breathing (finite repeats, no repeat:-1)
+        tl.to("#s1-glow-a", { scale: 1.08, opacity: 0.85, duration: 2.15, ease: "sine.inOut", repeat: 1, yoyo: true, transformOrigin: "50% 50%" }, 0);
+        tl.to("#s1-glow-b", { scale: 1.12, opacity: 0.8, duration: 2.4, ease: "sine.inOut", repeat: 0, yoyo: true, transformOrigin: "50% 50%" }, 0.3);
+
+        // top progress segment fills across this scene's full duration
+        tl.fromTo("#seg1", { scaleX: 0 }, { scaleX: 1, duration: 4.3, ease: "none" }, 0);
+
+        tl.fromTo("#s1-left", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.12);
+        tl.fromTo(".s1-card", { opacity: 0, y: 22, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, 0.05);
+        tl.fromTo("#s1-stats > div", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" }, 0.75);
+
+        function typeLine(id, t) {
+          tl.fromTo("#" + id, { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.32, ease: "power2.out" }, t);
+        }
+        typeLine("s1-l1", 0.3);
+        typeLine("s1-l2", 0.75);
+        typeLine("s1-l3", 1.2);
+        typeLine("s1-l4", 1.65);
+        typeLine("s1-l5", 2.73); // beat-grid: 2.73s (payoff line)
+        typeLine("s1-l6", 3.05);
+
+        // blinking cursor after payoff line, finite blinks to fill remaining duration
+        tl.set("#s1-cursor", { opacity: 1 }, 2.85);
+        var blinkCycle = 0.5;
+        var blinkRepeats = Math.max(0, Math.floor((4.3 - 2.85) / blinkCycle) - 1);
+        tl.to("#s1-cursor", { opacity: 0, duration: blinkCycle / 2, repeat: blinkRepeats, yoyo: true, ease: "none" }, 2.85 + blinkCycle / 2);
+
+        window.__timelines["scene1-hook"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

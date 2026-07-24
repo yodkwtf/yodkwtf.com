@@ -1,0 +1,1 @@
+Rebuilt my portfolio (yodkwtf.com) to keep itself honest: every project page renders the linked repo's live GitHub README, and blog posts publish — and email subscribers — the moment their date arrives. No redeploys, no stale docs. Built with Next.js 16, Sanity, and Resend.
