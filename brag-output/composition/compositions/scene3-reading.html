@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
+      />
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          background: #0e0e0c;
+          overflow: hidden;
+          font-family: "Outfit", sans-serif;
+        }
+        .s3-dotgrid { position: absolute; inset: 0; background-image: radial-gradient(circle, #2a2a26 1.5px, transparent 1.5px); background-size: 34px 34px; opacity: 0.4; }
+        .s3-glow { position: absolute; bottom: -380px; right: -280px; width: 1050px; height: 1050px; border-radius: 50%; background: radial-gradient(circle, rgba(52, 211, 153, 0.17) 0%, rgba(52, 211, 153, 0) 70%); }
+        .s3-glow2 { position: absolute; top: -320px; left: -300px; width: 850px; height: 850px; border-radius: 50%; background: radial-gradient(circle, rgba(16, 185, 129, 0.13) 0%, rgba(16, 185, 129, 0) 70%); }
+
+        .s3-chrome-mark { position: absolute; left: 64px; top: 52px; width: 34px; height: 26px; border-radius: 7px; background: #20201f; display: flex; align-items: center; justify-content: center; }
+        .s3-progress { position: absolute; left: 116px; top: 63px; right: 64px; height: 4px; display: flex; gap: 10px; }
+        .s3-seg { position: relative; flex: 1; height: 4px; border-radius: 2px; background: rgba(240, 239, 233, 0.14); overflow: hidden; }
+        .s3-seg i { position: absolute; inset: 0; background: #34d399; border-radius: 2px; transform-origin: left center; }
+
+        .s3-urlbar {
+          position: absolute; left: 140px; top: 110px; width: 900px; height: 54px; border-radius: 10px;
+          background: #1a1a17; border: 1px solid #2a2a26; display: flex; align-items: center; gap: 12px; padding: 0 22px;
+          font-family: "DM Mono", monospace; font-size: 19px; color: #8a8a80; opacity: 0;
+        }
+
+        .s3-article-mask { position: absolute; left: 140px; top: 200px; width: 1180px; height: 762px; overflow: hidden; opacity: 0; }
+        .s3-scroll { position: absolute; left: 0; top: 0; width: 1180px; }
+        .s3-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+        .s3-cat { font-family: "DM Mono", monospace; font-size: 19px; color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); background: rgba(52, 211, 153, 0.08); border-radius: 999px; padding: 7px 18px; }
+        .s3-meta { font-family: "DM Mono", monospace; font-size: 19px; color: #9a9a90; }
+        .s3-title { margin: 0 0 26px; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 68px; line-height: 1.1; color: #f0efe9; max-width: 1080px; }
+        .s3-p { margin: 0 0 12px; font-size: 28px; line-height: 1.55; color: #a3a39a; max-width: 1080px; }
+        .s3-h2 { margin: 54px 0 18px; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 48px; color: #f0efe9; }
+        .s3-code { margin-top: 26px; width: 1040px; border-radius: 16px; background: #1a1a17; border: 1px solid #2a2a26; overflow: hidden; }
+        .s3-code-bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 26px; border-bottom: 1px solid #2a2a26; }
+        .s3-code-bar .fname { display: flex; align-items: center; gap: 10px; font-family: "DM Mono", monospace; font-size: 19px; color: #a3a39a; }
+        .s3-filedot { width: 12px; height: 12px; border-radius: 3px; background: #61dafb; }
+        .s3-copybtn { display: flex; align-items: center; gap: 8px; font-family: "DM Mono", monospace; font-size: 17px; color: #9a9a90; }
+        .s3-code-body { padding: 26px 30px; font-family: "DM Mono", monospace; font-size: 23px; line-height: 1.8; color: #c9c9c0; }
+        .s3-code-body .kw { color: #6ee7b7; }
+        .s3-code-body .st { color: rgba(251, 191, 36, 0.88); }
+        .s3-code-body .pl { color: #a3a39a; }
+
+        .s3-toc {
+          position: absolute; left: 1420px; top: 200px; width: 360px; height: 762px; opacity: 0;
+          display: flex; flex-direction: column; justify-content: space-between;
+          border-left: 1px solid rgba(240, 239, 233, 0.08); padding-left: 40px;
+        }
+        .s3-toc-label { font-family: "DM Mono", monospace; font-size: 17px; letter-spacing: 0.08em; color: #9a9a90; margin-bottom: 30px; }
+        .s3-toc-item { position: relative; padding: 11px 0 11px 24px; font-size: 23px; color: #9a9a90; margin-bottom: 8px; }
+        .s3-toc-item.active { color: #f0efe9; }
+        .s3-toc-indicator { position: absolute; left: 0; top: 46px; width: 3px; height: 38px; background: #34d399; border-radius: 2px; }
+        .s3-toc-byline { display: flex; align-items: center; gap: 16px; padding-top: 34px; border-top: 1px solid rgba(240, 239, 233, 0.08); }
+        .s3-toc-avatar { width: 52px; height: 52px; border-radius: 12px; background: #20201f; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .s3-toc-byline-name { font-size: 21px; color: #f0efe9; }
+        .s3-toc-byline-role { font-family: "DM Mono", monospace; font-size: 16px; color: #9a9a90; margin-top: 4px; }
+
+        .s3-cursor { position: absolute; width: 40px; height: 40px; opacity: 0; pointer-events: none; }
+      </style>
+
+      <div id="root" data-composition-id="scene3-reading" data-width="1920" data-height="1080" data-duration="5.86" data-layout-allow-overlap="true">
+        <div class="s3-dotgrid"></div>
+        <div class="s3-glow" id="s3-glow" data-layout-allow-overflow="true"></div>
+        <div class="s3-glow2" data-layout-allow-overflow="true"></div>
+
+        <div class="s3-chrome-mark">
+          <svg width="20" height="13" viewBox="0 0 100 64" fill="none">
+            <path d="M15 10H63L54 19H30V45H54L63 54H15V10Z" fill="#f0efe9" />
+            <path d="M88 10H68.5C59.5 10 53 14 47 22L31 43.5C27 49 31 54 39 54H59L68 45H46.5C43.5 45 42.5 43.5 44.5 41L58.5 22C60.5 19.5 63.5 19 67 19H79L88 10Z" fill="#34d399" />
+          </svg>
+        </div>
+        <div class="s3-progress" data-layout-ignore="true">
+          <div class="s3-seg"><i style="transform:scaleX(1)"></i></div>
+          <div class="s3-seg"><i style="transform:scaleX(1)"></i></div>
+          <div class="s3-seg"><i id="seg3" style="transform:scaleX(0)"></i></div>
+          <div class="s3-seg"><i style="transform:scaleX(0)"></i></div>
+        </div>
+
+        <div class="s3-urlbar" id="s3-urlbar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9s1.3-6.5 3.8-9z"/></svg>
+          yodkwtf.com/blog/react-performance-optimization
+        </div>
+
+        <div class="s3-article-mask" id="s3-mask">
+          <div class="s3-scroll" id="s3-scroll" data-layout-allow-overflow="true" data-layout-allow-occlusion="true">
+            <div class="s3-eyebrow">
+              <span class="s3-cat">React.js</span>
+              <span class="s3-meta">6 min read</span>
+            </div>
+            <h1 class="s3-title">React Performance Optimization Techniques</h1>
+            <p class="s3-p">A practical guide to the techniques that matter&mdash;what they do, and when you actually need them.</p>
+            <h2 class="s3-h2">List virtualization (windowing)</h2>
+            <p class="s3-p">Render only the rows the viewport can see, not the whole list.</p>
+            <div class="s3-code" id="s3-code">
+              <div class="s3-code-bar">
+                <span class="fname"><span class="s3-filedot"></span>VirtualizedList.jsx</span>
+                <span class="s3-copybtn" id="s3-copybtn">
+                  <svg id="s3-icon-copy" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#9a9a90" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><rect x="4" y="4" width="11" height="11" rx="2"/></svg>
+                  <svg id="s3-icon-check" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" style="opacity:0; position:absolute;"><path d="M5 12l5 5L20 6"/></svg>
+                  <span id="s3-copied-label" style="opacity:0;color:#34d399;">Copied</span>
+                </span>
+              </div>
+              <div class="s3-code-body">
+                <div><span class="kw">import</span> <span class="pl">{ List }</span> <span class="kw">from</span> <span class="st">"react-window"</span>;</div>
+                <div><span class="kw">function</span> VirtualizedList<span class="pl">({ items })</span> <span class="pl">{</span></div>
+                <div>&nbsp;&nbsp;<span class="kw">return</span> <span class="pl">&lt;List</span> <span class="pl">height</span>=<span class="st">{400}</span> <span class="pl">itemCount</span>=<span class="pl">{items.length}</span> <span class="pl">/&gt;</span>;</div>
+              </div>
+            </div>
+            <h2 class="s3-h2" style="margin-top:80px;">Memoization</h2>
+            <p class="s3-p">Skip re-renders when props haven&rsquo;t actually changed.</p>
+            <p class="s3-p">Wrap expensive components in <code style="color:#6ee7b7;">React.memo</code> and derived values in <code style="color:#6ee7b7;">useMemo</code>.</p>
+          </div>
+        </div>
+
+        <div class="s3-toc" id="s3-toc">
+          <div>
+            <div class="s3-toc-label">ON THIS PAGE</div>
+            <div style="position:relative;">
+              <div class="s3-toc-indicator" id="s3-indicator"></div>
+              <div class="s3-toc-item active" id="s3-toc-0">List virtualization</div>
+              <div class="s3-toc-item" id="s3-toc-1">Memoization</div>
+              <div class="s3-toc-item" id="s3-toc-2">Debouncing input</div>
+            </div>
+          </div>
+          <div class="s3-toc-byline">
+            <div class="s3-toc-avatar">
+              <svg width="20" height="13" viewBox="0 0 100 64" fill="none">
+                <path d="M15 10H63L54 19H30V45H54L63 54H15V10Z" fill="#f0efe9" />
+                <path d="M88 10H68.5C59.5 10 53 14 47 22L31 43.5C27 49 31 54 39 54H59L68 45H46.5C43.5 45 42.5 43.5 44.5 41L58.5 22C60.5 19.5 63.5 19 67 19H79L88 10Z" fill="#34d399" />
+              </svg>
+            </div>
+            <div>
+              <div class="s3-toc-byline-name">Durgesh Chaudhary</div>
+              <div class="s3-toc-byline-role">Full-Stack Engineer</div>
+            </div>
+          </div>
+        </div>
+
+        <svg class="s3-cursor" id="s3-cursor" viewBox="0 0 24 24" fill="none">
+          <path d="M4 2 L4 20 L9 15.5 L12.5 22 L15.3 20.6 L11.8 14 L19 14 Z" fill="#f0efe9" stroke="#0e0e0c" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        tl.to("#s3-glow", { scale: 1.1, opacity: 0.8, duration: 2.8, ease: "sine.inOut", repeat: 1, yoyo: true, transformOrigin: "50% 50%" }, 0);
+        tl.fromTo("#seg3", { scaleX: 0 }, { scaleX: 1, duration: 5.86, ease: "none" }, 0);
+
+        tl.fromTo("#s3-urlbar", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.1);
+        tl.fromTo("#s3-mask", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.15);
+        tl.fromTo("#s3-scroll", { y: 16 }, { y: 0, duration: 0.5, ease: "power3.out" }, 0.15);
+        tl.fromTo("#s3-toc", { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.35);
+
+        tl.fromTo("#s3-code", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 1.3);
+
+        // cursor arrives at the copy button
+        tl.set("#s3-cursor", { x: 1250, y: 720, opacity: 0 }, 0);
+        tl.to("#s3-cursor", { opacity: 1, duration: 0.25 }, 1.9);
+        tl.to("#s3-cursor", { x: 1320, y: 448, duration: 0.5, ease: "power2.inOut" }, 2.15);
+
+        // click at beat-grid 12.02s global == 3.58s local
+        var CLICK_T = 3.58; // beat-grid: 12.02s
+        tl.to("#s3-cursor", { scale: 0.85, duration: 0.1 }, CLICK_T);
+        tl.to("#s3-cursor", { scale: 1, duration: 0.12 }, CLICK_T + 0.1);
+        tl.to("#s3-icon-copy", { opacity: 0, duration: 0.15 }, CLICK_T);
+        tl.to("#s3-icon-check", { opacity: 1, duration: 0.15 }, CLICK_T);
+        tl.to("#s3-copied-label", { opacity: 1, duration: 0.15 }, CLICK_T);
+        tl.to("#s3-copied-label", { opacity: 0, duration: 0.3 }, CLICK_T + 0.7);
+        tl.to("#s3-icon-check", { opacity: 0, duration: 0.2 }, CLICK_T + 0.9);
+        tl.to("#s3-icon-copy", { opacity: 1, duration: 0.2 }, CLICK_T + 0.9);
+
+        // scroll simulation + TOC indicator moves to item 2
+        var SCROLL_T = 4.0;
+        tl.to("#s3-scroll", { y: -430, duration: 0.6, ease: "power2.inOut" }, SCROLL_T);
+        tl.to("#s3-indicator", { y: 72, duration: 0.6, ease: "power2.inOut" }, SCROLL_T);
+        tl.to("#s3-toc-0", { color: "#9a9a90", duration: 0.3 }, SCROLL_T);
+        tl.to("#s3-toc-1", { color: "#f0efe9", duration: 0.3 }, SCROLL_T + 0.2);
+        tl.to("#s3-cursor", { opacity: 0, duration: 0.3 }, SCROLL_T);
+
+        window.__timelines["scene3-reading"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

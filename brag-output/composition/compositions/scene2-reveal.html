@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
+      />
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          background: #0e0e0c;
+          overflow: hidden;
+          font-family: "Outfit", sans-serif;
+        }
+        .s2-dotgrid { position: absolute; inset: 0; background-image: radial-gradient(circle, #2a2a26 1.5px, transparent 1.5px); background-size: 34px 34px; opacity: 0.4; }
+        .s2-glow { position: absolute; top: -340px; left: -280px; width: 1080px; height: 1080px; border-radius: 50%; background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0) 70%); }
+        .s2-glow2 { position: absolute; bottom: -380px; right: -260px; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(52, 211, 153, 0.14) 0%, rgba(52, 211, 153, 0) 70%); }
+
+        /* chrome */
+        .s2-chrome-mark { position: absolute; left: 64px; top: 52px; width: 34px; height: 26px; border-radius: 7px; background: #20201f; display: flex; align-items: center; justify-content: center; }
+        .s2-progress { position: absolute; left: 116px; top: 63px; right: 64px; height: 4px; display: flex; gap: 10px; }
+        .s2-seg { position: relative; flex: 1; height: 4px; border-radius: 2px; background: rgba(240, 239, 233, 0.14); overflow: hidden; }
+        .s2-seg i { position: absolute; inset: 0; background: #34d399; border-radius: 2px; transform-origin: left center; }
+
+        /* Phase A — project card */
+        .s2-phaseA { position: absolute; inset: 0; }
+        .s2-card-wrap { position: absolute; left: 200px; top: 168px; width: 1520px; height: 800px; }
+        .s2-thumb {
+          position: absolute; left: 0; top: 0; width: 980px; height: 800px; border-radius: 24px;
+          background: linear-gradient(150deg, #123b2e 0%, #0e0e0c 65%); border: 1.5px solid rgba(240, 239, 233, 0.08); overflow: hidden;
+        }
+        .s2-thumb-chrome { position: absolute; top: 40px; left: 40px; right: 40px; height: 52px; border-radius: 10px; background: rgba(240, 239, 233, 0.05); display: flex; align-items: center; gap: 10px; padding: 0 20px; }
+        .s2-thumb-chrome span { width: 12px; height: 12px; border-radius: 50%; background: rgba(240, 239, 233, 0.18); }
+        .s2-thumb-bars { position: absolute; left: 40px; right: 40px; top: 128px; bottom: 40px; display: flex; flex-direction: column; gap: 22px; }
+        .s2-thumb-bars i { display: block; height: 26px; border-radius: 7px; background: rgba(52, 211, 153, 0.15); }
+        .s2-thumb-bars i:nth-child(1) { width: 62%; }
+        .s2-thumb-bars i:nth-child(2) { width: 88%; }
+        .s2-thumb-bars i:nth-child(3) { width: 40%; }
+        .s2-thumb-bars i:nth-child(4) { width: 70%; margin-top: 30px; height: 180px; border-radius: 14px; background: rgba(52, 211, 153, 0.08); }
+        .s2-panel {
+          position: absolute; right: 0; top: 120px; width: 660px; height: 560px; border-radius: 22px; background: #1a1a17;
+          border: 1.5px solid rgba(240, 239, 233, 0.1); box-shadow: 0 40px 100px -24px rgba(0, 0, 0, 0.6); padding: 56px 58px;
+          display: flex; flex-direction: column;
+        }
+        .s2-panel h3 { margin: 0 0 24px; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 60px; color: #f0efe9; }
+        .s2-panel p { margin: 0 0 30px; font-size: 27px; line-height: 1.55; color: #a3a39a; }
+        .s2-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: auto; }
+        .s2-pill { font-family: "DM Mono", monospace; font-size: 19px; color: #a3a39a; background: #0e0e0c; border: 1px solid #2a2a26; border-radius: 7px; padding: 8px 16px; }
+        .s2-link { display: inline-flex; align-items: center; gap: 10px; font-size: 26px; font-weight: 500; color: #34d399; margin-top: 30px; }
+        .s2-cursor { position: absolute; width: 46px; height: 46px; opacity: 0; pointer-events: none; }
+        .s2-ripple { position: absolute; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #34d399; opacity: 0; }
+
+        /* Phase B — README detail */
+        .s2-phaseB { position: absolute; inset: 0; opacity: 0; }
+        .s2-urlbar {
+          position: absolute; left: 140px; top: 110px; width: 900px; height: 54px; border-radius: 10px;
+          background: #1a1a17; border: 1px solid #2a2a26; display: flex; align-items: center; gap: 12px; padding: 0 22px;
+          font-family: "DM Mono", monospace; font-size: 19px; color: #8a8a80; opacity: 0;
+        }
+        .s2-back { position: absolute; left: 1100px; top: 122px; font-family: "DM Mono", monospace; font-size: 21px; color: #9a9a90; opacity: 0; }
+        .s2-heading { position: absolute; left: 140px; top: 210px; width: 1200px; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 104px; color: #f0efe9; opacity: 0; }
+        .s2-desc { position: absolute; left: 140px; top: 360px; width: 980px; font-size: 30px; line-height: 1.55; color: #a3a39a; opacity: 0; }
+        .s2-code {
+          position: absolute; left: 140px; top: 494px; width: 980px; height: 356px; border-radius: 18px;
+          background: #1a1a17; border: 1px solid #2a2a26; padding: 36px 42px; font-family: "DM Mono", monospace; opacity: 0;
+          display: flex; flex-direction: column;
+        }
+        .s2-code .fname { font-size: 19px; color: #9a9a90; margin-bottom: 22px; }
+        .s2-code .line { font-size: 26px; line-height: 1.9; color: #6ee7b7; }
+        .s2-code .line span { color: #a3a39a; }
+        .s2-image {
+          position: absolute; left: 1160px; top: 494px; width: 620px; height: 356px; border-radius: 18px;
+          background: linear-gradient(140deg, #123b2e, #0e0e0c 70%); border: 1px solid #2a2a26; opacity: 0; overflow: hidden;
+        }
+        .s2-image i { position: absolute; display: block; border-radius: 8px; background: rgba(52, 211, 153, 0.14); }
+        .s2-image .cap { position: absolute; bottom: 18px; left: 24px; font-family: "DM Mono", monospace; font-size: 17px; color: #9a9a90; }
+        .s2-caption {
+          position: absolute; left: 140px; top: 892px; display: inline-flex; align-items: center; gap: 12px;
+          padding: 16px 28px; border-radius: 999px; border: 1.5px solid rgba(52, 211, 153, 0.3);
+          background: rgba(52, 211, 153, 0.08); color: #34d399; font-family: "DM Mono", monospace; font-size: 24px; opacity: 0;
+        }
+      </style>
+
+      <div id="root" data-composition-id="scene2-reveal" data-width="1920" data-height="1080" data-duration="5.34" data-layout-allow-overlap="true">
+        <div class="s2-dotgrid"></div>
+        <div class="s2-glow" id="s2-glow" data-layout-allow-overflow="true"></div>
+        <div class="s2-glow2" data-layout-allow-overflow="true"></div>
+
+        <div class="s2-chrome-mark">
+          <svg width="20" height="13" viewBox="0 0 100 64" fill="none">
+            <path d="M15 10H63L54 19H30V45H54L63 54H15V10Z" fill="#f0efe9" />
+            <path d="M88 10H68.5C59.5 10 53 14 47 22L31 43.5C27 49 31 54 39 54H59L68 45H46.5C43.5 45 42.5 43.5 44.5 41L58.5 22C60.5 19.5 63.5 19 67 19H79L88 10Z" fill="#34d399" />
+          </svg>
+        </div>
+        <div class="s2-progress" data-layout-ignore="true">
+          <div class="s2-seg"><i style="transform:scaleX(1)"></i></div>
+          <div class="s2-seg"><i id="seg2" style="transform:scaleX(0)"></i></div>
+          <div class="s2-seg"><i style="transform:scaleX(0)"></i></div>
+          <div class="s2-seg"><i style="transform:scaleX(0)"></i></div>
+        </div>
+
+        <div class="s2-phaseA" id="s2-phaseA">
+          <div class="s2-card-wrap" id="s2-card-wrap">
+            <div class="s2-thumb">
+              <div class="s2-thumb-chrome"><span></span><span></span><span></span></div>
+              <div class="s2-thumb-bars"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="s2-panel">
+              <h3>Cinematica</h3>
+              <p>A full-stack movie &amp; TV tracking platform&mdash;watchlists, reviews, personalized picks.</p>
+              <div class="s2-pills">
+                <span class="s2-pill">React.js</span>
+                <span class="s2-pill">Node.js</span>
+                <span class="s2-pill">MongoDB</span>
+              </div>
+              <span class="s2-link" id="s2-caselink">Case study &#8599;</span>
+            </div>
+          </div>
+          <svg class="s2-cursor" id="s2-cursor" viewBox="0 0 24 24" fill="none">
+            <path d="M4 2 L4 20 L9 15.5 L12.5 22 L15.3 20.6 L11.8 14 L19 14 Z" fill="#f0efe9" stroke="#0e0e0c" stroke-width="1"/>
+          </svg>
+          <div class="s2-ripple" id="s2-ripple"></div>
+        </div>
+
+        <div class="s2-phaseB" id="s2-phaseB" data-layout-allow-overflow="true">
+          <div class="s2-urlbar" id="s2-urlbar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9s1.3-6.5 3.8-9z"/></svg>
+            yodkwtf.com/projects/cinematica
+          </div>
+          <div class="s2-back" id="s2-back">&larr; Projects</div>
+          <h1 class="s2-heading" id="s2-heading"># Cinematica</h1>
+          <p class="s2-desc" id="s2-desc">A full-stack movie &amp; TV tracking platform built with the MERN stack, featuring auth, watchlists, and reviews.</p>
+          <div class="s2-code" id="s2-code">
+            <div class="fname">README.md</div>
+            <div class="line"><span>$</span> git clone https://github.com/yodkwtf/cinematica-mern.git</div>
+          </div>
+          <div class="s2-image" id="s2-image">
+            <i style="left:24px;top:24px;right:24px;height:34px;"></i>
+            <i style="left:24px;top:74px;width:44%;bottom:24px;"></i>
+            <i style="right:24px;top:74px;width:34%;bottom:24px;"></i>
+            <span class="cap">preview.png</span>
+          </div>
+          <div class="s2-caption" id="s2-caption">This is the actual GitHub README.</div>
+        </div>
+      </div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        tl.to("#s2-glow", { scale: 1.1, opacity: 0.85, duration: 2.6, ease: "sine.inOut", repeat: 1, yoyo: true, transformOrigin: "50% 50%" }, 0);
+        tl.fromTo("#seg2", { scaleX: 0 }, { scaleX: 1, duration: 5.34, ease: "none" }, 0);
+
+        tl.fromTo("#s2-card-wrap", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.1);
+
+        // cursor travels to the "Case study" link, then clicks
+        tl.set("#s2-cursor", { x: 1300, y: 700, opacity: 0 }, 0);
+        tl.to("#s2-cursor", { opacity: 1, duration: 0.25, ease: "power1.out" }, 0.55);
+        tl.to("#s2-cursor", { x: 1560, y: 742, duration: 0.4, ease: "power2.inOut" }, 0.85);
+        tl.to("#s2-cursor", { scale: 0.85, duration: 0.12, ease: "power1.in" }, 1.15);
+        tl.to("#s2-cursor", { scale: 1, duration: 0.14, ease: "power1.out" }, 1.27);
+        tl.set("#s2-ripple", { x: 1568, y: 755, opacity: 1, scale: 0.4 }, 1.15);
+        tl.to("#s2-ripple", { scale: 2.2, opacity: 0, duration: 0.45, ease: "power2.out" }, 1.15);
+        tl.to("#s2-caselink", { color: "#6ee7b7", duration: 0.15 }, 1.15);
+
+        // click-through dissolve: phase A out, phase B in
+        var T = 1.4;
+        tl.to("#s2-phaseA", { opacity: 0, scale: 0.97, duration: 0.5, ease: "power2.inOut" }, T);
+        tl.fromTo("#s2-phaseB", { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.inOut" }, T + 0.1);
+
+        tl.fromTo("#s2-urlbar", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T + 0.1);
+        tl.fromTo("#s2-back", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T + 0.15);
+        tl.fromTo("#s2-heading", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 1.9);
+        tl.fromTo("#s2-desc", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.15);
+        tl.fromTo("#s2-code", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.6);
+        tl.fromTo("#s2-image", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 3.1);
+        tl.fromTo("#s2-caption", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 3.6);
+
+        window.__timelines["scene2-reveal"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

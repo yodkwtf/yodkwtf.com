@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <template>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
+      />
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+          background: #0e0e0c;
+          overflow: hidden;
+          font-family: "Outfit", sans-serif;
+        }
+        .s4-dotgrid { position: absolute; inset: 0; background-image: radial-gradient(circle, #2a2a26 1.5px, transparent 1.5px); background-size: 34px 34px; opacity: 0.4; }
+
+        .s4-chrome-mark { position: absolute; left: 64px; top: 52px; width: 34px; height: 26px; border-radius: 7px; background: #20201f; display: flex; align-items: center; justify-content: center; z-index: 5; }
+        .s4-progress { position: absolute; left: 116px; top: 63px; right: 64px; height: 4px; display: flex; gap: 10px; z-index: 5; }
+        .s4-seg { position: relative; flex: 1; height: 4px; border-radius: 2px; background: rgba(240, 239, 233, 0.14); overflow: hidden; }
+        .s4-seg i { position: absolute; inset: 0; background: #34d399; border-radius: 2px; transform-origin: left center; }
+
+        /* Phase A — automation strip */
+        .s4-phaseA { position: absolute; inset: 0; }
+        .s4-strip-header {
+          position: absolute; left: 0; right: 0; top: 244px; text-align: center;
+          font-family: "Instrument Serif", Georgia, serif; font-size: 46px; color: #a3a39a; opacity: 0;
+        }
+        .s4-strip { position: absolute; left: 70px; top: 380px; width: 1780px; height: 330px; display: flex; align-items: center; gap: 0; }
+        .s4-chip { position: relative; width: 560px; height: 330px; border-radius: 22px; background: #1a1a17; border: 1.5px solid #2a2a26; padding: 40px 44px; opacity: 0; display: flex; flex-direction: column; }
+        .s4-connector { width: 50px; height: 2px; background: rgba(240, 239, 233, 0.14); flex-shrink: 0; position: relative; }
+        .s4-connector::after {
+          content: ""; position: absolute; right: -2px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px;
+          border-right: 2px solid #3a3a35; border-bottom: 2px solid #3a3a35; rotate: -45deg;
+        }
+        .s4-chip-icon-wrap { width: 56px; height: 56px; border-radius: 14px; background: #0e0e0c; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
+        .s4-chip-row { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+        .s4-chip-label { font-family: "DM Mono", monospace; font-size: 20px; color: #9a9a90; }
+        .s4-chip-value { font-family: "Instrument Serif", Georgia, serif; font-size: 48px; color: #f0efe9; margin-bottom: 16px; }
+        .s4-pill { display: inline-flex; align-items: center; gap: 8px; font-family: "DM Mono", monospace; font-size: 19px; padding: 8px 18px; border-radius: 999px; border: 1px solid #2a2a26; color: #a3a39a; margin-top: auto; align-self: flex-start; }
+        .s4-pill.live { color: #34d399; border-color: rgba(52, 211, 153, 0.35); background: rgba(52, 211, 153, 0.08); }
+        .s4-tag-new { font-family: "DM Mono", monospace; font-size: 16px; color: #0e0e0c; background: #34d399; border-radius: 999px; padding: 5px 13px; }
+        .s4-post-title { font-size: 24px; color: #f0efe9; line-height: 1.4; margin-top: auto; }
+        .s4-strip-caption {
+          position: absolute; left: 0; right: 0; top: 754px; text-align: center;
+          font-family: "DM Mono", monospace; font-size: 20px; letter-spacing: 0.04em; color: #6e6e66; opacity: 0;
+        }
+
+        /* Phase B — brand outro */
+        .s4-phaseB { position: absolute; inset: 0; opacity: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .s4-corner { position: absolute; width: 56px; height: 56px; border-color: rgba(52, 211, 153, 0.4); }
+        .s4-corner.tl { left: 64px; top: 96px; border-top: 2px solid; border-left: 2px solid; border-top-left-radius: 8px; }
+        .s4-corner.tr { right: 64px; top: 96px; border-top: 2px solid; border-right: 2px solid; border-top-right-radius: 8px; }
+        .s4-corner.bl { left: 64px; bottom: 64px; border-bottom: 2px solid; border-left: 2px solid; border-bottom-left-radius: 8px; }
+        .s4-corner.br { right: 64px; bottom: 64px; border-bottom: 2px solid; border-right: 2px solid; border-bottom-right-radius: 8px; }
+        .s4-glow-outro {
+          position: absolute; left: 50%; top: 46%; width: 1040px; height: 1040px; margin-left: -520px; margin-top: -520px;
+          border-radius: 50%; background: radial-gradient(circle, rgba(52, 211, 153, 0.32) 0%, rgba(52, 211, 153, 0) 68%); opacity: 0;
+        }
+        .s4-mark-wrap { width: 184px; height: 142px; border-radius: 28px; background: #20201f; display: flex; align-items: center; justify-content: center; margin-bottom: 50px; }
+        .s4-tagline { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 66px; color: #f0efe9; opacity: 0; margin-bottom: 26px; text-align: center; }
+        .s4-wordmark { font-family: "DM Mono", monospace; font-size: 32px; color: #34d399; opacity: 0; letter-spacing: 0.02em; margin-bottom: 44px; }
+        .s4-socials { display: flex; align-items: center; gap: 28px; opacity: 0; }
+        .s4-socials svg { display: block; }
+      </style>
+
+      <div id="root" data-composition-id="scene4-outro" data-width="1920" data-height="1080" data-duration="6.3" data-layout-allow-overlap="true">
+        <div class="s4-dotgrid"></div>
+
+        <div class="s4-chrome-mark">
+          <svg width="20" height="13" viewBox="0 0 100 64" fill="none">
+            <path d="M15 10H63L54 19H30V45H54L63 54H15V10Z" fill="#f0efe9" />
+            <path d="M88 10H68.5C59.5 10 53 14 47 22L31 43.5C27 49 31 54 39 54H59L68 45H46.5C43.5 45 42.5 43.5 44.5 41L58.5 22C60.5 19.5 63.5 19 67 19H79L88 10Z" fill="#34d399" />
+          </svg>
+        </div>
+        <div class="s4-progress" data-layout-ignore="true">
+          <div class="s4-seg"><i style="transform:scaleX(1)"></i></div>
+          <div class="s4-seg"><i style="transform:scaleX(1)"></i></div>
+          <div class="s4-seg"><i style="transform:scaleX(1)"></i></div>
+          <div class="s4-seg"><i id="seg4" style="transform:scaleX(0)"></i></div>
+        </div>
+
+        <div class="s4-phaseA" id="s4-phaseA" data-layout-allow-overflow="true">
+          <div class="s4-strip-header" id="s4-strip-header">Meanwhile, behind the scenes&hellip;</div>
+          <div class="s4-strip">
+            <div class="s4-chip" id="s4-chip1">
+              <div class="s4-chip-row">
+                <div class="s4-chip-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a3a39a" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+              </div>
+              <span class="s4-chip-label">publishedAt</span>
+              <div class="s4-chip-value">Aug 14</div>
+              <span class="s4-pill" id="s4-status-pill">Scheduled</span>
+            </div>
+            <div class="s4-connector"></div>
+            <div class="s4-chip" id="s4-chip2">
+              <div class="s4-chip-row">
+                <div class="s4-chip-icon-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a3a39a" stroke-width="2"><path d="M4 19.5V6a2 2 0 0 1 2-2h11l3 3v12.5"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21h13a1.5 1.5 0 0 0 1.5-1.5"/></svg></div>
+                <span class="s4-tag-new" style="margin-left:auto;">NEW</span>
+              </div>
+              <span class="s4-chip-label">/blog</span>
+              <div class="s4-post-title">React Performance Optimization Techniques</div>
+            </div>
+            <div class="s4-connector"></div>
+            <div class="s4-chip" id="s4-chip3">
+              <div class="s4-chip-row">
+                <div class="s4-chip-icon-wrap"><svg id="s4-envelope" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a3a39a" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+              </div>
+              <span class="s4-chip-label">Newsletter</span>
+              <div class="s4-chip-value" id="s4-mail-status" style="font-size:36px;">Sending&hellip;</div>
+              <span class="s4-pill" id="s4-mail-pill">Resend</span>
+            </div>
+          </div>
+          <div class="s4-strip-caption" id="s4-strip-caption">zero manual steps &middot; zero redeploys</div>
+        </div>
+
+        <div class="s4-phaseB" id="s4-phaseB">
+          <div class="s4-corner tl"></div>
+          <div class="s4-corner tr"></div>
+          <div class="s4-corner bl"></div>
+          <div class="s4-corner br"></div>
+          <div class="s4-glow-outro" id="s4-glow-outro"></div>
+          <div class="s4-mark-wrap">
+            <svg width="100" height="64" viewBox="0 0 100 64" fill="none">
+              <path d="M15 10H63L54 19H30V45H54L63 54H15V10Z" fill="#f0efe9" />
+              <path d="M88 10H68.5C59.5 10 53 14 47 22L31 43.5C27 49 31 54 39 54H59L68 45H46.5C43.5 45 42.5 43.5 44.5 41L58.5 22C60.5 19.5 63.5 19 67 19H79L88 10Z" fill="#34d399" />
+            </svg>
+          </div>
+          <div class="s4-tagline" id="s4-tagline">A portfolio that updates itself.</div>
+          <div class="s4-wordmark" id="s4-wordmark">yodkwtf.com</div>
+          <div class="s4-socials" id="s4-socials">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#a3a39a"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.03 11.03 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.21.66.8.55A10.99 10.99 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#a3a39a"><path d="M18.24 2h3.24l-7.08 8.09L23 22h-6.5l-5.09-6.66L5.6 22H2.35l7.57-8.65L1.5 2h6.66l4.6 6.09L18.24 2Zm-1.14 18h1.8L7.02 3.9H5.08L17.1 20Z"/></svg>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#a3a39a"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM.5 8.98h4.96V23H.5V8.98Zm7.6 0h4.76v1.92h.07c.66-1.25 2.28-2.57 4.7-2.57 5.03 0 5.96 3.31 5.96 7.62V23h-4.96v-6.06c0-1.45-.03-3.31-2.02-3.31-2.02 0-2.33 1.58-2.33 3.2V23H8.1V8.98Z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        tl.fromTo("#seg4", { scaleX: 0 }, { scaleX: 1, duration: 6.3, ease: "none" }, 0);
+
+        tl.fromTo("#s4-strip-header", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2);
+        tl.fromTo("#s4-chip1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.5);
+        tl.fromTo("#s4-chip2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 2.0);
+        tl.fromTo("#s4-chip3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 2.8);
+        tl.fromTo("#s4-strip-caption", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 3.1);
+
+        // chip1: scheduled -> published
+        tl.to("#s4-status-pill", { opacity: 0, duration: 0.15 }, 1.3);
+        tl.call(function () {
+          document.getElementById("s4-status-pill").textContent = "Published";
+          document.getElementById("s4-status-pill").classList.add("live");
+        }, [], 1.45);
+        tl.to("#s4-status-pill", { opacity: 1, duration: 0.15 }, 1.45);
+
+        // envelope sends — beat-locked to strong cue 17.47s global == 3.77s local
+        var SEND_T = 3.77; // beat-locked: 17.47s
+        tl.to("#s4-envelope", { scale: 1.25, duration: 0.14, ease: "power2.out" }, SEND_T);
+        tl.to("#s4-envelope", { scale: 1, duration: 0.22, ease: "power2.inOut" }, SEND_T + 0.14);
+        tl.to("#s4-mail-status", { opacity: 0, duration: 0.12 }, SEND_T);
+        tl.call(function () {
+          document.getElementById("s4-mail-status").textContent = "Sent";
+          document.getElementById("s4-mail-status").style.color = "#34d399";
+        }, [], SEND_T + 0.12);
+        tl.to("#s4-mail-status", { opacity: 1, duration: 0.2 }, SEND_T + 0.12);
+        tl.to("#s4-mail-pill", { opacity: 0, duration: 0.12 }, SEND_T);
+        tl.call(function () {
+          var p = document.getElementById("s4-mail-pill");
+          p.textContent = "Delivered";
+          p.classList.add("live");
+        }, [], SEND_T + 0.12);
+        tl.to("#s4-mail-pill", { opacity: 1, duration: 0.2 }, SEND_T + 0.12);
+
+        // internal phase crossfade: strip out, brand outro in (exit allowed — final scene)
+        var PT = 3.95;
+        tl.to("#s4-phaseA", { opacity: 0, y: -18, duration: 0.4, ease: "power2.in" }, PT);
+        tl.fromTo("#s4-phaseB", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, PT + 0.1);
+        tl.fromTo("#s4-glow-outro", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, PT + 0.1);
+
+        tl.fromTo("#s4-tagline", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.3);
+
+        // subtle accent pulse on the outro glow — beat-locked to strong cue 18.56s global == 4.86s local
+        var PULSE_T = 4.86; // beat-locked: 18.56s
+        tl.to("#s4-glow-outro", { opacity: 1, scale: 1.06, duration: 0.3, ease: "sine.out" }, PULSE_T);
+        tl.to("#s4-glow-outro", { opacity: 0.85, scale: 1, duration: 0.5, ease: "sine.inOut" }, PULSE_T + 0.3);
+
+        tl.fromTo("#s4-wordmark", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 5.3);
+        tl.fromTo("#s4-socials", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 5.6);
+
+        // keep the outro glow gently breathing through the final hold
+        tl.to("#s4-glow-outro", { scale: 1.04, duration: 0.4, ease: "sine.inOut" }, 5.9);
+
+        window.__timelines["scene4-outro"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
