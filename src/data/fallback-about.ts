@@ -1,0 +1,48 @@
+/**
+ * Local path ('/avatar.jpg') or full URL (Cloudinary, etc.).
+ * Leave empty to show the initials placeholder instead.
+ */
+export const FALLBACK_AVATAR_URL = '/about.png';
+
+export const FALLBACK_SHORT_BIO = [
+  `I'm a full-stack engineer with 3+ years of experience building web applications that are fast, accessible, and a joy to use. I believe great software comes from caring equally about the user experience and the code quality underneath it.`,
+  `When I'm not coding, I'm writing about web development, bingeing movies or TV shows, or missing open goals in Rocket League (blame lag, obviously).`,
+  `If you ever want to talk tech, cricket stats, DCEU, or whether Trevor from GTA is misunderstood, I'm your guy!`,
+];
+
+export const FALLBACK_BIO = [
+  `Hey, I'm Durgesh, a full-stack software engineer currently at Konrad Group. Over the past 3+ years I've worked on everything from enterprise dashboards and real-time monitoring systems to e-commerce platforms and AI-powered tools, alongside 140+ personal projects built mostly out of curiosity and a refusal to be bored.`,
+  `JavaScript has been my home for most of my career. React.js, Next.js, Node.js, TypeScript are my daily drivers, though I've also spent real time on Python, Docker, SQL, GCP, and Workday Extend (long story). I've worked across backend infrastructure, cloud systems, and enterprise workflow automation at different companies, and I'm currently at Konrad Group building software that real people depend on.`,
+  `Away from the keyboard, you'll find me watching movies, trying to stay fit through sheer consistency, playing Rocket League at a highly questionable level, and sharing my DCEU opinions that nobody asked for.
+`,
+];
+
+export const FALLBACK_EDUCATION = [
+  {
+    institution: 'The NorthCap University',
+    degree: 'B.Tech in Computer Science',
+    period: '2019 — 2023',
+    note: 'CGPA: 8.46 · Hands-on experience from internships, freelance work, and  100+ personal projects.',
+  },
+  {
+    institution: 'Delhi Public School Ghaziabad Society (DPSG)',
+    degree: 'Higher Secondary Education (PCM)',
+    period: '2013 — 2019',
+    note: 'Grade: 9.4 · Mathematics Topper for two consecutive years (11th & 12th)',
+  },
+];
+
+export const FALLBACK_STATS = [
+  {
+    num: '3+',
+    label: 'Years of experience',
+    sub: 'Shipping production software',
+  },
+  {
+    num: '140+',
+    label: 'Projects completed',
+    sub: 'From personal sites, to startups, to enterprises',
+  },
+  { num: '10+', label: 'Happy clients', sub: 'Across 5 countries' },
+  { num: '∞', label: 'Curiosity', sub: 'Always learning, always building' },
+];

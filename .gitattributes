@@ -1,0 +1,11 @@
+# Force LF line endings for content and source files so Windows checkouts
+# (git autocrlf) don't introduce CRLF. CRLF in .mdx silently broke TOC
+# heading extraction (see src/lib/toc.ts).
+*.mdx text eol=lf
+*.md  text eol=lf
+*.ts  text eol=lf
+*.tsx text eol=lf
+*.js  text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf

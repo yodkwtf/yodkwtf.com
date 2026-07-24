@@ -1,0 +1,228 @@
+---
+title: "Understanding Big O Notation"
+description: "A practical guide to Big O notation — how to measure time and space complexity, the rules for simplifying it, and why logarithms show up so often in algorithm analysis."
+publishedAt: "2026-04-30"
+category: "DSA"
+tags: ["Big O", "Algorithms", "Data Structures", "Computer Science"]
+featured: true
+coverImage: ""
+youtubeId: ""
+draft: false
+---
+
+Big O notation is a way of answering one question: as the input gets bigger, how much more work does this algorithm have to do? It's not about measuring exact runtimes — it's about the **shape of the growth curve**. Whether doubling the input doubles the work, squares it, or barely changes it at all.
+
+## Why it matters
+
+For small inputs, the difference between algorithms is negligible. But real-world programs deal with thousands or millions of entries, and at that scale the growth curve dominates everything else. Big O lets you compare approaches on equal footing and spot problems before you write a single benchmark.
+
+## A first example
+
+```js
+// filename: reverseList.js
+function reverseList(list) {
+  let reversedList = [];
+  for (let i = list.length - 1; i >= 0; i--) {
+    reversedList.push(list[i]);
+  }
+  return reversedList;
+}
+```
+
+This loops through `n` elements doing a constant amount of work on each — so its time complexity is **O(n)**, or linear time. For 5 elements it runs 5 times; for 10 million it runs 10 million times. The absolute numbers only become noticeable at scale, but the shape stays the same.
+
+<Callout type="tip" title="Small inputs vs. large inputs">
+  Time complexity differences are often invisible for small inputs but become
+  critical for large ones. An O(n) algorithm and an O(n²) algorithm might both
+  feel "instant" on 10 items, but on 100,000 items, one might take milliseconds
+  while the other takes minutes.
+</Callout>
+
+## Common complexities
+
+Big O is always calculated for the **worst-case scenario** — the input that makes the algorithm do the most work.
+
+| Notation   | Name         | Description                                           |
+| ---------- | ------------ | ----------------------------------------------------- |
+| O(1)       | Constant     | Doesn't depend on input size                          |
+| O(log n)   | Logarithmic  | Grows very slowly — halves the problem each step      |
+| O(n)       | Linear       | Grows proportionally with input                       |
+| O(n log n) | Linearithmic | Slightly worse than linear; common in sorting         |
+| O(n²)      | Quadratic    | Grows with the square of input — nested loops         |
+| O(2ⁿ)      | Exponential  | Grows extremely fast; usually needs a better approach |
+
+A useful way to build intuition here is visually — the chart below shows how dramatically these curves diverge as `n` increases:
+
+<svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Big O complexity chart</title>
+  <desc id="desc">Line chart showing growth curves for O(1), O(log n), O(n), O(n log n), O(n^2), and O(2^n) as input size increases.</desc>
+
+<line x1="50" y1="370" x2="650" y2="370" stroke="#B4B2A9" stroke-width="1" />
+<line x1="50" y1="20" x2="50" y2="370" stroke="#B4B2A9" stroke-width="1" />
+<text
+  x="350"
+  y="405"
+  text-anchor="middle"
+  fill="#5F5E5A"
+  font-family="sans-serif"
+  font-size="13"
+>
+  Input size (n)
+</text>
+<text
+  x="20"
+  y="195"
+  text-anchor="middle"
+  fill="#5F5E5A"
+  font-family="sans-serif"
+  font-size="13"
+  transform="rotate(-90 20 195)"
+>
+  Operations
+</text>
+
+<path d="M 50 350 L 650 350" fill="none" stroke="#888780" stroke-width="2" />
+<path
+  d="M 50 350 C 150 320, 300 290, 650 250"
+  fill="none"
+  stroke="#185FA5"
+  stroke-width="2"
+/>
+<path
+  d="M 50 350 C 250 250, 450 100, 650 20"
+  fill="none"
+  stroke="#0F6E56"
+  stroke-width="2"
+/>
+<path
+  d="M 50 350 Q 250 350 400 290 Q 550 230 650 180"
+  fill="none"
+  stroke="#534AB7"
+  stroke-width="2"
+/>
+<path
+  d="M 50 350 Q 350 350 480 230 Q 600 100 650 20"
+  fill="none"
+  stroke="#993C1D"
+  stroke-width="2"
+/>
+<path
+  d="M 50 350 C 200 300, 380 100, 430 20"
+  fill="none"
+  stroke="#D85A30"
+  stroke-width="2"
+/>
+
+  <g transform="translate(470, 30)">
+    <rect x="0" y="0" width="180" height="170" fill="#FFFFFF" stroke="#D3D1C7" stroke-width="0.5" rx="8"/>
+    <g font-family="sans-serif" font-size="12">
+      <line x1="12" y1="20" x2="32" y2="20" stroke="#888780" stroke-width="2"/>
+      <text x="38" y="24" fill="#2C2C2A">O(1) constant</text>
+
+      <line x1="12" y1="44" x2="32" y2="44" stroke="#185FA5" stroke-width="2"/>
+      <text x="38" y="48" fill="#2C2C2A">O(log n) logarithmic</text>
+
+      <line x1="12" y1="68" x2="32" y2="68" stroke="#0F6E56" stroke-width="2"/>
+      <text x="38" y="72" fill="#2C2C2A">O(n) linear</text>
+
+      <line x1="12" y1="92" x2="32" y2="92" stroke="#534AB7" stroke-width="2"/>
+      <text x="38" y="96" fill="#2C2C2A">O(n log n)</text>
+
+      <line x1="12" y1="116" x2="32" y2="116" stroke="#993C1D" stroke-width="2"/>
+      <text x="38" y="120" fill="#2C2C2A">O(n^2) quadratic</text>
+
+      <line x1="12" y1="140" x2="32" y2="140" stroke="#D85A30" stroke-width="2"/>
+      <text x="38" y="144" fill="#2C2C2A">O(2^n) exponential</text>
+    </g>
+
+  </g>
+</svg>
+
+Notice how O(1) and O(log n) stay nearly flat, O(n) and O(n log n) grow steadily, and O(n²) and O(2ⁿ) shoot upward almost immediately. This is why, for large inputs, moving from O(n²) to O(n log n) (for example) can make the difference between a program that runs instantly and one that times out.
+
+## Simplification rules
+
+When you analyze code you rarely get a clean single term — these rules let you reduce it down to what actually matters.
+
+1. **Constants don't matter.** An algorithm that always does 100 operations regardless of input is still O(1).
+
+2. **Drop constant multipliers.** O(5n) simplifies to O(n). Constants don't change the shape of the curve.
+
+3. **Nested loops over different inputs multiply.** A loop over `n` items containing a loop over `m` items is O(n \* m), not O(n²) — those are different variables.
+
+4. **Drop non-dominant terms.** O(n² + n) simplifies to O(n²). The smaller term is irrelevant once `n` grows large.
+
+5. **Separate loops over separate inputs add.** Two independent loops over `n` and `m` give O(n + m), not O(n²).
+
+## Worked examples
+
+```js
+// filename: logAtLeast5.js
+function logAtLeast5(n) {
+  for (let i = 1; i <= Math.max(5, n); i++) {
+    console.log(i);
+  }
+}
+```
+
+For small `n` this runs exactly 5 times, but once `n` exceeds 5 it scales linearly. Big O describes behavior as `n` grows large — **O(n)**.
+
+```js
+// filename: logAtMost5.js
+function logAtMost5(n) {
+  for (let i = 1; i <= Math.min(5, n); i++) {
+    console.log(i);
+  }
+}
+```
+
+No matter how large `n` gets, this loop runs at most 5 times. The operation count is capped by a constant — **O(1)**. A `for` loop doesn't automatically mean O(n); what matters is how many times it actually runs as `n` grows.
+
+## Space complexity
+
+Space complexity measures the additional memory an algorithm needs as input grows, using the same Big O notation.
+
+- **Primitives** (numbers, booleans, `null`) — O(1), fixed size regardless of value.
+- **Strings** — O(n), proportional to length.
+- **Arrays and objects** — O(n), proportional to number of elements or keys.
+
+```js
+// filename: sum.js
+function sum(arr) {
+  let total = 0;
+  for (let i = 0; i < arr.length; i++) {
+    total += arr[i];
+  }
+  return total;
+}
+```
+
+Only one extra variable (`total`) is created regardless of how large `arr` is — **O(1) space**. Its time complexity is still O(n) though; time and space are measured independently.
+
+```js
+// filename: double.js
+function double(arr) {
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(2 * arr[i]);
+  }
+  return newArr;
+}
+```
+
+`newArr` grows with the input — 10 elements in, 10 elements out. **O(n) space**. Sometimes you trade more memory for less time (caching results to avoid recomputation) or vice versa — knowing both dimensions lets you make that trade deliberately.
+
+## Logarithms
+
+A logarithm is the inverse of exponentiation: log₂(8) = 3 because 2³ = 8. It answers "what power do I raise the base to, to get this value?"
+
+In computer science the base is almost always 2, because so many algorithms work by repeatedly splitting a problem in half. An **O(log n)** algorithm reduces the remaining problem by a constant factor on each step — typically halving it.
+
+To make this concrete: if you have 1,000,000 items and halve the search space on each step, you find the answer in about 20 steps (since 2²⁰ ≈ 1,000,000). An O(n) algorithm on the same input needs up to 1,000,000 steps. This is why O(log n) is considered extremely efficient — the operation count barely increases even as the input grows enormously.
+
+Logarithmic complexity shows up wherever a problem is divided rather than iterated:
+
+- **Binary search** — halves the search space each step → O(log n)
+- **Merge sort** — recursively splits input in half → O(n log n)
+- **Quick sort** — partitions into smaller pieces → O(n log n) on average
+- **Many recursive algorithms** — any recursion that halves its input per call tends to have a logarithmic factor

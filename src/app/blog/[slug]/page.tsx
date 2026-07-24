@@ -1,0 +1,254 @@
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import remarkGfm from 'remark-gfm';
+import rehypeSlug from 'rehype-slug';
+import rehypePrettyCode from 'rehype-pretty-code';
+import { getBlogBySlug, getAllBlogsMeta, isPublishable } from '@/lib/blogs';
+import { rehypeExtractFilename } from '@/lib/rehype-extract-filename';
+import { rehypeFlattenCodeFigure } from '@/lib/rehype-flatten-code-figure';
+import { formatDate } from '@/lib/utils';
+import { TagPill } from '@/components/ui/TagPill';
+import { AnimateIn } from '@/components/ui/AnimateIn';
+import { mdxComponents } from '@/components/mdx/MDXComponents';
+import { BlogCodeEnhancer } from '@/components/mdx/BlogCodeEnhancer';
+import { ShareButtons } from '@/components/ui/ShareButtons';
+import { BlogCard } from '@/components/ui/BlogCard';
+import { siteConfig } from '@/config/site';
+import { getAboutPage } from '@/sanity/lib/queries';
+import { urlFor } from '@/sanity/lib/client';
+import { extractHeadings } from '@/lib/toc';
+import { logger } from '@/lib/logger';
+import { TableOfContents } from '@/components/ui/TableOfContents';
+
+export const revalidate = 3600;
+
+interface Params {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const posts = getAllBlogsMeta();
+  return posts.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogBySlug(slug);
+  if (!post || !isPublishable(post)) return { title: 'Post Not Found' };
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical: `${siteConfig.url}/blog/${slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      url: `${siteConfig.url}/blog/${slug}`,
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
+      authors: [siteConfig.author],
+      images: post.coverImage ? [post.coverImage] : [siteConfig.ogImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+    },
+  };
+}
+
+export default async function BlogDetailPage({ params }: Params) {
+  const { slug } = await params;
+  const post = getBlogBySlug(slug);
+  if (!post || !isPublishable(post)) notFound();
+
+  let avatarUrl: string | null = null;
+  try {
+    const about = await getAboutPage();
+    if (about?.avatar)
+      avatarUrl = urlFor(about.avatar).width(56).height(56).url();
+  } catch (err) {
+    logger.warn('BlogDetailPage', 'Failed to fetch avatar from Sanity', err);
+  }
+
+  const headings = extractHeadings(post.content);
+
+  const allPosts = getAllBlogsMeta();
+  const related = allPosts
+    .filter(
+      (p) => p.slug !== slug && p.tags?.some((t) => post.tags?.includes(t)),
+    )
+    .slice(0, 2);
+
+  const postUrl = `${siteConfig.url}/blog/${slug}`;
+
+  return (
+    <div className="pt-28 pb-24 px-6">
+      <div className="mx-auto max-w-3xl lg:max-w-5xl">
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-16 lg:items-start">
+          {/* Left column: everything */}
+          <article className="min-w-0">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-ink transition-colors group mb-8"
+            >
+              <ArrowLeft
+                size={15}
+                className="transition-transform group-hover:-translate-x-1"
+              />
+              Back to blog
+            </Link>
+
+            <AnimateIn className="mb-10">
+              <div className="flex flex-wrap gap-2 mb-5">
+                {post.category && (
+                  <span className="inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded-full border border-accent-500/30 text-accent-500 bg-accent-500/5">
+                    {post.category}
+                  </span>
+                )}
+                {post.tags?.map((tag) => (
+                  <TagPill key={tag} label={tag} />
+                ))}
+              </div>
+              <h1 className="font-display text-4xl md:text-5xl text-ink mb-5 leading-tight">
+                {post.title}
+              </h1>
+              <p className="text-ink-muted text-lg leading-relaxed mb-6">
+                {post.description}
+              </p>
+              <div className="flex flex-wrap items-center gap-4 pb-6 border-b border-border">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full overflow-hidden border border-accent-500/30 shrink-0">
+                    {avatarUrl ? (
+                      <Image
+                        src={avatarUrl}
+                        alt={siteConfig.author}
+                        width={28}
+                        height={28}
+                        className="object-cover w-full h-full"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-accent-500/20 flex items-center justify-center text-xs font-mono text-accent-500 font-medium">
+                        {siteConfig.name.slice(0, 1)}
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-sm text-ink font-medium">
+                    {siteConfig.name}
+                  </span>
+                </div>
+                <span className="text-ink-faint text-sm font-mono flex items-center gap-1">
+                  <Calendar size={12} /> {formatDate(post.publishedAt)}
+                </span>
+                <span className="text-ink-faint text-sm font-mono flex items-center gap-1">
+                  <Clock size={12} /> {post.readingTime}
+                </span>
+                {post.updatedAt && (
+                  <span className="text-ink-faint text-xs font-mono italic">
+                    Updated {formatDate(post.updatedAt)}
+                  </span>
+                )}
+              </div>
+            </AnimateIn>
+
+            {post.coverImage && (
+              <AnimateIn delay={0.1} className="mb-10">
+                <div className="relative rounded-xl overflow-hidden border border-border aspect-video">
+                  <Image
+                    src={post.coverImage}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </AnimateIn>
+            )}
+
+            {post.youtubeId && (
+              <AnimateIn delay={0.1} className="mb-10">
+                <p className="mb-3 text-sm font-mono text-ink-faint">
+                  Video version of this blog
+                </p>
+                <div className="rounded-xl overflow-hidden border border-border aspect-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${post.youtubeId}`}
+                    allowFullScreen
+                    className="w-full h-full"
+                    title={post.title}
+                  />
+                </div>
+              </AnimateIn>
+            )}
+
+            {/* Inline TOC for tablet and below */}
+            {headings.length > 1 && (
+              <div className="lg:hidden mb-10">
+                <TableOfContents headings={headings} variant="inline" />
+              </div>
+            )}
+
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+              <MDXRemote
+                source={post.content}
+                options={{
+                  mdxOptions: {
+                    remarkPlugins: [remarkGfm],
+                    rehypePlugins: [
+                      rehypeExtractFilename,
+                      rehypeSlug,
+                      [
+                        rehypePrettyCode,
+                        { theme: 'github-dark-default', keepBackground: true },
+                      ],
+                      rehypeFlattenCodeFigure,
+                    ],
+                  },
+                }}
+                components={mdxComponents}
+              />
+              <BlogCodeEnhancer />
+            </div>
+
+            <div className="mt-16">
+              <div className="flex flex-wrap items-center gap-2 pb-6 border-b border-border mb-8">
+                <span className="text-xs font-mono text-ink-faint uppercase tracking-wide">
+                  Tags:
+                </span>
+                {post.tags?.map((tag) => (
+                  <TagPill key={tag} label={tag} />
+                ))}
+              </div>
+              <div className="mb-12">
+                <ShareButtons url={postUrl} title={post.title} />
+              </div>
+              {related.length > 0 && (
+                <div>
+                  <h2 className="font-display text-2xl text-ink mb-6">
+                    Related posts
+                  </h2>
+                  <div className="grid gap-5">
+                    {related.map((p) => (
+                      <BlogCard key={p.slug} post={p} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </article>
+
+          {/* Right column: TOC (desktop / above tablet) */}
+          {headings.length > 1 && (
+            <aside className="hidden lg:block lg:sticky lg:top-28 lg:self-start">
+              <TableOfContents headings={headings} />
+            </aside>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

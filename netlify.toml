@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Next.js 16 requires Node 20.9+
+  NODE_VERSION = "20"
+
+# Official Next.js runtime — wires up SSR pages, API routes, and image
+# optimization as Netlify functions. Netlify auto-installs this, but
+# declaring it keeps the build reproducible.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

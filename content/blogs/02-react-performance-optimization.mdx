@@ -1,0 +1,299 @@
+---
+title: "React Performance Optimization Techniques"
+description: "A practical guide to the most useful React performance techniques — what they do, how to use them, and just as importantly, when you actually need them."
+publishedAt: "2026-05-31"
+category: "React.js"
+tags: ["SEO", "Performance", "Frontend"]
+featured: true
+coverImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80"
+youtubeId: ""
+draft: false
+---
+
+React apps tend to slow down in predictable ways: long lists rendering every item at once, images loading before they're needed, components re-rendering when nothing relevant changed, or expensive calculations running on every keystroke. This post walks through the most useful optimization techniques, how they work, and when they're actually worth reaching for.
+
+<Callout type="info" title="Optimize with intent">
+  Every technique here adds some complexity. Use them to fix a real, measured
+  performance problem — not as a checklist to apply to every component.
+</Callout>
+
+## List virtualization (windowing)
+
+When you render a list with thousands of items, React creates a DOM node for every single one — even the ones the user can't see. This wastes memory and slows down the initial render.
+
+Virtualization fixes this by only rendering items currently visible in the viewport, plus a small buffer. As the user scrolls, items that leave the screen are removed from the DOM and new ones are rendered in their place. The `react-virtualized` library (and its lighter successor `react-window`) handles all of this for you.
+
+```jsx
+// filename: VirtualizedList.jsx
+import { List } from "react-virtualized";
+
+function VirtualizedList({ items }) {
+  const rowRenderer = ({ index, key, style }) => (
+    <div key={key} style={style}>
+      {items[index]}
+    </div>
+  );
+
+  return (
+    <List
+      width={400}
+      height={400}
+      rowCount={items.length}
+      rowHeight={40}
+      rowRenderer={rowRenderer}
+    />
+  );
+}
+```
+
+`List` only renders enough rows to fill its 400px container regardless of how many items exist. The `style` prop passed into `rowRenderer` is what positions each row correctly as the user scrolls. Reach for this when you're rendering hundreds of rows or more — for short lists, the overhead isn't worth it.
+
+## Lazy loading images
+
+Loading every image upfront — especially on image-heavy pages — can significantly slow down the initial load, even if most images are far below the fold. Lazy loading defers an image until it's about to enter the viewport, showing a placeholder until then.
+
+The browser's **Intersection Observer API** is the modern way to detect when an element scrolls into view:
+
+```jsx
+// filename: LazyImage.jsx
+import { useEffect, useRef, useState } from "react";
+
+function LazyImage({ src, alt }) {
+  const imgRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        observer.disconnect(); // stop watching once loaded
+      }
+    });
+
+    if (imgRef.current) observer.observe(imgRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <img ref={imgRef} src={isVisible ? src : "/placeholder.png"} alt={alt} />
+  );
+}
+```
+
+Once the image scrolls into view, `isVisible` flips to `true` and the real `src` is swapped in. For simple cases though, the browser's built-in `loading="lazy"` attribute on `<img>` does this automatically without any JavaScript — worth trying first before reaching for a custom implementation.
+
+## Memoization
+
+Memoization caches the result of a computation so it isn't redone unless something it depends on actually changes. React has three tools for this, each solving a slightly different problem:
+
+- **`React.memo()`** wraps a component and skips re-rendering it if its props haven't changed since the last render.
+- **`useMemo()`** caches the result of a computation, only recalculating when a dependency changes.
+- **`useCallback()`** caches a function reference rather than a value. This matters when passing callbacks to memoized children — without it, a new function instance is created on every render, causing the child to re-render anyway and defeating the memoization.
+
+```jsx
+// filename: Memoization.jsx
+import { memo, useMemo, useCallback, useState } from "react";
+
+const ExpensiveChild = memo(function ExpensiveChild({ onClick, label }) {
+  console.log("ExpensiveChild rendered");
+  return <button onClick={onClick}>{label}</button>;
+});
+
+function Parent({ items }) {
+  const [count, setCount] = useState(0);
+
+  // Only recalculates when `items` changes
+  const total = useMemo(
+    () => items.reduce((sum, item) => sum + item.value, 0),
+    [items],
+  );
+
+  // Same function reference on every render
+  const handleClick = useCallback(() => setCount((c) => c + 1), []);
+
+  return (
+    <div>
+      <p>Total: {total}</p>
+      <p>Count: {count}</p>
+      <ExpensiveChild onClick={handleClick} label="Increment" />
+    </div>
+  );
+}
+```
+
+When `count` updates and `Parent` re-renders, `total` is served from cache since `items` didn't change, and `handleClick` keeps the same reference so `ExpensiveChild` doesn't re-render. That said, memoization itself has a cost — React still has to store and compare values on every render. Profile first, then apply it where it actually matters.
+
+## Throttling and debouncing
+
+Both limit how often a function runs in response to frequent events, but they work differently.
+
+**Throttling** ensures a function runs at most once per fixed interval, no matter how many times the event fires. This is useful for continuous events like scrolling or window resizing, where you want to react periodically but not on every single frame.
+
+```js
+// filename: throttle-example.js
+function createThrottledHandler() {
+  let throttled = false;
+
+  return () => {
+    if (!throttled) {
+      // business logic — runs immediately, then blocked for 2s
+      throttled = true;
+      setTimeout(() => {
+        throttled = false;
+      }, 2000);
+    }
+  };
+}
+
+window.addEventListener("resize", createThrottledHandler());
+```
+
+**Debouncing** instead waits until the event stops firing for a set period before running at all. This is ideal for search inputs — you don't want to fire an API call on every keystroke, only once the user has paused typing.
+
+```jsx
+// filename: SearchInput.jsx
+function SearchInput() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState("");
+
+  useEffect(() => {
+    // Start a 1s timer on every keystroke
+    const timer = setTimeout(() => setDebouncedTerm(searchTerm), 1000);
+    // If searchTerm changes before 1s is up, cancel and restart
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (debouncedTerm) {
+      // fetchData(debouncedTerm) — only fires after user stops typing
+    }
+  }, [debouncedTerm]);
+
+  return (
+    <input
+      type="text"
+      placeholder="Type to search..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  );
+}
+```
+
+A quick way to keep them straight: throttling is "run at most once every X seconds, no matter what." Debouncing is "run once, X seconds after the last event."
+
+## Code splitting
+
+By default, a React app bundles all its code into one file loaded upfront — including pages the user may never visit. As the app grows, this bundle gets large enough to noticeably slow down the initial load.
+
+Code splitting breaks the bundle into smaller chunks loaded on demand. `React.lazy()` dynamically imports a component only when it's first rendered, and `Suspense` shows a fallback while that chunk downloads.
+
+```jsx
+// filename: CodeSplitting.jsx
+import { lazy, Suspense } from "react";
+
+const HeavyChart = lazy(() => import("./HeavyChart"));
+
+function Dashboard() {
+  return (
+    <Suspense fallback={<p>Loading chart...</p>}>
+      <HeavyChart />
+    </Suspense>
+  );
+}
+```
+
+The code for `HeavyChart` is only fetched when `Dashboard` actually renders it. This is especially effective applied at the route level, where each page of your app becomes its own chunk.
+
+## React Fragments
+
+Every component must return a single root element. The instinct is to wrap siblings in a `<div>`, but that adds an extra node to the DOM — and over many components, those wrapper divs accumulate and can cause subtle layout issues, especially with flexbox or grid.
+
+`React.Fragment` (shorthand: `<>...</>`) groups elements without adding any node to the DOM.
+
+```jsx
+// filename: FragmentExample.jsx
+// ❌ Adds an unnecessary <div> to the DOM
+function Bad() {
+  return (
+    <div>
+      <Nav />
+      <Hero />
+    </div>
+  );
+}
+
+// ✅ Nav and Hero become direct siblings — no wrapper node
+function Good() {
+  return (
+    <>
+      <Nav />
+      <Hero />
+    </>
+  );
+}
+```
+
+## The `useTransition` hook
+
+React batches multiple `setState` calls from the same event handler into a single re-render. Normally this is a good thing, but it becomes a problem when one of those updates is expensive — the batch is blocked until the slow update finishes, making even cheap updates (like reflecting a keypress) feel laggy.
+
+```jsx
+// filename: handleChange.js
+const handleChange = (e) => {
+  setSearchQuery(e.target.value); // fast
+  setFilterData(); // slow — loops over a million items
+};
+```
+
+`useTransition` lets you mark certain updates as low priority. React handles high-priority updates first (keeping the UI responsive), then works through the low-priority ones when it has bandwidth.
+
+```jsx
+// filename: useTransition-example.jsx
+import { useState, useTransition } from "react";
+
+function SearchableList({ allItems }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState(allItems);
+  const [isPending, startTransition] = useTransition();
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value); // high priority — input stays responsive
+
+    startTransition(() => {
+      // low priority — runs in the background
+      setFilteredItems(allItems.filter((item) => item.includes(value)));
+    });
+  };
+
+  return (
+    <div>
+      <input value={searchQuery} onChange={handleChange} />
+      {isPending ? (
+        <p>Updating results...</p>
+      ) : (
+        <FilterItems items={filteredItems} />
+      )}
+    </div>
+  );
+}
+```
+
+`isPending` is `true` while the low-priority update is still processing, which lets you show a loading state in the meantime. One thing to keep in mind: this causes more re-renders than normal batching — the component re-renders once when the high-priority update settles, and again when the low-priority one does. Only reach for it when an expensive update is genuinely making the UI feel unresponsive.
+
+## Summary
+
+| Technique           | Purpose                            | When to reach for it                  |
+| ------------------- | ---------------------------------- | ------------------------------------- |
+| List virtualization | Render only visible list items     | Lists with 100s+ rows                 |
+| Lazy loading images | Load images on scroll              | Image-heavy pages                     |
+| `React.memo()`      | Skip re-renders on unchanged props | Expensive child components            |
+| `useMemo()`         | Cache expensive computations       | Heavy calculations                    |
+| `useCallback()`     | Cache function references          | Callbacks passed to memoized children |
+| Throttling          | Limit call frequency at intervals  | Scroll/resize handlers                |
+| Debouncing          | Delay call until activity stops    | Search inputs, autosave               |
+| Code splitting      | Load code on demand                | Large bundles, route-based splits     |
+| React Fragments     | Avoid extra DOM nodes              | Grouping sibling elements             |
+| `useTransition`     | Prioritize urgent state updates    | Heavy filtering/search UIs            |

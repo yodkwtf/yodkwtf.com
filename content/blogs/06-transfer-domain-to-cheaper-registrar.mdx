@@ -1,0 +1,70 @@
+---
+title: "Transfer Your Domain to a Cheaper Registrar"
+description: "Your domain renewal just got expensive. Here is how to transfer it to a cheaper registrar without any downtime, broken links, or SEO impact — step by step."
+publishedAt: "2026-07-06"
+category: "DevOps"
+tags: ["Branding", "DNS"]
+featured: false
+youtubeId: ""
+draft: false
+---
+
+Domain renewals are sneaky. You buy a domain at a great introductory price, forget about it for a year, and then get hit with a renewal invoice that's 2-3x what you originally paid. The good news — you can transfer your domain to a cheaper registrar and keep everything exactly as it is. Same domain name, no downtime, no SEO impact.
+
+## What is a domain transfer?
+
+A domain transfer moves the _registration_ of your domain from one company to another. Your domain name, website, email, and DNS records stay completely untouched. Think of it like switching your phone to a new carrier but keeping your number.
+
+## Before you start
+
+Check these things before initiating anything:
+
+- **Domain age** — ICANN requires a domain to be at least 60 days old before it can be transferred.
+- **Recent transfer** — If your domain was transferred in the last 60 days, you'll need to wait.
+- **Time remaining** — Start at least 2 weeks before expiry. Transfers take 5–7 days and you don't want to cut it close. Most registrars add 1 year to your expiry on transfer, so you won't lose time you already paid for.
+- **Renewal price at the new registrar** — Check the _renewal_ price, not just the transfer price. Some registrars offer cheap transfers but expensive renewals.
+
+## Step 1 — Unlock your domain
+
+Domains are locked by default to prevent unauthorized transfers. Log into your current registrar's dashboard and find the domain management page. Look for a setting called **Transfer Lock**, **Domain Lock**, or **Registrar Lock** and turn it off.
+
+## Step 2 — Get your EPP / Authorization code
+
+This is a one-time code that proves you own the domain and authorizes the transfer. In your current registrar's domain settings, look for **EPP Code**, **Authorization Code**, **Transfer Key**, or **Auth Code** — different registrars use different names, but it's the same thing.
+
+Most registrars will either display it immediately or email it to your registered address. Copy it and keep it handy.
+
+## Step 3 — Initiate the transfer at your new registrar
+
+Go to your new registrar's website and find their domain transfer page — usually under **Domains → Transfer a Domain**. Enter your domain name, complete checkout, and paste in your EPP code when prompted.
+
+## Step 4 — Approve the transfer
+
+After initiating the transfer, your current registrar sends an approval email to your registered address. Open it and click **Approve** as soon as you see it — approving manually can speed the transfer from 5–7 days down to just a few hours. If you don't see it, check spam.
+
+## Step 5 — Wait for it to complete
+
+The transfer processes in the background. You'll get a confirmation email from your new registrar once it's done. **Your website stays live the entire time** — DNS continues working normally during a transfer and visitors won't notice anything.
+
+## Step 6 — Verify your nameservers
+
+Once the transfer is complete, log into your new registrar and check that your nameservers are still set correctly under **DNS → Nameservers**. They should match exactly what you had before — whether that's Cloudflare, your hosting provider, or custom nameservers.
+
+If they've been reset to the new registrar's defaults, update them back to what they were. Everything else — hosting, email, SSL certificates — is unaffected as long as nameservers are correct.
+
+<Callout type="info" title="Using Cloudflare for DNS?">
+  If Cloudflare manages your DNS, the transfer has zero effect on your setup.
+  Your nameservers point to Cloudflare regardless of which registrar holds the
+  registration. Just verify the Cloudflare nameservers are still set at your new
+  registrar after the transfer and you're done.
+</Callout>
+
+## Troubleshooting
+
+**Transfer is stuck or taking too long** — Check your email for an approval request from your current registrar. The transfer won't proceed until you approve it.
+
+**EPP code is invalid** — Make sure you copied it with no extra spaces. If it was emailed to you, copy from the plain-text version rather than the HTML version.
+
+**Current registrar won't provide the EPP code** — This is rare but it happens. Check their support docs or contact them directly — they're legally required to provide it.
+
+**Domain expired before the transfer completed** — Contact your new registrar's support immediately. Most can still complete the transfer within a grace period after expiry, but act fast.

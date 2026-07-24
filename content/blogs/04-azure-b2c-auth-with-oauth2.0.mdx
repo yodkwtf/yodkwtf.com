@@ -1,0 +1,404 @@
+---
+title: 'Azure B2C Authentication with OAuth 2.0 and PKCE'
+description: 'A practical walkthrough of moving from frontend-owned authentication to backend session orchestration with Azure B2C, calling the OAuth 2.0 endpoints directly with PKCE and JWT cookies.'
+publishedAt: '2026-06-30'
+category: 'Authentication'
+tags: ['Azure', 'OAuth2', 'Security']
+featured: true
+coverImage: ''
+youtubeId: ''
+draft: false
+---
+
+A common pattern in single-page apps is to handle login entirely in the browser — but as an app grows toward SSR and enterprise requirements, this approach starts to show its limits. This post walks through moving from frontend-owned authentication to backend session orchestration using Azure AD B2C, OAuth 2.0 with PKCE, calling Azure's OAuth endpoints directly with plain HTTP rather than relying on the MSAL SDK.
+
+## Why move auth to the backend?
+
+In a frontend-owned setup, the browser talks directly to Azure B2C, receives tokens, and stores them in memory or session storage. This works, but it has real downsides:
+
+- **Token exposure** — tokens in the browser are more vulnerable to XSS than `httpOnly` cookies.
+- **Refresh complexity** — refresh logic has to be shared across every page or component that needs it.
+- **SSR mismatch** — the server doesn't know whether the user is authenticated until the frontend tells it, which defeats the purpose of server-side rendering.
+
+Moving auth to the backend makes it the single source of truth. It owns login, logout, and the entire token lifecycle. The frontend becomes a thin UI layer — it displays the user's info, but makes no auth decisions.
+
+## Understanding OAuth 2.0 and PKCE
+
+**OAuth 2.0 Authorization Code flow** lets a user authenticate directly with Azure B2C without exposing their password to our app. Azure redirects back to our `redirect_uri` with a short-lived authorization code, which we exchange for tokens via a server-to-server request.
+
+**PKCE (Proof Key for Code Exchange)** protects against intercepted authorization codes. Before redirecting the user, the app generates a random **code verifier**, hashes it into a **code challenge**, and sends the challenge to Azure with the authorization request. When exchanging the code for tokens, the app sends the original verifier — Azure recomputes the hash and confirms it matches, proving the token request came from the same client that started the flow.
+
+## The overall flow
+
+```txt
+/login
+  ↓
+/auth/start — generate PKCE pair, redirect to Azure
+  ↓
+Azure B2C — user authenticates
+  ↓
+/auth/callback — exchange code for tokens, set cookies
+  ↓
+redirect /
+  ↓
+authMiddleware — validate token on every request, refresh if expired
+```
+
+After login, tokens are stored as `httpOnly` cookies — inaccessible to browser JavaScript, which significantly reduces XSS risk.
+
+## Step 1: Install dependencies
+
+```bash
+npm install cookie-parser jsonwebtoken
+npm install -D @types/cookie-parser @types/jsonwebtoken
+```
+
+We'll use Node's built-in `crypto` for PKCE generation and built-in `fetch` for calling Azure's endpoints — no HTTP client library needed.
+
+## Step 2: Configure environment variables
+
+```env
+# filename: .env
+B2C_CLIENT_ID=YOUR_CLIENT_ID
+B2C_CLIENT_SECRET=YOUR_CLIENT_SECRET
+B2C_TENANT=YOUR_TENANT
+B2C_POLICY=YOUR_POLICY
+B2C_REDIRECT_URI=http://localhost:3000/auth/callback
+B2C_SCOPES=openid profile offline_access
+```
+
+- **`B2C_TENANT`** — your tenant name (e.g. `contoso` for `contoso.onmicrosoft.com`).
+- **`B2C_POLICY`** — the user flow name, such as `B2C_1_signupsignin`.
+- **`B2C_REDIRECT_URI`** — must exactly match what's registered in your Azure app registration.
+- **`B2C_SCOPES`** — `offline_access` is required. Without it, Azure won't issue a refresh token.
+
+From these, the two endpoints we'll call directly are:
+
+```txt
+Authorization: https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/{policy}/oauth2/v2.0/authorize
+Token:         https://{tenant}.b2clogin.com/{tenant}.onmicrosoft.com/{policy}/oauth2/v2.0/token
+```
+
+## Step 3: Load environment variables early
+
+```ts
+// filename: index.ts
+import 'dotenv/config'; // must be the very first import
+```
+
+Other modules read `process.env` at import time — if `dotenv` hasn't run yet, those values will be `undefined`.
+
+## Step 4: Enable cookie parsing
+
+```ts
+// filename: index.ts
+import cookieParser from 'cookie-parser';
+
+app.use(cookieParser());
+```
+
+`cookie-parser` populates `req.cookies` on every request, which we'll need to read both the auth cookies and the temporary PKCE verifier cookie.
+
+## Step 5: Create the auth module
+
+```txt
+src/auth/
+  azure-config.ts   — endpoint URLs and PKCE helpers
+  auth.service.ts   — token exchange, refresh, expiry checks
+  auth.routes.ts    — login, callback, logout routes
+  auth.middleware.ts — enforces auth on every request
+```
+
+## Step 6: Azure config and PKCE helpers
+
+```ts
+// filename: src/auth/azure-config.ts
+import crypto from 'crypto';
+
+const TENANT = process.env.B2C_TENANT!;
+const POLICY = process.env.B2C_POLICY!;
+
+export const AUTHORIZE_ENDPOINT = `https://${TENANT}.b2clogin.com/${TENANT}.onmicrosoft.com/${POLICY}/oauth2/v2.0/authorize`;
+
+export const TOKEN_ENDPOINT = `https://${TENANT}.b2clogin.com/${TENANT}.onmicrosoft.com/${POLICY}/oauth2/v2.0/token`;
+
+// 32 random bytes, base64url-encoded (URL-safe, no +/= characters)
+export function generateCodeVerifier(): string {
+  return crypto.randomBytes(32).toString('base64url');
+}
+
+// SHA-256 hash of the verifier — this is what gets sent to Azure
+export function generateCodeChallenge(verifier: string): string {
+  return crypto.createHash('sha256').update(verifier).digest('base64url');
+}
+```
+
+## Step 7: Token helper functions
+
+```ts
+// filename: src/auth/auth.service.ts
+import jwt from 'jsonwebtoken';
+import { Response } from 'express';
+import { TOKEN_ENDPOINT } from './azure-config';
+
+interface TokenResponse {
+  access_token: string;
+  refresh_token?: string;
+  expires_in: number;
+}
+
+// Decode (not verify) the JWT to read the exp claim
+export function isExpired(token: string): boolean {
+  try {
+    const decoded = jwt.decode(token) as { exp?: number } | null;
+    if (!decoded?.exp) return true;
+    return decoded.exp * 1000 < Date.now();
+  } catch {
+    return true;
+  }
+}
+
+export function clearAuthCookies(res: Response) {
+  res.clearCookie('access_jwt');
+  res.clearCookie('refresh_jwt');
+}
+
+export async function exchangeCodeForTokens(
+  code: string,
+  codeVerifier: string,
+): Promise<TokenResponse> {
+  const params = new URLSearchParams({
+    client_id: process.env.B2C_CLIENT_ID!,
+    client_secret: process.env.B2C_CLIENT_SECRET!,
+    grant_type: 'authorization_code',
+    code,
+    redirect_uri: process.env.B2C_REDIRECT_URI!,
+    scope: process.env.B2C_SCOPES ?? '',
+    code_verifier: codeVerifier,
+  });
+
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  });
+
+  if (!response.ok)
+    throw new Error(`Token exchange failed: ${await response.text()}`);
+  return response.json();
+}
+
+export async function refreshAccessToken(
+  refreshToken: string,
+): Promise<TokenResponse> {
+  const params = new URLSearchParams({
+    client_id: process.env.B2C_CLIENT_ID!,
+    client_secret: process.env.B2C_CLIENT_SECRET!,
+    grant_type: 'refresh_token',
+    refresh_token: refreshToken,
+    scope: process.env.B2C_SCOPES ?? '',
+  });
+
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  });
+
+  if (!response.ok)
+    throw new Error(`Token refresh failed: ${await response.text()}`);
+  return response.json();
+}
+```
+
+A couple of things worth noting. `isExpired` uses `jwt.decode` rather than `jwt.verify` — we're only reading the `exp` timestamp here, not validating the token's signature (Azure does that when the token is actually used). `exchangeCodeForTokens` and `refreshAccessToken` both POST to the same token endpoint with different `grant_type` values, which is standard OAuth 2.0 — the distinction is just which credential you're exchanging.
+
+## Step 8: Auth routes
+
+```ts
+// filename: src/auth/auth.routes.ts
+import { Router, Request, Response } from 'express';
+import {
+  AUTHORIZE_ENDPOINT,
+  generateCodeVerifier,
+  generateCodeChallenge,
+} from './azure-config';
+import { exchangeCodeForTokens } from './auth.service';
+
+export const authRouter = Router();
+
+const COOKIE_OPTIONS = { httpOnly: true, sameSite: 'lax' as const };
+
+// Login page
+authRouter.get('/login', (req: Request, res: Response) => {
+  res.render('login', { title: 'Login' });
+});
+
+// Kick off the Azure B2C login
+authRouter.get('/auth/start', (req: Request, res: Response) => {
+  const codeVerifier = generateCodeVerifier();
+  const codeChallenge = generateCodeChallenge(codeVerifier);
+
+  // Store the verifier in a short-lived cookie so /auth/callback can retrieve it
+  res.cookie('pkce_verifier', codeVerifier, {
+    ...COOKIE_OPTIONS,
+    maxAge: 5 * 60 * 1000,
+  });
+
+  const params = new URLSearchParams({
+    client_id: process.env.B2C_CLIENT_ID!,
+    response_type: 'code',
+    redirect_uri: process.env.B2C_REDIRECT_URI!,
+    scope: process.env.B2C_SCOPES ?? '',
+    code_challenge: codeChallenge,
+    code_challenge_method: 'S256',
+  });
+
+  res.redirect(`${AUTHORIZE_ENDPOINT}?${params.toString()}`);
+});
+
+// Azure redirects here after the user authenticates
+authRouter.get('/auth/callback', async (req: Request, res: Response) => {
+  const code = req.query.code as string;
+  const codeVerifier = req.cookies?.pkce_verifier;
+
+  if (!code || !codeVerifier) return res.redirect('/login');
+
+  try {
+    const tokens = await exchangeCodeForTokens(code, codeVerifier);
+
+    res.cookie('access_jwt', tokens.access_token, COOKIE_OPTIONS);
+    if (tokens.refresh_token) {
+      res.cookie('refresh_jwt', tokens.refresh_token, COOKIE_OPTIONS);
+    }
+    res.clearCookie('pkce_verifier');
+    res.redirect('/');
+  } catch (err) {
+    console.error(err);
+    res.redirect('/login');
+  }
+});
+
+// Clear cookies and end the local session
+authRouter.get('/logout', (req: Request, res: Response) => {
+  res.clearCookie('access_jwt');
+  res.clearCookie('refresh_jwt');
+  res.redirect('/login');
+});
+```
+
+`/auth/start` generates a fresh PKCE pair and stores the verifier in a short-lived `httpOnly` cookie — the verifier needs to survive the round trip to Azure and back, but is useless after that. The challenge method `S256` tells Azure to expect a SHA-256 hash, which is what `generateCodeChallenge` produces.
+
+Note that `/logout` only clears the local session cookies. If you need full single sign-out from Azure B2C as well, you'd redirect to Azure's logout endpoint instead.
+
+## Step 9: Auth middleware
+
+```ts
+// filename: src/auth/auth.middleware.ts
+import { Request, Response, NextFunction } from 'express';
+import {
+  isExpired,
+  clearAuthCookies,
+  refreshAccessToken,
+} from './auth.service';
+
+const COOKIE_OPTIONS = { httpOnly: true, sameSite: 'lax' as const };
+
+export async function authMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  // Let auth and static routes through without checking
+  if (
+    req.path.startsWith('/login') ||
+    req.path.startsWith('/auth') ||
+    req.path.startsWith('/static')
+  ) {
+    return next();
+  }
+
+  const accessToken = req.cookies?.access_jwt;
+  const refreshToken = req.cookies?.refresh_jwt;
+
+  if (!accessToken) return res.redirect('/login');
+  if (!isExpired(accessToken)) return next();
+
+  // Access token is expired — try refreshing
+  if (!refreshToken || isExpired(refreshToken)) {
+    clearAuthCookies(res);
+    return res.redirect('/login');
+  }
+
+  try {
+    const tokens = await refreshAccessToken(refreshToken);
+    res.cookie('access_jwt', tokens.access_token, COOKIE_OPTIONS);
+    if (tokens.refresh_token)
+      res.cookie('refresh_jwt', tokens.refresh_token, COOKIE_OPTIONS);
+    return next();
+  } catch {
+    clearAuthCookies(res);
+    return res.redirect('/login');
+  }
+}
+```
+
+The middleware runs on every request. If the access token is valid, the request goes through immediately. If it's expired, it tries to refresh silently using the refresh token and sets new cookies — the user never notices. If both tokens are expired or the refresh fails, cookies are cleared and the user is sent to login. By the time any route handler runs, authentication is already guaranteed.
+
+## Step 10: Wire everything together
+
+```ts
+// filename: index.ts
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import { authRouter } from './auth/auth.routes';
+import { authMiddleware } from './auth/auth.middleware';
+
+const app = express();
+
+app.use(cookieParser());
+app.use(authRouter); // auth routes first, so they bypass the middleware below
+app.use(authMiddleware); // every route registered after this is protected
+
+app.listen(3000);
+```
+
+## Step 11: Create the login page
+
+```html
+<!-- filename: views/login.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Sign In</h1>
+    <a href="/auth/start">Sign In With Azure B2C</a>
+  </body>
+</html>
+```
+
+The login page's only job is to link to `/auth/start`. Azure B2C handles everything from there.
+
+## Direct API calls vs. the MSAL SDK
+
+|               | Direct API calls                    | MSAL SDK                 |
+| ------------- | ----------------------------------- | ------------------------ |
+| Dependencies  | `crypto` + `fetch` (Node built-ins) | `@azure/msal-node`       |
+| PKCE          | Implemented manually                | Handled internally       |
+| Token caching | You manage (via cookies here)       | Built-in cache providers |
+| Visibility    | Full control over every request     | Some details abstracted  |
+| Portability   | Easy to port to any language        | Tied to SDK availability |
+
+The direct approach is a good fit when you want minimal dependencies, full transparency into the OAuth flow, or need to port the logic to a language without an MSAL SDK. The SDK is a better fit if you'd rather not maintain the PKCE and token-exchange code yourself.
+
+## Summary
+
+| Piece                | Role                                                    |
+| -------------------- | ------------------------------------------------------- |
+| `azure-config.ts`    | Endpoint URLs and PKCE verifier/challenge generation    |
+| `auth.service.ts`    | Token exchange, refresh, expiry checks, cookie clearing |
+| `auth.routes.ts`     | Login, `/auth/start`, `/auth/callback`, `/logout`       |
+| `auth.middleware.ts` | Validates/refreshes tokens on every request             |
+| `login.ejs`          | Minimal page linking to `/auth/start`                   |

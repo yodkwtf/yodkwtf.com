@@ -1,0 +1,47 @@
+name: Send newsletter
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/blogs/**'
+  schedule:
+    # Daily — catches future-dated posts once their publishedAt passes
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: newsletter
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Send emails for new posts
+        run: npx tsx scripts/send-newsletter.ts
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_AUDIENCE_ID: ${{ secrets.RESEND_AUDIENCE_ID }}
+
+      - name: Commit updated sent log
+        run: |
+          if ! git diff --quiet scripts/newsletter-sent.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add scripts/newsletter-sent.json
+            git commit -m "chore: update newsletter sent log [skip ci]"
+            git push
+          fi

@@ -1,0 +1,334 @@
+---
+title: 'Set Up Multiple Git Profile on the Same Machine'
+description: 'A one-time SSH and Git configuration that lets your work and personal GitHub accounts coexist on the same machine without ever switching between them.'
+publishedAt: '2026-06-27'
+category: 'Productivity'
+tags: ['Git', 'GitHub']
+featured: true
+coverImage: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=1600&q=80'
+youtubeId: ''
+draft: false
+---
+
+If you use the same machine for work and personal development, you've probably run into at least one of these:
+
+- Git commits have the wrong author email.
+- `git push` authenticates using the wrong GitHub account.
+- You keep logging in and out of VS Code.
+
+This guide walks through a one-time setup that lets both accounts coexist peacefully — the right commit author, the right SSH key, the right remote — all based on where the repository lives on your machine.
+
+## Folder structure
+
+The entire setup hinges on keeping work and personal repositories in separate folders:
+
+```sh
+~/Documents/Code/GitHub/
+├── Work/
+└── Personal/
+```
+
+This isn't just for organization. Git has a feature called `includeIf` that applies different configuration files depending on the directory a repository is in. By keeping repositories separated this way, Git can automatically use the correct name, email, and SSH key without you doing anything per-repository.
+
+## Step 1: Create two SSH keys
+
+Generate one key per account, giving each a descriptive filename:
+
+```bash
+ssh-keygen -t ed25519 -C "your-work@email.com" -f ~/.ssh/github_work
+ssh-keygen -t ed25519 -C "your-personal@email.com" -f ~/.ssh/github_personal
+```
+
+This creates two key pairs. To add them to GitHub, you first need to copy the public key contents. Run the following for each key:
+
+```bash
+cat ~/.ssh/github_work.pub
+cat ~/.ssh/github_personal.pub
+```
+
+Or copy directly to your clipboard without printing it:
+
+```bash
+# macOS
+pbcopy < ~/.ssh/github_work.pub
+
+# Linux (requires xclip)
+xclip -selection clipboard < ~/.ssh/github_work.pub
+
+# Windows (Git Bash)
+cat ~/.ssh/github_work.pub | clip
+```
+
+Paste the copied key into the corresponding GitHub account under **Settings → SSH and GPG Keys**, choosing **Authentication** as the key type. Repeat for the personal key on your personal account.
+
+<Callout type='info' title='Why ed25519?'>
+  You might notice the generated key starts with `ssh-ed25519` rather than the
+  older `ssh-rsa`. That's expected — `ed25519` is the recommended modern
+  algorithm, and GitHub supports it fully.
+</Callout>
+
+## Step 2: Configure SSH
+
+Create (or append to) `~/.ssh/config` with two host entries — one per account:
+
+```ssh
+# filename: ~/.ssh/config
+Host github-work
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github_work
+    IdentitiesOnly yes
+
+Host github-personal
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github_personal
+    IdentitiesOnly yes
+```
+
+Each `Host` entry defines a custom alias (`github-work`, `github-personal`) that maps to `github.com` but uses a different SSH key. The `IdentitiesOnly yes` line is important — it tells SSH to only try the specified key and not fall back to any other identity in your agent.
+
+Verify both connections work:
+
+```bash
+ssh -T git@github-work
+ssh -T git@github-personal
+```
+
+Each should print a success message with the corresponding GitHub username.
+
+## Step 3: Configure Git identities
+
+Create two separate Git config files — one per identity:
+
+```ini
+# filename: ~/.gitconfig-work
+[user]
+    name = Your Name
+    email = your-work@email.com
+```
+
+```ini
+# filename: ~/.gitconfig-personal
+[user]
+    name = Your Name
+    email = your-personal@email.com
+```
+
+Then reference them from your main `~/.gitconfig` using `includeIf`:
+
+```ini
+# filename: ~/.gitconfig
+[includeIf "gitdir:~/Documents/Code/GitHub/Work/"]
+    path = ~/.gitconfig-work
+
+[includeIf "gitdir:~/Documents/Code/GitHub/Personal/"]
+    path = ~/.gitconfig-personal
+```
+
+From this point on, any repository inside the `Work` folder automatically uses the work name and email, and any repository inside `Personal` uses the personal ones. You never need to run `git config user.email` inside individual repositories again.
+
+## Step 4: Update existing remotes to SSH
+
+For any repositories you already have cloned, update their remotes to use the correct SSH host alias:
+
+```bash
+# For a work repository (replace "acme" with your company's GitHub org or username)
+git remote set-url origin git@github-work:acme/my-project.git
+
+# For a personal repository (replace "john" with your personal GitHub username)
+git remote set-url origin git@github-personal:john/my-project.git
+```
+
+For new repositories, clone them using SSH from the start. The SSH URL format is always:
+
+```text
+git@<ssh-host-alias>:<github-username-or-org>/<repository>.git
+```
+
+Note the colon after the host alias and the slash between the owner and repository name — those aren't interchangeable.
+
+## Step 5: Make cloning effortless with shell functions
+
+At this point everything works correctly, but cloning still requires remembering the full SSH URL and the right folder to `cd` into. A shell function can handle all of that automatically.
+
+### The basic version
+
+Here's a straightforward function for cloning work repositories. Add this to your `~/.zshrc` or `~/.bashrc`:
+
+```bash
+# filename: ~/.zshrc
+
+clone-work() {
+    # Always clone into the Work folder regardless of where you run this from
+    cd ~/Documents/Code/GitHub/Work
+
+    # Clone using the github-work SSH host alias configured in Step 2
+    # Replace "acme" with your actual work GitHub username or org name
+    git clone git@github-work:acme/$1.git
+
+    # Jump into the cloned folder
+    cd $1
+}
+
+clone-personal() {
+    cd ~/Documents/Code/GitHub/Personal
+
+    # Replace "john" with your actual personal GitHub username
+    git clone git@github-personal:john/$1.git
+
+    cd $1
+}
+```
+
+Now instead of typing the full SSH URL and navigating folders manually, you just run:
+
+```bash
+clone-work my-project
+clone-personal my-blog
+```
+
+### The upgraded version
+
+The basic version works, but it will error out if you run it on a repository you've already cloned. The upgraded version handles that gracefully — and also opens VS Code automatically once you're in the folder.
+
+```bash
+# filename: ~/.zshrc
+
+clone-work() {
+    local ROOT="$HOME/Documents/Code/GitHub/Work"
+
+    # Show usage hint if no repo name is passed
+    [ -z "$1" ] && { echo "Usage: clone-work <repo-name>"; return 1; }
+
+    cd "$ROOT" || return
+
+    # If the folder already exists locally, skip cloning
+    if [ -d "$1" ]; then
+        echo "📂 Opening existing repository..."
+    else
+        echo "⬇️  Cloning repository..."
+        git clone git@github-work:acme/$1.git || return
+    fi
+
+    cd "$1" || return
+
+    # Optional: remove this line if you don't use VS Code
+    code .
+}
+
+clone-personal() {
+    local ROOT="$HOME/Documents/Code/GitHub/Personal"
+
+    [ -z "$1" ] && { echo "Usage: clone-personal <repo-name>"; return 1; }
+
+    cd "$ROOT" || return
+
+    if [ -d "$1" ]; then
+        echo "📂 Opening existing repository..."
+    else
+        echo "⬇️  Cloning repository..."
+        git clone git@github-personal:john/$1.git || return
+    fi
+
+    cd "$1" || return
+
+    # Optional: remove this line if you don't use VS Code
+    code .
+}
+```
+
+### Shortening to two-letter aliases (optional)
+
+Once you're comfortable with the functions, you can rename them to shorter aliases. There's nothing special about the names — just pick whatever feels natural:
+
+```bash
+# filename: ~/.zshrc
+
+# Rename the functions above from clone-work/clone-personal to gw/gp
+gw() { clone-work "$@"; }
+gp() { clone-personal "$@"; }
+```
+
+Or just rename the functions themselves directly to `gw` and `gp` in the definition. The final daily usage becomes:
+
+```bash
+gw api-service    # clone (or open) a work repository
+gp portfolio      # clone (or open) a personal repository
+```
+
+Both commands work from anywhere in your terminal — they always navigate to the correct root folder before doing anything.
+
+After editing your `~/.zshrc` or `~/.bashrc`, reload it to apply the changes:
+
+```bash
+source ~/.zshrc   # or source ~/.bashrc
+```
+
+## Step 6: Add a global pre-push hook
+
+The setup is solid now, but one last thing worth adding is a safety net: a global Git hook that checks you're not pushing to the wrong account before every push.
+
+First, create a global hooks directory and point Git to it:
+
+```bash
+mkdir -p ~/.githooks
+git config --global core.hooksPath ~/.githooks
+```
+
+Then create the hook file and make it executable:
+
+```bash
+touch ~/.githooks/pre-push
+chmod +x ~/.githooks/pre-push
+```
+
+Add the following to `~/.githooks/pre-push`:
+
+```bash
+# filename: ~/.githooks/pre-push
+#!/bin/bash
+
+REMOTE_URL=$(git remote get-url origin 2>/dev/null)
+REPO_PATH=$(git rev-parse --show-toplevel 2>/dev/null)
+
+WORK_DIR="$HOME/Documents/Code/GitHub/Work"
+PERSONAL_DIR="$HOME/Documents/Code/GitHub/Personal"
+
+# If we're in a Work folder, make sure the remote uses the work SSH host
+if [[ "$REPO_PATH" == "$WORK_DIR"* ]]; then
+    if [[ "$REMOTE_URL" != *"github-work"* ]]; then
+        echo "❌ Error: Pushing from a Work repository but remote is not using github-work."
+        echo "   Remote URL: $REMOTE_URL"
+        echo "   Run: git remote set-url origin git@github-work:<org>/<repo>.git"
+        exit 1
+    fi
+fi
+
+# If we're in a Personal folder, make sure the remote uses the personal SSH host
+if [[ "$REPO_PATH" == "$PERSONAL_DIR"* ]]; then
+    if [[ "$REMOTE_URL" != *"github-personal"* ]]; then
+        echo "❌ Error: Pushing from a Personal repository but remote is not using github-personal."
+        echo "   Remote URL: $REMOTE_URL"
+        echo "   Run: git remote set-url origin git@github-personal:<username>/<repo>.git"
+        exit 1
+    fi
+fi
+
+exit 0
+```
+
+This hook runs before every `git push`. It checks whether the remote URL of the repository matches the folder it lives in — if a repository inside `Work` is trying to push to a `github-personal` remote (or vice versa), the push is aborted with a clear error message telling you exactly how to fix it.
+
+This catches the one scenario the folder-based setup can't prevent on its own: a remote URL that was manually set to the wrong account.
+
+## The final workflow
+
+Once this is all in place, the daily workflow looks like this:
+
+```bash
+gw api-service    # clone (or open) a work repository
+gp portfolio      # clone (or open) a personal repository
+```
+
+No account switching. No correcting commit emails after the fact. No logging in and out of VS Code. The right identity and the right SSH key are used automatically, everywhere, based entirely on where the repository lives.

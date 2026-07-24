@@ -1,58 +1,53 @@
 {
-  "name": "yodkwtf.com",
-  "homepage": "https://yodkwtf.com/",
-  "description": "My portfolio website built with React,js using modern react hooks with context API and Airtable CMS.",
-  "version": "0.1.0",
+  "name": "my-portfolio-website",
+  "version": "3.0.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.3",
-    "airtable-node": "^0.1.20",
-    "normalize.css": "^8.0.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-helmet-async": "^1.1.2",
-    "react-icons": "^4.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.0"
-  },
+  "type": "module",
   "scripts": {
-    "dev": "react-scripts --openssl-legacy-provider start",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postbuild": "react-snap"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "icons": "node scripts/generate-file-icons.mjs",
+    "newsletter": "tsx scripts/send-newsletter.ts",
+    "newsletter:icons": "node scripts/generate-newsletter-icons.mjs"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yodkwtf/yodkwtf.com"
-  },
-  "bugs": {
-    "url": "https://github.com/yodkwtf/yodkwtf.com/issues"
+  "dependencies": {
+    "@portabletext/react": "^6.2.0",
+    "@sanity/client": "^7.22.1",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^5.28.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.4.0",
+    "framer-motion": "^12.40.0",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.469.0",
+    "next": "16.2.6",
+    "next-mdx-remote": "^6.0.0",
+    "next-sanity": "^13.0.7",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "reading-time": "^1.5.0",
+    "rehype-pretty-code": "^0.14.3",
+    "rehype-raw": "^7.0.0",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "sanity": "^5.28.0",
+    "shiki": "^4.1.0",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "react-snap": "^1.23.0"
+    "@iconify-json/vscode-icons": "^1.2.62",
+    "@iconify/utils": "^3.1.3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.0",
+    "typescript": "^5"
   }
 }
