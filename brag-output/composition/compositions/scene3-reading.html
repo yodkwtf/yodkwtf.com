@@ -7,7 +7,7 @@
     <template>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
       />
       <style>
         #root {
@@ -39,9 +39,9 @@
         .s3-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
         .s3-cat { font-family: "DM Mono", monospace; font-size: 19px; color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); background: rgba(52, 211, 153, 0.08); border-radius: 999px; padding: 7px 18px; }
         .s3-meta { font-family: "DM Mono", monospace; font-size: 19px; color: #9a9a90; }
-        .s3-title { margin: 0 0 26px; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 68px; line-height: 1.1; color: #f0efe9; max-width: 1080px; }
+        .s3-title { margin: 0 0 26px; font-family: "Outfit", sans-serif; font-weight: 600; font-size: 48px; line-height: 1.25; letter-spacing: -0.015em; color: #f0efe9; max-width: 1080px; }
         .s3-p { margin: 0 0 12px; font-size: 28px; line-height: 1.55; color: #a3a39a; max-width: 1080px; }
-        .s3-h2 { margin: 54px 0 18px; font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 48px; color: #f0efe9; }
+        .s3-h2 { margin: 54px 0 18px; font-family: "Outfit", sans-serif; font-weight: 600; font-size: 36px; line-height: 1.25; letter-spacing: -0.01em; color: #f0efe9; }
         .s3-code { margin-top: 26px; width: 1040px; border-radius: 16px; background: #1a1a17; border: 1px solid #2a2a26; overflow: hidden; }
         .s3-code-bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 26px; border-bottom: 1px solid #2a2a26; }
         .s3-code-bar .fname { display: flex; align-items: center; gap: 10px; font-family: "DM Mono", monospace; font-size: 19px; color: #a3a39a; }
@@ -58,9 +58,11 @@
           border-left: 1px solid rgba(240, 239, 233, 0.08); padding-left: 40px;
         }
         .s3-toc-label { font-family: "DM Mono", monospace; font-size: 17px; letter-spacing: 0.08em; color: #9a9a90; margin-bottom: 30px; }
-        .s3-toc-item { position: relative; padding: 11px 0 11px 24px; font-size: 23px; color: #9a9a90; margin-bottom: 8px; }
-        .s3-toc-item.active { color: #f0efe9; }
-        .s3-toc-indicator { position: absolute; left: 0; top: 46px; width: 3px; height: 38px; background: #34d399; border-radius: 2px; }
+        .s3-toc-item {
+          position: relative; padding: 11px 0 11px 20px; font-size: 23px; color: #9a9a90; margin-bottom: 8px;
+          border-left: 3px solid transparent; border-radius: 2px;
+        }
+        .s3-toc-item.active { color: #f0efe9; border-left-color: #34d399; }
         .s3-toc-byline { display: flex; align-items: center; gap: 16px; padding-top: 34px; border-top: 1px solid rgba(240, 239, 233, 0.08); }
         .s3-toc-avatar { width: 52px; height: 52px; border-radius: 12px; background: #20201f; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .s3-toc-byline-name { font-size: 21px; color: #f0efe9; }
@@ -127,7 +129,6 @@
           <div>
             <div class="s3-toc-label">ON THIS PAGE</div>
             <div style="position:relative;">
-              <div class="s3-toc-indicator" id="s3-indicator"></div>
               <div class="s3-toc-item active" id="s3-toc-0">List virtualization</div>
               <div class="s3-toc-item" id="s3-toc-1">Memoization</div>
               <div class="s3-toc-item" id="s3-toc-2">Debouncing input</div>
@@ -185,9 +186,8 @@
         // scroll simulation + TOC indicator moves to item 2
         var SCROLL_T = 4.0;
         tl.to("#s3-scroll", { y: -430, duration: 0.6, ease: "power2.inOut" }, SCROLL_T);
-        tl.to("#s3-indicator", { y: 72, duration: 0.6, ease: "power2.inOut" }, SCROLL_T);
-        tl.to("#s3-toc-0", { color: "#9a9a90", duration: 0.3 }, SCROLL_T);
-        tl.to("#s3-toc-1", { color: "#f0efe9", duration: 0.3 }, SCROLL_T + 0.2);
+        tl.to("#s3-toc-0", { color: "#9a9a90", borderLeftColor: "transparent", duration: 0.3 }, SCROLL_T);
+        tl.to("#s3-toc-1", { color: "#f0efe9", borderLeftColor: "#34d399", duration: 0.3 }, SCROLL_T + 0.2);
         tl.to("#s3-cursor", { opacity: 0, duration: 0.3 }, SCROLL_T);
 
         window.__timelines["scene3-reading"] = tl;

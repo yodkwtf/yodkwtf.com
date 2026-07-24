@@ -7,7 +7,7 @@
     <template>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap"
       />
       <style>
         #root {
@@ -30,7 +30,7 @@
         .s4-phaseA { position: absolute; inset: 0; }
         .s4-strip-header {
           position: absolute; left: 0; right: 0; top: 244px; text-align: center;
-          font-family: "Instrument Serif", Georgia, serif; font-size: 46px; color: #a3a39a; opacity: 0;
+          font-family: "Outfit", sans-serif; font-weight: 400; font-size: 38px; color: #a3a39a; opacity: 0;
         }
         .s4-strip { position: absolute; left: 70px; top: 380px; width: 1780px; height: 330px; display: flex; align-items: center; gap: 0; }
         .s4-chip { position: relative; width: 560px; height: 330px; border-radius: 22px; background: #1a1a17; border: 1.5px solid #2a2a26; padding: 40px 44px; opacity: 0; display: flex; flex-direction: column; }
@@ -42,7 +42,7 @@
         .s4-chip-icon-wrap { width: 56px; height: 56px; border-radius: 14px; background: #0e0e0c; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; }
         .s4-chip-row { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
         .s4-chip-label { font-family: "DM Mono", monospace; font-size: 20px; color: #9a9a90; }
-        .s4-chip-value { font-family: "Instrument Serif", Georgia, serif; font-size: 48px; color: #f0efe9; margin-bottom: 16px; }
+        .s4-chip-value { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 36px; line-height: 1.25; letter-spacing: -0.01em; color: #f0efe9; margin-bottom: 16px; }
         .s4-pill { display: inline-flex; align-items: center; gap: 8px; font-family: "DM Mono", monospace; font-size: 19px; padding: 8px 18px; border-radius: 999px; border: 1px solid #2a2a26; color: #a3a39a; margin-top: auto; align-self: flex-start; }
         .s4-pill.live { color: #34d399; border-color: rgba(52, 211, 153, 0.35); background: rgba(52, 211, 153, 0.08); }
         .s4-tag-new { font-family: "DM Mono", monospace; font-size: 16px; color: #0e0e0c; background: #34d399; border-radius: 999px; padding: 5px 13px; }
@@ -64,7 +64,7 @@
           border-radius: 50%; background: radial-gradient(circle, rgba(52, 211, 153, 0.32) 0%, rgba(52, 211, 153, 0) 68%); opacity: 0;
         }
         .s4-mark-wrap { width: 184px; height: 142px; border-radius: 28px; background: #20201f; display: flex; align-items: center; justify-content: center; margin-bottom: 50px; }
-        .s4-tagline { font-family: "Instrument Serif", Georgia, serif; font-weight: 400; font-size: 66px; color: #f0efe9; opacity: 0; margin-bottom: 26px; text-align: center; }
+        .s4-tagline { font-family: "Outfit", sans-serif; font-weight: 600; font-size: 46px; line-height: 1.3; letter-spacing: -0.015em; color: #f0efe9; opacity: 0; margin-bottom: 26px; text-align: center; }
         .s4-wordmark { font-family: "DM Mono", monospace; font-size: 32px; color: #34d399; opacity: 0; letter-spacing: 0.02em; margin-bottom: 44px; }
         .s4-socials { display: flex; align-items: center; gap: 28px; opacity: 0; }
         .s4-socials svg { display: block; }
@@ -134,9 +134,9 @@
           <div class="s4-tagline" id="s4-tagline">A portfolio that updates itself.</div>
           <div class="s4-wordmark" id="s4-wordmark">yodkwtf.com</div>
           <div class="s4-socials" id="s4-socials">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#a3a39a"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.79-.25.79-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.03 11.03 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14 0 1.55-.01 2.79-.01 3.17 0 .3.21.66.8.55A10.99 10.99 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="#a3a39a"><path d="M18.24 2h3.24l-7.08 8.09L23 22h-6.5l-5.09-6.66L5.6 22H2.35l7.57-8.65L1.5 2h6.66l4.6 6.09L18.24 2Zm-1.14 18h1.8L7.02 3.9H5.08L17.1 20Z"/></svg>
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#a3a39a"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM.5 8.98h4.96V23H.5V8.98Zm7.6 0h4.76v1.92h.07c.66-1.25 2.28-2.57 4.7-2.57 5.03 0 5.96 3.31 5.96 7.62V23h-4.96v-6.06c0-1.45-.03-3.31-2.02-3.31-2.02 0-2.33 1.58-2.33 3.2V23H8.1V8.98Z"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#a3a39a"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#a3a39a"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#a3a39a"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </div>
         </div>
       </div>
