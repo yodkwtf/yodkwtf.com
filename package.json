@@ -10,7 +10,8 @@
     "lint": "eslint",
     "icons": "node scripts/generate-file-icons.mjs",
     "newsletter": "tsx scripts/send-newsletter.ts",
-    "newsletter:icons": "node scripts/generate-newsletter-icons.mjs"
+    "newsletter:icons": "node scripts/generate-newsletter-icons.mjs",
+    "signature:icons": "node scripts/generate-signature-icons.mjs"
   },
   "dependencies": {
     "@portabletext/react": "^6.2.0",
@@ -38,6 +39,7 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
+    "@iconify-json/simple-icons": "^1.2.91",
     "@iconify-json/vscode-icons": "^1.2.62",
     "@iconify/utils": "^3.1.3",
     "@tailwindcss/postcss": "^4",
