@@ -107,7 +107,7 @@
 
 #### Deployment & Launch
 
-- [ ] Deploy the website to production
+- [x] Deploy the website to production
 - [x] Check for a custom domain based email address and set it up if available
 
 #### Marketing & Announcement
