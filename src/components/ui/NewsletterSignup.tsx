@@ -49,11 +49,11 @@ export function NewsletterSignup() {
       <div className="glass rounded-xl p-4 border border-border space-y-3">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <Mail size={14} className="text-accent-500 shrink-0" />
+            <Mail size={14} className="text-accent-fg shrink-0" />
             <p className="text-sm font-medium text-ink">Stay in the loop</p>
           </div>
           {COMING_SOON && (
-            <span className="font-mono text-[10px] px-2 py-0.5 rounded-full border border-accent-500/30 text-accent-500 bg-accent-500/5 shrink-0">
+            <span className="font-mono text-[10px] px-2 py-0.5 rounded-full border border-accent-500/30 text-accent-fg bg-accent-500/5 shrink-0">
               Coming soon
             </span>
           )}
@@ -63,7 +63,7 @@ export function NewsletterSignup() {
         </p>
 
         {status === 'success' ? (
-          <div className="flex items-center gap-2 text-accent-500 text-sm font-medium py-1">
+          <div className="flex items-center gap-2 text-accent-fg text-sm font-medium py-1">
             <Check size={15} />
             You&apos;re subscribed!
           </div>

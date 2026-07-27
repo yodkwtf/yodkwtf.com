@@ -2,8 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, type CSSProperties } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/components/ui/ThemeProvider';
 import { DCLogo } from '@/components/ui/DCLogo';
@@ -12,7 +11,7 @@ import { cn } from '@/lib/utils';
 
 export function Navbar({ resumeUrl }: { resumeUrl: string }) {
   const pathname = usePathname();
-  const { resolvedTheme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -57,7 +56,7 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
                   className={cn(
                     'px-4 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
                     active
-                      ? 'text-accent-500 bg-accent-500/8'
+                      ? 'text-accent-fg bg-accent-500/8'
                       : 'text-ink-muted hover:text-ink hover:bg-surface-subtle',
                   )}
                 >
@@ -71,23 +70,12 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
             <button
               onClick={toggleTheme}
               className="btn-ghost rounded-lg p-2 transition-all"
-              aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
+              aria-label="Toggle color theme"
             >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={resolvedTheme}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {resolvedTheme === 'dark' ? (
-                    <Sun size={17} className="text-ink-muted" />
-                  ) : (
-                    <Moon size={17} className="text-ink-muted" />
-                  )}
-                </motion.div>
-              </AnimatePresence>
+              <span className="theme-icon">
+                <Sun size={17} className="theme-icon-sun text-ink-muted" />
+                <Moon size={17} className="theme-icon-moon text-ink-muted" />
+              </span>
             </button>
 
             <Link
@@ -111,46 +99,35 @@ export function Navbar({ resumeUrl }: { resumeUrl: string }) {
         </nav>
       </header>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-15 z-40 bg-surface/95 backdrop-blur-md border-b border-border md:hidden"
-          >
-            <nav className="flex flex-col gap-1 px-6 py-4">
-              {siteConfig.nav.map((item, i) => {
-                const active =
-                  pathname === item.href ||
-                  pathname.startsWith(item.href + '/');
-                return (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06 }}
+      {mobileOpen && (
+        <div
+          className="reveal reveal-down fixed inset-x-0 top-15 z-40 bg-surface/95 backdrop-blur-md border-b border-border md:hidden"
+          style={{ '--reveal-duration': '0.2s' } as CSSProperties}
+        >
+          <nav className="stagger flex flex-col gap-1 px-6 py-4">
+            {siteConfig.nav.map((item) => {
+              const active =
+                pathname === item.href || pathname.startsWith(item.href + '/');
+              return (
+                <div key={item.href} className="stagger-item reveal-left">
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={cn(
+                      'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                      active
+                        ? 'text-accent-fg bg-accent-500/8'
+                        : 'text-ink-muted hover:text-ink hover:bg-surface-subtle',
+                    )}
                   >
-                    <Link
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className={cn(
-                        'block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                        active
-                          ? 'text-accent-500 bg-accent-500/8'
-                          : 'text-ink-muted hover:text-ink hover:bg-surface-subtle',
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                    {item.label}
+                  </Link>
+                </div>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </>
   );
 }

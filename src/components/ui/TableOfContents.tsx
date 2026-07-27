@@ -57,7 +57,7 @@ export function TableOfContents({
               key={slug}
               href={`#${slug}`}
               className={cn(
-                'block py-1 leading-snug text-accent-600 hover:text-accent-500 transition-colors',
+                'block py-1 leading-snug text-accent-fg hover:text-accent-strong transition-colors',
                 level === 2 ? 'text-[13px]' : 'pl-3 text-[12px]',
               )}
             >
@@ -83,7 +83,7 @@ export function TableOfContents({
               'block py-1 pr-2 leading-snug transition-all duration-150 border-l-2 -ml-px',
               level === 2 ? 'pl-3 text-[13px]' : 'pl-5 text-[12px]',
               activeSlug === slug
-                ? 'border-accent-500 text-accent-500'
+                ? 'border-accent-500 text-accent-fg'
                 : 'border-transparent text-ink-faint hover:text-ink hover:border-border',
             )}
           >

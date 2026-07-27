@@ -9,7 +9,7 @@ export function CTASection() {
       <AnimateIn>
         <div className="mx-auto max-w-3xl text-center space-y-6 relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-40 bg-accent-500/10 blur-3xl rounded-full pointer-events-none" />
-          <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">
+          <span className="font-mono text-xs uppercase tracking-widest text-accent-fg font-medium">
             Let&apos;s work together
           </span>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-ink leading-tight relative">

@@ -235,7 +235,7 @@ export default async function ProjectDetailPage({ params }: Params) {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-accent-500 hover:underline"
+                          className="text-accent-fg hover:underline"
                         >
                           live site
                         </a>
@@ -254,7 +254,7 @@ export default async function ProjectDetailPage({ params }: Params) {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-accent-500 hover:underline"
+                      className="text-accent-fg hover:underline"
                     >
                       View it on GitHub
                     </a>

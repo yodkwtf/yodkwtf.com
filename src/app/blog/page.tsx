@@ -21,7 +21,7 @@ export default function BlogPage() {
     <div className="pt-28 pb-24 px-6">
       <div className="mx-auto max-w-7xl">
         <AnimateIn className="mb-12 max-w-2xl">
-          <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">
+          <span className="font-mono text-xs uppercase tracking-widest text-accent-fg font-medium">
             Writing
           </span>
           <h1 className="font-display text-5xl md:text-6xl text-ink mt-3 mb-4 leading-tight">
@@ -30,7 +30,7 @@ export default function BlogPage() {
           <p className="text-ink-muted text-lg leading-relaxed">
             Thoughts on web development, software engineering, and building
             things that matter.{' '}
-            <span className="text-accent-500 font-semibold">
+            <span className="text-accent-fg font-semibold">
               {posts.length} posts
             </span>{' '}
             and counting.

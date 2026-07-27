@@ -21,7 +21,6 @@
     "@tailwindcss/typography": "^0.5.19",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
-    "framer-motion": "^12.40.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.469.0",
     "next": "16.2.6",

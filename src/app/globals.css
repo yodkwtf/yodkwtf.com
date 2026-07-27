@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Outfit:wght@300;400;500;600;700&display=swap");
+/* Never add a remote @import here: Tailwind v4's bundler strips it and the
+   fonts silently never load. Webfonts go through next/font in layout.tsx. */
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
@@ -18,6 +19,12 @@
   --accent-800: #065f46;
   --accent-900: #064e3b;
 
+  /* Accent as *text*. The ramp above is tuned for dark backgrounds, where
+     --accent-500 sits at 7.6:1; on the light surfaces it drops to 2.3:1. Use
+     these two for any accent-colored text or icon, never --accent-500. */
+  --accent-fg: #066e52;
+  --accent-fg-strong: #064e3b;
+
   /* Surface — light mode */
   --bg: #f4f4f0;
   --bg-subtle: #e8e8e2;
@@ -25,10 +32,9 @@
   --border: #c8c8c0;
   --border-subtle: #d8d8d0;
 
-  /* Text */
   --text: #111110;
   --text-muted: #4a4a44;
-  --text-faint: #888880;
+  --text-faint: #686862;
 
   /* Glow */
   --glow: rgba(16, 185, 129, 0.15);
@@ -42,9 +48,14 @@
 
   /* Transition */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --font-display: Georgia, "Times New Roman", Times, serif;
 }
 
 .dark {
+  --accent-fg: #10b981;
+  --accent-fg-strong: #6ee7b7;
+
   --bg: #0e0e0c;
   --bg-subtle: #161613;
   --bg-card: #1a1a17;
@@ -52,8 +63,8 @@
   --border-subtle: #222220;
 
   --text: #f0efe9;
-  --text-muted: #8a8a7e;
-  --text-faint: #6e6e66;
+  --text-muted: #9a9a8e;
+  --text-faint: #83837b;
 
   --glow: rgba(52, 211, 153, 0.12);
   --glow-strong: rgba(52, 211, 153, 0.2);
@@ -76,7 +87,7 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: "Outfit", system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.65;
   transition:
@@ -122,13 +133,13 @@ select:focus-visible {
 
 /* ─── Typography ────────────────────────────────────────────────────────── */
 .font-display {
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: var(--font-display);
 }
 .font-mono {
-  font-family: "DM Mono", "Fira Code", monospace;
+  font-family: var(--font-mono), "Fira Code", monospace;
 }
 .font-sans {
-  font-family: "Outfit", system-ui, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 /* ─── Noise texture ─────────────────────────────────────────────────────── */
@@ -142,6 +153,60 @@ select:focus-visible {
   opacity: 0.5;
 }
 
+/* ─── Theme toggle icon ─────────────────────────────────────────────────── */
+.theme-icon {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+}
+.theme-icon > * {
+  grid-area: 1 / 1;
+  transition:
+    opacity 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+.theme-icon-sun {
+  opacity: 0;
+  transform: rotate(-90deg);
+}
+.dark .theme-icon-sun {
+  opacity: 1;
+  transform: none;
+}
+.dark .theme-icon-moon {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+/* ─── Hero ambient glow ─────────────────────────────────────────────────── */
+.hero-glow {
+  position: absolute;
+  border-radius: 9999px;
+}
+.hero-glow-primary {
+  top: 33%;
+  right: -10%;
+  width: 38rem;
+  height: 38rem;
+  background: radial-gradient(
+    circle closest-side,
+    color-mix(in srgb, var(--accent-500) 9%, transparent),
+    transparent
+  );
+}
+.hero-glow-secondary {
+  bottom: -8%;
+  left: 18%;
+  width: 26rem;
+  height: 26rem;
+  background: radial-gradient(
+    circle closest-side,
+    color-mix(in srgb, var(--accent-400) 7%, transparent),
+    transparent
+  );
+}
+
 /* ─── Dot grid background ───────────────────────────────────────────────── */
 .dot-grid {
   background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
@@ -150,9 +215,15 @@ select:focus-visible {
 
 /* ─── Gradient text ─────────────────────────────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, var(--accent-400), var(--accent-600));
+  background: linear-gradient(135deg, var(--accent-700), var(--accent-900));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .text-gradient {
+  background: linear-gradient(135deg, var(--accent-400), var(--accent-600));
+  -webkit-background-clip: text;
   background-clip: text;
 }
 
@@ -221,6 +292,131 @@ select:focus-visible {
   animation: fadeUp 0.6s var(--ease) both;
 }
 
+/* ─── Entrance reveals (drives <AnimateIn>) ─────────────────────────────── */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes revealDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+@keyframes revealLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+}
+@keyframes revealRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+@keyframes revealFade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes revealZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+@keyframes revealPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.reveal,
+.stagger-item {
+  animation: revealUp var(--reveal-duration, 0.55s) var(--ease)
+    var(--reveal-delay, 0s) both;
+}
+
+.reveal-down {
+  animation-name: revealDown;
+}
+.reveal-left {
+  animation-name: revealLeft;
+}
+.reveal-right {
+  animation-name: revealRight;
+}
+.reveal-fade {
+  animation-name: revealFade;
+}
+.reveal-zoom {
+  animation-name: revealZoom;
+}
+.reveal-pop {
+  animation-name: revealPop;
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.stagger > .stagger-item:nth-child(1) {
+  --reveal-delay: 0s;
+}
+.stagger > .stagger-item:nth-child(2) {
+  --reveal-delay: calc(var(--stagger-step, 0.08s) * 1);
+}
+.stagger > .stagger-item:nth-child(3) {
+  --reveal-delay: calc(var(--stagger-step, 0.08s) * 2);
+}
+.stagger > .stagger-item:nth-child(4) {
+  --reveal-delay: calc(var(--stagger-step, 0.08s) * 3);
+}
+.stagger > .stagger-item:nth-child(5) {
+  --reveal-delay: calc(var(--stagger-step, 0.08s) * 4);
+}
+.stagger > .stagger-item:nth-child(6) {
+  --reveal-delay: calc(var(--stagger-step, 0.08s) * 5);
+}
+.stagger > .stagger-item:nth-child(7) {
+  --reveal-delay: calc(var(--stagger-step, 0.08s) * 6);
+}
+.stagger > .stagger-item:nth-child(n + 8) {
+  --reveal-delay: calc(var(--stagger-step, 0.08s) * 7);
+}
+
+.reveal-pending {
+  animation: none !important;
+  opacity: 0;
+}
+
+/* ─── Scroll hint bar ───────────────────────────────────────────────────── */
+@keyframes bounceBar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+.bounce-bar {
+  animation: bounceBar 1.5s ease-in-out infinite;
+}
+
 /* ─── Blink cursor ──────────────────────────────────────────────────────── */
 @keyframes blink {
   0%,
@@ -250,6 +446,12 @@ select:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .reveal,
+  .stagger-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
   html {
     scroll-behavior: auto;
   }
@@ -278,7 +480,7 @@ select:focus-visible {
 .prose h1,
 .prose h2,
 .prose h3 {
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: var(--font-display);
   font-weight: 400;
   scroll-margin-top: 6rem;
 }
@@ -299,7 +501,7 @@ select:focus-visible {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
-  font-family: "DM Mono", monospace;
+  font-family: var(--font-mono), monospace;
 }
 
 /* Remove Tailwind typography's default backtick decoration around inline code */
@@ -315,7 +517,7 @@ select:focus-visible {
 }
 
 .prose blockquote {
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 1.15em;
   border-left-width: 3px;
@@ -420,7 +622,7 @@ pre[data-language] {
   padding: 1.25rem 1.5rem;
   font-size: 0.875rem;
   line-height: 1.7;
-  font-family: "DM Mono", "Fira Code", monospace;
+  font-family: var(--font-mono), "Fira Code", monospace;
   overflow-x: auto;
   margin: 0;
 }
@@ -449,7 +651,7 @@ pre[data-language] span[data-highlighted-line] {
   align-items: center;
   padding: 0.25em 0.85em;
   font-size: 0.75rem;
-  font-family: "DM Mono", monospace;
+  font-family: var(--font-mono), monospace;
   font-weight: 400;
   letter-spacing: 0.02em;
   border-radius: 100px;
@@ -462,7 +664,7 @@ pre[data-language] span[data-highlighted-line] {
 .tag-pill.active {
   background: color-mix(in srgb, var(--accent-500) 12%, transparent);
   border-color: color-mix(in srgb, var(--accent-500) 40%, transparent);
-  color: var(--accent-500);
+  color: var(--accent-fg);
 }
 
 /* ─── Button styles ─────────────────────────────────────────────────────── */
@@ -474,7 +676,7 @@ pre[data-language] span[data-highlighted-line] {
   border-radius: var(--radius);
   font-size: 0.9rem;
   font-weight: 500;
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-sans), sans-serif;
   letter-spacing: 0.01em;
   cursor: pointer;
   transition: all 0.2s var(--ease);
@@ -486,11 +688,11 @@ pre[data-language] span[data-highlighted-line] {
   cursor: not-allowed;
 }
 .btn-primary {
-  background: var(--accent-600);
+  background: var(--accent-700);
   color: #fff;
 }
 .btn-primary:hover {
-  background: var(--accent-700);
+  background: var(--accent-800);
   transform: translateY(-1px);
   box-shadow: 0 8px 24px var(--glow-strong);
 }
@@ -501,7 +703,7 @@ pre[data-language] span[data-highlighted-line] {
 }
 .btn-outline:hover {
   border-color: var(--accent-500);
-  color: var(--accent-500);
+  color: var(--accent-fg);
   background: color-mix(in srgb, var(--accent-500) 6%, transparent);
 }
 .btn-ghost {

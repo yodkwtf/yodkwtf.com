@@ -33,7 +33,7 @@ export function ShareButtons({ url, title }: { url: string; title: string }) {
         <LinkedinIcon size={13} /> LinkedIn
       </a>
       <button onClick={copyLink} className="btn btn-outline justify-center text-xs gap-2 py-1.5 px-3 sm:justify-start">
-        {copied ? <><Check size={13} className="text-accent-500" /> Copied!</> : <><Link2 size={13} /> Copy link</>}
+        {copied ? <><Check size={13} className="text-accent-fg" /> Copied!</> : <><Link2 size={13} /> Copy link</>}
       </button>
     </div>
   );

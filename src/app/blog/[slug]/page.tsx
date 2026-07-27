@@ -106,7 +106,7 @@ export default async function BlogDetailPage({ params }: Params) {
             <AnimateIn className="mb-10">
               <div className="flex flex-wrap gap-2 mb-5">
                 {post.category && (
-                  <span className="inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded-full border border-accent-500/30 text-accent-500 bg-accent-500/5">
+                  <span className="inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded-full border border-accent-500/30 text-accent-fg bg-accent-500/5">
                     {post.category}
                   </span>
                 )}
@@ -132,7 +132,7 @@ export default async function BlogDetailPage({ params }: Params) {
                         className="object-cover w-full h-full"
                       />
                     ) : (
-                      <div className="w-full h-full bg-accent-500/20 flex items-center justify-center text-xs font-mono text-accent-500 font-medium">
+                      <div className="w-full h-full bg-accent-500/20 flex items-center justify-center text-xs font-mono text-accent-fg font-medium">
                         {siteConfig.name.slice(0, 1)}
                       </div>
                     )}

@@ -40,7 +40,7 @@ export async function MiniAboutSection() {
         <div className='grid lg:grid-cols-2 gap-12 items-center'>
           <AnimateIn>
             <div className='space-y-5'>
-              <span className='font-mono text-xs uppercase tracking-widest text-accent-500 font-medium'>
+              <span className='font-mono text-xs uppercase tracking-widest text-accent-fg font-medium'>
                 About Me
               </span>
               <h2 className='font-display text-3xl md:text-4xl text-ink leading-tight'>
@@ -59,15 +59,15 @@ export async function MiniAboutSection() {
               ))}
               <div className='flex flex-wrap items-center gap-4 text-sm text-ink-muted pt-2'>
                 <span className='flex items-center gap-1.5'>
-                  <MapPin size={14} className='text-accent-500' />
+                  <MapPin size={14} className='text-accent-fg' />
                   {siteConfig.location}
                 </span>
                 <span className='flex items-center gap-1.5'>
-                  <Coffee size={14} className='text-accent-500' />
+                  <Coffee size={14} className='text-accent-fg' />
                   Fueled by Chai
                 </span>
                 <span className='flex items-center gap-1.5'>
-                  <Code2 size={14} className='text-accent-500' />
+                  <Code2 size={14} className='text-accent-fg' />
                   Open to work
                 </span>
               </div>
