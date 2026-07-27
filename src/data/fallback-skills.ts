@@ -33,9 +33,9 @@ export const FALLBACK_SKILLS: Record<string, string[]> = {
 };
 
 export const SKILL_CATEGORY_COLORS: Record<string, string> = {
-  Frontend: 'text-accent-400',
-  Backend: 'text-violet-400',
-  Database: 'text-amber-400',
-  'Cloud & DevOps': 'text-sky-400',
-  'Tools & Libraries': 'text-rose-400',
+  Frontend: 'text-accent-fg',
+  Backend: 'text-violet-700 dark:text-violet-400',
+  Database: 'text-amber-700 dark:text-amber-400',
+  'Cloud & DevOps': 'text-sky-700 dark:text-sky-400',
+  'Tools & Libraries': 'text-rose-700 dark:text-rose-400',
 };

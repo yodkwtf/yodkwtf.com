@@ -22,7 +22,7 @@ See it live at [yodkwtf.com](https://yodkwtf.com) and please feel free to share 
 | Framework  | Next.js 16 (App Router, React Server Components)               |
 | Language   | TypeScript, React 19                                           |
 | Styling    | Tailwind CSS v4 with a CSS-variable design system              |
-| Animation  | Framer Motion                                                  |
+| Animation  | CSS keyframes (no runtime animation library)                   |
 | CMS        | Sanity (embedded Studio at `/admin`)                           |
 | Blog       | MDX via `next-mdx-remote`, `gray-matter`, `rehype-pretty-code` |
 | Newsletter | Resend (Audience API + Broadcasts)                             |
@@ -48,8 +48,13 @@ See it live at [yodkwtf.com](https://yodkwtf.com) and please feel free to share 
   avoids a flash of unstyled content on load.
 - **Incremental Static Regeneration** so CMS edits and future-dated posts go
   live on their own, without a redeploy.
-- Self-hosted fonts via `next/font` and optimized images with graceful
-  fallbacks for fast, shift-free loads.
+- **Entrance animations in pure CSS**, server-rendered visible. Nothing is
+  hidden behind hydration, so the page is readable and scrollable on first
+  paint even if JavaScript is slow or never arrives.
+- **WCAG 2.1 AA color contrast in both light and dark themes**, with the
+  accent palette split into separate background and foreground tokens.
+- Self-hosted body/mono fonts via `next/font`, a system serif for headings,
+  and optimized images with graceful fallbacks for fast, shift-free loads.
 - SEO out of the box: sitemap, `robots.txt`, RSS feed, JSON-LD, and Open
   Graph / Twitter cards.
 

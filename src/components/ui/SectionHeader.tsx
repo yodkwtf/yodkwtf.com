@@ -20,7 +20,7 @@ export function SectionHeader({
     <div className={cn("space-y-3 mb-12", align === "center" && "text-center mx-auto max-w-2xl", className)}>
       {label && (
         <AnimateIn delay={0}>
-          <span className="font-mono text-xs uppercase tracking-widest text-accent-500 font-medium">
+          <span className="font-mono text-xs uppercase tracking-widest text-accent-fg font-medium">
             {label}
           </span>
         </AnimateIn>

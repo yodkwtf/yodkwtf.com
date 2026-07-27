@@ -10,7 +10,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import { NewsletterSignup } from '@/components/ui/NewsletterSignup';
@@ -33,14 +32,12 @@ function shuffle<T>(arr: T[]): T[] {
 function PostRow({ post, isLast }: { post: BlogPostMeta; isLast: boolean }) {
   return (
     <Link href={`/blog/${post.slug}`} className="group block">
-      <motion.article
-        whileHover={{ x: 2 }}
-        transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-        className={`py-7 border-b border-border/40 ${isLast ? 'border-b-0' : ''}`}
+      <article
+        className={`py-7 border-b border-border/40 transition-transform duration-200 group-hover:translate-x-0.5 ${isLast ? 'border-b-0' : ''}`}
       >
         <div className="flex flex-wrap gap-1.5 mb-2">
           {post.category && (
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-accent-500/30 text-accent-500 bg-accent-500/5">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-accent-500/30 text-accent-fg bg-accent-500/5">
               {post.category}
             </span>
           )}
@@ -54,7 +51,7 @@ function PostRow({ post, isLast }: { post: BlogPostMeta; isLast: boolean }) {
           ))}
         </div>
 
-        <h2 className="font-display text-xl leading-snug text-ink group-hover:text-accent-500 transition-colors mb-1.5">
+        <h2 className="font-display text-xl leading-snug text-ink group-hover:text-accent-fg transition-colors mb-1.5">
           {post.title}
         </h2>
 
@@ -71,11 +68,11 @@ function PostRow({ post, isLast }: { post: BlogPostMeta; isLast: boolean }) {
             <Clock size={10} />
             {post.readingTime}
           </span>
-          <span className="ml-auto flex items-center gap-1 text-accent-500/60 group-hover:text-accent-500 transition-colors">
+          <span className="ml-auto flex items-center gap-1 text-accent-fg group-hover:text-accent-strong transition-colors">
             Read <ArrowUpRight size={11} />
           </span>
         </div>
-      </motion.article>
+      </article>
     </Link>
   );
 }
@@ -96,13 +93,13 @@ function FilterPill({
       onClick={onClick}
       className={`flex items-center gap-1.5 text-xs font-mono px-3 py-1.5 rounded-full border transition-all ${
         active
-          ? 'border-accent-500/50 bg-accent-500/10 text-accent-500'
+          ? 'border-accent-500/50 bg-accent-500/10 text-accent-fg'
           : 'border-border text-ink-muted hover:border-accent-500/30 hover:text-ink bg-surface-subtle'
       }`}
     >
       {label}
       <span
-        className={`text-[10px] ${active ? 'text-accent-500/70' : 'text-ink-faint'}`}
+        className={`text-[10px] ${active ? 'text-accent-fg' : 'text-ink-faint'}`}
       >
         {count}
       </span>
@@ -219,70 +216,56 @@ export function BlogListClient({
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-12 lg:gap-16 xl:gap-24 items-start">
       {/*  Post list  */}
       <div className="min-w-0 lg:max-w-3xl">
-        <AnimatePresence mode="popLayout">
-          {visible.length > 0 ? (
-            <motion.div key="posts" layout>
-              {visible.map((post, index) => (
-                <motion.div
-                  key={post.slug}
-                  layout
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+        {visible.length > 0 ? (
+          <div>
+            {visible.map((post, index) => (
+              <div key={post.slug} className="reveal reveal-up">
+                <PostRow post={post} isLast={index === visible.length - 1} />
+              </div>
+            ))}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between gap-3 pt-6">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="btn btn-outline gap-1.5 text-sm disabled:pointer-events-none disabled:opacity-40"
                 >
-                  <PostRow post={post} isLast={index === visible.length - 1} />
-                </motion.div>
-              ))}
-              {totalPages > 1 && (
-                <div className="flex items-center justify-between gap-3 pt-6">
-                  <button
-                    onClick={() => setPage((p) => Math.max(1, p - 1))}
-                    disabled={page === 1}
-                    className="btn btn-outline gap-1.5 text-sm disabled:pointer-events-none disabled:opacity-40"
-                  >
-                    <ChevronLeft size={14} /> Previous
-                  </button>
-                  <span className="text-xs font-mono text-ink-faint">
-                    Page {page} of {totalPages}
-                  </span>
-                  <button
-                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                    disabled={page === totalPages}
-                    className="btn btn-outline gap-1.5 text-sm disabled:pointer-events-none disabled:opacity-40"
-                  >
-                    Next <ChevronRight size={14} />
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          ) : (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="py-20 text-center"
+                  <ChevronLeft size={14} /> Previous
+                </button>
+                <span className="text-xs font-mono text-ink-faint">
+                  Page {page} of {totalPages}
+                </span>
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="btn btn-outline gap-1.5 text-sm disabled:pointer-events-none disabled:opacity-40"
+                >
+                  Next <ChevronRight size={14} />
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="reveal reveal-fade py-20 text-center">
+            <p className="font-display text-2xl text-ink-muted mb-2">
+              No posts found.
+            </p>
+            <p className="text-sm text-ink-faint mb-4">
+              Try adjusting your filters.
+            </p>
+            <button
+              onClick={() => {
+                setSearch('');
+                setActiveCategory(ALL);
+                setActiveTag(ALL);
+                setPage(1);
+              }}
+              className="btn btn-outline text-sm"
             >
-              <p className="font-display text-2xl text-ink-muted mb-2">
-                No posts found.
-              </p>
-              <p className="text-sm text-ink-faint mb-4">
-                Try adjusting your filters.
-              </p>
-              <button
-                onClick={() => {
-                  setSearch('');
-                  setActiveCategory(ALL);
-                  setActiveTag(ALL);
-                  setPage(1);
-                }}
-                className="btn btn-outline text-sm"
-              >
-                Clear filters
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              Clear filters
+            </button>
+          </div>
+        )}
       </div>
 
       {/*  Sidebar - sticky, does not scroll with the page  */}

@@ -1,8 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { Clock, Calendar } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import type { BlogPostMeta } from '@/types';
@@ -32,26 +29,25 @@ function FeaturedBlogCard({
   const gradient = gradientFor(post.slug);
 
   return (
-    <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <motion.article
-        whileHover={{ y: -3 }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+    <Link href={`/blog/${post.slug}`} className='group block h-full'>
+      <article
         className={cn(
           'flex flex-col h-full rounded-xl border border-border bg-surface-card overflow-hidden',
+          'hover:-translate-y-0.75',
           'hover:border-accent-500/40 hover:shadow-lg transition-all duration-300',
           'hover:shadow-[0_4px_24px_var(--glow)]',
           className,
         )}
       >
         {/* Top: image */}
-        <div className="relative h-52 shrink-0 overflow-hidden bg-surface-subtle">
+        <div className='relative h-52 shrink-0 overflow-hidden bg-surface-subtle'>
           {post.coverImage ? (
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              className='object-cover transition-transform duration-500 group-hover:scale-105'
+              sizes='(max-width: 768px) 100vw, 50vw'
             />
           ) : (
             <div
@@ -61,7 +57,7 @@ function FeaturedBlogCard({
               )}
             >
               {post.category && (
-                <span className="absolute bottom-2 right-2 font-mono text-[9px] text-white/20 uppercase tracking-widest">
+                <span className='absolute bottom-2 right-2 font-mono text-[9px] text-white/20 uppercase tracking-widest'>
                   {post.category}
                 </span>
               )}
@@ -70,13 +66,13 @@ function FeaturedBlogCard({
         </div>
 
         {/* Bottom: content */}
-        <div className="flex flex-col flex-1 px-5 py-5 gap-2.5">
+        <div className='flex flex-col flex-1 px-5 py-5 gap-2.5'>
           {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
+            <div className='flex flex-wrap gap-1.5'>
               {post.tags.slice(0, 2).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-border text-ink-faint bg-surface-subtle"
+                  className='text-[10px] font-mono px-2 py-0.5 rounded-full border border-border text-ink-faint bg-surface-subtle'
                 >
                   {tag}
                 </span>
@@ -84,26 +80,26 @@ function FeaturedBlogCard({
             </div>
           )}
 
-          <h3 className="font-display text-xl leading-snug text-ink group-hover:text-accent-500 transition-colors line-clamp-2">
+          <h3 className='font-display text-xl leading-snug text-ink group-hover:text-accent-fg transition-colors line-clamp-2'>
             {post.title}
           </h3>
 
-          <p className="text-sm text-ink-muted line-clamp-3 leading-relaxed flex-1">
+          <p className='text-sm text-ink-muted line-clamp-3 leading-relaxed flex-1'>
             {post.description}
           </p>
 
-          <div className="flex items-center gap-3 text-xs text-ink-faint font-mono mt-auto pt-1">
-            <span className="flex items-center gap-1">
+          <div className='flex items-center gap-3 text-xs text-ink-faint font-mono mt-auto pt-1'>
+            <span className='flex items-center gap-1'>
               <Calendar size={11} />
               {formatDate(post.publishedAt, 'MMM d, yyyy')}
             </span>
-            <span className="flex items-center gap-1">
+            <span className='flex items-center gap-1'>
               <Clock size={11} />
               {post.readingTime}
             </span>
           </div>
         </div>
-      </motion.article>
+      </article>
     </Link>
   );
 }
@@ -117,23 +113,22 @@ function CompactBlogCard({
   className?: string;
 }) {
   return (
-    <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <motion.article
-        whileHover={{ x: 3 }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+    <Link href={`/blog/${post.slug}`} className='group block h-full'>
+      <article
         className={cn(
           'flex flex-col h-full rounded-xl border border-border bg-surface-card px-5 py-4',
+          'hover:translate-x-0.75',
           'hover:border-accent-500/40 hover:shadow-lg transition-all duration-300',
           'hover:shadow-[0_4px_24px_var(--glow)]',
           className,
         )}
       >
         {post.tags && post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-2">
+          <div className='flex flex-wrap gap-1.5 mb-2'>
             {post.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-border text-ink-faint bg-surface-subtle"
+                className='text-[10px] font-mono px-2 py-0.5 rounded-full border border-border text-ink-faint bg-surface-subtle'
               >
                 {tag}
               </span>
@@ -141,25 +136,25 @@ function CompactBlogCard({
           </div>
         )}
 
-        <h3 className="font-display text-lg leading-snug text-ink group-hover:text-accent-500 transition-colors line-clamp-2 mb-1.5">
+        <h3 className='font-display text-lg leading-snug text-ink group-hover:text-accent-fg transition-colors line-clamp-2 mb-1.5'>
           {post.title}
         </h3>
 
-        <p className="text-sm text-ink-muted line-clamp-2 leading-relaxed flex-1">
+        <p className='text-sm text-ink-muted line-clamp-2 leading-relaxed flex-1'>
           {post.description}
         </p>
 
-        <div className="flex items-center gap-3 text-xs text-ink-faint font-mono mt-3">
-          <span className="flex items-center gap-1">
+        <div className='flex items-center gap-3 text-xs text-ink-faint font-mono mt-3'>
+          <span className='flex items-center gap-1'>
             <Calendar size={11} />
             {formatDate(post.publishedAt, 'MMM d, yyyy')}
           </span>
-          <span className="flex items-center gap-1">
+          <span className='flex items-center gap-1'>
             <Clock size={11} />
             {post.readingTime}
           </span>
         </div>
-      </motion.article>
+      </article>
     </Link>
   );
 }
@@ -182,26 +177,25 @@ export function BlogCard({
   const gradient = gradientFor(post.slug);
 
   return (
-    <Link href={`/blog/${post.slug}`} className="group block">
-      <motion.article
-        whileHover={{ x: 3 }}
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+    <Link href={`/blog/${post.slug}`} className='group block'>
+      <article
         className={cn(
           'flex gap-0 rounded-xl border border-border bg-surface-card overflow-hidden',
+          'hover:translate-x-0.75',
           'hover:border-accent-500/40 hover:shadow-lg transition-all duration-300',
           'hover:shadow-[0_4px_24px_var(--glow)]',
           className,
         )}
       >
         {/* Left: thumbnail - fixed width, full card height */}
-        <div className="relative hidden w-48 shrink-0 self-stretch overflow-hidden bg-surface-subtle sm:block sm:w-64">
+        <div className='relative hidden w-48 shrink-0 self-stretch overflow-hidden bg-surface-subtle sm:block sm:w-64'>
           {post.coverImage ? (
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 320px"
+              className='object-cover transition-transform duration-500 group-hover:scale-105'
+              sizes='(max-width: 768px) 100vw, 320px'
             />
           ) : (
             <div
@@ -211,7 +205,7 @@ export function BlogCard({
               )}
             >
               {post.category && (
-                <span className="absolute bottom-2 right-2 font-mono text-[9px] text-white/20 uppercase tracking-widest">
+                <span className='absolute bottom-2 right-2 font-mono text-[9px] text-white/20 uppercase tracking-widest'>
                   {post.category}
                 </span>
               )}
@@ -220,13 +214,13 @@ export function BlogCard({
         </div>
 
         {/* Right: content */}
-        <div className="flex flex-col flex-1 min-w-0 px-5 py-5 gap-2.5">
+        <div className='flex flex-col flex-1 min-w-0 px-5 py-5 gap-2.5'>
           {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
+            <div className='flex flex-wrap gap-1.5'>
               {post.tags.slice(0, 2).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-border text-ink-faint bg-surface-subtle"
+                  className='text-[10px] font-mono px-2 py-0.5 rounded-full border border-border text-ink-faint bg-surface-subtle'
                 >
                   {tag}
                 </span>
@@ -234,26 +228,26 @@ export function BlogCard({
             </div>
           )}
 
-          <h3 className="font-display text-lg sm:text-xl leading-snug text-ink group-hover:text-accent-500 transition-colors line-clamp-2">
+          <h3 className='font-display text-lg sm:text-xl leading-snug text-ink group-hover:text-accent-fg transition-colors line-clamp-2'>
             {post.title}
           </h3>
 
-          <p className="text-sm text-ink-muted line-clamp-2 leading-relaxed flex-1">
+          <p className='text-sm text-ink-muted line-clamp-2 leading-relaxed flex-1'>
             {post.description}
           </p>
 
-          <div className="flex items-center gap-3 text-xs text-ink-faint font-mono mt-auto pt-1">
-            <span className="flex items-center gap-1">
+          <div className='flex items-center gap-3 text-xs text-ink-faint font-mono mt-auto pt-1'>
+            <span className='flex items-center gap-1'>
               <Calendar size={11} />
               {formatDate(post.publishedAt, 'MMM d, yyyy')}
             </span>
-            <span className="flex items-center gap-1">
+            <span className='flex items-center gap-1'>
               <Clock size={11} />
               {post.readingTime}
             </span>
           </div>
         </div>
-      </motion.article>
+      </article>
     </Link>
   );
 }

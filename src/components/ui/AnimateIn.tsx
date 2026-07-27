@@ -1,15 +1,28 @@
-"use client";
+import type { CSSProperties } from "react";
+import { cn } from "@/lib/utils";
 
-import { motion, useInView, type TargetAndTransition } from "framer-motion";
-import { useRef } from "react";
+// CSS-only by design. Never animate these from JS with an `opacity: 0` initial
+// state: it serializes into the SSR HTML and the page ships invisible.
+
+type Direction = "up" | "down" | "left" | "right" | "none";
+
+const DIRECTION_CLASS: Record<Direction, string> = {
+  up: "reveal-up",
+  down: "reveal-down",
+  left: "reveal-left",
+  right: "reveal-right",
+  none: "reveal-fade",
+};
 
 interface AnimateInProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
   duration?: number;
-  direction?: "up" | "down" | "left" | "right" | "none";
-  once?: boolean;
+  direction?: Direction;
+  /** No animation. Required above the fold: an element starting at opacity 0
+   *  is ineligible for LCP. */
+  eager?: boolean;
 }
 
 export function AnimateIn({
@@ -18,29 +31,24 @@ export function AnimateIn({
   delay = 0,
   duration = 0.6,
   direction = "up",
-  once = true,
+  eager = false,
 }: AnimateInProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, margin: "-80px" });
-
-  const offsets: Record<string, TargetAndTransition> = {
-    up:    { opacity: 0, y: 24 },
-    down:  { opacity: 0, y: -24 },
-    left:  { opacity: 0, x: -24 },
-    right: { opacity: 0, x: 24 },
-    none:  { opacity: 0 },
-  };
+  if (eager) {
+    return className ? <div className={className}>{children}</div> : <>{children}</>;
+  }
 
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={offsets[direction]}
-      animate={inView ? { opacity: 1, y: 0, x: 0 } : offsets[direction]}
-      transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      className={cn("reveal", DIRECTION_CLASS[direction], className)}
+      style={
+        {
+          "--reveal-delay": `${delay}s`,
+          "--reveal-duration": `${duration}s`,
+        } as CSSProperties
+      }
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -53,32 +61,13 @@ export function StaggerContainer({
   className?: string;
   stagger?: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-
   return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      variants={{
-        hidden: {},
-        visible: { transition: { staggerChildren: stagger } },
-      }}
+    <div
+      className={cn("stagger", className)}
+      style={{ "--stagger-step": `${stagger}s` } as CSSProperties}
     >
       {children}
-    </motion.div>
-  );
-}
-
-export function BounceBar({ className }: { className?: string }) {
-  return (
-    <motion.div
-      animate={{ y: [0, 6, 0] }}
-      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-      className={className}
-    />
+    </div>
   );
 }
 
@@ -92,14 +81,22 @@ export function StaggerItem({
   direction?: "up" | "left" | "none";
 }) {
   return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: direction === "up" ? { opacity: 0, y: 20 } : direction === "left" ? { opacity: 0, x: -16 } : { opacity: 0 },
-        visible: { opacity: 1, y: 0, x: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
-      }}
+    <div
+      className={cn(
+        "stagger-item",
+        direction === "left"
+          ? "reveal-left"
+          : direction === "none"
+            ? "reveal-fade"
+            : "reveal-up",
+        className,
+      )}
     >
       {children}
-    </motion.div>
+    </div>
   );
+}
+
+export function BounceBar({ className }: { className?: string }) {
+  return <div className={cn("bounce-bar", className)} />;
 }

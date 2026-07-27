@@ -1,8 +1,5 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/SocialIcons';
 import type { Project } from '@/types';
@@ -24,11 +21,7 @@ export function FeaturedProjectCard({
   const imageLeft = index % 2 === 0;
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+    <article
       className={cn(
         'group flex flex-col overflow-hidden rounded-2xl border border-border',
         'md:relative md:block md:overflow-visible md:rounded-none md:border-0',
@@ -91,12 +84,12 @@ export function FeaturedProjectCard({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-ink hover:text-accent-500 transition-colors"
+              className="text-ink hover:text-accent-fg transition-colors"
             >
               {project.title}
             </a>
           ) : (
-            <span className="text-ink group-hover:text-accent-500 transition-colors">
+            <span className="text-ink group-hover:text-accent-fg transition-colors">
               {project.title}
             </span>
           )}
@@ -126,7 +119,7 @@ export function FeaturedProjectCard({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-ink-faint hover:text-ink transition-colors font-mono"
+              className="flex items-center gap-1.5 py-1 text-xs text-ink-faint hover:text-ink transition-colors font-mono"
             >
               <GithubIcon size={13} /> Source
             </a>
@@ -136,14 +129,14 @@ export function FeaturedProjectCard({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-ink-faint hover:text-accent-500 transition-colors font-mono"
+              className="flex items-center gap-1.5 py-1 text-xs text-ink-faint hover:text-accent-fg transition-colors font-mono"
             >
               <ExternalLink size={13} /> Live
             </a>
           )}
           <Link
             href={`/projects/${project.slug.current}`}
-            className="flex items-center gap-1 text-sm font-medium text-accent-500 hover:text-accent-400 transition-colors ml-auto"
+            className="flex items-center gap-1 py-1 text-sm font-medium text-accent-fg hover:text-accent-strong transition-colors ml-auto"
           >
             Case study{' '}
             <ArrowUpRight
@@ -153,6 +146,6 @@ export function FeaturedProjectCard({
           </Link>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }

@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/SocialIcons';
 import { TagPill } from '@/components/ui/TagPill';
@@ -48,12 +47,10 @@ export function ProjectCard({
   const { boxRef, textRef, lines } = useFillClamp(project.summary);
 
   return (
-    <motion.article
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+    <article
       className={cn(
         'group relative flex flex-col rounded-xl border border-border bg-surface-card overflow-hidden',
-        'hover:border-accent-500/40 hover:shadow-lg transition-all duration-300',
+        'hover:border-accent-500/40 hover:shadow-lg hover:-translate-y-1 transition-all duration-300',
         'hover:shadow-[0_8px_32px_var(--glow)]',
         featured && 'md:flex-row md:h-64',
         className,
@@ -89,7 +86,7 @@ export function ProjectCard({
           </div>
         )}
         {project.featured && (
-          <span className='absolute top-3 left-3 tag-pill bg-accent-500/90 text-white border-transparent text-[10px] tracking-wider uppercase'>
+          <span className='absolute top-3 left-3 tag-pill bg-accent-700/95 text-white border-transparent text-[10px] tracking-wider uppercase'>
             Featured
           </span>
         )}
@@ -104,7 +101,7 @@ export function ProjectCard({
         className={cn('flex flex-col flex-1 p-5 gap-3', featured && 'md:p-7')}
       >
         <div className='flex items-start justify-between gap-4'>
-          <h3
+          <h2
             className={cn(
               'font-display leading-snug transition-colors',
               featured ? 'text-xl md:text-2xl' : 'text-lg',
@@ -116,16 +113,16 @@ export function ProjectCard({
                 target='_blank'
                 rel='noopener noreferrer'
                 onClick={(e) => e.stopPropagation()}
-                className='text-ink hover:text-accent-500 transition-colors'
+                className='text-ink hover:text-accent-fg transition-colors'
               >
                 {project.title}
               </a>
             ) : (
-              <span className='text-ink group-hover:text-accent-500 transition-colors'>
+              <span className='text-ink group-hover:text-accent-fg transition-colors'>
                 {project.title}
               </span>
             )}
-          </h3>
+          </h2>
           <div className='flex items-center gap-2 shrink-0'>
             {!project.clientWork && project.githubUrl && (
               <a
@@ -145,7 +142,7 @@ export function ProjectCard({
                 target='_blank'
                 rel='noopener noreferrer'
                 onClick={(e) => e.stopPropagation()}
-                className='text-ink-faint hover:text-accent-500 transition-colors p-1'
+                className='text-ink-faint hover:text-accent-fg transition-colors p-1'
                 aria-label='Live site'
               >
                 <ExternalLink size={15} />
@@ -184,7 +181,7 @@ export function ProjectCard({
 
         <Link
           href={`/projects/${project.slug.current}`}
-          className='flex items-center gap-1 text-xs font-medium text-ink-muted hover:text-accent-500 transition-colors mt-1 group/link w-fit'
+          className='flex items-center gap-1 text-xs font-medium text-ink-muted hover:text-accent-fg transition-colors mt-1 group/link w-fit'
         >
           View details
           <ArrowUpRight
@@ -193,6 +190,6 @@ export function ProjectCard({
           />
         </Link>
       </div>
-    </motion.article>
+    </article>
   );
 }

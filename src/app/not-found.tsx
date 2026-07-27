@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import type { CSSProperties } from 'react';
 import { ArrowLeft, Home, Search } from 'lucide-react';
 import Link from 'next/link';
 
@@ -19,34 +19,25 @@ export default function NotFound() {
 
       <div className="relative text-center max-w-lg mx-auto space-y-8">
         {/* Glitchy 404 */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="relative"
-        >
+        <div className="reveal reveal-zoom relative">
           <div
             className="font-display text-[10rem] md:text-[14rem] leading-none text-transparent select-none"
             style={{ WebkitTextStroke: '1px var(--border)' }}
           >
             404
           </div>
-          <motion.div
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute inset-0 font-display text-[10rem] md:text-[14rem] leading-none text-gradient select-none blur-sm"
+          <div
+            className="pulse-glow absolute inset-0 font-display text-[10rem] md:text-[14rem] leading-none text-gradient select-none blur-sm"
             aria-hidden
           >
             404
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-3"
+        <div
+          className="reveal reveal-up space-y-3"
+          style={{ '--reveal-delay': '0.2s' } as CSSProperties}
         >
           <h1 className="font-display text-2xl md:text-3xl text-ink">
             Page not found.
@@ -55,14 +46,12 @@ export default function NotFound() {
             This page doesn&apos;t exist... or it did and I deleted it. Either
             way, there&apos;s nothing here.
           </p>
-        </motion.div>
+        </div>
 
         {/* Code block easter egg */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.5 }}
-          className="glass rounded-xl p-4 font-mono text-xs text-left border border-border"
+        <div
+          className="reveal reveal-up glass rounded-xl p-4 font-mono text-xs text-left border border-border"
+          style={{ '--reveal-delay': '0.35s' } as CSSProperties}
         >
           <div className="flex items-center gap-1.5 mb-3">
             <span className="w-2 h-2 rounded-full bg-red-400/70" />
@@ -76,7 +65,7 @@ export default function NotFound() {
               <span className="text-ink-muted">404: Page not found</span>
             </div>
             <div>
-              <span className="text-amber-400/80">HINT</span>{' '}
+              <span className="text-amber-700 dark:text-amber-400/80">HINT</span>{' '}
               <span className="text-ink-muted">Did you mean one of these?</span>
             </div>
             {LINKS.map((l) => (
@@ -84,21 +73,19 @@ export default function NotFound() {
                 <span className="text-ink-faint"> →</span>{' '}
                 <Link
                   href={l.href}
-                  className="text-accent-400 hover:text-accent-300 transition-colors underline-anim"
+                  className="text-accent-fg hover:text-accent-strong transition-colors underline-anim"
                 >
                   {l.label}
                 </Link>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="flex flex-wrap justify-center gap-3"
+        <div
+          className="reveal reveal-up flex flex-wrap justify-center gap-3"
+          style={{ '--reveal-delay': '0.5s' } as CSSProperties}
         >
           <Link href="/" className="btn btn-primary gap-2">
             <Home size={15} /> Go home
@@ -109,7 +96,7 @@ export default function NotFound() {
           >
             <ArrowLeft size={15} /> Go back
           </button>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

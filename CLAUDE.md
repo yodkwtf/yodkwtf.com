@@ -44,7 +44,7 @@ Pages and home-page sections are React Server Components that own their own data
 - `src/app/projects/ProjectsClient.tsx` — client-side search and tag filtering for the projects grid
 - `src/app/blog/BlogListClient.tsx` — client-side search and tag filtering for the blog list
 
-Sections like `HeroSection`, `FeaturedProjectsSection`, and `MiniAboutSection` are **single-file async RSCs** — they fetch their own data and use `AnimateIn` for animations rather than calling `motion.*` directly. This avoids needing a `'use client'` split. Only add a `*Client.tsx` companion when a section needs direct Framer Motion calls, hooks, or browser events.
+Sections like `HeroSection`, `FeaturedProjectsSection`, and `MiniAboutSection` are **single-file async RSCs**: they fetch their own data and use `AnimateIn` for animations rather than calling `motion.*` directly. This avoids needing a `'use client'` split. Only add a `*Client.tsx` companion when a section genuinely needs hooks or browser events; entrance animations and hover effects are pure CSS and do **not** require one.
 
 `src/app/error.tsx` is the app-wide error boundary (must be `'use client'`). It receives `error` and `reset` props and renders a "Try again / Go home" UI.
 
@@ -86,10 +86,28 @@ urlFor(image).width(800).url()
 
 ### Animation Primitives
 
-`src/components/ui/AnimateIn.tsx` exports four Framer Motion wrappers:
-- `AnimateIn` — fade-in with directional slide (`direction`: `up | down | left | right | none`)
-- `StaggerContainer` + `StaggerItem` — orchestrated stagger for lists
-- `BounceBar` — a `motion.div` that loops `y: [0, 6, 0]` indefinitely; used for the hero scroll indicator
+`src/components/ui/AnimateIn.tsx` exports four **CSS-driven server components** (no `'use client'`, no animation library). Each renders a `div` carrying a `reveal*` class defined in `globals.css`:
+- `AnimateIn`: fade-in with directional slide (`direction`: `up | down | left | right | none`). `delay`/`duration` are passed through as the `--reveal-delay` / `--reveal-duration` CSS vars. Pass `eager` to skip the animation entirely.
+- `StaggerContainer` + `StaggerItem`: stagger via `nth-child` delay rules, capped at 8 steps
+- `BounceBar`: CSS keyframe loop; used for the hero scroll indicator
+
+**Framer Motion is no longer a dependency** (Sanity Studio still pulls it in transitively for `/admin`, but no app code imports it). It was removed because `initial={{ opacity: 0 }}` serializes `style="opacity:0"` into the SSR HTML, so the whole page shipped invisible and only appeared after the library downloaded and hydrated, which on mobile meant seconds of blank, unscrollable screen. **Don't reintroduce JS-driven entrance animations.** For hover effects use CSS `transition` + `hover:` utilities.
+
+Two rules follow from this:
+- **Above-the-fold content must use `eager`** (or no wrapper). An element that starts at `opacity: 0` is ineligible to be the Largest Contentful Paint, so animating the hero directly inflates LCP by the animation's delay + duration.
+- Reveals are **scroll-triggered but fail-open**. Markup ships visible; `src/components/ui/ScrollReveal.tsx` (mounted in the root layout) hides only what is already below the fold by adding `.reveal-pending`, then removes it as you scroll. If that script never runs, every element simply stays visible. It sweeps on a rAF-throttled scroll listener rather than an `IntersectionObserver` on purpose: an observer only fires on threshold crossings, so a fast scroll or an anchor jump can skip an element and strand it hidden forever. It reveals once and does not re-hide on scroll up. CSS `animation-timeline: view()` was tried and rejected for the same reason: progress timelines scrub, so scrolling back up faded content out again.
+
+### Fonts
+
+`font-sans` (Outfit) and `font-mono` (DM Mono) are loaded via `next/font/google` in `src/app/layout.tsx` (self-hosted, preloaded, `display: swap`) and exposed as `--font-sans` / `--font-mono`.
+
+`font-display` is **not a webfont**. `--font-display` is defined in `globals.css` as `Georgia, "Times New Roman", Times, serif`, so headings cost zero bytes. This is deliberate: the site previously declared Instrument Serif but loaded it through a remote `@import` that Tailwind v4 strips, so production had been rendering the Georgia fallback all along and the design was tuned against it. Instrument Serif is ~34% narrower at the same size, so switching to it made every heading look small.
+
+**Never add `@import url("https://fonts.googleapis.com/...")` to `globals.css`**, because Tailwind v4's bundler silently strips remote `@import`s, so the fonts just never load. Add webfonts through `next/font` instead.
+
+### Theme: No-Flash Requirement
+
+`layout.tsx` inlines `THEME_INIT_SCRIPT` in `<head>` to set the `.dark` class before first paint; `ThemeProvider` seeds its state from that class. The navbar's theme toggle renders **both** icons and cross-fades them in CSS off `.dark`; picking one from `resolvedTheme` in JS would disagree with the server HTML and flash the wrong icon.
 
 ### Blog Detail Page — TOC and Layout
 
@@ -136,11 +154,17 @@ const { resolvedTheme, toggleTheme, setTheme } = useTheme();
 
 Tailwind CSS v4 is used with a CSS-variable-based design system. Custom token names to know:
 
-- Colors: `ink` (text), `ink-muted`, `ink-faint`; `surface`, `surface-subtle`, `surface-card`; `accent-{50–900}`; `border`, `border-subtle`
+- Colors: `ink` (text), `ink-muted`, `ink-faint`; `surface`, `surface-subtle`, `surface-card`; `accent-{50-900}`; `accent-fg` / `accent-strong`; `border`, `border-subtle`
 - Utility classes defined in `globals.css`: `.btn`, `.btn-primary`, `.btn-outline`, `.btn-ghost`, `.tag-pill`, `.glass`, `.dot-grid`, `.text-gradient`, `.glow-accent`
 - Dark mode uses the `.dark` class (toggled by `ThemeProvider`)
-- **To change the accent color**: update `--accent-*` CSS variables in `globals.css` and the `accent` field in `siteConfig`
-- Fonts: `font-display` (Instrument Serif), `font-mono` (DM Mono), `font-sans` (Outfit)
+- **To change the accent color**: update `--accent-*` CSS variables in `globals.css` and the `accent` field in `siteConfig`. Also update `--accent-fg` / `--accent-fg-strong`, which are set **per theme** (both live in `:root` and are overridden in `.dark`).
+- Fonts: `font-display` (Georgia, a system serif), `font-mono` (DM Mono), `font-sans` (Outfit)
+
+**Accent text must use `text-accent-fg`, never `text-accent-500`.** The numbered ramp is tuned for dark surfaces: `--accent-500` is 7.6:1 on the dark background but only **2.3:1** on the light one, so every accent-colored label, link, and icon failed WCAG AA in light mode. `--accent-fg` resolves to a dark emerald in light mode and the bright brand green in dark mode; `--accent-strong` is the paired hover/emphasis step (darker in light, brighter in dark). Use `text-accent-strong` only where the resting state is already `text-accent-fg`. For `text-ink*` elements that turn accent on hover, hover to `text-accent-fg`.
+
+The same applies to raw Tailwind palette colors used as text: `-400` shades are dark-mode-only. Pair them (`text-violet-700 dark:text-violet-400`), as `SKILL_CATEGORY_COLORS` in `fallback-skills.ts` does.
+
+Verify contrast in **both** themes, because Lighthouse only audits one and a light-mode-only regression will pass CI-style checks unnoticed.
 
 ### TypeScript Gotcha — `siteConfig as const`
 

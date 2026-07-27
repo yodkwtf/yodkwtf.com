@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import { Search, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { ProjectCard } from '@/components/ui/ProjectCard';
 import { TagPill } from '@/components/ui/TagPill';
 import type { Project } from '@/types';
@@ -76,49 +75,33 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
       </p>
 
       {/* Grid */}
-      <AnimatePresence mode="popLayout">
-        {filtered.length > 0 ? (
-          <motion.div
-            layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-7 xl:gap-x-10"
+      {filtered.length > 0 ? (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-7 xl:gap-x-10">
+          {filtered.map((project) => (
+            <div key={project._id} className="reveal reveal-pop">
+              <ProjectCard project={project} className="h-full" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="reveal reveal-fade py-24 text-center">
+          <p className="font-display text-2xl text-ink-muted mb-2">
+            No projects found.
+          </p>
+          <p className="text-sm text-ink-faint">
+            Try a different search or filter.
+          </p>
+          <button
+            onClick={() => {
+              setSearch('');
+              setActiveTag(ALL);
+            }}
+            className="btn btn-outline mt-4 text-sm"
           >
-            {filtered.map((project) => (
-              <motion.div
-                key={project._id}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <ProjectCard project={project} className="h-full" />
-              </motion.div>
-            ))}
-          </motion.div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="py-24 text-center"
-          >
-            <p className="font-display text-2xl text-ink-muted mb-2">
-              No projects found.
-            </p>
-            <p className="text-sm text-ink-faint">
-              Try a different search or filter.
-            </p>
-            <button
-              onClick={() => {
-                setSearch('');
-                setActiveTag(ALL);
-              }}
-              className="btn btn-outline mt-4 text-sm"
-            >
-              Clear filters
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Clear filters
+          </button>
+        </div>
+      )}
     </div>
   );
 }

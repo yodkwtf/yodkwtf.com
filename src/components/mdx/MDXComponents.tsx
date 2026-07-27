@@ -24,7 +24,7 @@ const calloutConfig: Record<
   tip: {
     icon: <Lightbulb size={15} />,
     classes: "border-accent-500/30 bg-accent-500/5",
-    labelClass: "text-accent-500",
+    labelClass: "text-accent-fg",
     label: "Tip",
   },
   error: {
@@ -161,7 +161,7 @@ export const mdxComponents = {
     }
 
     return (
-      <code className="rounded border border-border bg-surface-subtle px-1.5 py-0.5 font-mono text-sm text-accent-400">
+      <code className="rounded border border-border bg-surface-subtle px-1.5 py-0.5 font-mono text-sm text-accent-fg">
         {children}
       </code>
     );

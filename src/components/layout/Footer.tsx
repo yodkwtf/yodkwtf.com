@@ -32,14 +32,15 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
               {siteConfig.description.split('.')[0]}.
             </p>
           </div>
-          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-3">
             {footerLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 target={link.external ? '_blank' : undefined}
                 rel={link.external ? 'noopener noreferrer' : undefined}
-                className="flex items-center gap-1 text-sm text-ink-muted hover:text-ink transition-colors underline-anim"
+                className="flex items-center gap-1 py-1 text-sm text-ink-muted hover:text-ink transition-colors underline-anim"
               >
                 {link.label}
                 {link.external && <ArrowUpRight size={12} />}
@@ -52,7 +53,7 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-fg transition-colors"
             >
               <GithubIcon size={17} />
             </a>
@@ -61,7 +62,7 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-fg transition-colors"
             >
               <TwitterIcon size={17} />
             </a>
@@ -70,14 +71,14 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-fg transition-colors"
             >
               <LinkedinIcon size={17} />
             </a>
             <a
               href={`mailto:${siteConfig.email}`}
               aria-label="Email"
-              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-500 transition-colors"
+              className="btn-ghost p-2 rounded-lg text-ink-muted hover:text-accent-fg transition-colors"
             >
               <Mail size={17} />
             </a>
@@ -91,7 +92,7 @@ export function Footer({ resumeUrl }: { resumeUrl: string }) {
             href={`${siteConfig.links.repo}/issues`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs text-ink-faint font-mono hover:text-accent-500 transition-colors group"
+            className="flex items-center gap-1.5 text-xs text-ink-faint font-mono hover:text-accent-fg transition-colors group"
           >
             <GithubIcon size={13} />
             <span>Found an issue? Report it on GitHub</span>
