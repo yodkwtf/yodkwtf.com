@@ -61,7 +61,7 @@ cat ~/.ssh/github_work.pub | clip
 
 Paste the copied key into the corresponding GitHub account under **Settings → SSH and GPG Keys**, choosing **Authentication** as the key type. Repeat for the personal key on your personal account.
 
-<Callout type='info' title='Why ed25519?'>
+<Callout type="info" title="Why ed25519?">
   You might notice the generated key starts with `ssh-ed25519` rather than the
   older `ssh-rsa`. That's expected — `ed25519` is the recommended modern
   algorithm, and GitHub supports it fully.
@@ -264,6 +264,56 @@ After editing your `~/.zshrc` or `~/.bashrc`, reload it to apply the changes:
 ```bash
 source ~/.zshrc   # or source ~/.bashrc
 ```
+
+### Handling organization repos (not just your own account)
+
+There's one gotcha the functions above don't account for: a single hardcoded namespace only works for _one_ place your repos can live. If your work GitHub account is also a member of an organization, org-owned repos live under a completely different path than your own account's repos:
+
+```text
+git@github-work:your-username/repo.git    # repo under your own account
+git@github-work:your-org-name/repo.git    # repo owned by the organization
+```
+
+If `gw` has your username hardcoded and you try to clone a repo that actually belongs to the org, you'll hit a confusing dead end: `ssh -T git@github-work` still authenticates correctly, the org already shows as SSO-authorized under your SSH key in GitHub's settings, and cloning the exact same repo over HTTPS works fine — yet `gw` still fails. It's not a permissions problem at all; the function is just pointed at the wrong namespace.
+
+The fix is to accept the namespace as an optional second argument, defaulting to whichever one you use most often:
+
+```bash
+# filename: ~/.zshrc
+
+gw() {
+    local ROOT="$HOME/Documents/Code/GitHub/Work"
+    local NAMESPACE="${2:-your-username}"   # defaults to your own account, override for orgs
+
+    if [ -z "$1" ]; then
+        echo "Usage: gw <repo-name> [namespace]"
+        return 1
+    fi
+
+    mkdir -p "$ROOT"
+    cd "$ROOT" || return
+
+    if [ -d "$1" ]; then
+        echo "📂 Opening existing repository..."
+        cd "$1"
+    else
+        echo "⬇️  Cloning repository..."
+        git clone git@github-work:"$NAMESPACE"/"$1".git || return
+        cd "$1"
+    fi
+
+    code .
+}
+```
+
+Now both cases work with the same function:
+
+```bash
+gw my-own-repo                  # clones your-username/my-own-repo
+gw internal-tool your-org-name  # clones your-org-name/internal-tool
+```
+
+If you clone org repos more often than your own, just flip the default in `NAMESPACE` — whichever namespace you'll type less often should be the fallback.
 
 ## Step 6: Add a global pre-push hook
 
