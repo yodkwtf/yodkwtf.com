@@ -4,26 +4,16 @@ import { AnimateIn } from '@/components/ui/AnimateIn';
 import { siteConfig } from '@/config/site';
 import { getAboutPage } from '@/sanity/lib/queries';
 import { FALLBACK_SHORT_BIO, FALLBACK_STATS } from '@/data/fallback-about';
+import { RichText, type RichTextValue } from '@/components/ui/RichText';
 import { logger } from '@/lib/logger';
 
-function extractBlocks(blocks: { children?: { text: string }[] }[]): string[] {
-  return blocks
-    .map((block) => block.children?.map((c) => c.text).join('') ?? '')
-    .filter(Boolean);
-}
-
 export async function MiniAboutSection() {
-  let bio: string[] = FALLBACK_SHORT_BIO;
+  let bio: RichTextValue = FALLBACK_SHORT_BIO;
   let stats: { num: string; label: string; sub: string }[] = FALLBACK_STATS;
 
   try {
     const about = await getAboutPage();
-    if (about?.shortBio?.length) {
-      const extracted = extractBlocks(
-        about.shortBio as { children?: { text: string }[] }[],
-      );
-      if (extracted.length) bio = extracted;
-    }
+    if (about?.shortBio?.length) bio = about.shortBio;
     if (about?.stats?.length) stats = about.stats;
     logger.info('MiniAboutSection', 'Loaded about data from Sanity');
   } catch (err) {
@@ -52,11 +42,7 @@ export async function MiniAboutSection() {
                   code and creativity.
                 </em>
               </h2>
-              {bio.map((para, i) => (
-                <p key={i} className='text-ink-muted leading-relaxed'>
-                  {para}
-                </p>
-              ))}
+              <RichText value={bio} />
               <div className='flex flex-wrap items-center gap-4 text-sm text-ink-muted pt-2'>
                 <span className='flex items-center gap-1.5'>
                   <MapPin size={14} className='text-accent-fg' />

@@ -17,6 +17,11 @@ import { logger } from '@/lib/logger';
 import { getAboutPage, getExperience } from '@/sanity/lib/queries';
 import { urlFor } from '@/sanity/lib/client';
 import { toPlainText, type PortableTextBlock } from '@portabletext/react';
+import {
+  RichText,
+  RichTextInline,
+  type RichTextValue,
+} from '@/components/ui/RichText';
 import { FALLBACK_EXPERIENCE } from '@/data/fallback-experience';
 import {
   FALLBACK_BIO,
@@ -64,7 +69,7 @@ export default async function AboutPage() {
   let avatarHeight = 800;
   let avatarBlur: string | undefined;
   let resumeUrl: string = siteConfig.links.resume;
-  let bio: string[] = FALLBACK_BIO;
+  let bio: RichTextValue = FALLBACK_BIO;
 
   try {
     const [fetchedExp, about] = await Promise.all([
@@ -82,12 +87,7 @@ export default async function AboutPage() {
     }
     if (about?.resumeUrl) resumeUrl = about.resumeUrl;
     if (about?.education?.length) education = about.education;
-    if (about?.bio?.length) {
-      const extracted = (about.bio as { children?: { text: string }[] }[])
-        .map((block) => block.children?.map((c) => c.text).join('') ?? '')
-        .filter(Boolean);
-      if (extracted.length) bio = extracted;
-    }
+    if (about?.bio?.length) bio = about.bio;
     logger.info('AboutPage', 'Loaded about and experience data from Sanity');
   } catch (err) {
     logger.warn(
@@ -111,11 +111,7 @@ export default async function AboutPage() {
                   A bit about me.
                 </h1>
                 <div className='space-y-4 max-w-2xl'>
-                  {bio.map((para, i) => (
-                    <p key={i} className='text-ink-muted leading-relaxed'>
-                      {para}
-                    </p>
-                  ))}
+                  <RichText value={bio} />
                 </div>
                 <div className='flex flex-wrap gap-3 pt-1'>
                   <a
@@ -232,16 +228,19 @@ export default async function AboutPage() {
                                       typeof item === 'string'
                                         ? item
                                         : toPlainText(item);
+                                    if (!text.trim()) return null;
 
-                                    return text ? (
+                                    return (
                                       <li
                                         key={j}
                                         className='flex items-start gap-2 text-sm leading-relaxed text-ink-muted'
                                       >
                                         <span className='mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-500/60' />
-                                        {text}
+                                        <span>
+                                          <RichTextInline value={[item]} />
+                                        </span>
                                       </li>
-                                    ) : null;
+                                    );
                                   },
                                 )}
                               </ul>
@@ -274,10 +273,7 @@ export default async function AboutPage() {
                     <StaggerItem key={i}>
                       <div className='relative flex gap-3 sm:gap-5'>
                         <div className='relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-surface'>
-                          <GraduationCap
-                            size={16}
-                            className='text-accent-fg'
-                          />
+                          <GraduationCap size={16} className='text-accent-fg' />
                         </div>
 
                         <div className='glass flex-1 rounded-2xl border border-border p-4 sm:p-5'>
