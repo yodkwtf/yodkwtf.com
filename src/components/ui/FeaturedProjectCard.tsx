@@ -74,25 +74,17 @@ export function FeaturedProjectCard({
           'md:absolute md:top-1/2 md:w-[46%] md:-translate-y-1/2 md:p-8 md:text-left',
           'md:rounded-2xl md:border md:border-border md:bg-surface-card',
           'md:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18),0_0_40px_-16px_var(--glow)]',
-          imageLeft ? 'md:right-0' : 'md:left-0',
+          imageLeft ? 'md:right-[4%]' : 'md:left-[4%]',
         )}
       >
         {/* Title */}
         <h3 className="font-display text-2xl md:text-3xl leading-tight mb-3">
-          {project.liveUrl ? (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink hover:text-accent-fg transition-colors"
-            >
-              {project.title}
-            </a>
-          ) : (
-            <span className="text-ink group-hover:text-accent-fg transition-colors">
-              {project.title}
-            </span>
-          )}
+          <Link
+            href={`/projects/${project.slug.current}`}
+            className="text-ink hover:text-accent-fg transition-colors"
+          >
+            {project.title}
+          </Link>
         </h3>
 
         {/* Description */}
