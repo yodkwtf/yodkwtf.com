@@ -107,31 +107,21 @@ export function ProjectCard({
               featured ? 'text-xl md:text-2xl' : 'text-lg',
             )}
           >
-            {project.liveUrl ? (
-              <a
-                href={project.liveUrl}
-                target='_blank'
-                rel='noopener noreferrer'
-                onClick={(e) => e.stopPropagation()}
-                className='text-ink hover:text-accent-fg transition-colors'
-              >
-                {project.title}
-              </a>
-            ) : (
-              <span className='text-ink group-hover:text-accent-fg transition-colors'>
-                {project.title}
-              </span>
-            )}
+            <Link
+              href={`/projects/${project.slug.current}`}
+              className='text-ink group-hover:text-accent-fg transition-colors after:absolute after:inset-0 after:content-[""]'
+            >
+              {project.title}
+            </Link>
           </h2>
-          <div className='flex items-center gap-2 shrink-0'>
+          <div className='relative z-10 flex items-center gap-2 shrink-0'>
             {!project.clientWork && project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                onClick={(e) => e.stopPropagation()}
                 className='text-ink-faint hover:text-ink transition-colors p-1'
-                aria-label='GitHub'
+                aria-label={`${project.title} source on GitHub`}
               >
                 <GithubIcon size={15} />
               </a>
@@ -141,9 +131,8 @@ export function ProjectCard({
                 href={project.liveUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                onClick={(e) => e.stopPropagation()}
                 className='text-ink-faint hover:text-accent-fg transition-colors p-1'
-                aria-label='Live site'
+                aria-label={`${project.title} live site`}
               >
                 <ExternalLink size={15} />
               </a>
@@ -179,16 +168,16 @@ export function ProjectCard({
           )}
         </div>
 
-        <Link
-          href={`/projects/${project.slug.current}`}
-          className='flex items-center gap-1 text-xs font-medium text-ink-muted hover:text-accent-fg transition-colors mt-1 group/link w-fit'
+        <span
+          aria-hidden
+          className='flex items-center gap-1 text-xs font-medium text-ink-muted group-hover:text-accent-fg transition-colors mt-1 w-fit'
         >
           View details
           <ArrowUpRight
             size={13}
-            className='transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5'
+            className='transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5'
           />
-        </Link>
+        </span>
       </div>
     </article>
   );
